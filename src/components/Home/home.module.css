@@ -1,7 +1,106 @@
-.title{
+.container {
+    display: flex;
+    width: 100%;
+    background-color: black;
+    align-items: center;
+  }
+  .cardLeft {
+    width: 50%;
+    height: 20rem;
     display: flex;
     align-items: center;
-    justify-content: center;
     background-color: black;
-    color: aliceblue;
-}
+    justify-content: center;
+    border-radius: 1rem;
+    overflow: hidden;
+    transform: translateX(5rem);
+    z-index: 0;
+    filter:blur(1.5px)
+  }
+  .cardCenter {
+    width: 50%;
+    height: 30rem;
+    display: flex;
+    background-color: black;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.4s ease;
+  }
+  .cardActiveL {
+    width: 50%;
+    height: 30rem;
+    display: flex;
+    background-color: black;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+  }
+  .cardActiveR {
+    width: 50%;
+    height: 30rem;
+    display: flex;
+    background-color: black;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+  .cardD {
+    width: 50%;
+    height: 20rem;
+    display: flex;
+    background-color: black;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 0;
+    transform: translateX(-80%);
+    transition: transform 0.4s ease;
+    filter:blur(1.5px)
+  }
+  .cardDR {
+    width: 50%;
+    height: 20rem;
+    display: flex;
+    background-color: black;
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 0;
+    transform: translateX(80%);
+    transition: transform 0.4s ease;
+    filter:blur(1.5px)
+  }
+  .cardRigth {
+    width: 50%;
+    height: 20rem;
+    display: flex;
+    background-color: black;
+    filter: drop-shadow(1px 1px 13px white);
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transform: translateX(-5rem);
+    z-index: 0;
+    filter:blur(1.5px)
+    
+  }
+  
+  
+  .img{
+      width: 80%;
+  }
+  
