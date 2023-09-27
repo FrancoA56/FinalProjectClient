@@ -2,10 +2,14 @@
   background-color: rgb(199, 199, 199);
 }
 .labelText{
-  align-items: start;
-  margin-left: -92%;
+  margin-left: -98%;
   font-size: small;
 }
+.checkbox{
+  margin-left: 1em;
+  margin-bottom: -1em;
+}
+
 .labelType{
   float: left;
   margin-left: 1em;
@@ -25,9 +29,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -25%;
-  margin-left: 15%;
-  height: 50em;
+  margin-top: -40%;
+  margin-left: 12%;
+  height: 100%;
   background-color: rgb(233, 233, 233);
-  width: 80%;
+  width: 87%;
+}
+
+.img{
+  width: 45em;
+  height: 10%;
+}
+.containerImg{
+ margin-bottom: 5%;
 }
