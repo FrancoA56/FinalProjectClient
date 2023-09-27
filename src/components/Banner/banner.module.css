@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 1rem;
+    background-color: gray;
+    height: 6rem;
+    filter: drop-shadow(5px 0px 10px black);
+}
+.title{
+    margin-right: 1rem;
+}
