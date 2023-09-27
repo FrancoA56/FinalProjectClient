@@ -1,0 +1,33 @@
+.container{
+  background-color: rgb(199, 199, 199);
+}
+.labelText{
+  align-items: start;
+  margin-left: -92%;
+  font-size: small;
+}
+.labelType{
+  float: left;
+  margin-left: 1em;
+  text-decoration: underline;
+}
+.selectH1{
+  margin-left: 68%;
+}
+.select{
+  width: 10%;
+  font-size: small;
+  float: right;
+  margin-top: -2%;
+  margin-right: 2%;
+}
+.centrarPlantillas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -25%;
+  margin-left: 15%;
+  height: 50em;
+  background-color: rgb(233, 233, 233);
+  width: 80%;
+}
