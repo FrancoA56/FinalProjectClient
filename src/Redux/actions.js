@@ -52,3 +52,46 @@ export const removeModelDisable = (id) => {
     }
   };
 };
+
+export const orderByName = (name) => {
+  return {
+    type: ORDER_MODELS_NAME,
+    payload: name,
+  };
+};
+export const orderByRating = (rating) => {
+  return {
+    type: ORDER_MODELS_RATING,
+    payload: rating,
+  };
+};
+export const orderBySales = (owned) => {
+  return {
+    type: ORDER_MODELS_OWNED,
+    payload: owned,
+  };
+};
+export const orderByReleased = (released) => {
+  return {
+    type: ORDER_MODELS_RELEASED,
+    payload: released,
+  };
+};
+export const orderByPrice = (price) => {
+  return {
+    type: ORDER_MODELS_PRICE,
+    payload: price,
+  };
+};
+export const filterByType = (type) => {
+  return {
+    type: FILTER_MODELS_BY_TYPES,
+    payload: type,
+  };
+};
+export const filterByColor = (color) => {
+  return {
+    type: FILTER_MODELS_BY_COLORS,
+    payload: color,
+  };
+};
