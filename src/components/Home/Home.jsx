@@ -1,22 +1,23 @@
 import style from "./home.module.css";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
   const [activeLeftCard, setActiveLeftCard] = useState(false);
   const [activeRigthCard, setActiveRigthCard] = useState(false);
 
   const handleImageLeftClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     activeRigthCard && setActiveRigthCard(false);
     setActiveLeftCard(true);
   };
   const handleImageRigthClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     activeLeftCard && setActiveLeftCard(false);
     setActiveRigthCard(true);
   };
   const handleImageCenterClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setActiveLeftCard(false);
     setActiveRigthCard(false);
   };
@@ -62,7 +63,9 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <button>All</button>
+        <NavLink to={"/shop"}>
+          <button className={style.buttonShop}>Shop plantilla</button>
+        </NavLink>
       </div>
     </>
   );

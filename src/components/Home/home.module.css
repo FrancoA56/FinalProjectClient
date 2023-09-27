@@ -1,7 +1,7 @@
 .container {
     display: flex;
     width: 100%;
-    background-color: black;
+    background: linear-gradient(to bottom, white, gray);
     align-items: center;
   }
   .cardLeft {
@@ -9,7 +9,7 @@
     height: 20rem;
     display: flex;
     align-items: center;
-    background-color: black;
+    background-color: gray;
     justify-content: center;
     border-radius: 1rem;
     overflow: hidden;
@@ -59,7 +59,7 @@
     width: 50%;
     height: 20rem;
     display: flex;
-    background-color: black;
+    background-color:gray;
     border-radius: 1rem;
     align-items: center;
     justify-content: center;
@@ -73,7 +73,7 @@
     width: 50%;
     height: 20rem;
     display: flex;
-    background-color: black;
+    background-color: gray;
     border-radius: 1rem;
     align-items: center;
     justify-content: center;
@@ -87,7 +87,7 @@
     width: 50%;
     height: 20rem;
     display: flex;
-    background-color: black;
+    background-color:gray;
     filter: drop-shadow(1px 1px 13px white);
     border-radius: 1rem;
     align-items: center;
@@ -96,11 +96,17 @@
     transform: translateX(-5rem);
     z-index: 0;
     filter:blur(1.5px)
+  }
     
+  .buttonShop{
+    margin-top: 5%;
+    background-color: lightgray;
+    border: none;
+    width: 8rem ;
+    height: 2.5rem;
+    border-radius: 1rem 1rem 1rem 1rem;
+    filter: drop-shadow(2px 2px 2px black);
   }
-  
-  
-  .img{
-      width: 80%;
+  .buttonShop:hover{
+    background-color: gray;
   }
-  
