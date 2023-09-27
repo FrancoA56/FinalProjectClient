@@ -1,4 +1,4 @@
-import style from "./Home.module.css";
+import style from "./home.module.css";
 import { useState } from "react";
 
 const Home = () => {
