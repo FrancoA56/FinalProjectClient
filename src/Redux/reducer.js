@@ -1,8 +1,10 @@
 import {
   ADD_MODEL,
   ADD_MODELS,
+  ADD_MODEL_CART,
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
+  REMOVE_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
   ORDER_MODELS_NAME_DESCENDANT,
   ORDER_MODELS_OWNED,
@@ -17,6 +19,7 @@ import {
 const initialState = {
   models: [],
   allModels: [],
+  cart: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -32,6 +35,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         models: [...state.models, ...payload],
         allModels: [...state.allModels, ...payload],
+      };
+
+    case ADD_MODEL_CART:
+      const modelToCart = state.allModels.filter((model) => model.id === payload);
+      return {
+        ...state,
+        cart: [...state.cart, modelToCart],
+      };
+
+    case REMOVE_MODEL_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((model) => model.id !== payload),
       };
 
     case REMOVE_MODEL:

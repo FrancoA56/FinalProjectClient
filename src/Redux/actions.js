@@ -1,8 +1,10 @@
 import {
   ADD_MODEL,
   ADD_MODELS,
+  ADD_MODEL_CART,
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
+  REMOVE_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
   ORDER_MODELS_NAME_DESCENDANT,
   ORDER_MODELS_OWNED,
@@ -23,6 +25,30 @@ export const addModel = (model) => {
       return dispatch({
         type: ADD_MODEL,
         payload: model,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+export const addModelToCart = (id) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: ADD_MODEL_CART,
+        payload: id,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+export const removeModelToCart = (id) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: REMOVE_MODEL_CART,
+        payload: id,
       });
     } catch (error) {
       window.alert(error.message);
