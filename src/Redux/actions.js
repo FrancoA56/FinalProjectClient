@@ -1,10 +1,13 @@
 import {
   ADD_MODEL,
+  ADD_MODELS,
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
-  ORDER_MODELS_NAME,
+  ORDER_MODELS_NAME_ASCENDANT,
+  ORDER_MODELS_NAME_DESCENDANT,
   ORDER_MODELS_OWNED,
-  ORDER_MODELS_PRICE,
+  ORDER_MODELS_PRICE_ASCENDANT,
+  ORDER_MODELS_PRICE_DESCENDANT,
   ORDER_MODELS_RATING,
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
@@ -26,6 +29,18 @@ export const addModel = (model) => {
     }
   };
 };
+export const addAllModels = (id) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: ADD_MODELS,
+        payload: id,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
 
 export const removeModel = (id) => {
   return function (dispatch) {
@@ -41,8 +56,10 @@ export const removeModel = (id) => {
 };
 
 export const removeModelDisable = (id) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     try {
+        /* cambiar nombre de la ruta para la desabilitacion del modelo */
+      await axios.put(`${URL}disableModel/:${id}`);
       return dispatch({
         type: REMOVE_MODEL_DISABLE,
         payload: id,
@@ -53,9 +70,15 @@ export const removeModelDisable = (id) => {
   };
 };
 
-export const orderByName = (name) => {
+export const orderByNameAscendant = (name) => {
   return {
-    type: ORDER_MODELS_NAME,
+    type: ORDER_MODELS_NAME_ASCENDANT,
+    payload: name,
+  };
+};
+export const orderByNameDescendant = (name) => {
+  return {
+    type: ORDER_MODELS_NAME_DESCENDANT,
     payload: name,
   };
 };
@@ -77,9 +100,15 @@ export const orderByReleased = (released) => {
     payload: released,
   };
 };
-export const orderByPrice = (price) => {
+export const orderByPriceAscendant = (price) => {
   return {
-    type: ORDER_MODELS_PRICE,
+    type: ORDER_MODELS_PRICE_ASCENDANT,
+    payload: price,
+  };
+};
+export const orderByPriceDescendant = (price) => {
+  return {
+    type: ORDER_MODELS_PRICE_DESCENDANT,
     payload: price,
   };
 };
