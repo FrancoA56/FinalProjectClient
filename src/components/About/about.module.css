@@ -1,7 +1,7 @@
 
 :root {
-    --color-primary: #d90429;
-    --color-secondary: #ef233c;
+    --color-primary: #1f4b56;
+    --color-secondary: #33a9bf;
     --color-third: #8d99ae;
     --color-light: #edf2f4;
     --color-dark: black;
@@ -11,6 +11,7 @@
 .container {
     background-color: var(--color-third);
     color: var(--color-light);
+    font-family: sans-serif;
     width: 30%;
     font-size: 60%;
     margin-top: 20%;
