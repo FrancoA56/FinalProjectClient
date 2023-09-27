@@ -1,12 +1,15 @@
-import style from './banner.module.css'
+import style from "./banner.module.css";
 
 const Banner = () => {
-    return (
-        <div className={style.container}>
-            <h1 className={style.title}>Logotipe</h1>
-            <i class="fa-solid fa-rectangle-list"></i>
-        </div>
-    )
-}
+  return (
+    <div className={style.container}>
 
-export default Banner
+      <div className={style.img}> image </div>
+
+      <h1 className={style.title}>Brand</h1>
+      <i class="fa-brands fa-lastfm"></i>
+    </div>
+  );
+};
+
+export default Banner;
