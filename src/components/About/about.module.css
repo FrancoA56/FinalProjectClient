@@ -1,0 +1,19 @@
+
+:root {
+    --color-primary: #d90429;
+    --color-secondary: #ef233c;
+    --color-third: #8d99ae;
+    --color-light: #edf2f4;
+    --color-dark: black;
+  }
+
+
+.container {
+    background-color: var(--color-third);
+    color: var(--color-light);
+    width: 30%;
+    font-size: 60%;
+    margin-top: 20%;
+    margin-left: 1%;
+
+}
