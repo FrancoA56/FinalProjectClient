@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./nav.module.css";
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,46 +9,52 @@ function Nav() {
   };
 
   return (
-    <nav className={styles.navBar}>
+    // <nav className={styles.navBar}>
+    <nav class="bg-neutral-700">
       <div className={styles.allButtons}>
         <div className={styles.container}>
-          <Link to="">
-            <button className={styles.homeBtn}>Home</button>
-          </Link>
+          <NavLink to="/home">
+          <i class="my-4 fa-solid fa-house"></i>
+            {/* <button className={styles.homeBtn}>Home</button> */}
+            {/* <button class="font-bold text-white">Home</button> */}
+          </NavLink>
         </div>
 
         <div className={styles.container}>
-          <Link to="">
-            <button className={styles.shopBtn}>Shop</button>
-          </Link>
+          <NavLink to="/shop">
+            {/* <button className={styles.shopBtn}>Shop</button> */}
+            <i class="fa-solid fa-shop"></i>
+          </NavLink>
         </div>
         <div className={styles.dropdownMenu}>
-          <button onClick={toggleMenu} className={styles.allButtons}>
+{/*           <button onClick={toggleMenu} className={styles.allButtons}>
             Menú
-          </button>
+          </button> */}
+            <i onClick={toggleMenu} class="fa-solid fa-bars"></i>
           {menuOpen && (
             <div className={styles.dropdownContent}>
-            <Link to="">
+            <NavLink to="/login">
               <button className={styles.allButtons}>Log In</button>
-            </Link>
+            </NavLink>
   
-            <Link to="">
+            <NavLink to="/register">
               <button className={styles.allButtons}>Create Account</button>
-            </Link>
+            </NavLink>
 
-            <Link to="">
+            <NavLink to="/home">
               <button className={styles.allButtons}>Log Out</button>
-            </Link>
+            </NavLink>
           </div>
   
-
+  
           )}
         </div>
         
         <div className={styles.container}>
-          <Link to="">
-            <button className={styles.shoppingCartBtn}>Shopping Cart</button>
-          </Link>
+          <NavLink to="/cart">
+            {/* <button className={styles.shoppingCartBtn}>Shopping Cart</button> */}
+            <i class="fa-solid fa-cart-shopping"></i>
+          </NavLink>
         </div>
       </div>
     </nav>
