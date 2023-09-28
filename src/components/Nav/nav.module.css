@@ -1,0 +1,91 @@
+:root {
+  --color-primary: #1f4b56;
+  --color-secondary: #33a9bf;
+  --color-third: #8d99ae;
+  --color-light: #edf2f4;
+  --color-dark: black;
+}
+.navBar {
+  width: 100%;
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.allButtons {
+  width: 100%;
+  height: 70%;
+  cursor: pointer;
+  padding: 0 10px;
+  font-family: sans-serif;
+  font-size: 10pt;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.dropdownMenu {
+  position: relative;
+  display: inline-block;
+  background-color: var(--color-secondary);
+}
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: var(--color-primary);
+  min-width: 160px;
+  z-index: 1;
+  background-color: var(--color-secondary);
+}
+.dropdownMenu:hover .dropdownContent {
+  display: block;
+  top: 100%;
+  background-color: var(--color-secondary);
+}
+.dropdownContent button {
+  width: 100%;
+  padding: 5px 10px;
+  background-color: var(--color-secondary);
+}
+.homeBtn {
+  background-color: var(--color-secondary);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+}
+
+.shopBtn {
+  background-color: var(--color-secondary);
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+}
+.logInBtn {
+  background-color: var(--color-secondary);
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+}
+.createAccountBtn {
+  background-color: var(--color-secondary);
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+}
+.shoppingCartBtn {
+  background-color: var(--color-secondary);
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+  cursor: pointer;
+}
