@@ -5,7 +5,7 @@ import style from "./shoppingCart.module.css";
 import { types, colors } from "./typesAndColors"
 import plantillas from "../../img/img";
 
-const ShoppingCart = () => {
+const ShoppingCartComponent = () => {
   const dispatch = useDispatch();
   const allModels = useSelector((state) => state.allModels);
   const models = useSelector((state) => state.models);
@@ -109,4 +109,4 @@ const ShoppingCart = () => {
   );
 };
 
-export default ShoppingCart;
+export default ShoppingCartComponent;
