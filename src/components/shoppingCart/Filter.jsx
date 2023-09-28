@@ -28,7 +28,11 @@ const FilterLabel = () => {
         const typeName = Object.keys(type)[0];
         const typeValue = Object.values(type)[0];
         return (
-          <label className={style.labelText} key={index}>
+          <label
+            className={style.labelText}
+            key={index}
+            onChange={handleByType}
+          >
             <input
               type="checkbox"
               value={typeValue}
@@ -48,7 +52,7 @@ const FilterLabel = () => {
         const colorName = Object.keys(color)[0];
         const colorValue = Object.values(color)[0];
         return (
-          <label className={style.labelText} key={index}>
+          <label className={style.labelText} key={index} onChange={handleBycolors}>
             <input
               type="checkbox"
               value={colorValue}

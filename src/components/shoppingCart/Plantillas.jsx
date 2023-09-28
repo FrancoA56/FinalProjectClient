@@ -2,7 +2,9 @@
 import plantillas from "../../img/img";
 import style from "./shoppingCart.module.css";
 
-const Plantillas = () => {
+// REDUX
+
+const Plantillas = (props) => {
   return (
     <div className={style.centrarPlantillas}>
       {plantillas.map((img) => {
@@ -18,7 +20,7 @@ const Plantillas = () => {
     </div>
 
     /*       <div className={style.centrarPlantillas}>
-        {models?.map((model) => {
+        {props.models.map((model) => {
           return (
             <div className={style.containerImg}>
               <img src={model.url} alt={model.name} className={style.img} />
