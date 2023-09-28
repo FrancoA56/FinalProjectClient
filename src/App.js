@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import ShoppingCart from './components/shoppingCart/shoppingCart';
+import ShoppingCart from "./views/shoppingCart";
 import Home from './components/Home/Home'
 import Cart from '../src/views/cart.jsx'
 
