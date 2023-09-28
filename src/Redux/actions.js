@@ -31,35 +31,25 @@ export const addModel = (model) => {
     }
   };
 };
-export const addModelToCart = (id) => {
-  return function (dispatch) {
-    try {
-      return dispatch({
-        type: ADD_MODEL_CART,
-        payload: id,
-      });
-    } catch (error) {
-      window.alert(error.message);
-    }
-  };
-};
-export const removeModelToCart = (id) => {
-  return function (dispatch) {
-    try {
-      return dispatch({
-        type: REMOVE_MODEL_CART,
-        payload: id,
-      });
-    } catch (error) {
-      window.alert(error.message);
-    }
-  };
-};
+
 export const addAllModels = (id) => {
   return function (dispatch) {
     try {
       return dispatch({
         type: ADD_MODELS,
+        payload: id,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const addModelToCart = (id) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: ADD_MODEL_CART,
         payload: id,
       });
     } catch (error) {
@@ -84,10 +74,23 @@ export const removeModel = (id) => {
 export const removeModelDisable = (id) => {
   return async function (dispatch) {
     try {
-        /* cambiar nombre de la ruta para la desabilitacion del modelo */
+      /* cambiar nombre de la ruta para la desabilitacion del modelo */
       await axios.put(`${URL}disableModel/:${id}`);
       return dispatch({
         type: REMOVE_MODEL_DISABLE,
+        payload: id,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const removeModelToCart = (id) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: REMOVE_MODEL_CART,
         payload: id,
       });
     } catch (error) {

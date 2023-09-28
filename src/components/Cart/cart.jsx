@@ -1,12 +1,13 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import style from "./shoppingCart.module.css";
-import { addModelToCart, removeModelToCart } from "../../Redux/actions";
+// import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import style from "./shoppingCart.module.css";
+// import { addModelToCart, removeModelToCart } from "../../Redux/actions";
+import Nav from "../Nav/Nav";
 
-const Cart = () => {
-  const dispatch = useDispatch();
-  const models = useSelector((state) => state.cart);
+const CartComponent = () => {
+  // const dispatch = useDispatch();
+  // const models = useSelector((state) => state.cart);
 
   // useEffect(() => {
   // addModelToCart();
@@ -17,9 +18,10 @@ const Cart = () => {
 
   return (
     <div>
-      <p>{models}</p>
+      <Nav/>
+      {/* <p>{models}</p> */}
     </div>
   );
 };
 
-export default Cart;
+export default CartComponent;
