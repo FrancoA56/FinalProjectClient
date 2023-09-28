@@ -1,0 +1,125 @@
+:root {
+  --color-primary: #a9a9ab;
+  --color-secondary: #373838;
+  --color-third: grey;
+  --color-light: #edf2f4;
+  --color-dark: black;
+}
+.navBar {
+  width: 100%;
+  background-color: var(--color-third);
+  color: var(--color-light);
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50%;
+}
+
+.allButtons {
+  width: 100%;
+  height: 70%;
+  cursor: pointer;
+  padding: 0 10px;
+  font-family: sans-serif;
+  font-size: 10pt;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.dropdownMenu {
+  position: relative;
+  display: inline-block;
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 10rem;
+  filter: drop-shadow(2px 2px 2px black);
+}
+.dropdownContent {
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 5rem;
+  filter: drop-shadow(2px 2px 2px black);
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+}
+.dropdownMenu:hover .dropdownContent {
+  display: block;
+  top: 100%;
+}
+.dropdownContent button {
+  width: 100%;
+  padding: 5px 10px;
+}
+.homeBtn {
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+  align-items: center;
+}
+
+.shopBtn {
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+}
+.logInBtn {
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+}
+.createAccountBtn {
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
+  color: black;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+}
+.shoppingCartBtn {
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin: 20px;
+  cursor: pointer;
+}
