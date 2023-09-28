@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./nav.module.css";
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,15 +12,15 @@ function Nav() {
     <nav className={styles.navBar}>
       <div className={styles.allButtons}>
         <div className={styles.container}>
-          <Link to="">
+          <NavLink to="/home">
             <button className={styles.homeBtn}>Home</button>
-          </Link>
+          </NavLink>
         </div>
 
         <div className={styles.container}>
-          <Link to="">
+          <NavLink to="/shop">
             <button className={styles.shopBtn}>Shop</button>
-          </Link>
+          </NavLink>
         </div>
         <div className={styles.dropdownMenu}>
           <button onClick={toggleMenu} className={styles.allButtons}>
@@ -28,17 +28,17 @@ function Nav() {
           </button>
           {menuOpen && (
             <div className={styles.dropdownContent}>
-            <Link to="">
+            <NavLink to="/login">
               <button className={styles.allButtons}>Log In</button>
-            </Link>
+            </NavLink>
   
-            <Link to="">
+            <NavLink to="/register">
               <button className={styles.allButtons}>Create Account</button>
-            </Link>
+            </NavLink>
 
-            <Link to="">
+            <NavLink to="/home">
               <button className={styles.allButtons}>Log Out</button>
-            </Link>
+            </NavLink>
           </div>
   
 
@@ -46,9 +46,9 @@ function Nav() {
         </div>
         
         <div className={styles.container}>
-          <Link to="">
+          <NavLink to="/cart">
             <button className={styles.shoppingCartBtn}>Shopping Cart</button>
-          </Link>
+          </NavLink>
         </div>
       </div>
     </nav>
