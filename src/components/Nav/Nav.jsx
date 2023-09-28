@@ -9,23 +9,28 @@ function Nav() {
   };
 
   return (
-    <nav className={styles.navBar}>
+    // <nav className={styles.navBar}>
+    <nav class="bg-neutral-700">
       <div className={styles.allButtons}>
         <div className={styles.container}>
           <NavLink to="/home">
-            <button className={styles.homeBtn}>Home</button>
+          <i class="my-4 fa-solid fa-house"></i>
+            {/* <button className={styles.homeBtn}>Home</button> */}
+            {/* <button class="font-bold text-white">Home</button> */}
           </NavLink>
         </div>
 
         <div className={styles.container}>
           <NavLink to="/shop">
-            <button className={styles.shopBtn}>Shop</button>
+            {/* <button className={styles.shopBtn}>Shop</button> */}
+            <i class="fa-solid fa-shop"></i>
           </NavLink>
         </div>
         <div className={styles.dropdownMenu}>
-          <button onClick={toggleMenu} className={styles.allButtons}>
+{/*           <button onClick={toggleMenu} className={styles.allButtons}>
             Menú
-          </button>
+          </button> */}
+            <i onClick={toggleMenu} class="fa-solid fa-bars"></i>
           {menuOpen && (
             <div className={styles.dropdownContent}>
             <NavLink to="/login">
@@ -41,13 +46,14 @@ function Nav() {
             </NavLink>
           </div>
   
-
+  
           )}
         </div>
         
         <div className={styles.container}>
           <NavLink to="/cart">
-            <button className={styles.shoppingCartBtn}>Shopping Cart</button>
+            {/* <button className={styles.shoppingCartBtn}>Shopping Cart</button> */}
+            <i class="fa-solid fa-cart-shopping"></i>
           </NavLink>
         </div>
       </div>
