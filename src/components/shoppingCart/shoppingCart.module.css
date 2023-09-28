@@ -1,29 +1,58 @@
-.container{
+.container {
   background-color: rgb(199, 199, 199);
 }
-.labelText{
-  margin-left: -98%;
+.labelText {
+  display: flex;
+  width: 5%;
+  align-items: flex-start;
   font-size: small;
-}
-.checkbox{
   margin-left: 1em;
-  margin-bottom: -1em;
+  margin-top: 4.5em;
+  margin-bottom: -4em;
+  transform: scale(var(--escala, 1));
 }
-
-.labelType{
+.labelText:hover {
+  display: flex;
+  width: 5%;
+  align-items: flex-start;
+  font-size: small;
+  margin-left: 2em;
+  margin-top: 4.5em;
+  margin-bottom: -4em;
+  cursor: pointer;
+  --escala: 1.2;
+}
+.checkbox {
+  margin-right: 0.5em;
+}
+.labelType {
   float: left;
   margin-left: 1em;
   text-decoration: underline;
+  margin-bottom: 0.8em;
+  margin-top: -2.5em;
 }
-.selectH1{
+.labelColors {
+  float: left;
+  margin-left: 1em;
+  text-decoration: underline;
+  margin-bottom: 0.8em;
+  margin-top: 1em;
+}
+.selectH1 {
   margin-left: 68%;
+  margin-top: 1%;
 }
-.select{
+.select {
   width: 10%;
   font-size: small;
   float: right;
-  margin-top: -2%;
+  margin-top: -2.5%;
   margin-right: 2%;
+}
+.containerSelect {
+  width: 100%;
+  margin: 1em;
 }
 .centrarPlantillas {
   display: flex;
@@ -36,10 +65,10 @@
   width: 87%;
 }
 
-.img{
+.img {
   width: 45em;
   height: 10%;
 }
-.containerImg{
- margin-bottom: 5%;
+.containerImg {
+  margin-bottom: 5%;
 }
