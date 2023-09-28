@@ -12,19 +12,19 @@ function Nav() {
     <nav className={styles.navBar}>
       <div className={styles.allButtons}>
         <div className={styles.container}>
-          <Link to="">
+          <Link to="/home">
             <button className={styles.homeBtn}>Home</button>
           </Link>
         </div>
 
         <div className={styles.container}>
-          <Link to="">
+          <Link to="shop">
             <button className={styles.shopBtn}>Shop</button>
           </Link>
         </div>
         <div className={styles.dropdownMenu}>
           <button onClick={toggleMenu} className={styles.allButtons}>
-            Menú
+            Perfil
           </button>
           {menuOpen && (
             <div className={styles.dropdownContent}>

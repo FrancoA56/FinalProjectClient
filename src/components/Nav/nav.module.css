@@ -1,17 +1,17 @@
 :root {
-  --color-primary: #1f4b56;
-  --color-secondary: #33a9bf;
-  --color-third: #8d99ae;
+  --color-primary: #a9a9ab;
+  --color-secondary: #373838;
+  --color-third: grey;
   --color-light: #edf2f4;
   --color-dark: black;
 }
 .navBar {
   width: 100%;
-  background-color: var(--color-primary);
+  background-color: var(--color-third);
   color: var(--color-light);
-  align-items: center;
   display: flex;
   flex-direction: row;
+  margin-bottom: 50%;
 }
 
 .allButtons {
@@ -30,38 +30,56 @@
 .dropdownMenu {
   position: relative;
   display: inline-block;
-  background-color: var(--color-secondary);
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 10rem;
+  filter: drop-shadow(2px 2px 2px black);
 }
 .dropdownContent {
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 5rem;
+  filter: drop-shadow(2px 2px 2px black);
   display: none;
   position: absolute;
-  background-color: var(--color-primary);
   min-width: 160px;
   z-index: 1;
-  background-color: var(--color-secondary);
 }
 .dropdownMenu:hover .dropdownContent {
   display: block;
   top: 100%;
-  background-color: var(--color-secondary);
 }
 .dropdownContent button {
   width: 100%;
   padding: 5px 10px;
-  background-color: var(--color-secondary);
 }
 .homeBtn {
-  background-color: var(--color-secondary);
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
   display: flex;
   justify-content: space-around;
   flex-direction: row;
   margin-top: 10%;
   margin-bottom: 10%;
   margin: 20px;
+  align-items: center;
 }
 
 .shopBtn {
-  background-color: var(--color-secondary);
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
   align-items: center;
   display: flex;
   justify-content: space-around;
@@ -71,19 +89,35 @@
   margin: 20px;
 }
 .logInBtn {
-  background-color: var(--color-secondary);
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
   margin-top: 10%;
   margin-bottom: 10%;
   margin: 20px;
 }
 .createAccountBtn {
-  background-color: var(--color-secondary);
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
+  color: black;
   margin-top: 10%;
   margin-bottom: 10%;
   margin: 20px;
 }
 .shoppingCartBtn {
-  background-color: var(--color-secondary);
+  background-color: lightgray;
+  border: none;
+  width: 8rem ;
+  height: 2.5rem;
+  border-radius: 1rem 1rem 1rem 1rem;
+  filter: drop-shadow(2px 2px 2px black);
   margin-top: 10%;
   margin-bottom: 10%;
   margin: 20px;
