@@ -2,7 +2,7 @@ import style from "./home.module.css";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const Home = () => {
+const HomeComponent = () => {
   const [activeLeftCard, setActiveLeftCard] = useState(false);
   const [activeRigthCard, setActiveRigthCard] = useState(false);
 
@@ -71,4 +71,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeComponent;
