@@ -1,0 +1,45 @@
+.container{
+  background-color: rgb(199, 199, 199);
+}
+.labelText{
+  margin-left: -98%;
+  font-size: small;
+}
+.checkbox{
+  margin-left: 1em;
+  margin-bottom: -1em;
+}
+
+.labelType{
+  float: left;
+  margin-left: 1em;
+  text-decoration: underline;
+}
+.selectH1{
+  margin-left: 68%;
+}
+.select{
+  width: 10%;
+  font-size: small;
+  float: right;
+  margin-top: -2%;
+  margin-right: 2%;
+}
+.centrarPlantillas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -40%;
+  margin-left: 12%;
+  height: 100%;
+  background-color: rgb(233, 233, 233);
+  width: 87%;
+}
+
+.img{
+  width: 45em;
+  height: 10%;
+}
+.containerImg{
+ margin-bottom: 5%;
+}
