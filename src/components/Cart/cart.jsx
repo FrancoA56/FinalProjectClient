@@ -1,13 +1,20 @@
-import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
-// import style from "./shoppingCart.module.css";
-// import { addModelToCart, removeModelToCart } from "../../Redux/actions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  addModelToCart,
+  removeModelFromCart,
+  removeAllModelCart,
+  undoRemoveAllModelCart,
+} from "../../Redux/actions";
 import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
 const CartComponent = () => {
   // const dispatch = useDispatch();
-  // const models = useSelector((state) => state.cart);
+  const models = useSelector((state) => state.cart);
+  const Navigate = useNavigate();
+  const [emptyCart, setEmptyCart] = useState(false);
 
   // useEffect(() => {
   // addModelToCart();
@@ -16,92 +23,77 @@ const CartComponent = () => {
   //   }
   // }, models);
 
+  const totalPrice = (models) => {
+    const total = models.reduce(
+      (accumulated, model) => accumulated + model.price,
+      0
+    );
+    return total;
+  };
+
+  const emptyCartOnClick = () => {
+    removeAllModelCart();
+    setEmptyCart(true);
+  };
+
+  const undoEmptyCartOnClick = () => {
+    undoRemoveAllModelCart();
+    setEmptyCart(false);
+  };
+
+  const goToFinalCart = () => {
+    Navigate("/pay")
+  };
+
   return (
     <>
       <Nav />
-      <div className="bg-gray-100 p-4">
-        <h1 className="text-2xl font-bold mb-4">Carrito de Compras</h1>
+      <div className="bg-bgc p-4">
+        <h1 className="text-2xl font-bold mb-4">Shopping cart</h1>
         {/* Aquí puedes listar los productos en el carrito */}
-        <div className="bg-white p-4 rounded shadow-md">
+        <div className="bg-bgce p-4 rounded shadow-md">
           {/* Detalles del producto */}
-          <div className="flex justify-between items-center mb-2">
-            <img
-              src="imagen-producto.jpg"
-              alt="Producto"
-              className="w-16 h-16"
-            />
-            <div className="flex-1 ml-4">
-              <h2 className="text-lg font-semibold">Nombre del Producto</h2>
-              <p className="text-gray-600">Precio: $XX.XX</p>
+          {models.map((model) => (
+            <div className="flex justify-between items-center mb-2">
+              <img src={model.url} alt="Producto" className="w-16 h-16" />
+              <div className="flex-1 ml-4">
+                <h2 className="text-lg font-semibold">{model.name}</h2>
+                <p className="text-gray-600">${model.price}</p>
+              </div>
             </div>
-            <div className="flex items-center">
-              <span className="text-gray-600">Cantidad:</span>
-              <input
-                type="number"
-                className="w-10 h-8 ml-2 border border-gray-300 rounded"
-              />
-            </div>
-          </div>
-          {/* Más productos pueden ir aquí */}
-        </div>
-        <div className="bg-white p-4 rounded shadow-md">
-          {/* Detalles del producto */}
-          <div className="flex justify-between items-center mb-2">
-            <img
-              src="imagen-producto.jpg"
-              alt="Producto"
-              className="w-16 h-16"
-            />
-            <div className="flex-1 ml-4">
-              <h2 className="text-lg font-semibold">Nombre del Producto</h2>
-              <p className="text-gray-600">Precio: $XX.XX</p>
-            </div>
-            <div className="flex items-center">
-              <span className="text-gray-600">Cantidad:</span>
-              <input
-                type="number"
-                className="w-10 h-8 ml-2 border border-gray-300 rounded"
-              />
-            </div>
-          </div>
-          {/* Más productos pueden ir aquí */}
-        </div> <div className="bg-white p-4 rounded shadow-md">
-          {/* Detalles del producto */}
-          <div className="flex justify-between items-center mb-2">
-            <img
-              src="imagen-producto.jpg"
-              alt="Producto"
-              className="w-16 h-16"
-            />
-            <div className="flex-1 ml-4">
-              <h2 className="text-lg font-semibold">Nombre del Producto</h2>
-              <p className="text-gray-600">Precio: $XX.XX</p>
-            </div>
-            <div className="flex items-center">
-              <span className="text-gray-600">Cantidad:</span>
-              <input
-                type="number"
-                className="w-10 h-8 ml-2 border border-gray-300 rounded"
-              />
-            </div>
-          </div>
+          ))}
           {/* Más productos pueden ir aquí */}
         </div>
         {/* Total y botones de acción */}
         <div className="mt-4">
           <div className="flex justify-between items-center">
-            <p className="text-xl font-semibold">Total: $XXX.XX</p>
+            <p className="text-xl font-semibold c">
+              Total: $ {totalPrice(models)}
+            </p>
             <div>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded mr-2">
-                Pagar
+              <button className="bg-blue-700 text-white px-4 py-2 rounded mr-2">
+                Pay
               </button>
-              <button className="bg-red-500 text-white px-4 py-2 rounded">
-                Vaciar Carrito
-              </button>
+              {!emptyCart ? (
+                <button
+                  onClick={emptyCartOnClick}
+                  className="bg-botc text-white px-4 py-2 rounded w-30"
+                >
+                  Empty cart
+                </button>
+              ) : (
+                <button
+                  onClick={undoEmptyCartOnClick}
+                  className="bg-botc text-white px-4 py-2 rounded w-30"
+                >
+                  Undo
+                </button>
+              )}
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

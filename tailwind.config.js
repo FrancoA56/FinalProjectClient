@@ -2,8 +2,16 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bgcval: '#FF6969',
+        txcval: '#C70039',
+        bgc: "#F1EFEF",
+        bgce: "#F9DEC9",
+        txc: "#001524",
+        botc: "#176B87"
+      }
+    },
   },
   plugins: [],
 }
-
