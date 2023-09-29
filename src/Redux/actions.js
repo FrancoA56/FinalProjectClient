@@ -5,6 +5,7 @@ import {
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
+  REMOVE_ALL_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
   ORDER_MODELS_NAME_DESCENDANT,
   ORDER_MODELS_OWNED,
@@ -14,7 +15,7 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
-  GET_USER,
+  UNDO_EMPTY_CART
 } from "./types";
 import axios from "axios";
 
@@ -87,12 +88,36 @@ export const removeModelDisable = (id) => {
   };
 };
 
-export const removeModelToCart = (id) => {
+export const removeModelFromCart = (id) => {
   return function (dispatch) {
     try {
       return dispatch({
         type: REMOVE_MODEL_CART,
         payload: id,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const removeAllModelCart = () => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: REMOVE_ALL_MODEL_CART,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const undoRemoveAllModelCart = () => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: UNDO_EMPTY_CART,
       });
     } catch (error) {
       window.alert(error.message);

@@ -5,6 +5,7 @@ import {
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
+  REMOVE_ALL_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
   ORDER_MODELS_NAME_DESCENDANT,
   ORDER_MODELS_OWNED,
@@ -14,14 +15,14 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
-  GET_USER,
+  UNDO_EMPTY_CART
 } from "./types";
 
 const initialState = {
   models: [],
   allModels: [],
   cart: [],
-  user: []
+  cartRemoved: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -50,6 +51,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         cart: state.cart.filter((model) => model.id !== payload),
+      };
+
+    case REMOVE_ALL_MODEL_CART:
+      return {
+        ...state,
+        cartRemoved: [...state.cart],
+        cart: [],
+      };
+
+    case UNDO_EMPTY_CART:
+      return {
+        ...state,
+        cart: [...state.cartRemoved],
+        cartRemoved: [],
       };
 
     case REMOVE_MODEL:
