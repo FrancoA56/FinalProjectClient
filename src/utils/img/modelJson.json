@@ -1,12 +1,23 @@
-[{
+[
+  {
     "id": "number",
     "name": "string",
-    "createdAt": "date",
     "price": "number",
+    "createdAt": "date",
     "type": "string",
-    "purchased": "Relacion entre modelo y usuario",
-    "isDisabled": "boolean"
-},{  
-  "reviews": "array con reviews",
-  "rating": "promedio de rating de reviews"
-}]
+    "category": "string",
+    "purchased": "cantidad de emails de usuarios que han comprado .length",
+    "color": ["a color", "another color"],
+    "isDisabled": "boolean",
+    "reviews": [
+      {
+        "review": "review message",
+        "rating": "rating of review"
+      },
+      {
+        "review": "review message",
+        "rating": "rating of review"
+      }
+    ]
+  }
+]
