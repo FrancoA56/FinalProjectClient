@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+
 import "tailwindcss/tailwind.css";
 
 import { Link } from "react-router-dom";
 //import styles from "./nav.module.css";
+=======
+import { NavLink } from "react-router-dom";
+import styles from "./nav.module.css";
+
 function Nav() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -271,59 +276,3 @@ function Nav() {
 }
 
 export default Nav;
-
-{
-  /*
-  // const [menuOpen, setMenuOpen] = useState(false);
-
-  // const toggleMenu = () => {}
-  //   setMenuOpen(!menuOpen);
-  // ;
-
-  // return (
-  //   <nav className={styles.navBar}>
-  //     <div className={styles.allButtons}>
-  //       <div className={styles.container}>
-  //         <Link to="">
-  //           <button className={styles.homeBtn}>Home</button>
-  //         </Link>
-  //       </div>
-
-  //       <div className={styles.container}>
-  //         <Link to="">
-  //           <button className={styles.shopBtn}>Shop</button>
-  //         </Link>
-  //       </div>
-  //       <div className={styles.dropdownMenu}>
-  //         <button onClick={toggleMenu} className={styles.allButtons}>
-  //           Menú
-  //         </button>
-  //         {menuOpen && (
-  //           <div className={styles.dropdownContent}>
-  //           <Link to="">
-  //             <button className={styles.allButtons}>Log In</button>
-  //           </Link>
-  
-  //           <Link to="">
-  //             <button className={styles.allButtons}>Create Account</button>
-  //           </Link>
-
-  //           <Link to="">
-  //             <button className={styles.allButtons}>Log Out</button>
-  //           </Link>
-  //         </div>
-  
-
-  //         )}
-  //       </div>
-        
-  //       <div className={styles.container}>
-  //         <Link to="">
-  //           <button className={styles.shoppingCartBtn}>Shopping Cart</button>
-  //         </Link>
-  //       </div>
-  //     </div>
-  //   </nav>
-  // );
-*/
-}

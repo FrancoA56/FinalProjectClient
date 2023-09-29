@@ -1,5 +1,5 @@
 //MODULOS
-import plantillas from "../../img/img";
+import plantillas from "../../utils/img/exampleModel.json";
 import style from "./shoppingCart.module.css";
 
 // REDUX
