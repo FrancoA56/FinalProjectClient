@@ -1,7 +1,7 @@
 import style from "./home.module.css";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import plantillas from "../../img/img";
+import plantillas from "../../utils/img/exampleModel.json";
 
 const HomeComponent = () => {
   const [activeLeftCard, setActiveLeftCard] = useState(false);
