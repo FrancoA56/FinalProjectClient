@@ -4,19 +4,23 @@ import { NavLink } from "react-router-dom";
 import plantillas from "../../utils/img/exampleModel.json";
 
 const HomeComponent = () => {
+  // Estados locales para hacer la "animacion"
   const [activeLeftCard, setActiveLeftCard] = useState(false);
   const [activeRigthCard, setActiveRigthCard] = useState(false);
 
+  // Click q hace que la card de la izq pase a la derecha
   const handleImageLeftClick = (e) => {
     e.preventDefault();
     activeRigthCard && setActiveRigthCard(false);
     setActiveLeftCard(true);
   };
+  // Click q hace que la card de la derecha pase a la izquierda
   const handleImageRigthClick = (e) => {
     e.preventDefault();
     activeLeftCard && setActiveLeftCard(false);
     setActiveRigthCard(true);
   };
+  // Click q hace que la card que era del centro vuelva al centro
   const handleImageCenterClick = (e) => {
     e.preventDefault();
     setActiveLeftCard(false);
@@ -58,14 +62,16 @@ const HomeComponent = () => {
         >
           <img
             className={style.img}
-            src={plantillas[2].url}
-            alt={plantillas[2].name}
+            src={plantillas[7].url}
+            alt={plantillas[4].name}
           />
         </div>
       </div>
       <div>
         <NavLink to={"/shop"}>
-          <button className={style.buttonShop}>Shop plantilla</button>
+          <button class="bg-botc text-white px-4 py-2 rounded mr-2 my-8 drop-shadow-md">
+            Shop plantilla
+          </button>
         </NavLink>
       </div>
     </div>
