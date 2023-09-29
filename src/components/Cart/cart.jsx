@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   addModelToCart,
   removeModelFromCart,
@@ -13,7 +13,6 @@ import Footer from "../Footer/Footer";
 const CartComponent = () => {
   // const dispatch = useDispatch();
   const models = useSelector((state) => state.cart);
-  const Navigate = useNavigate();
   const [emptyCart, setEmptyCart] = useState(false);
 
   // useEffect(() => {
@@ -39,10 +38,6 @@ const CartComponent = () => {
   const undoEmptyCartOnClick = () => {
     undoRemoveAllModelCart();
     setEmptyCart(false);
-  };
-
-  const goToFinalCart = () => {
-    Navigate("/pay")
   };
 
   return (
@@ -71,9 +66,9 @@ const CartComponent = () => {
               Total: $ {totalPrice(models)}
             </p>
             <div>
-              <button className="bg-blue-700 text-white px-4 py-2 rounded mr-2">
+              <NavLink as={NavLink} to="/pay" className="bg-blue-700 text-white px-4 py-2 rounded mr-2">
                 Pay
-              </button>
+              </NavLink>
               {!emptyCart ? (
                 <button
                   onClick={emptyCartOnClick}
