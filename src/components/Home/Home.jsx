@@ -1,10 +1,13 @@
 import style from "./home.module.css";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+// import { useSelector } from 'react-redux';
+
 
 const Home = () => {
   const [activeLeftCard, setActiveLeftCard] = useState(false);
   const [activeRigthCard, setActiveRigthCard] = useState(false);
+  // const user = useSelector((state) => state.user);
 
   const handleImageLeftClick = (e) => {
     e.preventDefault();
@@ -24,7 +27,7 @@ const Home = () => {
 
   return (
     <>
-      <div className={style.container}>
+      <div className={style.container}>       
         <div
           onClick={handleImageLeftClick}
           className={!activeLeftCard ? style.cardLeft : style.cardActiveL}
@@ -67,6 +70,14 @@ const Home = () => {
           <button className={style.buttonShop}>Shop plantilla</button>
         </NavLink>
       </div>
+
+      {/* {user && (
+        <div>
+          <p>Email: {user.email}</p>
+          <img src={user.image} alt="User" />
+        </div>
+      )} */}
+
     </>
   );
 };

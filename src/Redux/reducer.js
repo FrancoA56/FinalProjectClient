@@ -14,12 +14,14 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
+  GET_USER,
 } from "./types";
 
 const initialState = {
   models: [],
   allModels: [],
   cart: [],
+  user: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -143,6 +145,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         models: filterByType,
       };
+
+      case GET_USER:
+      return {
+        ...state, //guardo el estado
+        user: payload,
+      }
 
     default:
       return { ...state };
