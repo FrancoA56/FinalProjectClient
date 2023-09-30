@@ -1,6 +1,8 @@
 import style from "./home.module.css";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+// import { useSelector } from 'react-redux';
+
 import plantillas from "../../utils/img/exampleModel.json";
 import { useSelector } from "react-redux";
 
@@ -11,6 +13,7 @@ const HomeComponent = () => {
   // Estados locales para hacer la "animacion"
   const [activeLeftCard, setActiveLeftCard] = useState(false);
   const [activeRigthCard, setActiveRigthCard] = useState(false);
+  // const user = useSelector((state) => state.user);
 
   // Click q hace que la card de la izq pase a la derecha
   const handleImageLeftClick = (e) => {
@@ -32,6 +35,7 @@ const HomeComponent = () => {
   };
 
   return (
+
     <div className={style.cont}>
       <div className={style.container}>
         <div
@@ -88,6 +92,7 @@ const HomeComponent = () => {
         </NavLink>
       </div>
     </div>
+    </>
   );
 };
 

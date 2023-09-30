@@ -161,6 +161,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         models: filterByType,
       };
 
+      case GET_USER:
+      return {
+        ...state, //guardo el estado
+        user: payload,
+      }
+
     default:
       return { ...state };
   }
