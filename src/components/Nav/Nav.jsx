@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import styles from "./nav.module.css";
 
 function Nav() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
