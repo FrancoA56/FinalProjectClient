@@ -1,8 +1,8 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import getUser from "../../Redux/actions";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../Redux/actions";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 // import { useAuth0 } from "@auth0/auth0-react";
 
@@ -34,16 +34,12 @@ function Validation (input) {
 
 
 const LoginComponents = () => {
-  // const { loginWithRedirect } = useAuth0();
   
-  // const handleLoginWithGoogle = () => {
-  //   loginWithRedirect ({
-  //     screen_hint: 'login',
-  //     connection: 'google-oauth2'
-  //   })
-  // }
-
   const navigate = useNavigate();
+  const users = useSelector ((state) => state.user)
+  const dispatch = useDispatch()
+  const { email } = useParams();
+
   
   const [input, setInput] = useState ({
     email: "",
@@ -68,7 +64,7 @@ const LoginComponents = () => {
     );
   }
   
-const [/*access*/, setAccess] = useState (false)
+const [access, setAccess] = useState (false)
   
 const handleSubmit = (e) => {
   e.preventDefault();
@@ -76,20 +72,25 @@ const handleSubmit = (e) => {
   // const PASSWORD = "123456";
 
 // Verificar si la información de usuario coincide
-if (input.email === user.email && input.password === user.password) {
+// if (users.email) {
+console.log(users)
+console.log(input)
+if (input.email === users.email && input.password === users.password) {
   setAccess(true);
-  // localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
   dispatch(getUser(input.email));
   navigate('/home');
 } else {
   alert("⛔ >>> email does not match password <<< ⛔");
+// }
 }
 };
 
+useEffect(() => {
+  dispatch(getUser(email));
+}, [dispatch, email]);
 
 // show-hide password
   const [showPassword, setShowPassword] = useState(false);
-  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -136,7 +137,7 @@ return (
         {/* <button>Login with GitHub</button> */}
         {/* <button>Login with Facebook</button> */}
       </div>
-   
+    
     </form>
   
   </div>
@@ -147,3 +148,15 @@ return (
 export default LoginComponents;
 
 
+
+
+
+// const { loginWithRedirect } = useAuth0();
+// const handleLoginWithGoogle = () => {
+//   loginWithRedirect ({
+//     screen_hint: 'login',
+//     connection: 'google-oauth2'
+//   })
+// }
+
+// localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
