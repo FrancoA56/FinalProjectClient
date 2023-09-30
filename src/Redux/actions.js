@@ -179,3 +179,24 @@ export const filterByColor = (color) => {
     payload: color,
   };
 };
+
+export const postUser = (payload) => {
+  return async function () {
+      const response = await axios.post(`${URL}register`, payload);
+      return response;
+  }
+}
+
+export function getUser (mail) {
+  return async function(dispatch) {
+    try {
+    const response = await axios.get(`${URL}${mail}`);
+    return dispatch({
+      type: GET_USER,
+      payload: response.data
+    })
+    } catch (error) {
+      console.log(error)
+  }  
+  }
+}

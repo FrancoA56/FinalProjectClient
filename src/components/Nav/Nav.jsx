@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-
 import "tailwindcss/tailwind.css";
-
 import { Link } from "react-router-dom";
-//import styles from "./nav.module.css";
 import { NavLink } from "react-router-dom";
 import styles from "./nav.module.css";
 
@@ -56,7 +53,7 @@ function Nav() {
             className="mb-4 ml-2 mr-5 mt-3 flex items-center text-neutral-900 hover:text-neutral-900
             focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 
             lg:mb-0 lg:mt-0"
-            href="#"
+            href=""
           >
             <img
               src="https://images.vexels.com/media/users/3/220668/isolated/preview/cd087e5b54a24f0cd84aa90692938d97-ilustracion-de-pato-de-goma-amarillo-pato-de-goma.png"
