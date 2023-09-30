@@ -4,7 +4,6 @@ import "tailwindcss/tailwind.css";
 
 import { Link } from "react-router-dom";
 //import styles from "./nav.module.css";
-=======
 import { NavLink } from "react-router-dom";
 import styles from "./nav.module.css";
 
