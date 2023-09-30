@@ -13,8 +13,8 @@ module.exports = {
         lgc: "#5EC3BF",
       },
       fontSize: {
-        parrafo: "1rem",
-        etiqueta: "1.5rem",
+        parrafo: "0.8rem",
+        etiqueta: "1.2rem",
         titulo: "2rem",
       },
       fontFamily: {
