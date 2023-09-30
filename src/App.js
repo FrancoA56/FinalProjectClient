@@ -11,6 +11,8 @@ import Home from "./views/home/HomeViews";
 function App() {
   return (
     <div className="App">
+      <h1>Proyecto Final</h1>
+   
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

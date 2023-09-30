@@ -2,6 +2,8 @@ import React from "react";
 import { useState,} from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+// import { useAuth0 } from "@auth0/auth0-react";
+
 
 /* Requirements to validate the login
 -----------------------------------------------------------------
@@ -31,6 +33,15 @@ function Validation (input) {
 
 function LoginComponents () {
   
+  // const { loginWithRedirect } = useAuth0();
+  
+  // const handleLoginWithGoogle = () => {
+  //   loginWithRedirect ({
+  //     screen_hint: 'login',
+  //     connection: 'google-oauth2'
+  //   })
+  // }
+
   const navigate = useNavigate();
   
   const [input, setInput] = useState ({
@@ -67,12 +78,14 @@ const handleSubmit = (e) => {
 // Verificar si la información de usuario coincide
 if (input.email === EMAIL && input.password === PASSWORD) {
   setAccess(true);
+  localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
+  dispatch(getUser(input.email));
   navigate('/home');
 } else {
   alert("⛔ >>> email does not match password <<< ⛔");
 }
 };
-      
+
 // show-hide password
   const [showPassword, setShowPassword] = useState(false);
   
@@ -117,9 +130,10 @@ return (
         <button type="button" onClick={togglePasswordVisibility}>{showPassword ? <FaEye style={{ backgroundColor: 'rgb(4, 100, 85)'}}/> : <FaEyeSlash style={{ backgroundColor: 'rgb(4, 100, 85)'}}/>}</button>
        
         <button type="submit">Sign in</button>
-
-        <button>Login with GitHub</button>
-        <button>Login with Facebook</button>
+      
+        {/* <button onClick={ handleLoginWithGoogle }>Continue with Google</button> */}
+        {/* <button>Login with GitHub</button> */}
+        {/* <button>Login with Facebook</button> */}
       </div>
    
     </form>
@@ -129,3 +143,5 @@ return (
 }
 
 export default LoginComponents;
+
+
