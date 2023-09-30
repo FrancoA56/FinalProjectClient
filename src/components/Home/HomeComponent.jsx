@@ -16,7 +16,7 @@ const HomeComponent = () => {
   // const user = useSelector((state) => state.user);
 
   // Click q hace que la card de la izq pase a la derecha
-  const handleImageLeftClick = (e) => {
+  const handleImageLeftClick = (e) => { 
     e.preventDefault();
     activeRigthCard && setActiveRigthCard(false);
     setActiveLeftCard(true);
@@ -35,7 +35,7 @@ const HomeComponent = () => {
   };
 
   return (
-
+    <>
     <div className={style.cont}>
       <div className={style.container}>
         <div
