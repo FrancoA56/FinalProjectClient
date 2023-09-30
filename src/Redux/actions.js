@@ -15,6 +15,7 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
+  GET_USER,
   UNDO_EMPTY_CART
 } from "./types";
 import axios from "axios";

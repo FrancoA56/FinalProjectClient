@@ -1,5 +1,7 @@
 import React from "react";
-import { useState,} from "react";
+import { useDispatch } from "react-redux";
+import getUser from "../../Redux/actions";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 // import { useAuth0 } from "@auth0/auth0-react";
@@ -31,8 +33,7 @@ function Validation (input) {
 }
 
 
-function LoginComponents () {
-  
+const LoginComponents = () => {
   // const { loginWithRedirect } = useAuth0();
   
   // const handleLoginWithGoogle = () => {
@@ -71,20 +72,20 @@ const [/*access*/, setAccess] = useState (false)
   
 const handleSubmit = (e) => {
   e.preventDefault();
-    
   const EMAIL = "claudiocarruz@gmail.com";
   const PASSWORD = "123456";
 
 // Verificar si la información de usuario coincide
-if (input.email === EMAIL && input.password === PASSWORD) {
-  setAccess(true);
-  localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
-  dispatch(getUser(input.email));
-  navigate('/home');
-} else {
-  alert("⛔ >>> email does not match password <<< ⛔");
+// if (input.email === EMAIL && input.password === PASSWORD) {
+//   setAccess(true);
+//   localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
+//   dispatch(getUser(input.email));
+//   navigate('/home');
+// } else {
+//   alert("⛔ >>> email does not match password <<< ⛔");
+// }
+// };
 }
-};
 
 // show-hide password
   const [showPassword, setShowPassword] = useState(false);
@@ -141,6 +142,7 @@ return (
   </div>
 )
 }
+
 
 export default LoginComponents;
 
