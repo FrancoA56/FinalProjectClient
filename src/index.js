@@ -17,9 +17,7 @@ ReactDOM.render(
   );
   
 
-
-
-
+  
 /* ---------Dominio Loguin Auth0---------------
   <Auth0Provider 
     domain='dev-iyjkcsm7sd2cg87z.us.auth0.com' 

@@ -183,7 +183,7 @@ export const filterByColor = (color) => {
 
 export const postUser = (payload) => {
   return async function () {
-      const response = await axios.post(`${URL}register`, payload);
+      const response = await axios.post(`${URL}api/user/register`, payload);
       return response;
   }
 }

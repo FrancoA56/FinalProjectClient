@@ -72,20 +72,20 @@ const [/*access*/, setAccess] = useState (false)
   
 const handleSubmit = (e) => {
   e.preventDefault();
-  const EMAIL = "claudiocarruz@gmail.com";
-  const PASSWORD = "123456";
+  // const EMAIL = "claudiocarruz@gmail.com";
+  // const PASSWORD = "123456";
 
 // Verificar si la información de usuario coincide
-// if (input.email === EMAIL && input.password === PASSWORD) {
-//   setAccess(true);
-//   localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
-//   dispatch(getUser(input.email));
-//   navigate('/home');
-// } else {
-//   alert("⛔ >>> email does not match password <<< ⛔");
-// }
-// };
+if (input.email === user.email && input.password === user.password) {
+  setAccess(true);
+  // localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
+  dispatch(getUser(input.email));
+  navigate('/home');
+} else {
+  alert("⛔ >>> email does not match password <<< ⛔");
 }
+};
+
 
 // show-hide password
   const [showPassword, setShowPassword] = useState(false);
@@ -141,7 +141,7 @@ return (
   
   </div>
 )
-}
+};
 
 
 export default LoginComponents;
