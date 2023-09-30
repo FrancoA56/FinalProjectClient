@@ -82,7 +82,7 @@ function RegisterComponents () {
   
         setInput({
         email: "",
-        password:"",
+        password: "",
         name: "",
         logo: "",
       });
@@ -94,13 +94,13 @@ function RegisterComponents () {
     }
     
     
-    useEffect(() => {
-  const token = localStorage.getItem('token');
-  if (token) {
-      // Hacer una petición al servidor para obtener la información del usuario
-    // Actualizar el estado global con la información del usuario
-  }
-}, [dispatch]);
+//     useEffect(() => {
+//   const token = localStorage.getItem('token');
+//   if (token) {
+//       // Hacer una petición al servidor para obtener la información del usuario
+//     // Actualizar el estado global con la información del usuario
+//   }
+// }, [dispatch]);
 
 
 
