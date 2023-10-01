@@ -73,11 +73,12 @@ const handleSubmit = (e) => {
 
 // Verificar si la información de usuario coincide
 // if (users.email) {
-console.log(users)
-console.log(input)
-if (input.email === users.email && input.password === users.password) {
-  setAccess(true);
+console.log("Users", users)
+console.log("Input", input)
+if (input.email && input.password) {
+      axios.get(`${URL}api/user?email=`)
   dispatch(getUser(input.email));
+  setAccess(true);
   navigate('/home');
 } else {
   alert("⛔ >>> email does not match password <<< ⛔");
