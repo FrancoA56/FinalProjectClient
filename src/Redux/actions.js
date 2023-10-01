@@ -189,7 +189,7 @@ export const postUser = (payload) => {
       console.log(response)
       return dispatch ({
         type: POST_USER,
-        payload :response.data
+        payload: response
       });
     } catch (error) {
       console.log(error)

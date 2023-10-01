@@ -25,7 +25,7 @@ const initialState = {
   allModels: [],
   cart: [],
   cartRemoved: [],
-  user: [],
+  user: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {

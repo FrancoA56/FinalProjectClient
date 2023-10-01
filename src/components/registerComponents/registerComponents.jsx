@@ -78,7 +78,7 @@ function RegisterComponents () {
     ) {
       try {
         console.log(input)
-        dispatch(postUser(input));
+        await dispatch(postUser(input));
         alert("User created successfully!")
   
         setInput({
