@@ -77,7 +77,7 @@ function RegisterComponents () {
       !errors.logo
     ) {
       try {
-        console.log(input)
+        console.log("Input", input)
         dispatch(postUser(input));
         alert("User created successfully!")
   
