@@ -16,7 +16,8 @@ import {
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
   GET_USER,
-  UNDO_EMPTY_CART
+  UNDO_EMPTY_CART,
+  LOGIN_USER
 } from "./types";
 
 const initialState = {
@@ -24,7 +25,7 @@ const initialState = {
   allModels: [],
   cart: [],
   cartRemoved: [],
-  user: [],
+  user: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -168,6 +169,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state, //guardo el estado
         user: payload,
       }
+
+      case LOGIN_USER:
+        return {
+          ...state,
+          user: payload,
+        }
 
     default:
       return { ...state };

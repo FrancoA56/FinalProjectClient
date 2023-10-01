@@ -16,7 +16,8 @@ import {
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
   GET_USER,
-  UNDO_EMPTY_CART
+  UNDO_EMPTY_CART,
+  LOGIN_USER
 } from "./types";
 import axios from "axios";
 
@@ -183,21 +184,46 @@ export const filterByColor = (color) => {
 
 export const postUser = (payload) => {
   return async function () {
-      const response = await axios.post(`${URL}api/user/register`, payload);
-      return response;
+    try {  
+    const response = await axios.post(`${URL}api/user/register`, payload);
+      return response
+    } catch (error) {
+      console.log(error)
+  }    
   }
 }
 
-export function getUser (mail) {
+export const logInUser = (payload) => {
+  return async function (dispatch) {
+    try {  
+      console.log("payload que le va a llegar al estado", payload);
+      return dispatch ({
+        type: LOGIN_USER,
+        payload: payload
+      });
+    } catch (error) {
+      console.log(error)
+  }    
+  }
+}
+
+export function getUser (email) {
   return async function(dispatch) {
     try {
-    const response = await axios.get(`${URL}/user/${mail}`);
+      if(email) {
+      const response = await axios.get(`${URL}api/user/${email}`);
     return dispatch({
       type: GET_USER,
       payload: response.data
     })
-    } catch (error) {
-      console.log(error)
-  }  
+    } else {
+      dispatch ({
+        type: GET_USER,
+        payload : []
+      })
+    }
+      } catch (error) {
+          console.log(error)
+      }    
   }
 }
