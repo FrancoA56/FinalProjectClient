@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import styles from "../registerComponents/register.module.css";
 import axios from "axios";
-// import { toast } from 'react-toastify';
+import { validation } from "../validation"
+ // import { toast } from 'react-toastify';
 
 /* Email validity requirements
 ----------------------------------------
@@ -19,30 +19,9 @@ one lowercase letter,
 one number and 
 one special character 
 */
-function validation(input) {
-  let errors = {};
 
-  // Validate mail
-  if (!/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
-    errors.email = "Incorrect email format";
-  }
-  if (!/^(?=.{1,35}$).+/.test(input.email)) {
-    errors.email = "Must be less than 35 characters";
-  } else {
-    errors.mail = "";
-  }
-  // Validate password
-  if (!/^(?=.*\d).{6,10}$/.test(input.password)) {
-    errors.password =
-      "l Password must have a number and between 6 to 10 characters";
-  } else {
-    errors.password = "";
-  }
-  return errors;
-}
 
 function RegisterComponents() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const URL = "http://localhost:3001/";
   const [errors, setErrors] = useState({});
