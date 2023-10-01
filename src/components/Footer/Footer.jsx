@@ -106,7 +106,7 @@ function Footer() {
             </h6>
             <p className="mb-4">
               <a
-                href="#!"
+                href="/shop"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
                 Shop
