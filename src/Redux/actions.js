@@ -182,17 +182,6 @@ export const filterByColor = (color) => {
   };
 };
 
-export const postUser = (payload) => {
-  return async function () {
-    try {  
-    const response = await axios.post(`${URL}api/user/register`, payload);
-      return response
-    } catch (error) {
-      console.log(error)
-  }    
-  }
-}
-
 export const logInUser = (payload) => {
   return async function (dispatch) {
     try {  
@@ -204,26 +193,5 @@ export const logInUser = (payload) => {
     } catch (error) {
       console.log(error)
   }    
-  }
-}
-
-export function getUser (email) {
-  return async function(dispatch) {
-    try {
-      if(email) {
-      const response = await axios.get(`${URL}api/user/${email}`);
-    return dispatch({
-      type: GET_USER,
-      payload: response.data
-    })
-    } else {
-      dispatch ({
-        type: GET_USER,
-        payload : []
-      })
-    }
-      } catch (error) {
-          console.log(error)
-      }    
   }
 }
