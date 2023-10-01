@@ -49,12 +49,10 @@ const LoginComponents = () => {
     }
   }
 
-  // show-hide password
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  // #5ec3bf
 
   return (
     <div class="bg-gradient-to-r from-[#000000] from-1% via-[#303030] via-50% to-[white] to-50%">
@@ -85,22 +83,69 @@ const LoginComponents = () => {
                     placeholder="Input email"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
-                  <p class="text-[#5ec3bf] text-xs absolute">{errors.email}</p>
                 </div>
 
-        <div>
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            id="password"
-            placeholder=" "
-            value={input.password}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="password">Enter password...</label>
-          <p style={{ color: "red" }}>{errors.password}</p>
-        </div>
+                {/* <!-- Password input --> */}
+                {/*                 <div class="relative mb-6" data-te-input-wrapper-init>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    placeholder=" "
+                    value={input.password}
+                    onChange={handleChange}
+                    required
+                    class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                  />
+                  <label
+                    for="exampleFormControlInput33"
+                    class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                  >
+                    Password
+                    <p class="text-red-500 text-xs">{errors.password}</p>
+                  </label>
+                </div> */}
+                <div className="mb-4">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    value={input.password}
+                    onChange={handleChange}
+                    required
+                    placeholder="Input password"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  style={{ position: "relative", left: 225, top: -45 }}
+                >
+                  {showPassword ? <FaEye style={{color:"gray"}} /> : <FaEyeSlash style={{color:"gray"}}/>}
+                </button>
+
+                {/* <!-- Not a member --> */}
+                <div class="mb-6 flex items-center justify-between">
+                  <div class="">
+                    <a
+                      href="#!"
+                      class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+                    ></a>
+                    Not a member?{" "}
+                    <a class="text-[#5ec3bf]" href="/register">
+                      Register
+                    </a>
+                  </div>
+
+                  {/* <!-- Forgot password link --> */}
+                  <a
+                    href="#!"
+                    class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+                  >
+                    Forgot password?
+                  </a>
+                </div>
 
                 {/* <!-- Submit button --> */}
                 <button
@@ -172,6 +217,7 @@ const LoginComponents = () => {
 };
 
 export default LoginComponents;
+
 
 // const { loginWithRedirect } = useAuth0();
 // const handleLoginWithGoogle = () => {
