@@ -54,26 +54,39 @@ const LoginComponents = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  // #5ec3bf
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Sign in...!!!</h1>
-        <h3>WELCOME</h3>
-        <p>Login to PageWeb to continue...!</p>
+    <div class="bg-gradient-to-r from-[#000000] from-1% via-[#303030] via-50% to-[white] to-50%">
+      <section class="h-screen">
+        <div class="container h-full px-6 py-24 ">
+          <div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
+            {/* <!-- Left column container with background--> */}
+            <div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
+              <img
+                src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
+                alt="CodecraftedLogo_image"
+              />
+            </div>
 
-        <div>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            placeholder=" "
-            value={input.email}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="email">Enter your email...</label>
-        </div>
+            {/* <!-- Right column container with form --> */}
+            <div class="md:w-8/12 lg:ml-6 lg:w-5/12">
+              <form onSubmit={handleSubmit}>
+                
+                {/* <!-- Email input --> */}
+                <div className="mb-4">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={input.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="Input email"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                  <p class="text-[#5ec3bf] text-xs absolute">{errors.email}</p>
+                </div>
 
         <div>
           <input
@@ -86,24 +99,74 @@ const LoginComponents = () => {
             required
           />
           <label htmlFor="password">Enter password...</label>
+          <p style={{ color: "red" }}>{errors.password}</p>
         </div>
 
-        <div>
-          <button type="button" onClick={togglePasswordVisibility}>
-            {showPassword ? (
-              <FaEye style={{ backgroundColor: "rgb(4, 100, 85)" }} />
-            ) : (
-              <FaEyeSlash style={{ backgroundColor: "rgb(4, 100, 85)" }} />
-            )}
-          </button>
+                {/* <!-- Submit button --> */}
+                <button
+                  type="submit"
+                  class="inline-block bg-[#5ec3bf] w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                >
+                  Sign in
+                </button>
 
-          <button type="submit">Sign in</button>
+                {/* <!-- Divider --> */}
+                <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+                  <p class="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+                    OR
+                  </p>
+                </div>
 
-          {/* <button onClick={ handleLoginWithGoogle }>Continue with Google</button> */}
-          {/* <button>Login with GitHub</button> */}
-          {/* <button>Login with Facebook</button> */}
+                {/* <!-- Social login buttons --> */}
+                {/*  Google */}
+                <a
+                  class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  style={{ "background-color": "#303030" }}
+                  href="#!"
+                  role="button"
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mr-2 h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 11v2.4h3.97c-.16 1.029-1.2 3.02-3.97 3.02-2.39 0-4.34-1.979-4.34-4.42 0-2.44 1.95-4.42 4.34-4.42 1.36 0 2.27.58 2.79 1.08l1.9-1.83c-1.22-1.14-2.8-1.83-4.69-1.83-3.87 0-7 3.13-7 7s3.13 7 7 7c4.04 0 6.721-2.84 6.721-6.84 0-.46-.051-.81-.111-1.16h-6.61zm0 0 17 2h-3v3h-2v-3h-3v-2h3v-3h2v3h3v2z"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  Continue with Google
+                </a>
+                {/* <!-- Twitter --> */}
+                <a
+                  class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  style={{ "background-color": "#505050" }}
+                  href="#!"
+                  role="button"
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="mr-2 h-3.5 w-3.5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                  </svg>
+                  Continue with Twitter
+                </a>
+              </form>
+            </div>
+          </div>
         </div>
-      </form>
+      </section>
     </div>
   );
 };
@@ -119,3 +182,5 @@ export default LoginComponents;
 // }
 
 // localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
+
+//! Estilos
