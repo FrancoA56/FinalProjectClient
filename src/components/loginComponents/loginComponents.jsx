@@ -12,28 +12,6 @@ import axios from "axios";
  Para las validaciones del login comprobar que el mail existe y 
 comparar la contraseña ingresada con la cargada por el usuario */
 
-function Validation(input) {
-  let errors = {};
-
-  // Validate mail
-  if (!/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
-    errors.email = "Incorrect email format";
-  }
-  if (!/^(?=.{1,35}$).+/.test(input.email)) {
-    errors.email = "Must be less than 35 characters";
-  } else {
-    errors.mail = "";
-  }
-  // Validate password
-  if (!/^(?=.*\d).{6,10}$/.test(input.password)) {
-    errors.password =
-      "l Password must have a number and between 6 to 10 characters";
-  } else {
-    errors.password = "";
-  }
-  return errors;
-}
-
 const LoginComponents = () => {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
@@ -45,31 +23,15 @@ const LoginComponents = () => {
     password: "",
   });
 
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
-
   function handleChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
-    setErrors(
-      Validation({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // const EMAIL = "claudiocarruz@gmail.com";
-    // const PASSWORD = "123456";
-
-    // Verificar si la información de usuario coincide
-    // if (users.email) {
     try {
       if (input.email && input.password) {
         const { data } = await axios.get(
@@ -82,18 +44,15 @@ const LoginComponents = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      console.log("error:", error);
       alert("⛔ >>> email does not match password <<< ⛔");
-      // }
     }
   }
 
-  // show-hide password
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  // #5ec3bf
 
   return (
     <div class="bg-gradient-to-r from-[#000000] from-1% via-[#303030] via-50% to-[white] to-50%">
@@ -124,7 +83,6 @@ const LoginComponents = () => {
                     placeholder="Input email"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
-                  <p class="text-[#5ec3bf] text-xs absolute">{errors.email}</p>
                 </div>
 
                 {/* <!-- Password input --> */}
@@ -158,7 +116,6 @@ const LoginComponents = () => {
                     placeholder="Input password"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
-                <p class="text-[#5ec3bf] text-xs absolute">{errors.password}</p>
                 </div>
                 <button
                   type="button"
@@ -260,6 +217,7 @@ const LoginComponents = () => {
 };
 
 export default LoginComponents;
+
 
 // const { loginWithRedirect } = useAuth0();
 // const handleLoginWithGoogle = () => {
