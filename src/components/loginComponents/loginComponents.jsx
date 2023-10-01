@@ -68,6 +68,7 @@ const LoginComponents = () => {
         <div class="md:w-8/12 lg:w-8/12">
           <form onSubmit={handleSubmit}>
             {/* <!-- Email input --> */}
+            {/* <!-- Email input --> */}
             <div className="mb-4">
               <input
                 type="email"
