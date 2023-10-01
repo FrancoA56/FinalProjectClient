@@ -17,7 +17,7 @@ import {
   FILTER_MODELS_BY_TYPES,
   GET_USER,
   UNDO_EMPTY_CART,
-  POST_USER
+  LOGIN_USER
 } from "./types";
 import axios from "axios";
 
@@ -183,13 +183,23 @@ export const filterByColor = (color) => {
 };
 
 export const postUser = (payload) => {
-  return async function (dispatch) {
+  return async function () {
     try {  
     const response = await axios.post(`${URL}api/user/register`, payload);
-      console.log(response)
+      return response
+    } catch (error) {
+      console.log(error)
+  }    
+  }
+}
+
+export const logInUser = (payload) => {
+  return async function (dispatch) {
+    try {  
+      console.log("payload que le va a llegar al estado", payload);
       return dispatch ({
-        type: POST_USER,
-        payload: response
+        type: LOGIN_USER,
+        payload: payload
       });
     } catch (error) {
       console.log(error)

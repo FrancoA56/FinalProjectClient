@@ -17,7 +17,7 @@ import {
   FILTER_MODELS_BY_TYPES,
   GET_USER,
   UNDO_EMPTY_CART,
-  POST_USER
+  LOGIN_USER
 } from "./types";
 
 const initialState = {
@@ -170,7 +170,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         user: payload,
       }
 
-      case POST_USER:
+      case LOGIN_USER:
         return {
           ...state,
           user: payload,
