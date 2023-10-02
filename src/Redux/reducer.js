@@ -167,10 +167,15 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case LOGIN_USER:
-      console.log('Reducer llamado con payload:', payload);
       return {
         ...state,
         user: payload
+      };
+
+    case LOGOUT_USER:
+      return {
+        ...state,
+        user: {}
       };
 
     default:

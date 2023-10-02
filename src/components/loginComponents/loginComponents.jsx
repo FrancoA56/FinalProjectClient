@@ -41,9 +41,9 @@ const LoginComponents = () => {
         console.log("respuesta de la peticion data", data);
 
         dispatch(logInUser(data));
-        console.log("usuario", usuario)
         setAccess(true);
         navigate("/");
+        console.log("usuario", usuario)
       }
     } catch (error) {
       console.log("error:", error);

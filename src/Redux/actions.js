@@ -183,9 +183,15 @@ export const filterByColor = (color) => {
 };
 
 export const logInUser = (payload) => {
-  return {
-    type: LOGIN_USER,
-    payload: payload,
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: LOGIN_USER,
+        payload: payload,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
   };
 };
 
