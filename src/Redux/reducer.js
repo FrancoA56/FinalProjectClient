@@ -18,9 +18,9 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
-  GET_USER,
   UNDO_EMPTY_CART,
   LOGIN_USER,
+  LOGOUT_USER
 } from "./types";
 
 const initialState = {
@@ -28,7 +28,7 @@ const initialState = {
   allModels: [],
   cart: [],
   cartRemoved: [],
-  user: { name: "nahue" },
+  user: {},
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -175,19 +175,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
       });
       return {
         ...state,
-        models: filterByType,
-      };
-
-    case GET_USER:
-      return {
-        ...state, //guardo el estado
-        user: payload,
+        models: filterByType
       };
 
     case LOGIN_USER:
       return {
         ...state,
-        user: payload,
+        user: payload
+      };
+
+    case LOGOUT_USER:
+      return {
+        ...state,
+        user: {}
       };
 
     default:

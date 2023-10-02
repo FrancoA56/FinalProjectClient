@@ -15,10 +15,9 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
-  GET_USER,
   UNDO_EMPTY_CART,
   LOGIN_USER,
-  REMOVE_USER
+  LOGOUT_USER,
 } from "./types";
 import axios from "axios";
 
@@ -202,15 +201,20 @@ export const filterByColor = (color) => {
 };
 
 export const logInUser = (payload) => {
-  return async function (dispatch) {
-    try {  
-      console.log("payload que le va a llegar al estado", payload);
-      return dispatch ({
+  return function (dispatch) {
+    try {
+      return dispatch({
         type: LOGIN_USER,
-        payload: payload
+        payload: payload,
       });
     } catch (error) {
-      console.log(error)
-  }    
-  }
-}
+      window.alert(error.message);
+    }
+  };
+};
+
+export const logOutUser = () => {
+  return {
+    type: LOGOUT_USER,
+  };
+};
