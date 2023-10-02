@@ -185,11 +185,14 @@ export const filterByColor = (color) => {
 };
 
 export const logInUser = (payload) => {
-  return function (dispatch) {
+  return function (dispatch) {  
     try {
+    //------- ------------------------------------------------------------------------------------
+      localStorage.setItem('user', JSON.stringify(payload)); // Guardar la data en el localStorage
+    // -------------------------------------------------------------------------------------------
       return dispatch({
         type: LOGIN_USER,
-        payload: payload,
+        payload: payload, 
       });
     } catch (error) {
       window.alert(error.message);
@@ -198,7 +201,15 @@ export const logInUser = (payload) => {
 };
 
 export const logOutUser = () => {
-  return {
-    type: LOGOUT_USER,
+  // ----------------------------------------------------------------
+  return function (dispatch) {
+    localStorage.removeItem('user'); // Eliminar del localStorage
+
+    dispatch({
+      type: LOGOUT_USER,
+    });
+  // -----------------------------------------------------------------
+  // return {
+  //   type: LOGOUT_USER,
   };
 };
