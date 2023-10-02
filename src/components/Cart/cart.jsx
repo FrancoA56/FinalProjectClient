@@ -13,6 +13,7 @@ import Footer from "../Footer/Footer";
 const CartComponent = () => {
   // const dispatch = useDispatch();
   const models = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
   const [emptyCart, setEmptyCart] = useState(false);
 
   // useEffect(() => {
@@ -42,6 +43,7 @@ const CartComponent = () => {
 
   return (
     <>
+    {console.log(user)}
       <Nav />
       <div className="bg-bgc p-4">
         <h1 className="text-2xl font-bold mb-4">Shopping cart</h1>

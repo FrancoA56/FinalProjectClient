@@ -5,6 +5,10 @@ export const REMOVE_MODEL = "REMOVE_MODEL";
 export const REMOVE_MODEL_DISABLE = "REMOVE_MODEL_DISABLE";
 export const REMOVE_ALL_MODEL_CART = "REMOVE_ALL_MODEL_CART";
 export const REMOVE_MODEL_CART = "REMOVE_MODEL_CART";
+////////////////////////////////////////
+// Agregado
+export const REMOVE_USER = "REMOVE_USER";
+////////////////////////////////////////
 export const ORDER_MODELS_NAME_ASCENDANT = "ORDER_MODELS_NAME_ASCENDANT";
 export const ORDER_MODELS_NAME_DESCENDANT = "ORDER_MODELS_NAME_DESCENDANT";
 export const ORDER_MODELS_RATING = "ORDER_MODELS_RATING";
@@ -14,4 +18,10 @@ export const ORDER_MODELS_PRICE_DESCENDANT = "ORDER_MODELS_PRICE_DESCENDANT";
 export const ORDER_MODELS_RELEASED = "ORDER_RELEASED";
 export const FILTER_MODELS_BY_TYPES = "FILTER_BY_TYPES";
 export const FILTER_MODELS_BY_COLORS = "FILTER_BY_COLORS";
+export const GET_USER = "GET_USER";
 export const UNDO_EMPTY_CART = "UNDO_EMPTY_CART";
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+
+
+// export const POST_USER = "POST_USER";

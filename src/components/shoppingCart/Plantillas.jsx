@@ -149,4 +149,5 @@ const Plantillas = ({
   );
 };
 
+
 export default Plantillas;

@@ -15,11 +15,14 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
-  UNDO_EMPTY_CART
+  UNDO_EMPTY_CART,
+  LOGIN_USER,
+  LOGOUT_USER,
 } from "./types";
 import axios from "axios";
 
 const URL = "http://localhost:3001/";
+
 
 export const addModel = (model) => {
   return function (dispatch) {
@@ -113,6 +116,7 @@ export const removeAllModelCart = () => {
   };
 };
 
+
 export const undoRemoveAllModelCart = () => {
   return function (dispatch) {
     try {
@@ -177,5 +181,24 @@ export const filterByColor = (color) => {
   return {
     type: FILTER_MODELS_BY_COLORS,
     payload: color,
+  };
+};
+
+export const logInUser = (payload) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: LOGIN_USER,
+        payload: payload,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const logOutUser = () => {
+  return {
+    type: LOGOUT_USER,
   };
 };
