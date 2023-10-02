@@ -5,30 +5,11 @@ import React from "react";
 function Footer() {
   return (
     <footer className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
-      {/* Main container div: holds the entire content of the footer */}
-      <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
-        <div className="mr-12 hidden lg:block">
-          <span>Contact us on social networks:</span>
-        </div>
-        {/* Social network icons container */}
-        <div className="flex justify-center">
-          <a href="#!" className="mr-6 text-neutral-600 dark:text-neutral-200">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {/* Icon path */}
-            </svg>
-          </a>
-          {/* Add other social network icons similarly */}
-        </div>
-      </div>
+
 
       {/* Main content container */}
-      <div className="mx-6 py-10 text-center md:text-left">
-        <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-6 py-5 text-center md:text-left">
+        <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-4">
           {/* Tailwind Elements section */}
           <div className="">
             <h6 className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
@@ -36,7 +17,7 @@ function Footer() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="mr-3 h-4 w-4"
+                className="mr-3 h-1 w-4"
               >
                 {/* Icon path */}
               </svg>
@@ -58,7 +39,7 @@ function Footer() {
             {/* Instagram section */}
             <p className="mr-2 mt-4 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
             <a
-              href="#!"
+              href="https://www.instagram.com/code_crafted_templates/"
               className="mb-4 flex items-center justify-center md:justify-center"
             >
               <svg
@@ -78,7 +59,7 @@ function Footer() {
              <p className="mr-8 mt-2 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
 
              <a
-                href="#!"
+                href="https://twitter.com/CodeCraftedTemp"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
               <svg
@@ -99,7 +80,7 @@ function Footer() {
              <p className="mr-6 mt-1.5 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
 
              <a
-                href="#!"
+                href="www.linkedin.com/in/code-crafted-templates"
                 className="mb-3 flex items-center justify-center md:justify-center"
               >
               <svg
@@ -125,7 +106,7 @@ function Footer() {
             </h6>
             <p className="mb-4">
               <a
-                href="#!"
+                href="/shop"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
                 Shop
@@ -136,7 +117,7 @@ function Footer() {
 
           {/* Contact section */}
           <div>
-            <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-center">
+            <h6 className="mb-2 flex justify-center font-semibold uppercase md:justify-center">
               Contact
             </h6>
             <p className="mb-4 flex items-center justify-center md:justify-start">
@@ -167,7 +148,7 @@ function Footer() {
       </div>
 
       {/* Copyright section */}
-      <div className="bg-neutral-200 p-6 text-center dark:bg-neutral-700">
+      <div className="bg-neutral-200 p-3 mb- text-center dark:bg-neutral-700">
         <span>© 2023 Copyright: </span>
         <a
           className="font-semibold text-neutral-600 dark:text-neutral-400"
