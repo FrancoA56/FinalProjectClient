@@ -30,10 +30,10 @@ const LoginComponents = () => {
     });
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      if (input.email && input.password) {
+async function handleSubmit(e) {
+  e.preventDefault();
+  try {
+    if (input.email && input.password) {
         const { data } = await axios.get(
           `${URL}api/user?email=${input.email}&password=${input.password}`
         );

@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 //import styles from "../registerComponents/register.module.css";
+
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import { validation } from "../validation";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 
 // import { toast } from 'react-toastify';
@@ -66,13 +71,12 @@ function RegisterComponents() {
     }
   }
 
-  //     useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //       // Hacer una petición al servidor para obtener la información del usuario
-  //     // Actualizar el estado global con la información del usuario
-  //   }
-  // }, [dispatch]);
+  // -------------------------------------------------------------------
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };  // Agrego ojito al register
+  // --------------------------------------------------------------------
 
   return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
@@ -140,7 +144,7 @@ function RegisterComponents() {
 
             <div className="mb-4">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 placeholder="Input password"
@@ -153,7 +157,20 @@ function RegisterComponents() {
                 {errors.password}
               </p>
             </div>
-
+{/* -------------------------------------------------------------------------------------------- */}
+            <button                                  // Boton de ojito de contraseña
+              type="button"
+              onClick={togglePasswordVisibility}
+              class="relative lg:bottom-11 lg:left-48 md:relative bottom-11 left-28"
+              // style={{ position: "relative", left: 190, top: -45 }}
+            >
+              {showPassword ? (
+                <FaEye style={{ color: "gray" }} />
+              ) : (
+                <FaEyeSlash style={{ color: "gray" }} />
+              )}
+            </button>
+{/* ---------------------------------------------------------------------------------------------- */}
             {/* Logo input */}
 
             <div className="mb-4">
