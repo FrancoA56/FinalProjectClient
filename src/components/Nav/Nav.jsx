@@ -1,12 +1,30 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "tailwindcss/tailwind.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { removeUser } from "../../Redux/actions";
 
 function Nav() {
+  // Traemos el estado Global "user"
   const user = useSelector((state) => state.user);
+
+  // Lo usamos para saber el path
   const location = useLocation();
+
+  // traemos para hacer el logout
+  const dispatch = useDispatch();
+
+  // Hook para ir al home
+  const navigate = useNavigate();
+  // Funcion para cerrar sesion
+
+  const handleLogOut = (e) => {
+    e.preventDefault()
+    const logOutConfirm = window.confirm('Are you sure you want to log out?')
+    logOutConfirm && dispatch(removeUser(user.name));
+    logOutConfirm && navigate('/')
+  };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -103,7 +121,7 @@ function Nav() {
             )}
 
             {/* Projects link */}
-{/*             <li className="mb-3 mt-3 lg:mb-1 lg:pr-2" data-te-nav-item-ref>
+            {/*             <li className="mb-3 mt-3 lg:mb-1 lg:pr-2" data-te-nav-item-ref>
               <a
                 className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
@@ -265,7 +283,7 @@ function Nav() {
                   <li>
                     <a
                       className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                      href="#"
+                      onClick={handleLogOut}
                     >
                       Log Out
                     </a>

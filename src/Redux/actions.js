@@ -17,11 +17,29 @@ import {
   FILTER_MODELS_BY_TYPES,
   GET_USER,
   UNDO_EMPTY_CART,
-  LOGIN_USER
+  LOGIN_USER,
+  REMOVE_USER
 } from "./types";
 import axios from "axios";
 
 const URL = "http://localhost:3001/";
+
+
+//////////////////////////////////////////
+// Agregado
+export const removeUser = (name) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: REMOVE_USER,
+        payload: name
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+//////////////////////////////////////////
 
 export const addModel = (model) => {
   return function (dispatch) {
@@ -114,6 +132,7 @@ export const removeAllModelCart = () => {
     }
   };
 };
+
 
 export const undoRemoveAllModelCart = () => {
   return function (dispatch) {

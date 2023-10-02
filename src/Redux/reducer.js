@@ -3,6 +3,9 @@ import {
   ADD_MODELS,
   ADD_MODEL_CART,
   REMOVE_MODEL,
+  /////////////////////
+  REMOVE_USER,
+  /////////////////////
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
   REMOVE_ALL_MODEL_CART,
@@ -17,7 +20,7 @@ import {
   FILTER_MODELS_BY_TYPES,
   GET_USER,
   UNDO_EMPTY_CART,
-  LOGIN_USER
+  LOGIN_USER,
 } from "./types";
 
 const initialState = {
@@ -25,11 +28,20 @@ const initialState = {
   allModels: [],
   cart: [],
   cartRemoved: [],
-  user: {},
+  user: { name: "nahue" },
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    //////////////////////////////////
+    //agregado
+    case REMOVE_USER:
+      return {
+        ...state,
+        user: {},
+      };
+    //////////////////////////////////
+    
     case ADD_MODEL:
       return {
         ...state,
@@ -44,7 +56,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case ADD_MODEL_CART:
-      const modelToCart = state.allModels.filter((model) => model.id === payload);
+      const modelToCart = state.allModels.filter(
+        (model) => model.id === payload
+      );
       return {
         ...state,
         cart: [...state.cart, modelToCart],
@@ -164,17 +178,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
         models: filterByType,
       };
 
-      case GET_USER:
+    case GET_USER:
       return {
         ...state, //guardo el estado
         user: payload,
-      }
+      };
 
-      case LOGIN_USER:
-        return {
-          ...state,
-          user: payload,
-        }
+    case LOGIN_USER:
+      return {
+        ...state,
+        user: payload,
+      };
 
     default:
       return { ...state };
