@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "tailwindcss/tailwind.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 function Nav() {
+  const user = useSelector((state) => state.user);
+  const location = useLocation();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -55,7 +59,7 @@ function Nav() {
             href=""
           >
             <img
-              src="https://images.vexels.com/media/users/3/220668/isolated/preview/cd087e5b54a24f0cd84aa90692938d97-ilustracion-de-pato-de-goma-amarillo-pato-de-goma.png"
+              src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/iso_wfaz4p.png"
               style={{ height: "25px", width: "25px" }}
               alt="Logo"
               loading="lazy"
@@ -66,31 +70,40 @@ function Nav() {
             className="list-style-none mr-auto flex flex-col pl-0 lg:flex-row"
             data-te-navbar-nav-ref
           >
-            <li className="mb-4 mt-3 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-              {/* Dashboard link */}
-              <a
-                className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
-                href="/"
-                data-te-nav-link-ref
-              >
-                Home
-              </a>
-            </li>
+            {location.pathname !== "/" && (
+              <>
+                {" "}
+                <li className="mb-4 mt-3 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                  {/* Dashboard link */}
+                  <a
+                    className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+                    href="/"
+                    data-te-nav-link-ref
+                  >
+                    Home
+                  </a>
+                </li>{" "}
+              </>
+            )}
+
             {/* Team link */}
-            <li className="mb-4 mt-3 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-              <a
-                className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
+            {location.pathname !== "/shop" && (
+              <li className="mb-4 mt-3 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <a
+                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
                  dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
                  dark:[&.active]:text-neutral-400"
-                href="/shop"
-                data-te-nav-link-ref
-              >
-                Shop
-              </a>
-            </li>
+                  href="/shop"
+                  data-te-nav-link-ref
+                >
+                  Shop
+                </a>
+              </li>
+            )}
+
             {/* Projects link */}
-            <li className="mb-3 mt-3 lg:mb-1 lg:pr-2" data-te-nav-item-ref>
+{/*             <li className="mb-3 mt-3 lg:mb-1 lg:pr-2" data-te-nav-item-ref>
               <a
                 className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
@@ -101,7 +114,7 @@ function Nav() {
               >
                 Otra Ruta
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
 
@@ -199,23 +212,38 @@ function Nav() {
           {/* Second dropdown container */}
           <div className="relative" data-te-dropdown-alignment="end">
             {/* Second dropdown trigger --> User profile */}
-            <a
-              className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-              href="#"
-              id="dropdownMenuButton2"
-              role="button"
-              aria-expanded={isDropdownOpen}
-              onClick={toggleDropdown}
-            >
-              {/* User avatar */}
-              <img
-                src="https://images.vexels.com/media/users/3/220668/isolated/preview/cd087e5b54a24f0cd84aa90692938d97-ilustracion-de-pato-de-goma-amarillo-pato-de-goma.png"
-                className="rounded-full"
-                style={{ height: "25px", width: "25px" }}
-                alt=""
-                loading="lazy"
-              />
-            </a>
+            {user.name ? (
+              <>
+                {" "}
+                <a
+                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                  href="#"
+                  id="dropdownMenuButton2"
+                  role="button"
+                  aria-expanded={isDropdownOpen}
+                  onClick={toggleDropdown}
+                >
+                  {" "}
+                  {user.name}{" "}
+                </a>
+              </>
+            ) : (
+              <>
+                {" "}
+                <a
+                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                  href="#"
+                  id="dropdownMenuButton2"
+                  role="button"
+                  aria-expanded={isDropdownOpen}
+                  onClick={toggleDropdown}
+                >
+                  {/* User avatar */}
+                  <i class="fa-solid fa-bars"></i>
+                </a>
+              </>
+            )}
+
             {/* Second dropdown menu */}
             <ul
               className={`absolute z-[1000] float-left m-0 ${
@@ -224,39 +252,47 @@ function Nav() {
               aria-labelledby="dropdownMenuButton1"
             >
               {/* Second dropdown menu items */}
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="/login"
-                >
-                  Login
-                </a>
-              </li>
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="/register"
-                  data-te-dropdown-item-ref
-                >
-                  Sing In
-                </a>
-              </li>
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="/register"
-                >
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="#"
-                >
-                  Log Out
-                </a>
-              </li>
+              {user.name ? (
+                <>
+                  <li>
+                    <a
+                      className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                      href="/register"
+                    >
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                      href="#"
+                    >
+                      Log Out
+                    </a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <li>
+                    <a
+                      className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                      href="/login"
+                    >
+                      Login
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                      href="/register"
+                      data-te-dropdown-item-ref
+                    >
+                      Sing In
+                    </a>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
