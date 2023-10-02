@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "tailwindcss/tailwind.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { removeUser } from "../../Redux/actions";
+import { logOutUser } from "../../Redux/actions";
 
 function Nav() {
   // Traemos el estado Global "user"
@@ -22,7 +22,7 @@ function Nav() {
   const handleLogOut = (e) => {
     e.preventDefault()
     const logOutConfirm = window.confirm('Are you sure you want to log out?')
-    logOutConfirm && dispatch(removeUser(user.name));
+    logOutConfirm && dispatch(logOutUser(user.name));
     logOutConfirm && navigate('/')
   };
 
@@ -282,7 +282,7 @@ function Nav() {
                   </li>
                   <li>
                     <a
-                      className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                      className="block cursor-pointer w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                       onClick={handleLogOut}
                     >
                       Log Out

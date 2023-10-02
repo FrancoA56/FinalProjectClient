@@ -15,7 +15,6 @@ comparar la contraseña ingresada con la cargada por el usuario */
 const LoginComponents = () => {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
-  const usuario = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const URL = "http://localhost:3001/";
 
@@ -38,15 +37,11 @@ const LoginComponents = () => {
         const { data } = await axios.get(
           `${URL}api/user?email=${input.email}&password=${input.password}`
         );
-        console.log("respuesta de la peticion data", data);
-
         dispatch(logInUser(data));
         setAccess(true);
         navigate("/");
-        console.log("usuario", usuario)
       }
     } catch (error) {
-      console.log("error:", error);
       alert("⛔ >>> email does not match password <<< ⛔");
     }
   }
