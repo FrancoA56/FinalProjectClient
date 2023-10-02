@@ -23,6 +23,23 @@ import axios from "axios";
 
 const URL = "http://localhost:3001/";
 
+
+//////////////////////////////////////////
+// Agregado
+export const removeUser = (name) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: REMOVE_USER,
+        payload: name
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+//////////////////////////////////////////
+
 export const addModel = (model) => {
   return function (dispatch) {
     try {
@@ -114,6 +131,7 @@ export const removeAllModelCart = () => {
     }
   };
 };
+
 
 export const undoRemoveAllModelCart = () => {
   return function (dispatch) {

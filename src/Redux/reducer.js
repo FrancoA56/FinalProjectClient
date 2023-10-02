@@ -3,6 +3,9 @@ import {
   ADD_MODELS,
   ADD_MODEL_CART,
   REMOVE_MODEL,
+  /////////////////////
+  REMOVE_USER,
+  /////////////////////
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
   REMOVE_ALL_MODEL_CART,
@@ -30,6 +33,15 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    //////////////////////////////////
+    //agregado
+    case REMOVE_USER:
+      return {
+        ...state,
+        user: {},
+      };
+    //////////////////////////////////
+    
     case ADD_MODEL:
       return {
         ...state,
