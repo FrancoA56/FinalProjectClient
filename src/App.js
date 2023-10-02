@@ -11,16 +11,33 @@ import Cart from "./views/cart/cart.jsx";
 import Pay from "./views/pay/pay.jsx";
 import Home from "./views/home/HomeViews";
 
+import axios from "axios";
+import plantillas from "./utils/img/ulisesPresets.json";
+
 function App() {
+
 // ----------------------------------------------------------------------------------------
   const dispatch = useDispatch();
-
+  const URL = "http://localhost:3001/api/preset";
+  
   useEffect(() => {
+    
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const userData = JSON.parse(storedUser);
       dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
     }
+    
+    const postData = async () => {
+      await Promise.all(
+        plantillas.map(async (plantilla) => {
+          await axios.post(URL, plantilla);
+        })
+      );
+    };
+
+    postData();
+     
   }, [dispatch]);
 // ----------------------------------------------------------------------------------------
 
