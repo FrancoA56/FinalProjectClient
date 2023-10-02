@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser } from "../../Redux/actions";
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 // import { useAuth0 } from "@auth0/auth0-react";
@@ -116,7 +116,18 @@ const LoginComponents = () => {
                 <a class="text-[#5ec3bf]" href="/register">
                   Register
                 </a>
+                
               </div>
+              {/* Agregar enlace de Home */}
+              <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 mr-15 ml-12">
+                  Back to Home
+                </a>
+                <Link to="/" className="flex items-center mr-11 ml-15">
+                  <i
+                    className="text-[#5ec3bf] fa-solid fa-house"
+                    style={{ marginRight: "8px" }}
+                  ></i>
+                </Link>
 
               {/* <!-- Forgot password link --> */}
               <a
@@ -169,7 +180,7 @@ const LoginComponents = () => {
               Continue with Google
             </a>
             {/* <!-- Twitter --> */}
-            <a
+            {/* <a
               class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               style={{ "background-color": "#505050" }}
               href="#!"
@@ -186,7 +197,7 @@ const LoginComponents = () => {
                 <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
               </svg>
               Continue with Twitter
-            </a>
+            </a> */}
           </form>
         </div>
       </div>
