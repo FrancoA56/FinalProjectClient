@@ -15,9 +15,9 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
-  GET_USER,
   UNDO_EMPTY_CART,
-  LOGIN_USER
+  LOGIN_USER,
+  LOGOUT_USER
 } from "./types";
 
 const initialState = {
@@ -44,7 +44,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case ADD_MODEL_CART:
-      const modelToCart = state.allModels.filter((model) => model.id === payload);
+      const modelToCart = state.allModels.filter(
+        (model) => model.id === payload
+      );
       return {
         ...state,
         cart: [...state.cart, modelToCart],
@@ -161,20 +163,15 @@ const rootReducer = (state = initialState, { type, payload }) => {
       });
       return {
         ...state,
-        models: filterByType,
+        models: filterByType
       };
 
-      case GET_USER:
+    case LOGIN_USER:
+      console.log('Reducer llamado con payload:', payload);
       return {
-        ...state, //guardo el estado
-        user: payload,
-      }
-
-      case LOGIN_USER:
-        return {
-          ...state,
-          user: payload,
-        }
+        ...state,
+        user: payload
+      };
 
     default:
       return { ...state };

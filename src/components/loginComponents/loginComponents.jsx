@@ -15,6 +15,7 @@ comparar la contraseña ingresada con la cargada por el usuario */
 const LoginComponents = () => {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
+  const usuario = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const URL = "http://localhost:3001/";
 
@@ -39,7 +40,8 @@ const LoginComponents = () => {
         );
         console.log("respuesta de la peticion data", data);
 
-        dispatch(logInUser(input.email));
+        dispatch(logInUser(data));
+        console.log("usuario", usuario)
         setAccess(true);
         navigate("/");
       }
