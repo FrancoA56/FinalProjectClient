@@ -133,20 +133,39 @@ const Plantillas = ({
   }, [selectedFilterColor, selectedCategory, selectedOrder]);
 
   return (
-    <div className="flex flex-wrap m-6">
+    /* contenedor */
+    <div className="flex flex-wrap my-6 ml-20 justify-start">
       {templates.map((img, index) => (
-        <div key={index} className="flex-wrap rounded overflow-hidden shadow-xl m-4">
-          <img src={imagen} alt={"img.name"} className="w-full h-64 object-cover" />
+        /* Contenedor cards */
+        <div
+          key={index}
+          className="rounded-md overflow-hidden shadow-xl m-4"
+          style={{
+            background:
+              "radial-gradient(20rem circle at bottom, rgb(0, 0, 0), rgb(50, 50, 50)",
+            filter: "drop-shadow(5px 5px 10px black)",
+          }}
+        >
+          <img
+            src={imagen}
+            alt={"img.name"}
+            className="w-full h-64 object-cover"
+          />
           <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{img.name}</div>
-            <p className="text-gray-700 text-base mb-2">{img.type}</p>
-            <p className="text-gray-900 text-lg">${img.price}</p>
+            <div className="font-mediun uppercase leading-normal font-semibold mb-2 text-white">
+              {img.name}
+            </div>
+            <p className="text-[#909090git] text-base capitalize mb-2">
+              {img.type}
+            </p>
+            <p className="text-white text-lg">
+              <strong>${img.price}</strong>
+            </p>
           </div>
         </div>
       ))}
     </div>
   );
-  
 };
 
 export default Plantillas;
