@@ -1,9 +1,9 @@
 import "./App.css";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { logInUser, createPresets } from './Redux/actions';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logInUser, createPresets } from "./Redux/actions";
 import Login from "./views/login";
 import Register from "./views/register";
 import ShoppingCart from "./views/shoppingCart";
@@ -15,24 +15,18 @@ import axios from "axios";
 import plantillas from "./utils/img/ulisesPresets.json";
 
 function App() {
-
   const dispatch = useDispatch();
   const URL = "http://localhost:3001/api/preset";
 
-
-=======
   const presets = useSelector((state) => state.presets);
 
   useEffect(() => {
-    
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const userData = JSON.parse(storedUser);
       dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
     }
-    
-    
-    
+
     if (presets === 1) {
       const postData = async () => {
         try {
@@ -48,18 +42,11 @@ function App() {
       };
       postData();
     }
-
-
-  postData();
-  
-}, [dispatch]);
-
-     
   }, [dispatch]);
-// ----------------------------------------------------------------------------------------
+  // ----------------------------------------------------------------------------------------
 
-// ----------------------------------------------------------------------------------------
-  
+  // ----------------------------------------------------------------------------------------
+
   return (
     <div className="App">
       <Routes>
