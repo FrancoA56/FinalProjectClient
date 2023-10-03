@@ -99,20 +99,14 @@ function Footer() {
             {/* Add other product links similarly */}
           </div>
 
-          {/* Useful links section */}
-          <div className="">
-            <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-center">
-              Links
-            </h6>
-            <p className="mb-4">
-              <a
-                href="/shop"
-                className="mb-4 flex items-center justify-center md:justify-center"
-              >
-                Shop
-              </a>
-            </p>
-            {/* Add other useful links similarly */}
+          {/* Email us */}
+          <div className="flex flex-col">
+            <input className="border rounded ml-2 mr-40" type="text" name="name" id="name" placeholder="Name">
+            </input>
+            <input className="border rounded ml-2 mt-2 mr-20" type="text" name="email" id="email" placeholder="Email">
+            </input>
+            <input className="border rounded m-2 h-28" type="text" name="text" id="text" placeholder="Talk to us!">
+            </input>
           </div>
 
           {/* Contact section */}

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 // import styles from "../registerComponents/register.module.css";
 import Swal from 'sweetalert2';
+
+
 import axios from "axios";
 import { validation } from "../validation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";

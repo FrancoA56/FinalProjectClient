@@ -84,9 +84,9 @@ function Nav() {
         >
           {/* Logo */}
           <a
-            className="mb-4 ml-2 mr-5 mt-3 flex items-center text-neutral-900 hover:text-neutral-900
+            className="mb-4 ml-2 mr-5  flex items-center text-neutral-900 hover:text-neutral-900
             focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 
-            lg:mb-0 lg:mt-0"
+            lg:mb-0 lg:"
             href=""
           >
             <img
@@ -104,7 +104,7 @@ function Nav() {
             {location.pathname !== "/" && (
               <>
                 {" "}
-                <li className="mb-4 mt-3 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                   {/* Dashboard link */}
                   <a
                     className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
@@ -119,7 +119,7 @@ function Nav() {
 
             {/* Team link */}
             {location.pathname !== "/shop" && (
-              <li className="mb-4 mt-3 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                 <a
                   className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
@@ -134,7 +134,7 @@ function Nav() {
             )}
 
             {/* Projects link */}
-            {/*             <li className="mb-3 mt-3 lg:mb-1 lg:pr-2" data-te-nav-item-ref>
+            {/*             <li className="mb-3  lg:mb-1 lg:pr-2" data-te-nav-item-ref>
               <a
                 className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
