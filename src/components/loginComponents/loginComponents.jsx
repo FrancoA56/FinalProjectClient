@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser } from "../../Redux/actions";
 import { useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
+import Swal from 'sweetalert2';
+
 // import { useAuth0 } from "@auth0/auth0-react";
 
 /* Requirements to validate the login
@@ -42,9 +44,19 @@ async function handleSubmit(e) {
         navigate("/");
       }
     } catch (error) {
-      alert("⛔ >>> email does not match password <<< ⛔");
+      showErrorAlert(error.message);
     }
   }
+
+// -----------------------------------------------------------
+const showErrorAlert = () => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: `>>> email does not match password <<<`,
+  });
+};
+// -----------------------------------------------------------
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -144,6 +156,7 @@ async function handleSubmit(e) {
               class="inline-block bg-[#5ec3bf] w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               data-te-ripple-init
               data-te-ripple-color="light"
+              // onClick={handleSubmit}
             >
               Sign in
             </button>

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import styles from "../registerComponents/register.module.css";
-import { useNavigate } from "react-router-dom";
-
+// import styles from "../registerComponents/register.module.css";
+import Swal from 'sweetalert2';
 import axios from "axios";
 import { validation } from "../validation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
-
 // import { toast } from 'react-toastify';
 
 /* Email validity requirements
@@ -57,24 +55,40 @@ function RegisterComponents() {
         console.log(input);
         const { data } = await axios.post(`${URL}api/user/register`, input);
         if (data.email) {
-          alert("User created successfully!");
+          showSuccessAlert("User created successfully!");
           navigate("/login"); //cdo termine de crear el usuaro, q me redirija al login para loguearse...!
         }
       } catch (error) {
         console.log(error);
-        return alert(
-          ">>> ⛔ Something went wrong or some fields are missing. Please try again. ⛔ <<<"
-        );
-      }
+      showErrorAlert(">>> Something went wrong or some fields are missing. Please try again. <<<");
     }
   }
+}
 
-  // -------------------------------------------------------------------
+// --------------------------------------------------------------------------Alert-✅-----------
+const showSuccessAlert = (message) => {
+  Swal.fire({
+    icon: 'success',
+    title: 'Success',
+    text: `${message}`,
+  });
+};
+
+const showErrorAlert = (message) => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: `${message}`,
+  });
+};
+// --------------------------------------------------------------------------------⛔------------
+
+// -------------------------------------------------------------------------- Ojito Password---
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };  // Agrego ojito al register
-  // --------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 
   return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
