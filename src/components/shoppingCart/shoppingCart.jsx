@@ -1,6 +1,7 @@
 // LIBRERIAS
 import React from "react";
 // MODULOS
+import Banner from "../Banner/Banner"
 import Nav from "../Nav/Nav";
 import ComponentShop from "./ComponentShop";
 
@@ -8,6 +9,7 @@ import ComponentShop from "./ComponentShop";
 const ShoppingCartComponent = () => {
   return (
     <>
+    <Banner/>
       <Nav />
       <div>
         <ComponentShop />

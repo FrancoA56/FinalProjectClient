@@ -1,10 +1,14 @@
 const SelectOrder = ({ handleOrderChange }) => {
   return (
-    <div className="mb-6 w-24 ml-5">
-      <h6 className="text-lg font-semibold mb-2">Order by:</h6>
+    <div className="flex flex-col items-start ml-5">
+      {/*       <h6 className="text-lg font-semibold mb-2">Order by:</h6> */}
+      <h1 className="font-mediun uppercase leading-normal  font-semibold mb-2 text-[#5ec3bf]">
+        Order By:
+      </h1>
+
       <div className="relative">
         <select
-          className="block w-full px-4 py-2 pr-8 leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+          className="block px-4 py-2 pr-8 leading-tight border rounded-md shadow appearance-none focus:outline-none focus:shadow-outline text-sm"
           onChange={handleOrderChange}
         >
           <option value="name a">A-Z</option>
@@ -16,7 +20,7 @@ const SelectOrder = ({ handleOrderChange }) => {
           <option value="price d">Higher price</option>
           <option value="price a">Lower price</option>
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <div className="pointer-events-none absolute inset-y-0 right-1 flex items-center px-2 text-[#5ec3bf]">
           <svg
             className="w-4 h-4"
             xmlns="http://www.w3.org/2000/svg"
