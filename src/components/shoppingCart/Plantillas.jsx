@@ -1,9 +1,9 @@
 //LIBRERIAS
 import axios from "axios";
 import { useEffect, useState } from "react";
+import imagen from "../../utils/img/plantilla.png";
 
 //MODULOS
-import style from "./shoppingCart.module.css";
 
 const Plantillas = ({
   selectedOrder,
@@ -30,7 +30,6 @@ const Plantillas = ({
   const order = selectedOrder.split(" ");
   const orderName = order[0];
   const orderValue = order[1];
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -134,20 +133,20 @@ const Plantillas = ({
   }, [selectedFilterColor, selectedCategory, selectedOrder]);
 
   return (
-    <div className={style.centrarPlantillas}>
-      {templates.map((img, index) => {
-        return (
-          <div className={style.containerImg} key={index}>
-            {/* <img src={img.url} alt={img.name} className={style.img} /> */}
-            <p>{img.name}</p>
-            <p>{img.type}</p>
-            <p>${img.price}</p>
+    <div className="flex flex-wrap m-6">
+      {templates.map((img, index) => (
+        <div key={index} className="flex-wrap rounded overflow-hidden shadow-xl m-4">
+          <img src={imagen} alt={"img.name"} className="w-full h-64 object-cover" />
+          <div className="px-6 py-4">
+            <div className="font-bold text-xl mb-2">{img.name}</div>
+            <p className="text-gray-700 text-base mb-2">{img.type}</p>
+            <p className="text-gray-900 text-lg">${img.price}</p>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
+  
 };
-
 
 export default Plantillas;
