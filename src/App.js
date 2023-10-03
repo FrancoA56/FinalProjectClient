@@ -16,10 +16,13 @@ import plantillas from "./utils/img/ulisesPresets.json";
 
 function App() {
 
-// ----------------------------------------------------------------------------------------
   const dispatch = useDispatch();
   const URL = "http://localhost:3001/api/preset";
+
+
+=======
   const presets = useSelector((state) => state.presets);
+
   useEffect(() => {
     
     const storedUser = localStorage.getItem('user');
@@ -46,10 +49,17 @@ function App() {
       postData();
     }
 
+
+  postData();
+  
+}, [dispatch]);
+
      
   }, [dispatch]);
 // ----------------------------------------------------------------------------------------
 
+// ----------------------------------------------------------------------------------------
+  
   return (
     <div className="App">
       <Routes>

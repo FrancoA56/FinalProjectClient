@@ -4,6 +4,7 @@ import "tailwindcss/tailwind.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { logOutUser } from "../../Redux/actions";
+import Swal from 'sweetalert2';
 
 function Nav() {
   // Traemos el estado Global "user"
@@ -21,10 +22,22 @@ function Nav() {
 
   const handleLogOut = (e) => {
     e.preventDefault()
-    const logOutConfirm = window.confirm('Are you sure you want to log out?')
-    logOutConfirm && dispatch(logOutUser(user.name));
-    logOutConfirm && navigate('/')
-  };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to log out",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+    dispatch(logOutUser(user.name));
+    navigate('/')
+  }
+});
+};
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
