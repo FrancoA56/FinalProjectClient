@@ -18,6 +18,7 @@ import {
   UNDO_EMPTY_CART,
   LOGIN_USER,
   LOGOUT_USER,
+  CREATE_PRESETS
 } from "./types";
 import axios from "axios";
 
@@ -213,3 +214,9 @@ export const logOutUser = () => {
   //   type: LOGOUT_USER,
   };
 };
+
+export const createPresets = () => {
+  return {
+    type: CREATE_PRESETS,
+  };
+}
