@@ -1,6 +1,5 @@
 // LIBRERIAS
 import React from "react";
-import { useEffect } from "react";
 // MODULOS
 import Nav from "../Nav/Nav";
 import ComponentShop from "./ComponentShop";

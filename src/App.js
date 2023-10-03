@@ -2,8 +2,8 @@ import "./App.css";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { logInUser } from './Redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { logInUser, createPresets } from './Redux/actions';
 import Login from "./views/login";
 import Register from "./views/register";
 import ShoppingCart from "./views/shoppingCart";
@@ -19,7 +19,7 @@ function App() {
 // ----------------------------------------------------------------------------------------
   const dispatch = useDispatch();
   const URL = "http://localhost:3001/api/preset";
-  
+  const presets = useSelector((state) => state.presets);
   useEffect(() => {
     
     const storedUser = localStorage.getItem('user');
@@ -28,15 +28,24 @@ function App() {
       dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
     }
     
-    const postData = async () => {
-      await Promise.all(
-        plantillas.map(async (plantilla) => {
-          await axios.post(URL, plantilla);
-        })
-      );
-    };
+    
+    
+    if (presets === 1) {
+      const postData = async () => {
+        try {
+          await Promise.all(
+            plantillas.map(async (plantilla) => {
+              await axios.post(URL, plantilla);
+            })
+          );
+          dispatch(createPresets());
+        } catch (error) {
+          console.error("Error al enviar datos:", error);
+        }
+      };
+      postData();
+    }
 
-    postData();
      
   }, [dispatch]);
 // ----------------------------------------------------------------------------------------

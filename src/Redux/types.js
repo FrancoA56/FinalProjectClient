@@ -24,4 +24,7 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 
 
+export const CREATE_PRESETS = " CREATE_PRESETS"
+
+
 // export const POST_USER = "POST_USER";

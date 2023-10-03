@@ -17,7 +17,8 @@ import {
   FILTER_MODELS_BY_TYPES,
   UNDO_EMPTY_CART,
   LOGIN_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  CREATE_PRESETS
 } from "./types";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   cart: [],
   cartRemoved: [],
   user: [],
+  presets: 1,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -178,6 +180,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         user: {}
       };
+    
+    case CREATE_PRESETS:
+      return {
+        ...state,
+        presets: 0
+      }
 
     default:
       return { ...state };
