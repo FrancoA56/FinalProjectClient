@@ -155,7 +155,7 @@ const Plantillas = ({
             <div className="font-mediun uppercase leading-normal font-semibold mb-2 text-white">
               {img.name}
             </div>
-            <p className="text-[#909090git] text-base capitalize mb-2">
+            <p className="text-white text-base capitalize mb-2">
               {img.type}
             </p>
             <p className="text-white text-lg">
