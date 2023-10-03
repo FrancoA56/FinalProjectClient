@@ -35,8 +35,18 @@ function App() {
       );
     };
 
-    postData();
+  postData();
+}, []);
+=========
+// ----------------------------------------------------------------------------------------
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
+    }
   }, [dispatch]);
   
   
