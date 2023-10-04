@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 // import { useAuth0 } from "@auth0/auth0-react";
 
@@ -32,11 +32,10 @@ const LoginComponents = () => {
     });
   }
 
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      if (input.email && input.password) {
+async function handleSubmit(e) {
+  e.preventDefault();
+  try {
+    if (input.email && input.password) {
         const { data } = await axios.get(
           `${URL}api/user?email=${input.email}&password=${input.password}`
         );
@@ -49,15 +48,15 @@ const LoginComponents = () => {
     }
   }
 
-  // -----------------------------------------------------------
-  const showErrorAlert = () => {
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: `>>> email does not match password <<<`,
-    });
-  };
-  // -----------------------------------------------------------
+// -----------------------------------------------------------
+const showErrorAlert = () => {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: `>>> email does not match password <<<`,
+  });
+};
+// -----------------------------------------------------------
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -79,7 +78,7 @@ const LoginComponents = () => {
           <form onSubmit={handleSubmit}>
             {/* <!-- Email input --> */}
             {/* <!-- Email input --> */}
-            <div className="mb-8">
+            <div className="mb-4">
               <input
                 type="email"
                 name="email"
@@ -87,26 +86,25 @@ const LoginComponents = () => {
                 value={input.email}
                 onChange={handleChange}
                 required
-                placeholder="Enter email"
+                placeholder="Input email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             {/* <!-- Password input --> */}
-            <div className="mb-12">
+            <div className="mb-4">
               <input
-                // type={showPassword ? "text" : "password"}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 value={input.password}
                 onChange={handleChange}
                 required
-                placeholder="Enter password"
+                placeholder="Input password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
-            {/* <button
+            <button
               type="button"
               onClick={togglePasswordVisibility}
               class="relative lg:bottom-11 lg:left-48 md:relative bottom-11 left-28"
@@ -117,7 +115,7 @@ const LoginComponents = () => {
               ) : (
                 <FaEyeSlash style={{ color: "gray" }} />
               )}
-            </button> */}
+            </button>
 
             {/* <!-- Not a member --> */}
             <div class="mb-6 flex items-center justify-between">
@@ -130,17 +128,18 @@ const LoginComponents = () => {
                 <a class="text-[#5ec3bf]" href="/register">
                   Register
                 </a>
+                
               </div>
               {/* Agregar enlace de Home */}
               <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 mr-15 ml-12">
-                Back to Home
-              </a>
-              <Link to="/" className="flex items-center mr-11 ml-15">
-                <i
-                  className="text-[#5ec3bf] fa-solid fa-house"
-                  style={{ marginRight: "8px" }}
-                ></i>
-              </Link>
+                  Back to Home
+                </a>
+                <Link to="/" className="flex items-center mr-11 ml-15">
+                  <i
+                    className="text-[#5ec3bf] fa-solid fa-house"
+                    style={{ marginRight: "8px" }}
+                  ></i>
+                </Link>
 
               {/* <!-- Forgot password link --> */}
               <a

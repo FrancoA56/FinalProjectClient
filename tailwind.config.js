@@ -10,7 +10,7 @@ module.exports = {
         bgce: "#F9DEC9",
         txc: "#001524",
         botc: "#176B87",
-        logo: "#5EC3BF",
+        lgc: "#5EC3BF",
       },
       fontSize: {
         parrafo: "0.8rem",

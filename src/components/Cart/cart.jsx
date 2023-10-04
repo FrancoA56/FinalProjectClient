@@ -148,7 +148,7 @@ const CartComponent = () => {
                 ) : (
                   <button
                     onClick={undoEmptyCartOnClick}
-                    className="inline-block bg-logo w-auto rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                    className="inline-block bg-[#5ec3bf] w-auto rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
                      text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                     style={{ "background-color": "#303030" }}
                   >
@@ -157,7 +157,7 @@ const CartComponent = () => {
                 )}
                 <NavLink
                   to="/pay"
-                  className="inline-block bg-logo w-auto rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                  className="inline-block bg-[#5ec3bf] w-auto rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
                   text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                 >
                   Continue to Payment
