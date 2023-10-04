@@ -2,6 +2,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import imagen from "../../utils/img/plantilla.png";
+import { addModelToCart } from "../../Redux/actions";
+import { useDispatch } from "react-redux";
 
 //MODULOS
 
@@ -12,6 +14,7 @@ const Plantillas = ({
 }) => {
   const URL = "http://localhost:3001/api/preset";
   const [templates, setTemplates] = useState([]);
+  const dispatch = useDispatch();
 
   // FILTRADOS
   const category = selectedCategory.join(" ");
@@ -30,6 +33,12 @@ const Plantillas = ({
   const order = selectedOrder.split(" ");
   const orderName = order[0];
   const orderValue = order[1];
+
+  const buyPreset = (id) => {
+    return () => {
+      dispatch(addModelToCart(id));
+    };
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -151,16 +160,19 @@ const Plantillas = ({
             alt={"img.name"}
             className="w-full h-64 object-cover"
           />
-          <div className="px-6 py-4">
+          <div className="px-6 py-4 grid grid-cols-2">
             <div className="font-mediun uppercase leading-normal font-semibold mb-2 text-white">
               {img.name}
             </div>
-            <p className="text-white text-base capitalize mb-2">
-              {img.type}
-            </p>
-            <p className="text-white text-lg">
+            <div className="text-white text-lg">
               <strong>${img.price}</strong>
-            </p>
+            </div>
+            <div className="text-white text-base capitalize mb-2">
+              {img.type}
+            </div>
+            <button className="bg-logo" onClick={buyPreset(img.id)}>
+              Buy
+            </button>
           </div>
         </div>
       ))}

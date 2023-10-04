@@ -18,12 +18,11 @@ import {
   UNDO_EMPTY_CART,
   LOGIN_USER,
   LOGOUT_USER,
-  CREATE_PRESETS
+  CREATE_PRESETS,
 } from "./types";
 import axios from "axios";
 
 const URL = "http://localhost:3001/";
-
 
 export const addModel = (model) => {
   return function (dispatch) {
@@ -52,11 +51,22 @@ export const addAllModels = (id) => {
 };
 
 export const addModelToCart = (id) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     try {
+      const { data } = await axios.get(`${URL}api/preset/${id}`);
+      const preset = {
+        id: data.id,
+        name: data.name,
+        category: data.category,
+        price: data.price,
+        color: data.color,
+        type: data.type,
+        rating: data.ratingAverage,
+        released: data.released
+      }
       return dispatch({
         type: ADD_MODEL_CART,
-        payload: id,
+        payload: preset,
       });
     } catch (error) {
       window.alert(error.message);
@@ -116,7 +126,6 @@ export const removeAllModelCart = () => {
     }
   };
 };
-
 
 export const undoRemoveAllModelCart = () => {
   return function (dispatch) {
@@ -186,14 +195,14 @@ export const filterByColor = (color) => {
 };
 
 export const logInUser = (payload) => {
-  return function (dispatch) {  
+  return function (dispatch) {
     try {
-    //------- ------------------------------------------------------------------------------------
-      localStorage.setItem('user', JSON.stringify(payload)); // Guardar la data en el localStorage
-    // -------------------------------------------------------------------------------------------
+      //------- ------------------------------------------------------------------------------------
+      localStorage.setItem("user", JSON.stringify(payload)); // Guardar la data en el localStorage
+      // -------------------------------------------------------------------------------------------
       return dispatch({
         type: LOGIN_USER,
-        payload: payload, 
+        payload: payload,
       });
     } catch (error) {
       window.alert(error.message);
@@ -204,14 +213,14 @@ export const logInUser = (payload) => {
 export const logOutUser = () => {
   // ----------------------------------------------------------------
   return function (dispatch) {
-    localStorage.removeItem('user'); // Eliminar del localStorage
+    localStorage.removeItem("user"); // Eliminar del localStorage
 
     dispatch({
       type: LOGOUT_USER,
     });
-  // -----------------------------------------------------------------
-  // return {
-  //   type: LOGOUT_USER,
+    // -----------------------------------------------------------------
+    // return {
+    //   type: LOGOUT_USER,
   };
 };
 
@@ -219,4 +228,4 @@ export const createPresets = () => {
   return {
     type: CREATE_PRESETS,
   };
-}
+};

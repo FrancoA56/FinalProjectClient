@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import {
-  addModelToCart,
   removeModelFromCart,
   removeAllModelCart,
   undoRemoveAllModelCart,
@@ -39,7 +38,7 @@ const CartComponent = () => {
 
   const calculateDeployCost = () => {
     // Lógica para calcular el costo de despliegue
-    return models.length * 10; // Por ejemplo, $10 por cada producto
+    return models.length * 10 + 30; // Por ejemplo, $10 por cada producto
   };
 
   const deployCost = calculateDeployCost();
