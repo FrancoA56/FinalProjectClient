@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "tailwindcss/tailwind.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { logOutUser } from "../../Redux/actions";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import "tailwindcss/tailwind.css";
+import { logOutUser } from "../../Redux/actions";
 
 function Nav() {
   // Traemos el estado Global "user"
@@ -27,8 +26,8 @@ function Nav() {
       text: "You are about to log out",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#5ec3bf",
+      cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {
       if (result.isConfirmed) {
