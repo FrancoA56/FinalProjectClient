@@ -35,7 +35,7 @@ function RegisterComponents() {
     email: "",
     password: "",
     name: "",
-    logo: "",
+    logo: "https://www.students.soyhenry.com/",
   });
 
   const handleChange = (e) => {
@@ -53,7 +53,7 @@ function RegisterComponents() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!errors.email && !errors.password && !errors.name && !errors.logo) {
+    if (!errors.email && !errors.password && !errors.name /*&& !errors.logo */) {
       try {
         console.log(input);
         const { data } = await axios.post(`${URL}api/user/register`, input);
@@ -122,58 +122,76 @@ const showErrorAlert = (message) => {
         <div class="md:w-8/12 lg:w-8/12">
           <form onSubmit={(e) => handleSubmit(e)}>
             {/* Name input */}
-            <div className="mb-4">
+            <div className="my-8">
               <input
                 type="text"
                 name="name"
                 id="name"
-                placeholder="Input name"
+                placeholder="Company name"
                 value={input.name}
                 onChange={(e) => handleChange(e)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
               />
-              <p className="text-[#585858] text-xs absolute indent-3">
+              <p className="text-txcval text-xs absolute indent-3 mt-1">
                 {errors.name}
               </p>
             </div>
 
             {/* Email input */}
 
-            <div className="mb-4">
+            <div className="my-8">
               <input
                 type="text"
                 name="email"
-                placeholder="Input email"
+                placeholder="Enter email"
                 value={input.email}
                 onChange={(e) => handleChange(e)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
               />
-              <p className="text-[#585858] text-xs absolute indent-3">
+              <p className="text-txcval text-xs absolute indent-3 mt-1">
                 {errors.email}{" "}
               </p>
             </div>
 
             {/* Password input */}
 
-            <div className="mb-4">
+            <div className="mt-8 mb-9">
               <input
-                type={showPassword ? "text" : "password"}
+                // type={showPassword ? "text" : "password"}
+                type="password"
                 name="password"
                 id="password"
-                placeholder="Input password"
+                placeholder="Enter password"
                 value={input.password}
                 onChange={(e) => handleChange(e)}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
               />
-              <p className="text-[#585858] text-xs absolute indent-3">
+              <p className="text-txcval text-xs absolute indent-3 mt-1">
                 {errors.password}
               </p>
             </div>
+
+            <div className="mt-8 mb-9">
+              <input
+                // type={showPassword ? "text" : "password"}
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                placeholder="Confirm password"
+                value={input.confirmPassword}
+                onChange={(e) => handleChange(e)}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                required
+              />
+              <p className="text-txcval text-xs absolute indent-3 mt-1">
+                {errors.confirmPassword}
+              </p>
+            </div>
 {/* -------------------------------------------------------------------------------------------- */}
-            <button                                  // Boton de ojito de contraseña
+            {/* <button                                  // Boton de ojito de contraseña
               type="button"
               onClick={togglePasswordVisibility}
               class="relative lg:bottom-11 lg:left-48 md:relative bottom-11 left-28"
@@ -184,11 +202,11 @@ const showErrorAlert = (message) => {
               ) : (
                 <FaEyeSlash style={{ color: "gray" }} />
               )}
-            </button>
+            </button> */}
 {/* ---------------------------------------------------------------------------------------------- */}
             {/* Logo input */}
 
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <input
                 type="text"
                 name="logo"
@@ -202,7 +220,7 @@ const showErrorAlert = (message) => {
               <p className="text-[#585858] text-xs absolute indent-3">
                 {errors.logo}
               </p>
-            </div>
+            </div> */}
             {/* <!--are you member --> */}
             <div class="mb-6 flex items-center justify-start ml-3 mr-3">
               <a
