@@ -18,7 +18,7 @@ import {
   UNDO_EMPTY_CART,
   LOGIN_USER,
   LOGOUT_USER,
-  CREATE_PRESETS
+  CREATE_PRESETS,
 } from "./types";
 
 const initialState = {
@@ -32,7 +32,6 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    
     case ADD_MODEL:
       return {
         ...state,
@@ -47,13 +46,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case ADD_MODEL_CART:
-      const modelToCart = state.allModels.filter(
-        (model) => model.id === payload
-      );
-      return {
-        ...state,
-        cart: [...state.cart, modelToCart],
-      };
+
+        return {
+          ...state,
+          cart: [...state.cart, payload],
+        };
 
     case REMOVE_MODEL_CART:
       return {
@@ -166,26 +163,26 @@ const rootReducer = (state = initialState, { type, payload }) => {
       });
       return {
         ...state,
-        models: filterByType
+        models: filterByType,
       };
 
     case LOGIN_USER:
       return {
         ...state,
-        user: payload
+        user: payload,
       };
 
     case LOGOUT_USER:
       return {
         ...state,
-        user: {}
+        user: {},
       };
-    
+
     case CREATE_PRESETS:
       return {
         ...state,
-        presets: 0
-      }
+        presets: 0,
+      };
 
     default:
       return { ...state };
