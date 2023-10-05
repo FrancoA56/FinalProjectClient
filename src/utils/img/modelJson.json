@@ -1,0 +1,23 @@
+[
+  {
+    "id": "number",
+    "name": "string",
+    "price": "number",
+    "createdAt": "date",
+    "type": "string",
+    "category": "string",
+    "purchased": "cantidad de emails de usuarios que han comprado .length",
+    "color": ["a color", "another color"],
+    "isDisabled": "boolean",
+    "reviews": [
+      {
+        "review": "review message",
+        "rating": "rating of review"
+      },
+      {
+        "review": "review message",
+        "rating": "rating of review"
+      }
+    ]
+  }
+]

@@ -5,6 +5,7 @@ import {
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
+  REMOVE_ALL_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
   ORDER_MODELS_NAME_DESCENDANT,
   ORDER_MODELS_OWNED,
@@ -14,6 +15,10 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
+  UNDO_EMPTY_CART,
+  LOGIN_USER,
+  LOGOUT_USER,
+  CREATE_PRESETS,
 } from "./types";
 import axios from "axios";
 
@@ -31,36 +36,37 @@ export const addModel = (model) => {
     }
   };
 };
-export const addModelToCart = (id) => {
-  return function (dispatch) {
-    try {
-      return dispatch({
-        type: ADD_MODEL_CART,
-        payload: id,
-      });
-    } catch (error) {
-      window.alert(error.message);
-    }
-  };
-};
-export const removeModelToCart = (id) => {
-  return function (dispatch) {
-    try {
-      return dispatch({
-        type: REMOVE_MODEL_CART,
-        payload: id,
-      });
-    } catch (error) {
-      window.alert(error.message);
-    }
-  };
-};
+
 export const addAllModels = (id) => {
   return function (dispatch) {
     try {
       return dispatch({
         type: ADD_MODELS,
         payload: id,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const addModelToCart = (id) => {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`${URL}api/preset/${id}`);
+      const preset = {
+        id: data.id,
+        name: data.name,
+        category: data.category,
+        price: data.price,
+        color: data.color,
+        type: data.type,
+        rating: data.ratingAverage,
+        released: data.released
+      }
+      return dispatch({
+        type: ADD_MODEL_CART,
+        payload: preset,
       });
     } catch (error) {
       window.alert(error.message);
@@ -84,11 +90,48 @@ export const removeModel = (id) => {
 export const removeModelDisable = (id) => {
   return async function (dispatch) {
     try {
-        /* cambiar nombre de la ruta para la desabilitacion del modelo */
+      /* cambiar nombre de la ruta para la desabilitacion del modelo */
       await axios.put(`${URL}disableModel/:${id}`);
       return dispatch({
         type: REMOVE_MODEL_DISABLE,
         payload: id,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const removeModelFromCart = (id) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: REMOVE_MODEL_CART,
+        payload: id,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const removeAllModelCart = () => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: REMOVE_ALL_MODEL_CART,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const undoRemoveAllModelCart = () => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: UNDO_EMPTY_CART,
       });
     } catch (error) {
       window.alert(error.message);
@@ -148,5 +191,41 @@ export const filterByColor = (color) => {
   return {
     type: FILTER_MODELS_BY_COLORS,
     payload: color,
+  };
+};
+
+export const logInUser = (payload) => {
+  return function (dispatch) {
+    try {
+      //------- ------------------------------------------------------------------------------------
+      localStorage.setItem("user", JSON.stringify(payload)); // Guardar la data en el localStorage
+      // -------------------------------------------------------------------------------------------
+      return dispatch({
+        type: LOGIN_USER,
+        payload: payload,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+export const logOutUser = () => {
+  // ----------------------------------------------------------------
+  return function (dispatch) {
+    localStorage.removeItem("user"); // Eliminar del localStorage
+
+    dispatch({
+      type: LOGOUT_USER,
+    });
+    // -----------------------------------------------------------------
+    // return {
+    //   type: LOGOUT_USER,
+  };
+};
+
+export const createPresets = () => {
+  return {
+    type: CREATE_PRESETS,
   };
 };
