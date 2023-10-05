@@ -23,15 +23,7 @@ export function validation(input) {
   if (!input.email) {
     errors.email = "Email shouldn't be empty";
   }
-  // Validate password
-  if (!passwordRegex.test(input.password)) {
-    errors.password =
-      "Password should have a number";
-  }
-  if (input.password.length < 8 && input.password.length > 30) {
-    errors.password = "Password should have between 8 and 30 characters";
-  }
-
+  // Validate confirm password
   if (input.password !== input.confirmPassword) {
     errors.confirmPassword = "Password should be the same";
   }
