@@ -2,6 +2,7 @@ import {
   ADD_MODEL,
   ADD_MODELS,
   ADD_MODEL_CART,
+  ADD_ALL_MODEL_CART,
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
@@ -44,21 +45,31 @@ const rootReducer = (state = initialState, { type, payload }) => {
         models: [...state.models, ...payload],
         allModels: [...state.allModels, ...payload],
       };
-
+      
     case ADD_MODEL_CART:
+      return {
+        ...state,
+        cart: payload,
+      };
 
-        return {
-          ...state,
-          cart: [...state.cart, payload],
-        };
+    case ADD_ALL_MODEL_CART:
+      return {
+        ...state,
+        cart: payload,
+      };
 
     case REMOVE_MODEL_CART:
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.cart.filter((model) => model.id !== payload))
+      );
       return {
         ...state,
         cart: state.cart.filter((model) => model.id !== payload),
       };
 
     case REMOVE_ALL_MODEL_CART:
+      localStorage.setItem("cart", null);
       return {
         ...state,
         cartRemoved: [...state.cart],
@@ -66,6 +77,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case UNDO_EMPTY_CART:
+      localStorage.setItem("cart", JSON.stringify(state.cartRemoved));
       return {
         ...state,
         cart: [...state.cartRemoved],
