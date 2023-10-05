@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 // import styles from "../registerComponents/register.module.css";
 import Swal from 'sweetalert2';
-
-
 import axios from "axios";
 import { validation } from "../validation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
-// import { toast } from 'react-toastify';
 
 /* Email validity requirements
 ----------------------------------------
@@ -30,13 +26,41 @@ function RegisterComponents() {
   const navigate = useNavigate();
   const URL = "http://localhost:3001/";
   const [errors, setErrors] = useState({});
+  const [password, setPassword] = useState("");
+  
+  const [validations, setValidations] = useState({
+    hasUppercase: false,
+    hasLowercase: false,
+    hasNumber: false,
+    hasSpecialChar: false,
+    isBetween8And30: false,
+  });
 
   const [input, setInput] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
     name: "",
     logo: "https://www.students.soyhenry.com/",
   });
+
+ // --------------------------------------Password validity requirements----------------------------------
+  const validatePassword = (e) => {
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const numberRegex = /[0-9]/;
+    const specialCharRegex = /[\W_]/;
+
+    setValidations({
+      hasUppercase: uppercaseRegex.test(e),
+      hasLowercase: lowercaseRegex.test(e),
+      hasNumber: numberRegex.test(e),
+      hasSpecialChar: specialCharRegex.test(e),
+      isBetween8And30: e.length >= 8 && e.length <= 30,
+    });
+    setPassword(e);
+  };
+// --------------------------------------------------------------------------------------------------------
 
   const handleChange = (e) => {
     setInput({
@@ -53,7 +77,7 @@ function RegisterComponents() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!errors.email && !errors.password && !errors.name /*&& !errors.logo */) {
+    if (!errors.email && !errors.password && !errors.name && !errors.confirmPassword /*&& !errors.logo */) {      
       try {
         console.log(input);
         const { data } = await axios.post(`${URL}api/user/register`, input);
@@ -63,10 +87,10 @@ function RegisterComponents() {
         }
       } catch (error) {
         console.log(error);
-      showErrorAlert(">>> Something went wrong or some fields are missing. Please try again. <<<");
+      showErrorAlert(">>> Registered email... Please try again. <<<");
+      }
     }
   }
-}
 
 // --------------------------------------------------------------------------Alert-✅-----------
 const showSuccessAlert = (message) => {
@@ -86,12 +110,12 @@ const showErrorAlert = (message) => {
 };
 // --------------------------------------------------------------------------------⛔------------
 
-// -------------------------------------------------------------------------- Ojito Password---
+// -------------------------------------------------------------------------- Ojito Password------
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };  // Agrego ojito al register
-// --------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------
 
   return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
@@ -159,25 +183,33 @@ const showErrorAlert = (message) => {
 
             <div className="mt-8 mb-9">
               <input
-                // type={showPassword ? "text" : "password"}
-                type="password"
+                type={showPassword ? "text" : "password"}
+                // type="password"
                 name="password"
                 id="password"
                 placeholder="Enter password"
                 value={input.password}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => {validatePassword(e.target.value); handleChange(e)}}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
               />
               <p className="text-txcval text-xs absolute indent-3 mt-1">
                 {errors.password}
               </p>
+              
+              <ul>
+                <li>{validations.hasUppercase ? "✔️" : "❌"} Tiene mayúscula</li>
+                <li>{validations.hasLowercase ? "✔️" : "❌"} Tiene minúscula</li>
+                <li>{validations.hasNumber ? "✔️" : "❌"} Tiene número</li>
+                <li>{validations.hasSpecialChar ? "✔️" : "❌"} Tiene caracter especial</li>
+                <li>{validations.isBetween8And30 ? "✔️" : "❌"} Entre 8 y 30 caracteres</li>
+              </ul>
             </div>
 
             <div className="mt-8 mb-9">
               <input
-                // type={showPassword ? "text" : "password"}
-                type="password"
+                type={showPassword ? "text" : "password"}
+                // type="password"
                 name="confirmPassword"
                 id="confirmPassword"
                 placeholder="Confirm password"
@@ -190,8 +222,9 @@ const showErrorAlert = (message) => {
                 {errors.confirmPassword}
               </p>
             </div>
+
 {/* -------------------------------------------------------------------------------------------- */}
-            {/* <button                                  // Boton de ojito de contraseña
+            <button                                  // Boton de ojito de contraseña
               type="button"
               onClick={togglePasswordVisibility}
               class="relative lg:bottom-11 lg:left-48 md:relative bottom-11 left-28"
@@ -202,8 +235,9 @@ const showErrorAlert = (message) => {
               ) : (
                 <FaEyeSlash style={{ color: "gray" }} />
               )}
-            </button> */}
+            </button>
 {/* ---------------------------------------------------------------------------------------------- */}
+           
             {/* Logo input */}
 
             {/* <div className="mb-4">
