@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import imagen from "../../utils/img/plantilla.png";
 import { addModelToCart } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 //MODULOS
 
@@ -155,11 +157,13 @@ const Plantillas = ({
             filter: "drop-shadow(5px 5px 10px black)",
           }}
         >
+          <Link to={`/detail/${img.id}`}>
           <img
             src={imagen}
             alt={"img.name"}
             className="w-full h-64 object-cover"
           />
+          </Link>
           <div className="px-6 py-4 grid grid-cols-2">
             <div className="font-mediun uppercase leading-normal font-semibold mb-2 text-white">
               {img.name}
