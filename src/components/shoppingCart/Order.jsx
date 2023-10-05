@@ -1,4 +1,4 @@
-const SelectOrder = ({ handleOrderChange }) => {
+const SelectOrder = ({ handleOrderChange, selectedOrder }) => {
   return (
     <div className="flex flex-col items-start ml-5">
       {/*       <h6 className="text-lg font-semibold mb-2">Order by:</h6> */}
@@ -10,6 +10,7 @@ const SelectOrder = ({ handleOrderChange }) => {
         <select
           className="block px-4 py-2 pr-8 leading-tight border rounded-md shadow appearance-none focus:outline-none focus:shadow-outline text-sm"
           onChange={handleOrderChange}
+          value={selectedOrder}
         >
           <option value="name a">A-Z</option>
           <option value="name d">Z-A</option>
