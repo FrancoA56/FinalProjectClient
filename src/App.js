@@ -59,10 +59,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/pay" element={<Pay />} />
-        <Route path="/detail" element={<Detail/>}/>
+        <Route path="/detail/:id" element={<Detail/>}/>
       </Routes>
     </div>
   );
-}
+} 
 
 export default App;
