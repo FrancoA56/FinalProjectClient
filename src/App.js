@@ -25,7 +25,7 @@ function App() {
     if (storedUser) {
       const userData = JSON.parse(storedUser);
       dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
-    }
+    };
 
     if (presets === 1) {
       const postData = async () => {
@@ -41,6 +41,8 @@ function App() {
         }
       };
       postData();
+
+      
     }
   }, [dispatch]);
   // ----------------------------------------------------------------------------------------

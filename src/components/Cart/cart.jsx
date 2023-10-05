@@ -6,6 +6,7 @@ import {
   removeModelFromCart,
   removeAllModelCart,
   undoRemoveAllModelCart,
+  addAllModelsToCart,
 } from "../../Redux/actions";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
@@ -15,6 +16,13 @@ const CartComponent = () => {
   const models = useSelector((state) => state.cart);
   const [emptyCart, setEmptyCart] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      dispatch(addAllModelsToCart(JSON.parse(storedCart)));
+    }
+  }, [dispatch]);
 
   const totalPrice = (models) => {
     const total = models.reduce(
@@ -65,9 +73,26 @@ const CartComponent = () => {
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
               }}
             >
-              {models.map((model, index) => (
-                <div key={index} className="mb-4">
-                  <img src={model.url} alt={model.name} className="w-full" />
+              {models.map((model) => (
+                <div className="m-2 bg-logo grid grid-cols-7 h-72 " key={model.id}>
+                  <img
+                    src={model.url}
+                    alt={model.name}
+                    className="w-full h-64 m-4 col-span-3"
+                  />
+                  <div className=" grid grid-cols-3 col-span-4 ">
+                    <div className="col-span-1 mt-7">{model.name}</div>
+                    <div className="mt-7 col-span-1">{model.category}</div>
+                    <button
+                      onClick={() => dispatch(removeModelFromCart(model.id))}
+                      className="text-red-500 font-semibold relative bottom-16 left-16"
+                    >
+                      X
+                    </button>
+                    <div className="col-span-1">{model.type}</div>
+                    <div className="col-span-1">{model.rating}</div>
+                    <div className="col-span-1">${model.price}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -80,59 +105,79 @@ const CartComponent = () => {
                   "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
               }}
             >
-              {models.map((model, index) => (
+              {models.map((model) => (
                 <div
-                  key={index}
-                  className="flex justify-between items-center border-b border-gray-300 p-4 mb-4"
+                  key={model.id}
+                  className="items-center border-b border-gray-300 p-4 mb-4 "
                 >
-                  <div className="flex items-center">
-                    <img
-                      src={model.url}
-                      alt="Producto"
-                      className="w-16 h-16 mr-4"
-                    />
-                    <div>
-                      <h2 className="text-lg font-semibold">{model.name}</h2>
-                      <p className="text-gray-600">${model.price}</p>
+                  <div className="grid grid-cols-7">
+                    <div className="text-lg font-semibold col-span-2 text-start">
+                      {model.name}
                     </div>
+                    <div className="text-lg font-semibold col-span-2">
+                      {model.type}
+                    </div>
+                    <div className="text-gray-600 font-semibold col-span-2">
+                      ${model.price}
+                    </div>
+                    <button
+                      onClick={() => dispatch(removeModelFromCart(model.id))}
+                      className="text-red-500 font-semibold col-span-1"
+                    >
+                      X
+                    </button>
                   </div>
-                  <button
-                    onClick={() => dispatch(removeModelFromCart(model.id))}
-                    className="text-red-500 font-semibold"
-                  >
-                    Remove
-                  </button>
                 </div>
               ))}
 
               {/* Detalles del carrito */}
               <div className="mb-2 left">
-                <label
-                  className="block m-3 text-sm font-medium uppercase leading-normal"
-                >
+                <label className="block m-3 text-sm font-medium uppercase leading-normal">
                   Deployment Service
                 </label>
                 <select
                   className="w-full p-2 border-2 shadow-lg rounded text-sm font-medium uppercase leading-normal"
                   onChange={(e) => setDeployService(e.target.value === "true")}
                 >
-                  <option value="false" className="text-sm font-medium uppercase leading-normal">Without Deployment</option>
-                  <option value="true" className="text-sm font-medium uppercase leading-normal">With Deployment</option>
+                  <option
+                    value="false"
+                    className="text-sm font-medium uppercase leading-normal"
+                  >
+                    Without Deployment
+                  </option>
+                  <option
+                    value="true"
+                    className="text-sm font-medium uppercase leading-normal"
+                  >
+                    With Deployment
+                  </option>
                 </select>
               </div>
               <div className="mb-2 left">
-                <label className="block mt-4 text-sm font-medium uppercase leading-normal">Subtotal</label>
-                <p className="text-sm font-medium uppercase leading-normal">${totalPrice(models)}</p>
+                <label className="block mt-4 text-sm font-medium uppercase leading-normal">
+                  Subtotal
+                </label>
+                <p className="text-sm font-medium uppercase leading-normal">
+                  ${totalPrice(models)}
+                </p>
               </div>
               {deployService && (
                 <div className="mb-2">
-                  <label className="block mt-4 text-sm font-medium uppercase leading-normal">Deployment Cost</label>
-                  <p className="block mt-4 text-sm font-medium uppercase leading-normal">${deployCost}</p>
+                  <label className="block mt-4 text-sm font-medium uppercase leading-normal">
+                    Deployment Cost
+                  </label>
+                  <p className="block mt-4 text-sm font-medium uppercase leading-normal">
+                    ${deployCost}
+                  </p>
                 </div>
               )}
               <div className="mb-2">
-                <label className="block mt-4 font-semibold text-sm font-medium uppercase leading-normal">Total</label>
-                <p className="text-sm font-medium uppercase leading-normal">${totalPrice(models) + (deployService ? deployCost : 0)}</p>
+                <label className="block mt-4 font-semibold text-sm font-medium uppercase leading-normal">
+                  Total
+                </label>
+                <p className="text-sm font-medium uppercase leading-normal">
+                  ${totalPrice(models) + (deployService ? deployCost : 0)}
+                </p>
               </div>
               <div className="flex justify-between mx-4 my-8">
                 {!emptyCart ? (

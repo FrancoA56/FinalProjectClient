@@ -2,6 +2,7 @@ import {
   ADD_MODEL,
   ADD_MODELS,
   ADD_MODEL_CART,
+  ADD_ALL_MODEL_CART,
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
@@ -51,7 +52,7 @@ export const addAllModels = (id) => {
 };
 
 export const addModelToCart = (id) => {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
       const { data } = await axios.get(`${URL}api/preset/${id}`);
       const preset = {
@@ -63,11 +64,34 @@ export const addModelToCart = (id) => {
         type: data.type,
         rating: data.ratingAverage,
         released: data.released
-      }
-      return dispatch({
+      };
+
+      const state = getState();
+      const updatedCart = [...state.cart, preset]; // Agregar el nuevo elemento al carrito existente
+
+      // Actualizar el estado con el nuevo carrito
+      dispatch({
         type: ADD_MODEL_CART,
-        payload: preset,
+        payload: updatedCart,
       });
+
+      // Guardar el carrito actualizado en el localStorage
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+
+
+export const addAllModelsToCart = (localStorage) => {
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: ADD_ALL_MODEL_CART,
+        payload: localStorage
+      })
     } catch (error) {
       window.alert(error.message);
     }
