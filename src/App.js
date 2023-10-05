@@ -10,6 +10,7 @@ import ShoppingCart from "./views/shoppingCart";
 import Cart from "./views/cart/cart.jsx";
 import Pay from "./views/pay/pay.jsx";
 import Home from "./views/home/HomeViews";
+import Detail  from "./views/detail/detail";
 
 import axios from "axios";
 import plantillas from "./utils/img/ulisesPresets.json";
@@ -58,6 +59,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/pay" element={<Pay />} />
+        <Route path="/detail" element={<Detail/>}/>
       </Routes>
     </div>
   );
