@@ -8,7 +8,7 @@ import Plantillas from "./Plantillas";
 const ComponentShop = () => {
   // ! PARA LOS COLORES
   const [selectedFilterColor, setSelectedFilterColor] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState("");
+  const [selectedOrder, setSelectedOrder] = useState("name a");
 
   // Para manejar los cambios en los filtros seleccionados
   const handleFilterColorChange = (event) => {
@@ -54,6 +54,15 @@ const ComponentShop = () => {
     setSelectedCategory(selectedCategory);
   }, [selectedCategory]);
 
+
+  // ! LIMPIEZA DE FILTROS
+  const handleClearFilter = () => {
+    setSelectedCategory([]);
+    setSelectedFilterColor([]);
+    setCheck([]);
+    setSelectedOrder("name a");
+  };
+
   return (
     <>
       <div class="grid h-screen lg:grid-cols-8 md:grid-cols-2">
@@ -71,6 +80,7 @@ const ComponentShop = () => {
               handleOrderChange={handleOrderChange}
               selectedFilterColor={selectedFilterColor}
               selectedCategory={selectedCategory}
+              selectedOrder={selectedOrder}
             />
           </div>
           {/* Category */}
@@ -138,7 +148,15 @@ const ComponentShop = () => {
                 </label>
               );
             })}
+            {/* Botón Clear filter */}
           </div>
+          <button
+            className="inline-block bg-logo w-auto rounded 5ec3bf my-4 ml-7 mt-9 px-3 pb-1 pt-1 text-sm font-small uppercase leading-normal
+          text-black shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+            onClick={() => handleClearFilter()}
+          >
+            Clear filter
+          </button>
         </div>
         {/* Main */}
         <div
@@ -149,11 +167,11 @@ const ComponentShop = () => {
           }}
         >
           {/* <div className="bg-red-500 flex flex-wrap"> */}
-            <Plantillas
-              selectedFilterColor={selectedFilterColor}
-              selectedOrder={selectedOrder}
-              selectedCategory={selectedCategory}
-            />
+          <Plantillas
+            selectedFilterColor={selectedFilterColor}
+            selectedOrder={selectedOrder}
+            selectedCategory={selectedCategory}
+          />
           {/* </div> */}
         </div>
         {/* FINAL */}
