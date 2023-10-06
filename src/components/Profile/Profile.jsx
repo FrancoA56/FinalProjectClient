@@ -49,7 +49,7 @@ const Profile = () => {
               }}
             >
               <div className="mb-4">
-                <img className="w-full" src={user.logo} alt="" />
+                <img className="w-full" src={user.logo ? user.logo : "nada"} alt="" />
               </div>
             </div>
 
@@ -72,8 +72,8 @@ const Profile = () => {
                         type="text"
                         name="name"
                         id="name"
-                        defaultValue={user.name}
-                        placeholder={user.name}
+                        defaultValue={user.name ? user.name : "DEFAULT"}
+                        placeholder={user.name ? user.name : "DEFAULT"}
                         // value={input.password}
                         // onChange={(e) => handleChange(e)}
                         className="shadow appearance-none border rounded-md w-3/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline first-letter:shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
