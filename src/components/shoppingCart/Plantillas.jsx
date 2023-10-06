@@ -89,7 +89,9 @@ const Plantillas = ({
           </Link>
           <div className="px-6 py-4 grid grid-cols-2">
             <div className="font-mediun uppercase leading-normal font-semibold mb-2 text-white">
+              <Link to={`/detail/${img.name}`} >
               {img.name}
+              </Link>
             </div>
             <div className="text-white text-lg">
               <strong>${img.price}</strong>
