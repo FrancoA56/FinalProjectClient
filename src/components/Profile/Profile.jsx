@@ -88,9 +88,9 @@ const Profile = () => {
             >
               {/* //////////////////////////// */}
               {/* Aca aparece el logo */}
-              <div className="my-4 flex items-center justify-center">
+              <div className="my-4 w-3/4 h-3/4 flex items-center justify-center">
                 <img
-                  className="w-3/4 max-h-3/4 rounded-md shadow"
+                  className="container rounded-md shadow"
                   src={user.logo ? user.logo : "nada"}
                   alt=""
                 />
