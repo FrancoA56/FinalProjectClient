@@ -20,6 +20,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   CREATE_PRESETS,
+  EDIT_USER,
 } from "./types";
 import axios from "axios";
 
@@ -63,7 +64,7 @@ export const addModelToCart = (id) => {
         color: data.color,
         type: data.type,
         rating: data.ratingAverage,
-        released: data.released
+        released: data.released,
       };
 
       const state = getState();
@@ -77,21 +78,19 @@ export const addModelToCart = (id) => {
 
       // Guardar el carrito actualizado en el localStorage
       localStorage.setItem("cart", JSON.stringify(updatedCart));
-
     } catch (error) {
       window.alert(error.message);
     }
   };
 };
 
-
 export const addAllModelsToCart = (localStorage) => {
   return function (dispatch) {
     try {
       return dispatch({
         type: ADD_ALL_MODEL_CART,
-        payload: localStorage
-      })
+        payload: localStorage,
+      });
     } catch (error) {
       window.alert(error.message);
     }
@@ -125,6 +124,22 @@ export const removeModelDisable = (id) => {
     }
   };
 };
+
+//////////////////////////////////////////////////////////////////////
+// Action creada para el put, le paso la data del usuario
+export const editUserRedux = (userData) => {
+  return async function (dispatch) {
+    try {
+      return dispatch({
+        type: EDIT_USER,
+        payload: userData,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+  };
+};
+//////////////////////////////////////////////////////////////////////
 
 export const removeModelFromCart = (id) => {
   return function (dispatch) {
