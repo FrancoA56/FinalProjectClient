@@ -54,31 +54,31 @@ const PresetsDetail = () => {
                 <dt className="text-gray-400 font-medium uppercase leading-normal">
                   Type
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500"></dd>
+                <dd className="mt-2 text-sm text-gray-500">{presets.type}</dd>
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <dt className="text-gray-400 font-medium uppercase leading-normal">
                   Category
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500"></dd>
+                <dd className="mt-2 text-sm text-gray-500">{presets.category} </dd>
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <dt className="text-gray-400 font-medium uppercase leading-normal">
                   Price
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500"></dd>
+                <dd className="mt-2 text-sm text-gray-500">{presets.price}</dd>
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <dt className="text-gray-400 font-medium uppercase leading-normal">
                   Default Color
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500"></dd>
+                <dd className="mt-2 text-sm text-gray-500">{presets.defaultColor}</dd>
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <dt className="text-gray-400 font-medium uppercase leading-normalont-medium">
                   Released At
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500"></dd>
+                <dd className="mt-2 text-sm text-gray-500">{presets.releasedAt}</dd>
               </div>
             </dl>
           </div>
