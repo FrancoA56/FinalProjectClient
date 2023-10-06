@@ -12,6 +12,8 @@ import Pay from "./views/pay/pay.jsx";
 import Home from "./views/home/HomeViews";
 import Detail  from "./views/detail/detail";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import ProfileView  from "./views/profile/profileView";
+
 
 import axios from "axios";
 import plantillas from "./utils/img/ulisesPresets.json";
@@ -62,6 +64,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/pay" element={<Pay />} />
         <Route path="/detail/:id" element={<Detail/>}/>
+        <Route path="/profile" element={<ProfileView/>}/>
       </Routes>
     </div>
   );
