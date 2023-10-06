@@ -3,26 +3,64 @@ import { useState } from "react";
 import axios from "axios";
 import Banner from "../Banner/Banner";
 import Nav from "../Nav/Nav";
+import { editUserRedux, logInUser } from "../../Redux/actions";
 
 const Profile = () => {
+  // traigo el usuario del estado global
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  // estado local donde se aloja la imagen hasta q se ejecuta uploadImage
-  const [imageSelected, setImageSelected] = useState();
+  // construyo un estado local para pasarselo a la action de redux "editUserRedux()"
+  const [userLocal, setuserLocal] = useState({
+    name: user.name,
+    logo: "",
+    about: "",
+  });
 
-  const uploadImage = async () => {
+  // Funcion para que vaya cambiando el estado local
+  const handleChange = (e) => {
+    setuserLocal({
+      ...userLocal,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Funcion que carga la imagen a cloudinary
+  const uploadImage = async (files) => {
     const formData = new FormData();
-    formData.append("file", imageSelected);
+    formData.append("file", files);
     // aca va el Upload presets: "codeCraftTemplates"
     formData.append("upload_preset", "codeCraftTemplates");
     // el link siempre es el mismo, solo se personaliza con el nombre de la nube, en este caso "codecrafttemplates"
-    const { data } = await axios.post(
-      "https://api.cloudinary.com/v1_1/codecrafttemplates/image/upload",
-      formData
-    );
-    // de la data me devuelve el url de la imagen el cloudinary
-    //! dispatch(actionX(data.secure_url));
+    try {
+      const { data } = await axios.post(
+        "https://api.cloudinary.com/v1_1/codecrafttemplates/image/upload",
+        formData
+      );
+      // data.secure_url me devuelve el url de la imagen el cloudinary
+      // seteo el logo del estado local
+      setuserLocal({ ...userLocal, logo: data.secure_url });
+      window.alert("anda el cloudi");
+    } catch (error) {
+      window.alert("se rompe cloudy");
+    }
+  };
+
+  // funcion que hace un dispatch al editUserRedux
+  const editUser = async (userEdit) => {
+    try {
+      await axios.put(`http://localhost:3001/api/user/${user.email}`, userEdit);
+      window.alert("se subio");
+      dispatch(editUserRedux(userEdit));
+    } catch (error) {
+      window.alert("se rompe");
+    }
+  };
+
+  // funcion que ejecuta todo
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    editUser(userLocal);
   };
 
   return (
@@ -42,14 +80,25 @@ const Profile = () => {
           <div className="grid grid-cols-12 gap-4">
             {/* Columna izquierda */}
             <div
-              className="col-span-12 md:col-span-8"
+              className="col-span-12 md:col-span-8 flex flex-col justify-center items-center"
               style={{
                 background:
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
               }}
             >
-              <div className="mb-4">
-                <img className="w-full" src={user.logo ? user.logo : "nada"} alt="" />
+              {/* //////////////////////////// */}
+              {/* Aca aparece el logo */}
+              <div className="my-4 flex items-center justify-center">
+                <img
+                  className="w-3/4 max-h-3/4 rounded-md shadow"
+                  src={user.logo ? user.logo : "nada"}
+                  alt=""
+                />
+              </div>
+              {/* //////////////////////////// */}
+              {/* Aca aparece el about */}
+              <div className="my-4 flex items-center justify-center">
+                <p className="text-white w-3/4 text-justify">{user.about ? user.about : ""}</p>
               </div>
             </div>
 
@@ -66,34 +115,39 @@ const Profile = () => {
                   <label className="block m-3 text-sm font-medium uppercase leading-normal">
                     Edit Profile
                   </label>
-                  <form action={uploadImage}>
+                  <form>
                     <div className="mt-8 mb-9">
+                      {/* //////////////////////////// */}
+                      {/* input del nombre*/}
                       <input
                         type="text"
                         name="name"
                         id="name"
-                        defaultValue={user.name ? user.name : "DEFAULT"}
                         placeholder={user.name ? user.name : "DEFAULT"}
-                        // value={input.password}
-                        // onChange={(e) => handleChange(e)}
+                        value={userLocal.name}
+                        onChange={handleChange}
                         className="shadow appearance-none border rounded-md w-3/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline first-letter:shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       />
+                      {/* //////////////////////////// */}
+
+                      {/* //////////////////////////// */}
+                      {/* Input de la imagen */}
                       <input
                         type="file"
                         name="file"
                         id="file"
-                        // value={input.password}
-                        // onChange={(e) => handleChange(e)}
+                        onChange={(e) => uploadImage(e.target.files[0])}
                         className="w-3/4 my-4  "
                       />
+                      {/* //////////////////////////// */}
 
-                      {/* /////////////////////////////// */}
-
-                      {/* /////////////////////////////// */}
-
+                      {/* //////////////////////////// */}
+                      {/* About */}
                       <textarea
                         name="about"
                         id="about"
+                        value={userLocal.about}
+                        onChange={handleChange}
                         cols="40"
                         rows="5"
                         placeholder="..."
@@ -102,16 +156,20 @@ const Profile = () => {
                       <p class="mt-1 text-sm leading-6 text-gray-600 mb-10">
                         Write a few sentences about your company.
                       </p>
+                      {/* //////////////////////////// */}
 
+                      {/* //////////////////////////// */}
+                      {/* BOTON */}
                       <button
-                        type="submit"
+                        /* type="submit" */
                         class="inline-block mt-24 bg-[#5ec3bf] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                        data-te-ripple-init
-                        data-te-ripple-color="light"
-                        onClick={uploadImage}
+                        // data-te-ripple-init
+                        // data-te-ripple-color="light"
+                        onClick={handleSubmit}
                       >
                         Update
                       </button>
+                      {/* //////////////////////////// */}
                     </div>
                   </form>
                 </div>
