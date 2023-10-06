@@ -11,3 +11,10 @@ export const colors = [
   { Green: "green" },
   { Blue: "blue" },
 ];
+
+export const models = [
+  { About: "about" },
+  { Home: "home" },
+  { Form: "form" },
+  { Card: "card" },
+];

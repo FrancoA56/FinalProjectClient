@@ -1,7 +1,7 @@
 // LIBRERIAS
 import { useState, useEffect } from "react";
 // COMPONENTES
-import { types, colors } from "./typesAndColors";
+import { types, colors, models } from "./typesAndColors";
 import SelectOrder from "./Order";
 import Plantillas from "./Plantillas";
 
@@ -27,12 +27,12 @@ const ComponentShop = () => {
     });
   };
 
-  // useEffect para que se actualice el estado de selectedType cada vez que se marca o desmarca un filtro.
+  // useEffect para que se actualice el estado de selectedFilterColor cada vez que se marca o desmarca un filtro.
   useEffect(() => {
     setSelectedFilterColor(selectedFilterColor);
   }, [selectedFilterColor]);
 
-  // ! PARA LAS CATEGORIAS/TIPOS
+  // ! PARA LAS CATEGORIAS
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [check, setCheck] = useState([]);
 
@@ -55,12 +55,38 @@ const ComponentShop = () => {
   }, [selectedCategory]);
 
 
+  // ! PARA MANEJAR LOS TYPES
+  const [selectedTypes, setSelectedTypes] = useState([])
+
+  const handleTypeChange = (event) => {
+    const modelsName = event.target.value;
+    const isCheckedType = event.target.checked;
+
+    //actualizacion del estado para obtener el filtro mas reciente
+    setSelectedTypes((prevSelectedType) => {
+      if (isCheckedType) {
+        //Si se marca un tipo lo agrego al array
+        return [...prevSelectedType, modelsName];
+      } else {
+        //Si se desmarca un tipo, lo elimino del array
+        return prevSelectedType.filter((filter) => filter !== modelsName);
+      }
+    });
+  };
+
+  // useEffect para que se actualice el estado de selectedFilterColor cada vez que se marca o desmarca un filtro.
+  useEffect(() => {
+    setSelectedTypes(selectedTypes);
+  }, [selectedTypes]);
+
+
   // ! LIMPIEZA DE FILTROS
   const handleClearFilter = () => {
     setSelectedCategory([]);
     setSelectedFilterColor([]);
     setCheck([]);
     setSelectedOrder("name a");
+    setSelectedTypes([])
   };
 
   return (
@@ -148,7 +174,32 @@ const ComponentShop = () => {
                 </label>
               );
             })}
-            {/* Botón Clear filter */}
+
+            {/* Types */}
+            <br />
+            <h1 className="font-mediun uppercase leading-normal font-semibold mb-2 text-[#5ec3bf]">
+              Types:
+            </h1>
+            {/*             <label className="font-mediun uppercase leading-normal font-semibold mb-2 ml-5">Colors:</label> */}
+
+            {models.map((type, index) => {
+              const modelsName = Object.keys(type)[0];
+              const modelsValue = Object.values(type)[0];
+              return (
+                <label className="ml-5 my-1 flex" key={index}>
+                  <input
+                    type="checkbox"
+                    value={modelsValue}
+                    checked={selectedTypes.includes(modelsValue)}
+                    onChange={(event) => {
+                      handleTypeChange(event);
+                    }}
+                    className="mr-2"
+                  />
+                  <span className="text-sm text-white">{modelsName}</span>
+                </label>
+              );
+            })}
           </div>
           <button
             className="inline-block bg-logo w-auto rounded 5ec3bf my-4 ml-7 mt-9 px-3 pb-1 pt-1 text-sm font-small uppercase leading-normal
@@ -171,6 +222,7 @@ const ComponentShop = () => {
             selectedFilterColor={selectedFilterColor}
             selectedOrder={selectedOrder}
             selectedCategory={selectedCategory}
+            selectedTypes={selectedTypes}
           />
           {/* </div> */}
         </div>
