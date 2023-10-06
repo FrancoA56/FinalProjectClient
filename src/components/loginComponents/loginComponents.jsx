@@ -18,7 +18,7 @@ const LoginComponents = () => {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
   const dispatch = useDispatch();
-  const URL = "http://localhost:3001/";
+  const URL = process.env.REACT_APP_API;
 
   const [input, setInput] = useState({
     email: "",
@@ -38,7 +38,7 @@ const LoginComponents = () => {
     try {
       if (input.email && input.password) {
         const { data } = await axios.get(
-          `${URL}api/user?email=${input.email}&password=${input.password}`
+          `${URL}/api/user?email=${input.email}&password=${input.password}`
         );
         dispatch(logInUser(data));
         setAccess(true);

@@ -11,14 +11,14 @@ import Banner from '../Banner/Banner';
 
 
 const PresetsDetail = () => {
-  const URL = "http://localhost:3001/api/preset";
+  const URL = process.env.REACT_APP_API;
   const { id } = useParams();
   const [presets, setPresets] = useState({});
 
   useEffect(() => {
     async function fetchPreset() {
       try {
-        const {data} = await axios.get(`${URL}/${id}`)
+        const {data} = await axios.get(`${URL}/api/preset/${id}`)
         if (data.name) {
           setPresets(data)
         } else {

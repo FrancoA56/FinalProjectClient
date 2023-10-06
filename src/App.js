@@ -18,7 +18,7 @@ import plantillas from "./utils/img/ulisesPresets.json";
 
 function App() {
   const dispatch = useDispatch();
-  const URL = "http://localhost:3001/api/preset";
+  const URL = process.env.REACT_APP_API;
 
   const presets = useSelector((state) => state.presets);
 
@@ -34,7 +34,7 @@ function App() {
         try {
           await Promise.all(
             plantillas.map(async (plantilla) => {
-              await axios.post(URL, plantilla);
+              await axios.post(`${URL}/api/preset`, plantilla);
             })
           );
           dispatch(createPresets());
@@ -46,7 +46,7 @@ function App() {
 
       
     }
-  }, [dispatch]);
+  }, [dispatch, presets]);
   // ----------------------------------------------------------------------------------------
 
   // ----------------------------------------------------------------------------------------
