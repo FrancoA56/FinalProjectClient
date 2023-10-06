@@ -20,6 +20,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   CREATE_PRESETS,
+  EDIT_USER,
 } from "./types";
 
 const initialState = {
@@ -45,7 +46,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         models: [...state.models, ...payload],
         allModels: [...state.allModels, ...payload],
       };
-      
+
     case ADD_MODEL_CART:
       return {
         ...state,
@@ -183,6 +184,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         user: payload,
       };
+    ////////////////////////////////////////////
+    // le paso al estado global la nueva data q traigo del axios.put
+    case EDIT_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+    ////////////////////////////////////////////
 
     case LOGOUT_USER:
       return {

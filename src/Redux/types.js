@@ -9,6 +9,7 @@ export const REMOVE_MODEL_CART = "REMOVE_MODEL_CART";
 ////////////////////////////////////////
 // Agregado
 export const REMOVE_USER = "REMOVE_USER";
+export const EDIT_USER = "EDIT_USER"
 ////////////////////////////////////////
 export const ORDER_MODELS_NAME_ASCENDANT = "ORDER_MODELS_NAME_ASCENDANT";
 export const ORDER_MODELS_NAME_DESCENDANT = "ORDER_MODELS_NAME_DESCENDANT";
