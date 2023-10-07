@@ -98,15 +98,15 @@ const Profile = () => {
               <div className="my-4 w-3/4 h-80 flex items-center justify-center">
                 <img
                   className="max-w-full max-h-full rounded-md shadow"
-                  src={user.logo ? user.logo : "nada"}
+                  src={user.logo ? user.logo : "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1696687386/no_imagen_am0gxq.jpg"}
                   alt=""
                 />
               </div>
               {/* //////////////////////////// */}
               {/* Aca aparece el about */}
-              <div className="my-4 flex items-center justify-center">
-                <p className="text-white w-3/4 text-justify">
-                  {user.about ? user.about : ""}
+              <div className="my-4 flex items-center justify-center w-3/4 ">
+                <p className="text-white text-justify">
+                  {user.about ? user.about : "There is still no about to show"}
                 </p>
               </div>
             </div>
