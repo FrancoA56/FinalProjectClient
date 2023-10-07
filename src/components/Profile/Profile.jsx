@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Banner from "../Banner/Banner";
 import Nav from "../Nav/Nav";
@@ -8,11 +8,13 @@ import { editUserRedux, logInUser } from "../../Redux/actions";
 const Profile = () => {
   // traigo el usuario del estado global
   const user = useSelector((state) => state.user);
+  console.log(user);
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
 
   // construyo un estado local para pasarselo a la action de redux "editUserRedux()"
   const [userLocal, setuserLocal] = useState({
+    email: user.email,
     name: user.name,
     logo: "",
     about: "",
@@ -47,7 +49,7 @@ const Profile = () => {
     }
   };
 
-  // funcion que hace un dispatch al editUserRedux
+  // funcion edita la base de datos
   const editUser = async (userEdit) => {
     try {
       await axios.put(`${URL}/api/user/${user.email}`, userEdit);
@@ -57,7 +59,6 @@ const Profile = () => {
       window.alert("se rompe");
     }
   };
-
   // funcion que ejecuta todo
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -99,7 +100,9 @@ const Profile = () => {
               {/* //////////////////////////// */}
               {/* Aca aparece el about */}
               <div className="my-4 flex items-center justify-center">
-                <p className="text-white w-3/4 text-justify">{user.about ? user.about : ""}</p>
+                <p className="text-white w-3/4 text-justify">
+                  {user.about ? user.about : ""}
+                </p>
               </div>
             </div>
 
