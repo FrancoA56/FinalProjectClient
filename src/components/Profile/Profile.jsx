@@ -63,6 +63,7 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     editUser(userLocal);
+    logInUser(userLocal)
   };
 
   return (
@@ -81,18 +82,22 @@ const Profile = () => {
           </h1>
           <div className="grid grid-cols-12 gap-4">
             {/* Columna izquierda */}
+            
             <div
-              className="col-span-12 md:col-span-8 flex flex-col justify-center items-center"
+              className="col-span-12 md:col-span-8 flex flex-col justify-center items-center rounded"
               style={{
                 background:
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
               }}
             >
               {/* //////////////////////////// */}
+              <label className="block m-3 text-xl text-white font-medium uppercase leading-normal">
+                   {user.name ? user.name : ""}
+                  </label>
               {/* Aca aparece el logo */}
-              <div className="my-4 w-3/4 h-3/4 flex items-center justify-center">
+              <div className="my-4 w-3/4 h-80 flex items-center justify-center">
                 <img
-                  className="container rounded-md shadow"
+                  className="max-w-full max-h-full rounded-md shadow"
                   src={user.logo ? user.logo : "nada"}
                   alt=""
                 />
@@ -108,7 +113,7 @@ const Profile = () => {
 
             {/* Columna derecha */}
             <div
-              className="col-span-12 md:col-span-4"
+              className="col-span-12 md:col-span-4 rounded"
               style={{
                 background:
                   "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
@@ -122,6 +127,7 @@ const Profile = () => {
                   <form>
                     <div className="mt-8 mb-9">
                       {/* //////////////////////////// */}
+      
                       {/* input del nombre*/}
                       <input
                         type="text"
@@ -141,8 +147,15 @@ const Profile = () => {
                         name="file"
                         id="file"
                         onChange={(e) => uploadImage(e.target.files[0])}
-                        className="w-3/4 my-4  "
+                        className="w-3/4 my-4 invisible absolute left-0"
                       />
+                      <label
+                        title="Nahue"
+                        for="file"
+                        class="inline-block mt-5 bg-[#909090] hover:bg-[#303030] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                      >
+                        upload Image
+                      </label>
                       {/* //////////////////////////// */}
 
                       {/* //////////////////////////// */}
@@ -155,7 +168,7 @@ const Profile = () => {
                         cols="40"
                         rows="5"
                         placeholder="..."
-                        className="indent-2 w-3/4 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        className="indent-2 w-3/4 mt-5 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       ></textarea>
                       <p class="mt-1 text-sm leading-6 text-gray-600 mb-10">
                         Write a few sentences about your company.
@@ -166,7 +179,7 @@ const Profile = () => {
                       {/* BOTON */}
                       <button
                         /* type="submit" */
-                        class="inline-block mt-24 bg-[#5ec3bf] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        class="inline-block mt-5 bg-[#5ec3bf] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         // data-te-ripple-init
                         // data-te-ripple-color="light"
                         onClick={handleSubmit}
