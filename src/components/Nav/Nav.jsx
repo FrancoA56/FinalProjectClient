@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
-import { logOutUser } from "../../Redux/actions";
+import { logOutUser, addAllModelsToCart } from "../../Redux/actions";
 
 function Nav() {
   // Traemos el estado Global "user"
@@ -23,6 +23,14 @@ function Nav() {
 
   // Hook para ir al home
   const navigate = useNavigate();
+
+  // useEffect para cargar el cart del localStorage
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      dispatch(addAllModelsToCart(JSON.parse(storedCart)));
+    }
+  }, [dispatch]);
   // Funcion para cerrar sesion
 
   const handleLogOut = (e) => {
