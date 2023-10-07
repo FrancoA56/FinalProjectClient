@@ -9,6 +9,7 @@ const Profile = () => {
   // traigo el usuario del estado global
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const URL = process.env.REACT_APP_API;
 
   // construyo un estado local para pasarselo a la action de redux "editUserRedux()"
   const [userLocal, setuserLocal] = useState({
@@ -49,7 +50,7 @@ const Profile = () => {
   // funcion que hace un dispatch al editUserRedux
   const editUser = async (userEdit) => {
     try {
-      await axios.put(`http://localhost:3001/api/user/${user.email}`, userEdit);
+      await axios.put(`${URL}/api/user/${user.email}`, userEdit);
       window.alert("se subio");
       dispatch(editUserRedux(userEdit));
     } catch (error) {

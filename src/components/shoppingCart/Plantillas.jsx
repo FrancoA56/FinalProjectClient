@@ -13,13 +13,13 @@ const Plantillas = ({
   selectedCategory,
   selectedTypes,
 }) => {
-  const URL = "http://localhost:3001/api/preset";
+  const URL = process.env.REACT_APP_API;
   const [templates, setTemplates] = useState([]);
   const dispatch = useDispatch();
 
   const fetchTemplates = async (filters, orderType, orderPriority) => {
     try {
-      const response = await axios.get(URL, {
+      const response = await axios.get(`${URL}/api/preset`, {
         params: {
           filters: JSON.stringify(filters),
           orderType,

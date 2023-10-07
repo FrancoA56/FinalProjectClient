@@ -24,7 +24,7 @@ import {
 } from "./types";
 import axios from "axios";
 
-const URL = "http://localhost:3001/";
+const URL = process.env.REACT_APP_API;
 
 export const addModel = (model) => {
   return function (dispatch) {
@@ -55,7 +55,7 @@ export const addAllModels = (id) => {
 export const addModelToCart = (id) => {
   return async function (dispatch, getState) {
     try {
-      const { data } = await axios.get(`${URL}api/preset/${id}`);
+      const { data } = await axios.get(`${URL}/api/preset/${id}`);
       const preset = {
         id: data.id,
         name: data.name,
@@ -114,7 +114,7 @@ export const removeModelDisable = (id) => {
   return async function (dispatch) {
     try {
       /* cambiar nombre de la ruta para la desabilitacion del modelo */
-      await axios.put(`${URL}disableModel/:${id}`);
+      await axios.put(`${URL}/disableModel/:${id}`);
       return dispatch({
         type: REMOVE_MODEL_DISABLE,
         payload: id,
