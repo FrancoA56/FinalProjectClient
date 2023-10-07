@@ -24,7 +24,7 @@ one special character
 
 function RegisterComponents() {
   const navigate = useNavigate();
-  const URL = "http://localhost:3001/";
+  const URL = process.env.REACT_APP_API;
   const [errors, setErrors] = useState({});
   const [password, setPassword] = useState("");
   
@@ -80,7 +80,7 @@ function RegisterComponents() {
     if (!errors.email && !errors.password && !errors.name && !errors.confirmPassword /*&& !errors.logo */) {      
       try {
         console.log(input);
-        const { data } = await axios.post(`${URL}api/user/register`, input);
+        const { data } = await axios.post(`${URL}/api/user/register`, input);
         if (data.email) {
           showSuccessAlert("User created successfully!");
           navigate("/login"); //cdo termine de crear el usuaro, q me redirija al login para loguearse...!
