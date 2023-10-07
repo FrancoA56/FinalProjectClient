@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "tailwindcss/tailwind.css";
@@ -6,7 +6,6 @@ import {
   removeModelFromCart,
   removeAllModelCart,
   undoRemoveAllModelCart,
-  addAllModelsToCart,
 } from "../../Redux/actions";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
@@ -16,13 +15,6 @@ const CartComponent = () => {
   const models = useSelector((state) => state.cart);
   const [emptyCart, setEmptyCart] = useState(false);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      dispatch(addAllModelsToCart(JSON.parse(storedCart)));
-    }
-  }, [dispatch]);
 
   const totalPrice = (models) => {
     const total = models.reduce(

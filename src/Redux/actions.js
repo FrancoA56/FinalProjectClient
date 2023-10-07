@@ -55,6 +55,11 @@ export const addAllModels = (id) => {
 export const addModelToCart = (id) => {
   return async function (dispatch, getState) {
     try {
+      const state = getState();
+      const allreadyOnCart = state.cart.filter(c => c.id === id);
+      
+      if (allreadyOnCart.length) return window.alert("This preset is allready on cart") 
+      
       const { data } = await axios.get(`${URL}/api/preset/${id}`);
       const preset = {
         id: data.id,
@@ -67,7 +72,6 @@ export const addModelToCart = (id) => {
         released: data.released,
       };
 
-      const state = getState();
       const updatedCart = [...state.cart, preset]; // Agregar el nuevo elemento al carrito existente
 
       // Actualizar el estado con el nuevo carrito
@@ -130,6 +134,7 @@ export const removeModelDisable = (id) => {
 export const editUserRedux = (userData) => {
   return async function (dispatch) {
     try {
+      localStorage.setItem("user", JSON.stringify(userData)); // Guardar la data en el localStorage
       return dispatch({
         type: EDIT_USER,
         payload: userData,
