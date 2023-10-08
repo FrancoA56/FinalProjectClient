@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 // import styles from "../registerComponents/register.module.css";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import axios from "axios";
 import { validation } from "../validation";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -27,7 +27,7 @@ function RegisterComponents() {
   const URL = process.env.REACT_APP_API;
   const [errors, setErrors] = useState({});
   const [password, setPassword] = useState("");
-  
+
   const [validations, setValidations] = useState({
     hasUppercase: false,
     hasLowercase: false,
@@ -35,16 +35,17 @@ function RegisterComponents() {
     hasSpecialChar: false,
     isBetween8And30: false,
   });
+  
 
   const [input, setInput] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     name: "",
-    logo: "https://www.students.soyhenry.com/",
+    logo: "",
   });
 
- // --------------------------------------Password validity requirements----------------------------------
+  // --------------------------------------Password validity requirements----------------------------------
   const validatePassword = (e) => {
     const uppercaseRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
@@ -60,7 +61,7 @@ function RegisterComponents() {
     });
     setPassword(e);
   };
-// --------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------
 
   const handleChange = (e) => {
     setInput({
@@ -77,7 +78,12 @@ function RegisterComponents() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!errors.email && !errors.password && !errors.name && !errors.confirmPassword /*&& !errors.logo */) {      
+    if (
+      !errors.email &&
+      !errors.password &&
+      !errors.name &&
+      !errors.confirmPassword /*&& !errors.logo */
+    ) {
       try {
         console.log(input);
         const { data } = await axios.post(`${URL}/api/user/register`, input);
@@ -87,35 +93,35 @@ function RegisterComponents() {
         }
       } catch (error) {
         console.log(error);
-      showErrorAlert(">>> Registered email... Please try again. <<<");
+        showErrorAlert(">>> Registered email... Please try again. <<<");
       }
     }
   }
 
-// --------------------------------------------------------------------------Alert-✅-----------
-const showSuccessAlert = (message) => {
-  Swal.fire({
-    icon: 'success',
-    title: 'Success',
-    text: `${message}`,
-  });
-};
+  // --------------------------------------------------------------------------Alert-✅-----------
+  const showSuccessAlert = (message) => {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: `${message}`,
+    });
+  };
 
-const showErrorAlert = (message) => {
-  Swal.fire({
-    icon: 'error',
-    title: 'Error',
-    text: `${message}`,
-  });
-};
-// --------------------------------------------------------------------------------⛔------------
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: `${message}`,
+    });
+  };
+  // --------------------------------------------------------------------------------⛔------------
 
-// -------------------------------------------------------------------------- Ojito Password------
+  // -------------------------------------------------------------------------- Ojito Password------
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };  // Agrego ojito al register
-// -----------------------------------------------------------------------------------------------
+  }; // Agrego ojito al register
+  // -----------------------------------------------------------------------------------------------
 
   return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
@@ -146,139 +152,204 @@ const showErrorAlert = (message) => {
         <div class="md:w-8/12 lg:w-8/12">
           <form onSubmit={(e) => handleSubmit(e)}>
             {/* Name input */}
-            <div className="my-8">
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Company name"
-                value={input.name}
-                onChange={(e) => handleChange(e)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-              <p className="text-txcval text-xs absolute indent-3 mt-1">
-                {errors.name}
-              </p>
+            <div className="">
+              <div className="flex items-center justify-end">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Company name"
+                  value={input.name}
+                  onChange={(e) => handleChange(e)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  required
+                />
+                <span className="absolute mr-2" title={errors.name}>
+                  {" "}
+                  {errors.name && (
+                    <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                  )}
+                </span>
+              </div>
             </div>
+            {/* <p className="text-txcval text-xs absolute indent-3 mt-1">
+              {errors.name}
+            </p> */}
 
             {/* Email input */}
 
-            <div className="my-8">
-              <input
-                type="text"
-                name="email"
-                placeholder="Enter email"
-                value={input.email}
-                onChange={(e) => handleChange(e)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-              <p className="text-txcval text-xs absolute indent-3 mt-1">
+            <div className="mt-3">
+              <div className="flex items-center justify-end">
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Enter email"
+                  value={input.email}
+                  onChange={(e) => handleChange(e)}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  required
+                />
+                <span className="absolute mr-2" title={errors.email}>
+                  {" "}
+                  {errors.email && (
+                    <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                  )}
+                </span>
+              </div>
+              {/* <p className="text-txcval text-xs absolute indent-3 mt-1">
                 {errors.email}{" "}
-              </p>
+              </p> */}
             </div>
 
             {/* Password input */}
 
-            <div className="mt-8 mb-9">
-              <input
-                type={showPassword ? "text" : "password"}
-                // type="password"
-                name="password"
-                id="password"
-                placeholder="Enter password"
-                value={input.password}
-                onChange={(e) => {validatePassword(e.target.value); handleChange(e)}}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-              <p className="text-txcval text-xs absolute indent-3 mt-1">
-                {errors.password}
-              </p>
-              
-              <ul>
-                <li>{validations.hasUppercase ? "✔️" : "❌"} Tiene mayúscula</li>
-                <li>{validations.hasLowercase ? "✔️" : "❌"} Tiene minúscula</li>
-                <li>{validations.hasNumber ? "✔️" : "❌"} Tiene número</li>
-                <li>{validations.hasSpecialChar ? "✔️" : "❌"} Tiene caracter especial</li>
-                <li>{validations.isBetween8And30 ? "✔️" : "❌"} Entre 8 y 30 caracteres</li>
-              </ul>
-            </div>
-
-            <div className="mt-8 mb-9">
-              <input
-                type={showPassword ? "text" : "password"}
-                // type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                placeholder="Confirm password"
-                value={input.confirmPassword}
-                onChange={(e) => handleChange(e)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-              <p className="text-txcval text-xs absolute indent-3 mt-1">
+            <div className="mt-3 ">
+              <div className="flex items-center justify-end">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  // type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Enter password"
+                  value={input.password}
+                  onChange={(e) => {
+                    validatePassword(e.target.value);
+                    handleChange(e);
+                  }}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  required
+                />
+                {/* -------------------------------------------------------------------------------------------- */}
+                <span // Boton de ojito de contraseña
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute mr-2 text-[#909090] hover:text-[#303030]"
+                >
+                  {
+                    showPassword ? (
+                      <i class="fa-solid fa-eye-slash" />
+                    ) : (
+                      <i class="fa-solid fa-eye" />
+                    ) /* (
+                        <FaEye style={{ color: "gray" }} />
+                        ) : (
+                          <FaEyeSlash style={{ color: "gray" }} />
+                          ) */
+                  }
+                </span>
+                {/* ---------------------------------------------------------------------------------------------- */}
+              </div>
+              <div className="mt-3">
+                <div className="flex items-center justify-end">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    // type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    placeholder="Confirm password"
+                    value={input.confirmPassword}
+                    onChange={(e) => handleChange(e)}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                  <span
+                    className="absolute mr-2"
+                    title={errors.confirmPassword}
+                  >
+                    {" "}
+                    {errors.confirmPassword && (
+                      <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                    )}
+                  </span>
+                </div>
+                {/* <p className="text-txcval text-xs absolute indent-3 mt-1">
                 {errors.confirmPassword}
-              </p>
-            </div>
+              </p> */}
+              </div>
+              {/* <p className="text-txcval text-xs absolute indent-3 mt-1">
+                {errors.password}
+              </p> */}
+              {/* <div className={(validations.hasLowercase || validations.hasUppercase || validations.hasNumber || validations.hasSpecialChar || validations.isBetween8And30) ? "visible" : "invisible"}> */}
+                <p className="mt-3 text-sm text-[#606060]">
+                  <strong> Password must have:</strong>
+                </p>
+                <ul className="grid grid-cols-2 text-sm text-[#606060]">
+                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
+                    <li>
+                      {validations.hasUppercase ? (
+                        <i class="fa-solid fa-check" />
+                      ) : (
+                        <i class="fa-solid fa-xmark" />
+                      )}{" "}
+                      An uppercase character
+                    </li>
+                    <li>
+                      {validations.hasLowercase ? (
+                        <i class="fa-solid fa-check" />
+                      ) : (
+                        <i class="fa-solid fa-xmark" />
+                      )}{" "}
+                      An lowercase character
+                    </li>
+                    <li className="line-clamp-1">
+                      {validations.isBetween8And30 ? (
+                        <i class="fa-solid fa-check" />
+                      ) : (
+                        <i class="fa-solid fa-xmark" />
+                      )}{" "}
+                      A between 8 and 30 char...
+                    </li>
+                  </div>
+                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
+                    <li>
+                      {validations.hasNumber ? (
+                        <i class="fa-solid fa-check" />
+                      ) : (
+                        <i class="fa-solid fa-xmark" />
+                      )}{" "}
+                      A number
+                    </li>
+                    <li>
+                      {validations.hasSpecialChar ? (
+                        <i class="fa-solid fa-check" />
+                      ) : (
+                        <i class="fa-solid fa-xmark" />
+                      )}{" "}
+                      A special character
+                    </li>
 
-{/* -------------------------------------------------------------------------------------------- */}
-            <button                                  // Boton de ojito de contraseña
-              type="button"
-              onClick={togglePasswordVisibility}
-              class="relative lg:bottom-11 lg:left-48 md:relative bottom-11 left-28"
-              // style={{ position: "relative", left: 190, top: -45 }}
-            >
-              {showPassword ? (
-                <FaEye style={{ color: "gray" }} />
-              ) : (
-                <FaEyeSlash style={{ color: "gray" }} />
-              )}
-            </button>
-{/* ---------------------------------------------------------------------------------------------- */}
-           
-            {/* Logo input */}
+                  </div>
+                </ul>
+              </div>
+            {/* </div> */}
+            <hr className="mt-5 border border-[#909090] rounded-sm" />
 
-            {/* <div className="mb-4">
-              <input
-                type="text"
-                name="logo"
-                placeholder="Input logo"
-                value={input.logo}
-                onChange={(e) => handleChange(e)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                height="40px"
-                required
-              />
-              <p className="text-[#585858] text-xs absolute indent-3">
-                {errors.logo}
-              </p>
-            </div> */}
             {/* <!--are you member --> */}
-            <div class="mb-6 flex items-center justify-start ml-3 mr-3">
-              <a
-                href="#!"
-                class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-              ></a>
-              Are you already a member?
-              <a class="text-[#5ec3bf] ml-3" href="/login">
-                Login
-              </a>
-              {/* Agregar enlace de Home */}
-              <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8" >Back to Home</a>
-              <Link to="/" className="flex items-center ml-2 mb-1">
-                <i
-                  className="text-[#5ec3bf] fa-solid fa-house"
-                  style={{ marginRight: "8px" }}
-                ></i>
-              </Link>
+            <div className="grid grid-cols-2 text-[#606060] text-sm">
+              <div className="cols-span-1 text-sm flex pt-2 pl-2">
+                <p> Are you already a member? </p>
+                <NavLink to="/login">
+                  <a class="text-[#3a8a87] ml-1">
+                    <strong> Login </strong>
+                  </a>
+                </NavLink>
+              </div>
+
+              <div class="flex justify-end items-end text-sm pt-2 pr-2">
+                {/* Agregar enlace de Home */}
+                <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
+                  Back to Home
+                </a>
+                <Link to="/" className="flex items-center ml-2 mb-1">
+                  <i className="text-[#3a8a87] fa-solid fa-house"></i>
+                </Link>
+              </div>
             </div>
 
             {/* <!-- Submit button --> */}
             <button
               type="submit"
-              class="inline-block bg-[#5ec3bf] w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              class="inline-block mt-10 bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               data-te-ripple-init
               data-te-ripple-color="light"
             >
@@ -295,8 +366,7 @@ const showErrorAlert = (message) => {
             {/* <!-- Social login buttons --> */}
             {/*  Google */}
             <a
-              class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-              style={{ "background-color": "#303030" }}
+              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               href="#!"
               role="button"
               data-te-ripple-init
