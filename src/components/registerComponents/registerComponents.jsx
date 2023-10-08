@@ -322,7 +322,7 @@ function RegisterComponents() {
                 </ul>
               </div>
             {/* </div> */}
-            <hr className="mt-8 border border-[#909090] rounded-sm" />
+            <hr className="mt-5 border border-[#909090] rounded-sm" />
 
             {/* <!--are you member --> */}
             <div className="grid grid-cols-2 text-[#606060] text-sm">
