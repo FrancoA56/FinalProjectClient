@@ -9,7 +9,7 @@ export const REMOVE_MODEL_CART = "REMOVE_MODEL_CART";
 ////////////////////////////////////////
 // Agregado
 export const REMOVE_USER = "REMOVE_USER";
-export const EDIT_USER = "EDIT_USER"
+export const EDIT_USER = "EDIT_USER";
 ////////////////////////////////////////
 export const ORDER_MODELS_NAME_ASCENDANT = "ORDER_MODELS_NAME_ASCENDANT";
 export const ORDER_MODELS_NAME_DESCENDANT = "ORDER_MODELS_NAME_DESCENDANT";
@@ -24,9 +24,8 @@ export const GET_USER = "GET_USER";
 export const UNDO_EMPTY_CART = "UNDO_EMPTY_CART";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
-
-
-export const CREATE_PRESETS = " CREATE_PRESETS"
-
+export const WITH_DEPLOYMENT = "WITH_DEPLOYMENT";
+export const WITHOUT_DEPLOYMENT = "WITHOUT_DEPLOYMENT";
+export const CREATE_PRESETS = " CREATE_PRESETS";
 
 // export const POST_USER = "POST_USER";

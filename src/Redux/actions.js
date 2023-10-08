@@ -21,6 +21,8 @@ import {
   LOGOUT_USER,
   CREATE_PRESETS,
   EDIT_USER,
+  WITH_DEPLOYMENT,
+  WITHOUT_DEPLOYMENT
 } from "./types";
 import axios from "axios";
 
@@ -271,5 +273,17 @@ export const logOutUser = () => {
 export const createPresets = () => {
   return {
     type: CREATE_PRESETS,
+  };
+};
+
+export const withDeployment = () => {
+  return {
+    type: WITH_DEPLOYMENT,
+  };
+};
+
+export const withoutDeployment = () => {
+  return {
+    type: WITHOUT_DEPLOYMENT,
   };
 };

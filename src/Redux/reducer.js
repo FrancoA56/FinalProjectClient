@@ -21,6 +21,8 @@ import {
   LOGOUT_USER,
   CREATE_PRESETS,
   EDIT_USER,
+  WITH_DEPLOYMENT,
+  WITHOUT_DEPLOYMENT
 } from "./types";
 
 const initialState = {
@@ -30,6 +32,7 @@ const initialState = {
   cartRemoved: [],
   user: [],
   presets: 1,
+  deployment: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -204,6 +207,20 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         presets: 0,
       };
+
+    case WITH_DEPLOYMENT:
+      return {
+        ...state,
+        deployment: true,
+      };
+
+    case WITHOUT_DEPLOYMENT:
+      return {
+        ...state,
+        deployment: false,
+      };
+
+
 
     default:
       return { ...state };
