@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "tailwindcss/tailwind.css";
+import plantilla from "../../utils/img/plantilla.png"
 import {
   removeModelFromCart,
   removeAllModelCart,
@@ -68,7 +69,7 @@ const CartComponent = () => {
               {models.map((model) => (
                 <div className="m-2 bg-logo grid grid-cols-7 h-72 " key={model.id}>
                   <img
-                    src={model.url}
+                    src={plantilla}
                     alt={model.name}
                     className="w-full h-64 m-4 col-span-3"
                   />
