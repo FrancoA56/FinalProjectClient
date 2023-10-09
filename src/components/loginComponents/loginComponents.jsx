@@ -69,7 +69,7 @@ const LoginComponents = () => {
       {/* Columna izq */}
       <div
         class="grid-span-2 flex justify-center 
-        items-center"
+        items-center py-3"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
@@ -120,13 +120,13 @@ const LoginComponents = () => {
                 </span>
 
             </div>
-            <div className="flex justify-start mt-1 ml-3" >
+            <div className="flex justify-start mt-2 ml-3" >
 
                 <a className="text-sm text-[#606060]">
                   <strong> Forgot password?</strong>
                 </a>
             </div>
-            <hr className="mt-5 border border-[#909090] rounded-sm" />
+            <hr className="mt-2 border border-[#909090] rounded-sm" />
             <div className="grid grid-cols-2 text-[#606060] text-sm">
               <div className="cols-span-1 text-sm flex pt-2 pl-2">
                 <p> Not a member? </p>
@@ -218,7 +218,7 @@ const LoginComponents = () => {
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div class="mb-12 md:mb-0 md:w-10/12 lg:w-full">
+        <div class="mb-12 md:mb-0 md:w-10/12 lg:w-full flex items-center justify-center">
           <img
             src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
             alt="CodecraftedLogo_image"

@@ -35,7 +35,6 @@ function RegisterComponents() {
     hasSpecialChar: false,
     isBetween8And30: false,
   });
-  
 
   const [input, setInput] = useState({
     email: "",
@@ -133,7 +132,7 @@ function RegisterComponents() {
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div class="mb-12 md:mb-0 md:w-10/12 lg:w-full">
+        <div class="md:w-full lg:w-full flex justify-center items-center">
           <img
             src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
             alt="CodecraftedLogo_image"
@@ -143,13 +142,13 @@ function RegisterComponents() {
       {/* Columna der */}
       <div
         class="grid-span-2 flex justify-center 
-        items-center"
+        items-center py-3"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
         }}
       >
-        <div class="md:w-8/12 lg:w-8/12">
+        <div class="md:w-8/12 lg:w-8/12 ">
           <form onSubmit={(e) => handleSubmit(e)}>
             {/* Name input */}
             <div className="">
@@ -270,59 +269,58 @@ function RegisterComponents() {
                 {errors.password}
               </p> */}
               {/* <div className={(validations.hasLowercase || validations.hasUppercase || validations.hasNumber || validations.hasSpecialChar || validations.isBetween8And30) ? "visible" : "invisible"}> */}
-                <p className="mt-3 text-sm text-[#606060]">
-                  <strong> Password must have:</strong>
-                </p>
-                <ul className="grid grid-cols-2 text-sm text-[#606060]">
-                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                    <li>
-                      {validations.hasUppercase ? (
-                        <i class="fa-solid fa-check" />
-                      ) : (
-                        <i class="fa-solid fa-xmark" />
-                      )}{" "}
-                      An uppercase character
-                    </li>
-                    <li>
-                      {validations.hasLowercase ? (
-                        <i class="fa-solid fa-check" />
-                      ) : (
-                        <i class="fa-solid fa-xmark" />
-                      )}{" "}
-                      An lowercase character
-                    </li>
-                    <li className="line-clamp-1">
-                      {validations.isBetween8And30 ? (
-                        <i class="fa-solid fa-check" />
-                      ) : (
-                        <i class="fa-solid fa-xmark" />
-                      )}{" "}
-                      A between 8 and 30 char...
-                    </li>
-                  </div>
-                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                    <li>
-                      {validations.hasNumber ? (
-                        <i class="fa-solid fa-check" />
-                      ) : (
-                        <i class="fa-solid fa-xmark" />
-                      )}{" "}
-                      A number
-                    </li>
-                    <li>
-                      {validations.hasSpecialChar ? (
-                        <i class="fa-solid fa-check" />
-                      ) : (
-                        <i class="fa-solid fa-xmark" />
-                      )}{" "}
-                      A special character
-                    </li>
-
-                  </div>
-                </ul>
-              </div>
+              <p className="mt-3 text-sm text-[#606060]">
+                <strong> Password must have:</strong>
+              </p>
+              <ul className="grid grid-cols-2 text-sm text-[#606060]">
+                <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
+                  <li>
+                    {validations.hasUppercase ? (
+                      <i class="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i class="fa-solid fa-xmark text-red-600" />
+                    )}{" "}
+                    An uppercase character
+                  </li>
+                  <li>
+                    {validations.hasLowercase ? (
+                      <i class="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i class="fa-solid fa-xmark text-red-600" />
+                    )}{" "}
+                    An lowercase character
+                  </li>
+                  <li className="line-clamp-1">
+                    {validations.isBetween8And30 ? (
+                      <i class="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i class="fa-solid fa-xmark text-red-600" />
+                    )}{" "}
+                    A between 8 and 30 char...
+                  </li>
+                </div>
+                <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
+                  <li>
+                    {validations.hasNumber ? (
+                      <i class="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i class="fa-solid fa-xmark text-red-600" />
+                    )}{" "}
+                    A number
+                  </li>
+                  <li>
+                    {validations.hasSpecialChar ? (
+                      <i class="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i class="fa-solid fa-xmark text-red-600" />
+                    )}{" "}
+                    A special character
+                  </li>
+                </div>
+              </ul>
+            </div>
             {/* </div> */}
-            <hr className="mt-5 border border-[#909090] rounded-sm" />
+            <hr className="mt-2 border border-[#909090] rounded-sm" />
 
             {/* <!--are you member --> */}
             <div className="grid grid-cols-2 text-[#606060] text-sm">
