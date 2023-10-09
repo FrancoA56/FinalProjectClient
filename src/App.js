@@ -32,8 +32,9 @@ function App() {
               Authorization: `${storedToken}`,
             },
           };
-          const { data } = await axios.get(`${URL}/api/user/validate`,headerToken);
-
+          console.log("headerToken", headerToken);
+          const { data } = await axios.get(`${URL}/api/user/validate`, headerToken);
+          console.log("data", data);
           if (data) {
             const user = decodeToken(storedToken);
             dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
@@ -43,11 +44,10 @@ function App() {
           console.error("Error al validar el token:", error.message);
         }
       };
-
       login();
     }
 
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch, isLoggedIn, URL]);
 
   return (
     <div className="App">
