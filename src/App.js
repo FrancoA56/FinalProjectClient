@@ -14,22 +14,38 @@ import Detail  from "./views/detail/detail";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import ProfileView  from "./views/profile/profileView";
 import decodeToken from "./components/loginComponents/decodeToken";
+import axios from "axios";
 
 
 function App() {
+  const URL = process.env.REACT_APP_API;
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("token");
-    if (storedUser && !isLoggedIn) {
-      // const { data } = await axios.get(
-      //   `${URL}/api/user?email=${input.email}&password=${input.password}`
-      // );
-      const user = decodeToken(storedUser);
-      dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
-      dispatch(logInSet(true));
-    };
+    const storedToken = localStorage.getItem("token");
+    if (storedToken && !isLoggedIn) {
+      const login = async () => {
+        try {
+          const headerToken = {
+            headers: {
+              Authorization: `${storedToken}`,
+            },
+          };
+          const { data } = await axios.get(`${URL}/api/user/validate`,headerToken);
+
+          if (data) {
+            const user = decodeToken(storedToken);
+            dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
+            dispatch(logInSet(true));
+          }
+        } catch (error) {
+          console.error("Error al validar el token:", error.message);
+        }
+      };
+
+      login();
+    }
 
   }, [dispatch, isLoggedIn]);
 

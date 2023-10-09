@@ -232,7 +232,7 @@ export const logInUser = (payload) => {
 export const logOutUser = () => {
   // ----------------------------------------------------------------
   return function (dispatch) {
-    localStorage.removeItem("user"); // Eliminar del localStorage
+    localStorage.removeItem("token"); // Eliminar del localStorage
 
     dispatch({
       type: LOGOUT_USER,
