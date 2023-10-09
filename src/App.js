@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser, createPresets } from "./Redux/actions";
+import { logInUser, createPresets, logInSet } from "./Redux/actions";
 import Login from "./views/login";
 import Register from "./views/register";
 import ShoppingCart from "./views/shoppingCart";
@@ -13,41 +13,41 @@ import Home from "./views/home/HomeViews";
 import Detail  from "./views/detail/detail";
 import ProfileView  from "./views/profile/profileView";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-
+import decodeToken from "./components/loginComponents/decodeToken";
 import axios from "axios";
-import plantillas from "./utils/img/ulisesPresets.json";
+
 
 function App() {
-  const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
-
-  const presets = useSelector((state) => state.presets);
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.login);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
-    };
-
-    if (presets === 1) {
-      const postData = async () => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken && !isLoggedIn) {
+      const login = async () => {
         try {
-          await Promise.all(
-            plantillas.map(async (plantilla) => {
-              await axios.post(`${URL}/api/preset`, plantilla);
-            })
-          );
-          dispatch(createPresets());
+          const headerToken = {
+            headers: {
+              Authorization: `${storedToken}`,
+            },
+          };
+          const { data } = await axios.get(`${URL}/api/user/validate`,headerToken);
+
+          if (data) {
+            const user = decodeToken(storedToken);
+            dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
+            dispatch(logInSet(true));
+          }
         } catch (error) {
-          console.error("Error al enviar datos:", error);
+          console.error("Error al validar el token:", error.message);
         }
       };
-      postData();
 
-      
+      login();
     }
-  }, [dispatch, presets, URL]);
+
+  }, [dispatch, isLoggedIn]);
   // ----------------------------------------------------------------------------------------
 
   // ----------------------------------------------------------------------------------------

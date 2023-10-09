@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser } from "../../Redux/actions";
+import { logInUser, logInSet } from "../../Redux/actions";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, NavLink } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
 import LoginGoogle from '../LoginGoogle/loginGoogle';
-
+import decodeToken from "./decodeToken";
 
 /* Requirements to validate the login
 -----------------------------------------------------------------
@@ -16,11 +16,9 @@ comparar la contraseña ingresada con la cargada por el usuario */
 
 const LoginComponents = () => {
   const navigate = useNavigate();
-  const [access, setAccess] = useState(false);
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
   
-
 
   const [input, setInput] = useState({
     email: "",
@@ -41,8 +39,12 @@ const LoginComponents = () => {
         const { data } = await axios.get(
           `${URL}/api/user?email=${input.email}&password=${input.password}`
         );
-        dispatch(logInUser(data));
-        setAccess(true);
+        console.log("data", data);
+        localStorage.setItem("token", data);
+        const user = decodeToken(data);
+        console.log("user", user);
+        dispatch(logInUser(user));
+        dispatch(logInSet(true));
         navigate("/");
       }
     } catch (error) {
@@ -70,7 +72,7 @@ const LoginComponents = () => {
       {/* Columna izq */}
       <div
         class="grid-span-2 flex justify-center 
-        items-center"
+        items-center py-3"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
@@ -80,7 +82,7 @@ const LoginComponents = () => {
           <form onSubmit={handleSubmit}>
             {/* <!-- Email input --> */}
             {/* <!-- Email input --> */}
-            <div className="mb-8">
+            <div className="mt-3">
               <input
                 type="email"
                 name="email"
@@ -94,10 +96,10 @@ const LoginComponents = () => {
             </div>
 
             {/* <!-- Password input --> */}
-            <div className="mb-12">
+            <div className="mt-3 flex items-center justify-end">
               <input
                 // type={showPassword ? "text" : "password"}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 value={input.password}
@@ -106,56 +108,48 @@ const LoginComponents = () => {
                 placeholder="Enter password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-            </div>
-            {/* <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              class="relative lg:bottom-11 lg:left-48 md:relative bottom-11 left-28"
-              // style={{ position: "relative", left: 190, top: -45 }}
-            >
-              {showPassword ? (
-                <FaEye style={{ color: "gray" }} />
-              ) : (
-                <FaEyeSlash style={{ color: "gray" }} />
-              )}
-            </button> */}
-
-            {/* <!-- Not a member --> */}
-            <div class="mb-6 flex items-center justify-between">
-              <div class="">
-                <a
-                  href="#!"
-                  class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
-                ></a>
-                Not a member?{" "}
-                <a class="text-[#5ec3bf]" href="/register">
-                  Register
-                </a>
-              </div>
-              {/* Agregar enlace de Home */}
-              <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 mr-15 ml-12">
-                Back to Home
-              </a>
-              <Link to="/" className="flex items-center mr-11 ml-15">
-                <i
-                  className="text-[#5ec3bf] fa-solid fa-house"
-                  style={{ marginRight: "8px" }}
-                ></i>
-              </Link>
-
-              {/* <!-- Forgot password link --> */}
-              <a
-                href="/forgotpassword"
-                class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600"
+              <span // Boton de ojito de contraseña
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute mr-2 text-[#909090] hover:text-[#303030]"
               >
-                Forgot password?
+                {showPassword ? (
+                  <i class="fa-solid fa-eye-slash" />
+                ) : (
+                  <i class="fa-solid fa-eye" />
+                )}
+              </span>
+            </div>
+            <div className="flex justify-start mt-2 ml-3">
+              <a className="text-sm text-[#606060]">
+                <strong> Forgot password?</strong>
               </a>
+            </div>
+            <hr className="mt-2 border border-[#909090] rounded-sm" />
+            <div className="grid grid-cols-2 text-[#606060] text-sm">
+              <div className="cols-span-1 text-sm flex pt-2 pl-2">
+                <p> Not a member? </p>
+                <NavLink to="/register">
+                  <a class="text-[#3a8a87] ml-1">
+                    <strong> Register </strong>
+                  </a>
+                </NavLink>
+              </div>
+
+              <div class="flex justify-end items-end text-sm pt-2 pr-2">
+                <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
+                  Back to Home
+                </a>
+                <Link to="/" className="flex items-center ml-2 mb-1">
+                  <i className="text-[#3a8a87] fa-solid fa-house"></i>
+                </Link>
+              </div>
             </div>
 
             {/* <!-- Submit button --> */}
             <button
               type="submit"
-              class="inline-block bg-[#5ec3bf] w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              class="mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               data-te-ripple-init
               data-te-ripple-color="light"
               // onClick={handleSubmit}
@@ -229,7 +223,7 @@ const LoginComponents = () => {
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div class="mb-12 md:mb-0 md:w-10/12 lg:w-full">
+        <div class="mb-12 md:mb-0 md:w-10/12 lg:w-full flex items-center justify-center">
           <img
             src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
             alt="CodecraftedLogo_image"

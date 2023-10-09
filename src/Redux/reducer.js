@@ -6,7 +6,6 @@ import {
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
-  REMOVE_ALL_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
   ORDER_MODELS_NAME_DESCENDANT,
   ORDER_MODELS_OWNED,
@@ -16,12 +15,14 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
-  UNDO_EMPTY_CART,
   LOGIN_USER,
   LOGOUT_USER,
   CREATE_PRESETS,
   EDIT_USER,
   USER_LOGIN_GOOGLE,
+  WITH_DEPLOYMENT,
+  WITHOUT_DEPLOYMENT,
+  LOGIN_TRUE,
 } from "./types";
 
 const initialState = {
@@ -31,6 +32,8 @@ const initialState = {
   cartRemoved: [],
   user: [],
   presets: 1,
+  deployment: false,
+  login: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -68,22 +71,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         cart: state.cart.filter((model) => model.id !== payload),
-      };
-
-    case REMOVE_ALL_MODEL_CART:
-      localStorage.setItem("cart", null);
-      return {
-        ...state,
-        cartRemoved: [...state.cart],
-        cart: [],
-      };
-
-    case UNDO_EMPTY_CART:
-      localStorage.setItem("cart", JSON.stringify(state.cartRemoved));
-      return {
-        ...state,
-        cart: [...state.cartRemoved],
-        cartRemoved: [],
       };
 
     case REMOVE_MODEL:
@@ -185,6 +172,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         user: payload,
       };
+
+    case LOGIN_TRUE:
+      return {
+        ...state,
+        login: payload,
+      };
     ////////////////////////////////////////////
     // le paso al estado global la nueva data q traigo del axios.put
     case EDIT_USER:
@@ -214,10 +207,23 @@ const rootReducer = (state = initialState, { type, payload }) => {
             userInfo: payload,
         }
   //////////////////////////////////////////////////  
+  
+    case WITH_DEPLOYMENT:
+      return {
+        ...state,
+        deployment: true,
+      };
 
-      default:
-        return state;
-    }
-  };
+    case WITHOUT_DEPLOYMENT:
+      return {
+        ...state,
+        deployment: false,
+      };
+
+    default:
+      return { ...state };
+  }
+};
+  
 
 export default rootReducer;
