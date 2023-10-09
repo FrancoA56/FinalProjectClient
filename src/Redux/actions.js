@@ -21,6 +21,7 @@ import {
   EDIT_USER,
   WITH_DEPLOYMENT,
   WITHOUT_DEPLOYMENT,
+  LOGIN_TRUE,
 } from "./types";
 import axios from "axios";
 
@@ -239,6 +240,14 @@ export const logOutUser = () => {
     // -----------------------------------------------------------------
     // return {
     //   type: LOGOUT_USER,
+  };
+};
+export const logInSet = (payload) => {
+  return function (dispatch) {
+    dispatch({
+      type: LOGIN_TRUE,
+      payload: payload,
+    });
   };
 };
 

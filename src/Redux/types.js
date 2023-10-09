@@ -24,6 +24,7 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const WITH_DEPLOYMENT = "WITH_DEPLOYMENT";
 export const WITHOUT_DEPLOYMENT = "WITHOUT_DEPLOYMENT";
-export const CREATE_PRESETS = " CREATE_PRESETS";
+export const CREATE_PRESETS = "CREATE_PRESETS";
+export const LOGIN_TRUE = "LOGIN_TRUE";
 
 // export const POST_USER = "POST_USER";
