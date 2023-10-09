@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser, createPresets, logInSet } from "./Redux/actions";
+import { logInUser, logInSet } from "./Redux/actions";
 import Login from "./views/login";
 import Register from "./views/register";
 import ShoppingCart from "./views/shoppingCart";
@@ -32,8 +32,9 @@ function App() {
               Authorization: `${storedToken}`,
             },
           };
-          const { data } = await axios.get(`${URL}/api/user/validate`,headerToken);
-
+          console.log("headerToken", headerToken);
+          const { data } = await axios.get(`${URL}/api/user/validate`, headerToken);
+          console.log("data", data);
           if (data) {
             const user = decodeToken(storedToken);
             dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
@@ -43,14 +44,10 @@ function App() {
           console.error("Error al validar el token:", error.message);
         }
       };
-
       login();
     }
 
-  }, [dispatch, isLoggedIn]);
-  // ----------------------------------------------------------------------------------------
-
-  // ----------------------------------------------------------------------------------------
+  }, [dispatch, isLoggedIn, URL]);
 
   return (
     <div className="App">
