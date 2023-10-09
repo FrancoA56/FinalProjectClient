@@ -6,6 +6,7 @@ import { useNavigate, Link , NavLink} from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
+import decodeToken from "./decodeToken";
 
 // import { useAuth0 } from "@auth0/auth0-react";
 
@@ -40,7 +41,10 @@ const LoginComponents = () => {
         const { data } = await axios.get(
           `${URL}/api/user?email=${input.email}&password=${input.password}`
         );
-        dispatch(logInUser(data));
+        console.log(data)
+        localStorage.setItem("token", data);
+        const user = decodeToken(data)
+        dispatch(logInUser(user));
         setAccess(true);
         navigate("/");
       }

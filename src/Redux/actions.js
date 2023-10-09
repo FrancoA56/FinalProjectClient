@@ -244,7 +244,7 @@ export const logInUser = (payload) => {
   return function (dispatch) {
     try {
       //------- ------------------------------------------------------------------------------------
-      localStorage.setItem("user", JSON.stringify(payload)); // Guardar la data en el localStorage
+       // Guardar la data en el localStorage
       // -------------------------------------------------------------------------------------------
       return dispatch({
         type: LOGIN_USER,
