@@ -5,8 +5,6 @@ import "tailwindcss/tailwind.css";
 import plantilla from "../../utils/img/plantilla.png";
 import {
   removeModelFromCart,
-  removeAllModelCart,
-  undoRemoveAllModelCart,
 } from "../../Redux/actions";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
@@ -14,7 +12,6 @@ import Banner from "../Banner/Banner";
 
 const CartComponent = () => {
   const models = useSelector((state) => state.cart);
-  const [emptyCart, setEmptyCart] = useState(false);
   const dispatch = useDispatch();
 
   const totalPrice = (models) => {
@@ -23,16 +20,6 @@ const CartComponent = () => {
       0
     );
     return total;
-  };
-
-  const emptyCartOnClick = () => {
-    dispatch(removeAllModelCart());
-    setEmptyCart(true);
-  };
-
-  const undoEmptyCartOnClick = () => {
-    dispatch(undoRemoveAllModelCart());
-    setEmptyCart(false);
   };
 
   const [deployService, setDeployService] = useState(false);
@@ -68,6 +55,7 @@ const CartComponent = () => {
             >
               {models.map((model) => (
                 <div
+
                   className="m-2 grid grid-cols-7 h-48 rounded-md"
                   style={{
                     background:
@@ -206,7 +194,6 @@ const CartComponent = () => {
                   </p>
                 </div>
               </div>
-
               {/* Botones */}
               <div className="row-span-1 flex flex-col items-center">
                 {!emptyCart ? (

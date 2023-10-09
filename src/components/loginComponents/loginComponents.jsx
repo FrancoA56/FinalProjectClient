@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser } from "../../Redux/actions";
+import { logInUser, logInSet } from "../../Redux/actions";
 import { useState } from "react";
-import { useNavigate, Link , NavLink} from "react-router-dom";
+import { useNavigate, Link, NavLink } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
+import decodeToken from "./decodeToken";
 
 // import { useAuth0 } from "@auth0/auth0-react";
 
@@ -16,9 +17,9 @@ comparar la contraseña ingresada con la cargada por el usuario */
 
 const LoginComponents = () => {
   const navigate = useNavigate();
-  const [access, setAccess] = useState(false);
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
+  
 
   const [input, setInput] = useState({
     email: "",
@@ -32,7 +33,6 @@ const LoginComponents = () => {
     });
   }
 
-
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -40,8 +40,12 @@ const LoginComponents = () => {
         const { data } = await axios.get(
           `${URL}/api/user?email=${input.email}&password=${input.password}`
         );
-        dispatch(logInUser(data));
-        setAccess(true);
+        console.log("data", data);
+        localStorage.setItem("token", data);
+        const user = decodeToken(data);
+        console.log("user", user);
+        dispatch(logInUser(user));
+        dispatch(logInSet(true));
         navigate("/");
       }
     } catch (error) {
@@ -69,7 +73,7 @@ const LoginComponents = () => {
       {/* Columna izq */}
       <div
         class="grid-span-2 flex justify-center 
-        items-center"
+        items-center py-3"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
@@ -105,28 +109,24 @@ const LoginComponents = () => {
                 placeholder="Enter password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-                <span // Boton de ojito de contraseña
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className="absolute mr-2 text-[#909090] hover:text-[#303030]"
-                >
-                  {
-                    showPassword ? (
-                      <i class="fa-solid fa-eye-slash" />
-                    ) : (
-                      <i class="fa-solid fa-eye" />
-                    )
-                  }
-                </span>
-
+              <span // Boton de ojito de contraseña
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute mr-2 text-[#909090] hover:text-[#303030]"
+              >
+                {showPassword ? (
+                  <i class="fa-solid fa-eye-slash" />
+                ) : (
+                  <i class="fa-solid fa-eye" />
+                )}
+              </span>
             </div>
-            <div className="flex justify-start mt-1 ml-3" >
-
-                <a className="text-sm text-[#606060]">
-                  <strong> Forgot password?</strong>
-                </a>
+            <div className="flex justify-start mt-2 ml-3">
+              <a className="text-sm text-[#606060]">
+                <strong> Forgot password?</strong>
+              </a>
             </div>
-            <hr className="mt-5 border border-[#909090] rounded-sm" />
+            <hr className="mt-2 border border-[#909090] rounded-sm" />
             <div className="grid grid-cols-2 text-[#606060] text-sm">
               <div className="cols-span-1 text-sm flex pt-2 pl-2">
                 <p> Not a member? </p>
@@ -146,7 +146,7 @@ const LoginComponents = () => {
                 </Link>
               </div>
             </div>
-   
+
             {/* <!-- Submit button --> */}
             <button
               type="submit"
@@ -168,7 +168,7 @@ const LoginComponents = () => {
             {/* <!-- Social login buttons --> */}
             {/*  Google */}
             <a
-            class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               href="#!"
               role="button"
               data-te-ripple-init
@@ -218,7 +218,7 @@ const LoginComponents = () => {
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div class="mb-12 md:mb-0 md:w-10/12 lg:w-full">
+        <div class="mb-12 md:mb-0 md:w-10/12 lg:w-full flex items-center justify-center">
           <img
             src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
             alt="CodecraftedLogo_image"

@@ -6,7 +6,6 @@ import {
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
-  REMOVE_ALL_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
   ORDER_MODELS_NAME_DESCENDANT,
   ORDER_MODELS_OWNED,
@@ -16,13 +15,13 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
-  UNDO_EMPTY_CART,
   LOGIN_USER,
   LOGOUT_USER,
   CREATE_PRESETS,
   EDIT_USER,
   WITH_DEPLOYMENT,
-  WITHOUT_DEPLOYMENT
+  WITHOUT_DEPLOYMENT,
+  LOGIN_TRUE,
 } from "./types";
 import axios from "axios";
 
@@ -58,10 +57,11 @@ export const addModelToCart = (id) => {
   return async function (dispatch, getState) {
     try {
       const state = getState();
-      const allreadyOnCart = state.cart.filter(c => c.id === id);
-      
-      if (allreadyOnCart.length) return window.alert("This preset is allready on cart") 
-      
+      const allreadyOnCart = state.cart.filter((c) => c.id === id);
+
+      if (allreadyOnCart.length)
+        return window.alert("This preset is allready on cart");
+
       const { data } = await axios.get(`${URL}/api/preset/${id}`);
       const preset = {
         id: data.id,
@@ -161,30 +161,6 @@ export const removeModelFromCart = (id) => {
   };
 };
 
-export const removeAllModelCart = () => {
-  return function (dispatch) {
-    try {
-      return dispatch({
-        type: REMOVE_ALL_MODEL_CART,
-      });
-    } catch (error) {
-      window.alert(error.message);
-    }
-  };
-};
-
-export const undoRemoveAllModelCart = () => {
-  return function (dispatch) {
-    try {
-      return dispatch({
-        type: UNDO_EMPTY_CART,
-      });
-    } catch (error) {
-      window.alert(error.message);
-    }
-  };
-};
-
 export const orderByNameAscendant = (name) => {
   return {
     type: ORDER_MODELS_NAME_ASCENDANT,
@@ -243,9 +219,6 @@ export const filterByColor = (color) => {
 export const logInUser = (payload) => {
   return function (dispatch) {
     try {
-      //------- ------------------------------------------------------------------------------------
-      localStorage.setItem("user", JSON.stringify(payload)); // Guardar la data en el localStorage
-      // -------------------------------------------------------------------------------------------
       return dispatch({
         type: LOGIN_USER,
         payload: payload,
@@ -259,7 +232,7 @@ export const logInUser = (payload) => {
 export const logOutUser = () => {
   // ----------------------------------------------------------------
   return function (dispatch) {
-    localStorage.removeItem("user"); // Eliminar del localStorage
+    localStorage.removeItem("token"); // Eliminar del localStorage
 
     dispatch({
       type: LOGOUT_USER,
@@ -267,6 +240,14 @@ export const logOutUser = () => {
     // -----------------------------------------------------------------
     // return {
     //   type: LOGOUT_USER,
+  };
+};
+export const logInSet = (payload) => {
+  return function (dispatch) {
+    dispatch({
+      type: LOGIN_TRUE,
+      payload: payload,
+    });
   };
 };
 

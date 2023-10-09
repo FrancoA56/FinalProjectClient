@@ -54,9 +54,8 @@ const ComponentShop = () => {
     setSelectedCategory(selectedCategory);
   }, [selectedCategory]);
 
-
   // ! PARA MANEJAR LOS TYPES
-  const [selectedTypes, setSelectedTypes] = useState([])
+  const [selectedTypes, setSelectedTypes] = useState([]);
 
   const handleTypeChange = (event) => {
     const modelsName = event.target.value;
@@ -79,178 +78,181 @@ const ComponentShop = () => {
     setSelectedTypes(selectedTypes);
   }, [selectedTypes]);
 
-
   // ! LIMPIEZA DE FILTROS
   const handleClearFilter = () => {
     setSelectedCategory([]);
     setSelectedFilterColor([]);
     setCheck([]);
     setSelectedOrder("name a");
-    setSelectedTypes([])
+    setSelectedTypes([]);
   };
 
   return (
     <>
-      <div class="grid h-screen lg:grid-cols-8 md:grid-cols-2">
-        {/* lateral */}
-        <div
-          class="col-span-1 h-full bg-gradient-to-r from-[#000000] to-[#505050] flex flex-col items-start"
-          /*           style={{
-            background:
-              "radial-gradient( 40rem circle at right, rgb(105, 105, 105), black)",
-          }} */
-        >
-          {/* Order by */}
-          <div class="my-5">
-            <SelectOrder
-              handleOrderChange={handleOrderChange}
-              selectedFilterColor={selectedFilterColor}
-              selectedCategory={selectedCategory}
-              selectedOrder={selectedOrder}
-            />
-          </div>
-          {/* Category */}
-          <div className="flex flex-col ">
-            <h1 className="font-mediun uppercase leading-normal font-semibold mb-2 my-1 ml-5 text-[#5ec3bf]">
-              Category:
-            </h1>
-            {/* All */}
-            <div>
-              <label className="my-1 flex items-center text-white ml-5 ">
-                <input
-                  type="checkbox"
-                  value={[]}
-                  checked={check.length === 0}
-                  onChange={(event) => {
-                    setSelectedCategory([]);
-                    setCheck([]);
-                  }}
-                  className="mr-2 "
-                />
-                <span className="text-sm text-white">All</span>
-              </label>
-            </div>
-            {/* basic | medium | premium */}
-            {types.map((type, index) => {
-              const typeName = Object.keys(type)[0];
-              const typeValue = Object.values(type)[0];
-              return (
-                <label key={index} className=" my-1 flex items-center ml-5">
-                  <input
-                    type="checkbox"
-                    value={typeValue}
-                    checked={check === typeValue}
-                    onChange={(event) => {
-                      handleCategoryChange(event);
-                    }}
-                    className="mr-2"
-                  />
-                  <span className="text-sm  text-white">{typeName}</span>
-                </label>
-              );
-            })}
-            {/* Colores */}
-            <br />
-            <h1 className="font-mediun uppercase leading-normal font-semibold mb-2 text-[#5ec3bf]">
-              Colors:
-            </h1>
-            {/*             <label className="font-mediun uppercase leading-normal font-semibold mb-2 ml-5">Colors:</label> */}
-
-            {colors.map((color, index) => {
-              const colorName = Object.keys(color)[0];
-              const colorValue = Object.values(color)[0];
-              return (
-                <label className="ml-5 my-1 flex" key={index}>
-                  <input
-                    type="checkbox"
-                    value={colorValue}
-                    checked={selectedFilterColor.includes(colorValue)}
-                    onChange={(event) => {
-                      handleFilterColorChange(event);
-                    }}
-                    className="mr-2"
-                  />
-                  <span className="text-sm text-white">{colorName}</span>
-                </label>
-              );
-            })}
-
-            {/* Types */}
-            <br />
-            <h1 className="font-mediun uppercase leading-normal font-semibold mb-2 text-[#5ec3bf]">
-              Types:
-            </h1>
-            {/*             <label className="font-mediun uppercase leading-normal font-semibold mb-2 ml-5">Colors:</label> */}
-
-            {models.map((type, index) => {
-              const modelsName = Object.keys(type)[0];
-              const modelsValue = Object.values(type)[0];
-              return (
-                <label className="ml-5 my-1 flex" key={index}>
-                  <input
-                    type="checkbox"
-                    value={modelsValue}
-                    checked={selectedTypes.includes(modelsValue)}
-                    onChange={(event) => {
-                      handleTypeChange(event);
-                    }}
-                    className="mr-2"
-                  />
-                  <span className="text-sm text-white">{modelsName}</span>
-                </label>
-              );
-            })}
-          </div>
-          <button
-            className="inline-block bg-logo w-auto rounded 5ec3bf my-4 ml-7 mt-9 px-3 pb-1 pt-1 text-sm font-small uppercase leading-normal
-          text-black shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-            onClick={() => handleClearFilter()}
+      <div className="bg-gray-100 min-h-screen">
+        <div className="container mx-auto p-4">
+          {/* Encabezado */}
+          <h1
+            className="inline-block mb-4 w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                     text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+            style={{ "background-color": "#303030" }}
           >
-            Clear filter
-          </button>
+            Shop
+          </h1>
+          {/* Encolumnado */}
+          <div className="grid grid-cols-12 gap-4">
+            {/* Columna IZQ */}
+            <div
+              className="col-span-12 md:col-span-2 rounded sm:h-full sm:flex sm:justify-center md:flex md:flex-col md:justify-start md:items-start flex flex-col items-start justify-start"
+              style={{
+                background:
+                  "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
+              }}
+            >
+              {/* /////////////////////////////////// */}
+              {/* Order */}
+              <div>
+                <SelectOrder
+                  handleOrderChange={handleOrderChange}
+                  selectedFilterColor={selectedFilterColor}
+                  selectedCategory={selectedCategory}
+                  selectedOrder={selectedOrder}
+                />
+              </div>
+
+              {/* /////////////////////////////////// */}
+              {/* Category */}
+              <div className="flex flex-col justify-start">
+                <h1 className="justify-start uppercase leading-normal font-semibold mb-1 mt-5 ml-5">
+                  Category:
+                </h1>
+                {/* All */}
+                <div>
+                  <label className="my-1 flex items-center ml-5 ">
+                    <input
+                      type="checkbox"
+                      value={[]}
+                      checked={check.length === 0}
+                      onChange={(event) => {
+                        setSelectedCategory([]);
+                        setCheck([]);
+                      }}
+                      className="mr-2"
+                    />
+                    <span className="text-sm font-medium uppercase leading-normal text-[#303030]">
+                      All
+                    </span>
+                  </label>
+                  {/* basic | medium | premium */}
+                  {types.map((type, index) => {
+                    const typeName = Object.keys(type)[0];
+                    const typeValue = Object.values(type)[0];
+                    return (
+                      <label
+                        key={index}
+                        className=" my-1 flex items-center ml-5"
+                      >
+                        <input
+                          type="checkbox"
+                          value={typeValue}
+                          checked={check === typeValue}
+                          onChange={(event) => {
+                            handleCategoryChange(event);
+                          }}
+                          className="mr-2"
+                        />
+                        <span className="text-sm font-medium uppercase leading-normal text-[#303030]">
+                          {typeName}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+              {/* /////////////////////////////////// */}
+              {/* Colores */}
+              <div>
+                <h1 className="ml-5 font-mediun uppercase leading-normal font-semibold mb-1 mt-5">
+                  Colors:
+                </h1>
+
+                {colors.map((color, index) => {
+                  const colorName = Object.keys(color)[0];
+                  const colorValue = Object.values(color)[0];
+                  return (
+                    <label className="ml-5 my-1 flex" key={index}>
+                      <input
+                        type="checkbox"
+                        value={colorValue}
+                        checked={selectedFilterColor.includes(colorValue)}
+                        onChange={(event) => {
+                          handleFilterColorChange(event);
+                        }}
+                        className="mr-2"
+                      />
+                      <span className="text-sm font-medium uppercase leading-normal text-[#303030]">
+                        {colorName}
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+
+              {/* /////////////////////////////////// */}
+              {/* Types */}
+              <div>
+                <h1 className="font-mediun uppercase leading-normal font-semibold mt-5 ml-1">
+                  Types:
+                </h1>
+
+                {models.map((type, index) => {
+                  const modelsName = Object.keys(type)[0];
+                  const modelsValue = Object.values(type)[0];
+                  return (
+                    <label className="ml-5 my-1 flex" key={index}>
+                      <input
+                        type="checkbox"
+                        value={modelsValue}
+                        checked={selectedTypes.includes(modelsValue)}
+                        onChange={(event) => {
+                          handleTypeChange(event);
+                        }}
+                        className="mr-2"
+                      />
+                      <span className="text-sm font-medium uppercase leading-normal text-[#303030]">
+                        {modelsName}
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+              <div className="w-full flex justify-center items-center">
+                <button
+                  className="mt-5 w-3/4 inline-block bg-logo rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  onClick={() => handleClearFilter()}
+                >
+                  Clear filter
+                </button>
+              </div>
+            </div>
+            {/* Columna derecha */}
+            <div
+              className="col-span-12 md:col-span-10 flex justify-center items-start rounded h-screen overflow-auto"
+              style={{
+                background:
+                  "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
+              }}
+            >
+              <Plantillas
+                selectedFilterColor={selectedFilterColor}
+                selectedOrder={selectedOrder}
+                selectedCategory={selectedCategory}
+                selectedTypes={selectedTypes}
+              />
+            </div>
+          </div>
         </div>
-        {/* Main */}
-        <div
-          class="col-span-7 h-full"
-          style={{
-            background:
-              "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-          }}
-        >
-          {/* <div className="bg-red-500 flex flex-wrap"> */}
-          <Plantillas
-            selectedFilterColor={selectedFilterColor}
-            selectedOrder={selectedOrder}
-            selectedCategory={selectedCategory}
-            selectedTypes={selectedTypes}
-          />
-          {/* </div> */}
-        </div>
-        {/* FINAL */}
       </div>
-      {/*  <div
-        className="flex"
-        style={{
-          background:
-            "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-        }}
-      >
-        <div
-          className="w-2/6 flex flex-col items-center"
-          style={{
-            background:
-              "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
-          }}
-        >
-          
-        <div className="flex flex-wrap">
-          <Plantillas
-            selectedFilterColor={selectedFilterColor}
-            selectedOrder={selectedOrder}
-            selectedCategory={selectedCategory}
-          />
-        </div>
-      </div> */}
     </>
   );
 };

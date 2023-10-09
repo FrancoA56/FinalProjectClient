@@ -2,7 +2,7 @@ const SelectOrder = ({ handleOrderChange, selectedOrder }) => {
   return (
     <div className="flex flex-col items-start ml-5">
       {/*       <h6 className="text-lg font-semibold mb-2">Order by:</h6> */}
-      <h1 className="font-mediun uppercase leading-normal  font-semibold mb-2 text-[#5ec3bf]">
+      <h1 className="font-mediun uppercase leading-normal font-semibold mb-2 mt-5">
         Order By:
       </h1>
 
