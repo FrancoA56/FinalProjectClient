@@ -28,10 +28,9 @@ const PresetsDetail = () => {
       }
     }
     fetchPreset();
-  }, [id]);
+  }, [id, URL]);
   return (
     <>
-    {console.log("Preset", presets)}
       <Banner />
       <Nav />
       <div
