@@ -13,16 +13,11 @@ import Home from "./views/home/HomeViews";
 import Detail  from "./views/detail/detail";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import ProfileView  from "./views/profile/profileView";
-import axios from "axios";
-import plantillas from "./utils/img/ulisesPresets.json";
 import decodeToken from "./components/loginComponents/decodeToken";
 
 
 function App() {
   const dispatch = useDispatch();
-  const URL = process.env.REACT_APP_API;
-
-  const presets = useSelector((state) => state.presets);
   const isLoggedIn = useSelector((state) => state.login);
 
   useEffect(() => {
@@ -36,24 +31,7 @@ function App() {
       dispatch(logInSet(true));
     };
 
-    if (presets === 1) {
-      const postData = async () => {
-        try {
-          await Promise.all(
-            plantillas.map(async (plantilla) => {
-              await axios.post(`${URL}/api/preset`, plantilla);
-            })
-          );
-          dispatch(createPresets());
-        } catch (error) {
-          console.error("Error al enviar datos:", error);
-        }
-      };
-      postData();
-
-      
-    }
-  }, [dispatch, presets, URL, isLoggedIn]);
+  }, [dispatch, isLoggedIn]);
   // ----------------------------------------------------------------------------------------
 
   // ----------------------------------------------------------------------------------------
