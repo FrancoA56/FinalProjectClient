@@ -22,12 +22,22 @@ function App() {
 
   const presets = useSelector((state) => state.presets);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const userData = JSON.parse(storedUser);
-      dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
-    };
+  useEffect(async () => {
+    const storedToken = localStorage.getItem("token");
+
+    if(storedToken){
+    const headerToken = {
+      headers: {
+        Authorization: `${storedToken}`,
+      },
+    }
+    const {data} = await axios.get(`${URL}/api/validate`,headerToken);
+    console.log('esvalido?',data)}
+
+    // if (storedUser) {
+    //   const userData = storedUser;
+    //   dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
+    // };
 
     if (presets === 1) {
       const postData = async () => {
