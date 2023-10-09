@@ -41,6 +41,7 @@ function App() {
             dispatch(logInSet(true));
           }
         } catch (error) {
+          localStorage.removeItem("token")
           console.error("Error al validar el token:", error.message);
         }
       };
