@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Preset 1",
+    "price": 10,
+    "defaultColor": "green",
+    "type": "about",
+    "category": "basic"
+  },
+  {
+    "id": "2",
+    "name": "Preset 2",
+    "price": 2,
+    "defaultColor": "blue",
+    "type": "home",
+    "category": "medium"
+  },
+  {
+    "id": "3",
+    "name": "Preset 3",
+    "price": 28,
+    "defaultColor": "white",
+    "type": "home",
+    "category": "premium"
+  },
+  {
+    "id": "4",
+    "name": "Preset 4",
+    "price": 5,
+    "defaultColor": "red",
+    "type": "about",
+    "category": "medium"
+  },
+  {
+    "id": "5",
+    "name": "Preset 5",
+    "price": 22,
+    "defaultColor": "black",
+    "type": "form",
+    "category": "basic"
+  },
+  {
+    "id": "6",
+    "name": "Preset 6",
+    "price": 33,
+    "defaultColor": "white",
+    "type": "form",
+    "category": "premium"
+  }
+]

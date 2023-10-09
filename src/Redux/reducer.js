@@ -2,6 +2,7 @@ import {
   ADD_MODEL,
   ADD_MODELS,
   ADD_MODEL_CART,
+  ADD_ALL_MODEL_CART,
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
@@ -14,12 +15,24 @@ import {
   ORDER_MODELS_RELEASED,
   FILTER_MODELS_BY_COLORS,
   FILTER_MODELS_BY_TYPES,
+  LOGIN_USER,
+  LOGOUT_USER,
+  CREATE_PRESETS,
+  EDIT_USER,
+  WITH_DEPLOYMENT,
+  WITHOUT_DEPLOYMENT,
+  LOGIN_TRUE,
 } from "./types";
 
 const initialState = {
   models: [],
   allModels: [],
   cart: [],
+  cartRemoved: [],
+  user: [],
+  presets: 1,
+  deployment: false,
+  login: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -38,13 +51,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case ADD_MODEL_CART:
-      const modelToCart = state.allModels.filter((model) => model.id === payload);
       return {
         ...state,
-        cart: [...state.cart, modelToCart],
+        cart: payload,
+      };
+
+    case ADD_ALL_MODEL_CART:
+      return {
+        ...state,
+        cart: payload,
       };
 
     case REMOVE_MODEL_CART:
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(state.cart.filter((model) => model.id !== payload))
+      );
       return {
         ...state,
         cart: state.cart.filter((model) => model.id !== payload),
@@ -142,6 +164,50 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         models: filterByType,
+      };
+
+    case LOGIN_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+
+    case LOGIN_TRUE:
+      return {
+        ...state,
+        login: payload,
+      };
+    ////////////////////////////////////////////
+    // le paso al estado global la nueva data q traigo del axios.put
+    case EDIT_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+    ////////////////////////////////////////////
+
+    case LOGOUT_USER:
+      return {
+        ...state,
+        user: {},
+      };
+
+    case CREATE_PRESETS:
+      return {
+        ...state,
+        presets: 0,
+      };
+
+    case WITH_DEPLOYMENT:
+      return {
+        ...state,
+        deployment: true,
+      };
+
+    case WITHOUT_DEPLOYMENT:
+      return {
+        ...state,
+        deployment: false,
       };
 
     default:
