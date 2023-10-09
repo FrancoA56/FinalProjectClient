@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser } from "../../Redux/actions";
+import { logInUser, logInSet } from "../../Redux/actions";
 import { useState } from "react";
-import { useNavigate, Link , NavLink} from "react-router-dom";
+import { useNavigate, Link, NavLink } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -17,7 +17,6 @@ comparar la contraseña ingresada con la cargada por el usuario */
 
 const LoginComponents = () => {
   const navigate = useNavigate();
-  const [access, setAccess] = useState(false);
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
 
@@ -33,7 +32,6 @@ const LoginComponents = () => {
     });
   }
 
-
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -41,11 +39,12 @@ const LoginComponents = () => {
         const { data } = await axios.get(
           `${URL}/api/user?email=${input.email}&password=${input.password}`
         );
-        console.log(data)
+        console.log("data", data);
         localStorage.setItem("token", data);
-        const user = decodeToken(data)
+        const user = decodeToken(data);
+        console.log("user", user);
         dispatch(logInUser(user));
-        setAccess(true);
+        dispatch(logInSet(true));
         navigate("/");
       }
     } catch (error) {
@@ -109,26 +108,22 @@ const LoginComponents = () => {
                 placeholder="Enter password"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-                <span // Boton de ojito de contraseña
-                  type="button"
-                  onClick={togglePasswordVisibility}
-                  className="absolute mr-2 text-[#909090] hover:text-[#303030]"
-                >
-                  {
-                    showPassword ? (
-                      <i class="fa-solid fa-eye-slash" />
-                    ) : (
-                      <i class="fa-solid fa-eye" />
-                    )
-                  }
-                </span>
-
+              <span // Boton de ojito de contraseña
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute mr-2 text-[#909090] hover:text-[#303030]"
+              >
+                {showPassword ? (
+                  <i class="fa-solid fa-eye-slash" />
+                ) : (
+                  <i class="fa-solid fa-eye" />
+                )}
+              </span>
             </div>
-            <div className="flex justify-start mt-2 ml-3" >
-
-                <a className="text-sm text-[#606060]">
-                  <strong> Forgot password?</strong>
-                </a>
+            <div className="flex justify-start mt-2 ml-3">
+              <a className="text-sm text-[#606060]">
+                <strong> Forgot password?</strong>
+              </a>
             </div>
             <hr className="mt-2 border border-[#909090] rounded-sm" />
             <div className="grid grid-cols-2 text-[#606060] text-sm">
@@ -150,7 +145,7 @@ const LoginComponents = () => {
                 </Link>
               </div>
             </div>
-   
+
             {/* <!-- Submit button --> */}
             <button
               type="submit"
@@ -172,7 +167,7 @@ const LoginComponents = () => {
             {/* <!-- Social login buttons --> */}
             {/*  Google */}
             <a
-            class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               href="#!"
               role="button"
               data-te-ripple-init
