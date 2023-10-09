@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "tailwindcss/tailwind.css";
-import plantilla from "../../utils/img/plantilla.png"
+import plantilla from "../../utils/img/plantilla.png";
 import {
   removeModelFromCart,
-  removeAllModelCart,
-  undoRemoveAllModelCart,
 } from "../../Redux/actions";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
@@ -14,7 +12,6 @@ import Banner from "../Banner/Banner";
 
 const CartComponent = () => {
   const models = useSelector((state) => state.cart);
-  const [emptyCart, setEmptyCart] = useState(false);
   const dispatch = useDispatch();
 
   const totalPrice = (models) => {
@@ -23,16 +20,6 @@ const CartComponent = () => {
       0
     );
     return total;
-  };
-
-  const emptyCartOnClick = () => {
-    dispatch(removeAllModelCart());
-    setEmptyCart(true);
-  };
-
-  const undoEmptyCartOnClick = () => {
-    dispatch(undoRemoveAllModelCart());
-    setEmptyCart(false);
   };
 
   const [deployService, setDeployService] = useState(false);
@@ -67,7 +54,10 @@ const CartComponent = () => {
               }}
             >
               {models.map((model) => (
-                <div className="m-2 bg-logo grid grid-cols-7 h-72 " key={model.id}>
+                <div
+                  className="m-2 bg-logo grid grid-cols-7 h-72 "
+                  key={model.id}
+                >
                   <img
                     src={plantilla}
                     alt={model.name}
@@ -173,25 +163,6 @@ const CartComponent = () => {
                 </p>
               </div>
               <div className="flex justify-between mx-4 my-8">
-                {!emptyCart ? (
-                  <button
-                    onClick={emptyCartOnClick}
-                    className="inline-block bg-[#5ec3bf] w-auto rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                    text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                    style={{ "background-color": "#303030" }}
-                  >
-                    Empty Cart
-                  </button>
-                ) : (
-                  <button
-                    onClick={undoEmptyCartOnClick}
-                    className="inline-block bg-logo w-auto rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                     text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                    style={{ "background-color": "#303030" }}
-                  >
-                    Undo
-                  </button>
-                )}
                 <NavLink
                   to="/pay"
                   className="inline-block bg-logo w-auto rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
