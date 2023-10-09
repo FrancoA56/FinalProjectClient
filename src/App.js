@@ -10,13 +10,12 @@ import ShoppingCart from "./views/shoppingCart";
 import Cart from "./views/cart/cart.jsx";
 import Pay from "./views/pay/pay.jsx";
 import Home from "./views/home/HomeViews";
-import Detail  from "./views/detail/detail";
+import Detail from "./views/detail/detail";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import ProfileView  from "./views/profile/profileView";
+import ProfileView from "./views/profile/profileView";
 import axios from "axios";
 import plantillas from "./utils/img/ulisesPresets.json";
 import decodeToken from "./components/loginComponents/decodeToken";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -26,15 +25,29 @@ function App() {
   const isLoggedIn = useSelector((state) => state.login);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("token");
-    if (storedUser && !isLoggedIn) {
-      // const { data } = await axios.get(
-      //   `${URL}/api/user?email=${input.email}&password=${input.password}`
-      // );
-      const user = decodeToken(storedUser);
-      dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
-      dispatch(logInSet(true));
-    };
+    const storedToken = localStorage.getItem("token");
+    if (storedToken && !isLoggedIn) {
+      const login = async () => {
+        try {
+          const headerToken = {
+            headers: {
+              Authorization: `${storedToken}`,
+            },
+          };
+          const { data } = await axios.get(`${URL}/api/user/validate`,headerToken);
+
+          if (data) {
+            const user = decodeToken(storedToken);
+            dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
+            dispatch(logInSet(true));
+          }
+        } catch (error) {
+          console.error("Error al validar el token:", error);
+        }
+      };
+
+      login();
+    }
 
     if (presets === 1) {
       const postData = async () => {
@@ -50,8 +63,6 @@ function App() {
         }
       };
       postData();
-
-      
     }
   }, [dispatch, presets, URL, isLoggedIn]);
   // ----------------------------------------------------------------------------------------
@@ -68,11 +79,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/pay" element={<Pay />} />
-        <Route path="/detail/:id" element={<Detail/>}/>
-        <Route path="/profile" element={<ProfileView/>}/>
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/profile" element={<ProfileView />} />
       </Routes>
     </div>
   );
-} 
+}
 
 export default App;
