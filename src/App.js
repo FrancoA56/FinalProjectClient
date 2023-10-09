@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser, createPresets } from "./Redux/actions";
+import { logInUser, createPresets, logInSet } from "./Redux/actions";
 import Login from "./views/login";
 import Register from "./views/register";
 import ShoppingCart from "./views/shoppingCart";
@@ -15,29 +15,26 @@ import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import ProfileView  from "./views/profile/profileView";
 import axios from "axios";
 import plantillas from "./utils/img/ulisesPresets.json";
+import decodeToken from "./components/loginComponents/decodeToken";
+
 
 function App() {
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
 
   const presets = useSelector((state) => state.presets);
+  const isLoggedIn = useSelector((state) => state.login);
 
-  useEffect(async () => {
-    const storedToken = localStorage.getItem("token");
-
-    if(storedToken){
-    const headerToken = {
-      headers: {
-        Authorization: `${storedToken}`,
-      },
-    }
-    const {data} = await axios.get(`${URL}/api/validate`,headerToken);
-    console.log('esvalido?',data)}
-
-    // if (storedUser) {
-    //   const userData = storedUser;
-    //   dispatch(logInUser(userData)); // Actualizar el estado con el usuario almacenado
-    // };
+  useEffect(() => {
+    const storedUser = localStorage.getItem("token");
+    if (storedUser && !isLoggedIn) {
+      // const { data } = await axios.get(
+      //   `${URL}/api/user?email=${input.email}&password=${input.password}`
+      // );
+      const user = decodeToken(storedUser);
+      dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
+      dispatch(logInSet(true));
+    };
 
     if (presets === 1) {
       const postData = async () => {
@@ -56,7 +53,7 @@ function App() {
 
       
     }
-  }, [dispatch, presets, URL]);
+  }, [dispatch, presets, URL, isLoggedIn]);
   // ----------------------------------------------------------------------------------------
 
   // ----------------------------------------------------------------------------------------

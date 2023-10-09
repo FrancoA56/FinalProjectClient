@@ -21,6 +21,7 @@ import {
   EDIT_USER,
   WITH_DEPLOYMENT,
   WITHOUT_DEPLOYMENT,
+  LOGIN_TRUE,
 } from "./types";
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
   user: [],
   presets: 1,
   deployment: false,
+  login: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -168,6 +170,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: payload,
+      };
+
+    case LOGIN_TRUE:
+      return {
+        ...state,
+        login: payload,
       };
     ////////////////////////////////////////////
     // le paso al estado global la nueva data q traigo del axios.put
