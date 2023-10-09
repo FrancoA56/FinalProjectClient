@@ -73,9 +73,7 @@ const PresetsDetail = () => {
                 <dt className="text-gray-400 font-medium uppercase leading-normal">
                   Default Color
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500">
-                  {presets.color}
-                </dd>
+                <dd className="mt-2 text-sm text-gray-500">{presets.color}</dd>
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <dt className="text-gray-400 font-medium uppercase leading-normalont-medium">
