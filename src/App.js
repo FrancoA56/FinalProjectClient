@@ -10,18 +10,16 @@ import ShoppingCart from "./views/shoppingCart";
 import Cart from "./views/cart/cart.jsx";
 import Pay from "./views/pay/pay.jsx";
 import Home from "./views/home/HomeViews";
-import Detail from "./views/detail/detail";
+import Detail  from "./views/detail/detail";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import ProfileView from "./views/profile/profileView";
-import axios from "axios";
-import plantillas from "./utils/img/ulisesPresets.json";
+import ProfileView  from "./views/profile/profileView";
 import decodeToken from "./components/loginComponents/decodeToken";
+import axios from "axios";
+
 
 function App() {
-  const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
-
-  const presets = useSelector((state) => state.presets);
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login);
 
   useEffect(() => {
@@ -42,29 +40,14 @@ function App() {
             dispatch(logInSet(true));
           }
         } catch (error) {
-          console.error("Error al validar el token:", error);
+          console.error("Error al validar el token:", error.message);
         }
       };
 
       login();
     }
 
-    if (presets === 1) {
-      const postData = async () => {
-        try {
-          await Promise.all(
-            plantillas.map(async (plantilla) => {
-              await axios.post(`${URL}/api/preset`, plantilla);
-            })
-          );
-          dispatch(createPresets());
-        } catch (error) {
-          console.error("Error al enviar datos:", error);
-        }
-      };
-      postData();
-    }
-  }, [dispatch, presets, URL, isLoggedIn]);
+  }, [dispatch, isLoggedIn]);
   // ----------------------------------------------------------------------------------------
 
   // ----------------------------------------------------------------------------------------
@@ -79,11 +62,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/pay" element={<Pay />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/profile" element={<ProfileView />} />
+        <Route path="/detail/:id" element={<Detail/>}/>
+        <Route path="/profile" element={<ProfileView/>}/>
       </Routes>
     </div>
   );
-}
+} 
 
 export default App;
