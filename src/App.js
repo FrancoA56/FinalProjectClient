@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser, createPresets, logInSet } from "./Redux/actions";
+import { logInUser, logInSet } from "./Redux/actions";
 import Login from "./views/login";
 import Register from "./views/register";
 import ShoppingCart from "./views/shoppingCart";
@@ -32,9 +32,6 @@ function App() {
     };
 
   }, [dispatch, isLoggedIn]);
-  // ----------------------------------------------------------------------------------------
-
-  // ----------------------------------------------------------------------------------------
 
   return (
     <div className="App">
