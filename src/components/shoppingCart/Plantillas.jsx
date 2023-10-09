@@ -68,16 +68,15 @@ const Plantillas = ({
 
   return (
     /* contenedor */
-    <div className="flex flex-wrap my-6 ml-20 justify-start">
+    <div className="flex flex-wrap my-6 justify-center">
       {templates.map((img, index) => (
         /* Contenedor cards */
         <div
           key={index}
-          className="rounded-md overflow-hidden shadow-xl m-4"
+          className="rounded-md overflow-hidden shadow-xl m-4 w-1/3 hover:scale-105 ease-in duration-200"
           style={{
             background:
               "radial-gradient(20rem circle at bottom, rgb(0, 0, 0), rgb(50, 50, 50)",
-            filter: "drop-shadow(5px 5px 10px black)",
           }}
         >
           <Link to={`/detail/${img.id}`}>
@@ -87,19 +86,18 @@ const Plantillas = ({
               className="w-full h-64 object-cover"
             />
           </Link>
-          <div className="px-6 py-4 grid grid-cols-2">
-            <div className="font-mediun uppercase leading-normal font-semibold mb-2 text-white">
+          <div className="px-6 py-4">
+            <div className="font-medium uppercase leading-normal  text-white">
               <Link to={`/detail/${img.name}`} >
-              {img.name}
+              {img.name}{" "}
               </Link>
+              <span className="text-white font-thin capitalize" >| {img.type}</span>
             </div>
-            <div className="text-white text-lg">
+            <div className="text-white text-lg mt-3">
               <strong>${img.price}</strong>
             </div>
-            <div className="text-white text-base capitalize mb-2">
-              {img.type}
-            </div>
-            <button className="bg-logo" onClick={buyPreset(img.id)}>
+
+            <button className="mt-3 inline-block bg-[#505050] w-3/4 rounded 5ec3bf px-7 pb-1.5 pt-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]" onClick={buyPreset(img.id)}>
               Buy
             </button>
           </div>

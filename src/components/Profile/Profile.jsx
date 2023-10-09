@@ -68,8 +68,6 @@ const Profile = () => {
 
   return (
     <>
-      <Banner />
-      <Nav />
       <div className="bg-gray-100 min-h-screen">
         <div className="container mx-auto p-4">
           {/* Encabezado */}
@@ -84,27 +82,28 @@ const Profile = () => {
             {/* Columna izquierda */}
             
             <div
-              className="col-span-12 md:col-span-8 flex flex-col justify-center items-center rounded"
+              className="col-span-12 md:col-span-8 flex flex-col justify-start items-center rounded"
               style={{
                 background:
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
               }}
             >
               {/* //////////////////////////// */}
-              <label className="block m-3 text-xl text-white font-medium uppercase leading-normal">
+              <label className="block mt-3 text-xl text-white font-medium uppercase leading-normal">
                    {user.name ? user.name : ""}
                   </label>
               {/* Aca aparece el logo */}
-              <div className="my-4 w-3/4 h-80 flex items-center justify-center">
+              <div className="w-3/4 h-3/4 flex items-center justify-center">
                 <img
-                  className="max-w-full max-h-full rounded-md shadow"
+                  // className="max-w-full max-h-full rounded-md shadow"
+                  className="h-72 object-cover rounded-md shadow"
                   src={user.logo ? user.logo : "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1696687386/no_imagen_am0gxq.jpg"}
                   alt=""
                 />
               </div>
               {/* //////////////////////////// */}
               {/* Aca aparece el about */}
-              <div className="my-4 flex items-center justify-center w-3/4 ">
+              <div className="mb-5 flex items-center justify-center w-3/4 ">
                 <p className="text-white text-justify">
                   {user.about ? user.about : "There is still no about to show"}
                 </p>
@@ -179,7 +178,7 @@ const Profile = () => {
                       {/* BOTON */}
                       <button
                         /* type="submit" */
-                        class="inline-block mt-5 bg-[#5ec3bf] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        class="mt-10 inline-block bg-logo w-3/4 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         // data-te-ripple-init
                         // data-te-ripple-color="light"
                         onClick={handleSubmit}
