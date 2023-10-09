@@ -24,9 +24,9 @@ export const GET_USER = "GET_USER";
 export const UNDO_EMPTY_CART = "UNDO_EMPTY_CART";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
-
-
 export const CREATE_PRESETS = " CREATE_PRESETS"
+////////////////////////////////////////
+// Agregado
+export const USER_LOGIN_GOOGLE = "USER_LOGIN_GOOGLE"
+////////////////////////////////////////
 
-
-// export const POST_USER = "POST_USER";

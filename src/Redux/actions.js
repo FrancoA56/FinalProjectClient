@@ -21,6 +21,7 @@ import {
   LOGOUT_USER,
   CREATE_PRESETS,
   EDIT_USER,
+  USER_LOGIN_GOOGLE,
 } from "./types";
 import axios from "axios";
 
@@ -273,3 +274,24 @@ export const createPresets = () => {
     type: CREATE_PRESETS,
   };
 };
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+////////////////// Agregado de Google Login
+export const userLoginGoogle = (data) => async(dispatch) =>{
+  try {
+    const userGoogle= await axios.post(`${URL}/user/googlelogin`, data)
+    console.log('data', userGoogle)
+  dispatch({
+    type: USER_LOGIN_GOOGLE,
+    payload: userGoogle.data
+  },
+  localStorage.setItem('user', JSON.stringify(userGoogle)))
+
+}catch (error) {
+console.log(error)
+} 
+}
+////////////////////////////////////////////////////////////////////////////
+

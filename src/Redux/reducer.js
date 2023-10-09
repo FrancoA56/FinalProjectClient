@@ -21,6 +21,7 @@ import {
   LOGOUT_USER,
   CREATE_PRESETS,
   EDIT_USER,
+  USER_LOGIN_GOOGLE,
 } from "./types";
 
 const initialState = {
@@ -205,9 +206,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
         presets: 0,
       };
 
-    default:
-      return { ...state };
-  }
-};
+  ///////////////////////////////////////////////////
+  ///////////////////Agregado Google Login
+      case USER_LOGIN_GOOGLE:
+        return {
+            ...state,
+            userInfo: payload,
+        }
+  //////////////////////////////////////////////////  
+
+      default:
+        return state;
+    }
+  };
 
 export default rootReducer;

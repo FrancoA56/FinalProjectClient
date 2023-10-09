@@ -5,23 +5,22 @@ import App from './App';
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "./Redux/store";
-// import { Auth0Provider } from "@auth0/auth0-react";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 ReactDOM.render(
   <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
         <App />
-      </BrowserRouter>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
   );
   
 
-  
-/* ---------Dominio Loguin Auth0---------------
-  <Auth0Provider 
-    domain='dev-iyjkcsm7sd2cg87z.us.auth0.com' 
-    clientId='BWHyC3JmjNHZnpsVG5t3ZsYg8fQrPqH3' 
-    redirectUri={window.location.origin}>
-  </Auth0Provider>
-*/
+  // ---------Dominio Loguin Auth0---------------
+  // import { Auth0Provider } from "@auth0/auth0-react";
+  // <Auth0Provider 
+  //   domain='codecrafted-templates.us.auth0.com' 
+  //   clientId='qhQRe9uouJwbhHJCIbkgS00Huca7jbmC' 
+  //   redirectUri={window.location.origin}>  
+  // </Auth0Provider>

@@ -48,7 +48,7 @@
   max-height: 20rem;
   display: flex;
   border-radius: 1rem;
-  align-items: start;
+  /* align-items: start; */
   justify-content: center;
   overflow: hidden;
   z-index: 1;
