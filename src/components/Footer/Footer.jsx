@@ -2,6 +2,31 @@ import "tailwindcss/tailwind.css";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 
+/* import { useRef } from "react";
+import emailjs from "@emailjs/browser";
+  // ? FUNCIONES PARA USAR EMAIL JS
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_rjik02h",
+        "template_w2je5xe",
+        form.current,
+        "ncTuTVkphxHhuJbUE"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  }; */
+
 // Footer container
 function Footer() {
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -13,15 +38,21 @@ function Footer() {
   });
 
   //Función para manejar el cambio en los inputs del form
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
-  const handleInputChange = (e) => {
+/*   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-
+ */
   //Función para manejar el envío del form
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +60,9 @@ function Footer() {
       console.log("Form Data:", formData);
       showSuccessAlert("Your form was submitted successfully!");
     } else {
-      showErrorAlert("You must fill in at least the email and a message to submit the form");
+      showErrorAlert(
+        "You must fill in at least the email and a message to submit the form"
+      );
     }
     setPopupOpen(false);
   };
@@ -89,6 +122,8 @@ function Footer() {
             <p className="mr-2 mt-4 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
               <a
                 href="https://www.instagram.com/code_crafted_templates/"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
                 <svg
@@ -108,6 +143,8 @@ function Footer() {
             <p className="mr-8 mt-2 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
               <a
                 href="https://twitter.com/CodeCraftedTemp"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
                 <svg
@@ -127,6 +164,8 @@ function Footer() {
             <p className="mr-6 mt-1.5 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
               <a
                 href="www.linkedin.com/in/code-crafted-templates"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-3 flex items-center justify-center md:justify-center"
               >
                 <svg
@@ -173,12 +212,12 @@ function Footer() {
 
             {/* pop up form --> talk to us */}
 
-            <div
-              className="rounded cursor-pointer"
-              onClick={() => setPopupOpen(true)}
-            >
+            <div className="rounded cursor-pointer">
               <div className="flex items-center justify-center">
-                <h2 className="mt-6 text-white text-center text-sm font-medium uppercase leading-normal bg-logo hover:bg-[#303030] py-2 px-4 rounded inline-block">
+                <h2
+                  className="mt-6 text-white text-center text-sm font-medium uppercase leading-normal bg-logo hover:bg-[#303030] py-2 px-4 rounded inline-block"
+                  onClick={() => setPopupOpen(true)}
+                >
                   Talk to us
                 </h2>
               </div>
@@ -225,9 +264,11 @@ function Footer() {
                               <div class="mt-2.5">
                                 <input
                                   type="text"
-                                  name="first-name"
-                                  id="first-name"
+                                  name="name"
+                                  id="name"
                                   autocomplete="given-name"
+                                  onChange={handleChange}
+                                  value={formData.name}
                                   class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
@@ -279,6 +320,8 @@ function Footer() {
                                   name="email"
                                   id="email"
                                   autocomplete="email"
+                                  onChange={handleChange}
+                                  value={formData.email}
                                   class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
@@ -296,6 +339,8 @@ function Footer() {
                                   name="message"
                                   id="message"
                                   rows="4"
+                                  onChange={handleChange}
+                                  value={formData.message}
                                   class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 ></textarea>
                               </div>
