@@ -18,10 +18,8 @@ const ComponentShop = () => {
     //actualizacion del estado para obtener el filtro mas reciente
     setSelectedFilterColor((prevSelectedFilter) => {
       if (isChecked) {
-        //Si se marca un tipo lo agrego al array
         return [...prevSelectedFilter, typeName];
       } else {
-        //Si se desmarca un tipo, lo elimino del array
         return prevSelectedFilter.filter((filter) => filter !== typeName);
       }
     });
@@ -64,10 +62,8 @@ const ComponentShop = () => {
     //actualizacion del estado para obtener el filtro mas reciente
     setSelectedTypes((prevSelectedType) => {
       if (isCheckedType) {
-        //Si se marca un tipo lo agrego al array
         return [...prevSelectedType, modelsName];
       } else {
-        //Si se desmarca un tipo, lo elimino del array
         return prevSelectedType.filter((filter) => filter !== modelsName);
       }
     });
