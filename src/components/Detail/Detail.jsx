@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "tailwindcss/tailwind.css";
 import { format } from "date-fns";
+import Swal from "sweetalert2";
 
 // COMPONENTES
 import Nav from "../Nav/Nav";
@@ -85,7 +86,7 @@ const PresetsDetail = () => {
               <div>
                 {" "}
                 <p className="font-semibold mt-2 mb-2  text-xl text-[#909090] capitalize">
-                  {presets.price}
+                  ${presets.price}
                 </p>
                 <span className="block border-t border-[#909090] uppercase text-sm text-[#909090]">
                   Price

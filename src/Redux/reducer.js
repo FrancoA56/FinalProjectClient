@@ -20,8 +20,8 @@ import {
   CREATE_PRESETS,
   EDIT_USER,
   WITH_DEPLOYMENT,
-  WITHOUT_DEPLOYMENT,
   LOGIN_TRUE,
+  DEPLOYMENT_COST
 } from "./types";
 
 const initialState = {
@@ -32,6 +32,7 @@ const initialState = {
   user: [],
   presets: 1,
   deployment: false,
+  deploymentCost: 0,
   login: false,
 };
 
@@ -201,13 +202,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case WITH_DEPLOYMENT:
       return {
         ...state,
-        deployment: true,
+        deployment: payload,
       };
 
-    case WITHOUT_DEPLOYMENT:
+    case DEPLOYMENT_COST:
       return {
         ...state,
-        deployment: false,
+        deploymentCost: payload,
       };
 
     default:

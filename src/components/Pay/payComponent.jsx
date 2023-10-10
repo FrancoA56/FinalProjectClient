@@ -8,6 +8,7 @@ const PayComponent = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const deployment = useSelector((state) => state.deployment);
+  const deploymentCost = useSelector((state) => state.deploymentCost);
   const Navigate = useNavigate();
 
   // Estados para los datos del formulario de tarjeta de débito/credito
@@ -45,13 +46,8 @@ const PayComponent = () => {
     }
   };
 
-  const calculateDeployCost = () => {
-    // Lógica para calcular el costo de despliegue
-    return cart.length * 10 + 30; // Por ejemplo, $10 por cada producto
-  };
-
   const total = () => {
-    return calculateDeployCost() + subTotal;
+    return deploymentCost + subTotal;
   };
 
   return (
@@ -59,37 +55,36 @@ const PayComponent = () => {
       <Banner />
       <Nav />
       <div>
-      <div className="container mx-auto p-1 mt-2 mb-2">
-        <h2
-          className="inline-block mb-2 mt-2 w-full p-1  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+        <div className="container mx-auto p-1 mt-2 mb-2">
+          <h2
+            className="inline-block mb-2 mt-2 w-full p-1  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
           text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-          style={{ "background-color": "#303030" }}
-        >
-          Checkout
-        </h2>
+            style={{ "background-color": "#303030" }}
+          >
+            Checkout
+          </h2>
         </div>
         <div className="bg-gray-300 mb-2 container mx-auto p-4 rounded 5ec3bf">
-
-        <div className="grid grid-cols-5 text-sm font-medium uppercase leading-normal">
-          <div>Presets</div>
-          <div>SubTotal</div>
-          <div>With deployment</div>
-          <div>Deployment Cost</div>
-          <div>Total</div>
-          <div>{cart.length}</div>
-          <div>{subTotal}</div>
-          {deployment ? <div>Yes</div> : <div>No</div>}
-          <div>{calculateDeployCost()}</div>
-          <div>{total()}</div>
-        </div>
-        <h3
-          className="inline-block bg-[#5ec3bf] mb-1 my-8 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+          <div className="grid grid-cols-5 text-sm font-medium uppercase leading-normal">
+            <div>Presets</div>
+            <div>SubTotal</div>
+            <div>With deployment</div>
+            <div>Deployment Cost</div>
+            <div>Total</div>
+            <div>{cart.length} Units</div>
+            <div>${subTotal}</div>
+            {deployment ? <div>Yes</div> : <div>No</div>}
+            <div>${deploymentCost}</div>
+            <div>${total()}</div>
+          </div>
+          <h3
+            className="inline-block bg-[#5ec3bf] mb-1 my-8 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
                      text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-          style={{ "background-color": "#303030" }}
-        >
-          How do you want to pay?
-        </h3>
-      </div>
+            style={{ "background-color": "#303030" }}
+          >
+            How do you want to pay?
+          </h3>
+        </div>
       </div>
       <div
         className="flex flex-col justify-center items-center container mx-auto p-2 mt-2 rounded 5ec3bf w-full mb-4"

@@ -28,6 +28,7 @@ const Plantillas = ({
       });
       const { data } = response;
       setTemplates(data);
+      console.log(data)
     } catch (error) {
       console.error("Error al obtener datos:", error);
     }
@@ -40,19 +41,19 @@ const Plantillas = ({
     const order = selectedOrder.split(" ");
     const orderName = order[0];
     const orderValue = order[1];
-
+    
     const filters = {};
     const orderType = orderName;
     const orderPriority = orderValue;
-
+    
     if (selectedCategory.length > 0) {
       filters.category = category;
     }
-
+    
     if (selectedFilterColor.length > 0) {
       filters.defaultColor = defaultColor;
     }
-
+    
     if (selectedTypes.length > 0) {
       filters.type = type;
     }
