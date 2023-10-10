@@ -5,31 +5,28 @@ import loading from "../../utils/img/loading.png"
 
 const ForgotPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const userEmail = {
-      email: e.target.email.value
-    }
-
+   
     setIsLoading (true);
-      await axios.post(`${URL}api/user/forgotpassword`, userEmail)
-      .then((res) => {
+    try {
+      await axios.post(`${URL}/api/user/register`, { email });
         setIsLoading(false)
         swal.fire({
           showConfirmButton: true,
           icon: 'success',
           text: 'Revise su email, se le ha enviado un enlace para crear una nueva contraseña'
         })
-      }).catch ((err) => {
+      } catch (error) {
         setIsLoading(false)
         swal.fire({
           showConfirmButton: true,
           icon: 'error',
           text: 'Hubo un error al tratar de enviar los datos, compruebe el correo introsucido o intentelo mas tarde'
         })
-      })
+      }
   }
 
   return (
@@ -41,6 +38,8 @@ const ForgotPassword = () => {
           type="email"
           name="email"
           placeholder="Introduce tu email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <div className="divButton">
