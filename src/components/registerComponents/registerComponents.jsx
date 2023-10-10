@@ -102,6 +102,7 @@ function RegisterComponents() {
     Swal.fire({
       icon: "success",
       title: "Success",
+      confirmButtonColor: "rgb(94 195 191)",
       text: `${message}`,
     });
   };
@@ -110,6 +111,7 @@ function RegisterComponents() {
     Swal.fire({
       icon: "error",
       title: "Error",
+      confirmButtonColor: "rgb(94 195 191)",
       text: `${message}`,
     });
   };
@@ -226,9 +228,9 @@ function RegisterComponents() {
                 >
                   {
                     showPassword ? (
-                      <i class="fa-solid fa-eye-slash" />
+                      <i  class="fa-solid fa-eye"/>
                     ) : (
-                      <i class="fa-solid fa-eye" />
+                      <i class="fa-solid fa-eye-slash" />
                     ) /* (
                         <FaEye style={{ color: "gray" }} />
                         ) : (

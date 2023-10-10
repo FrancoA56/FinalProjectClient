@@ -21,7 +21,7 @@ const PresetsDetail = () => {
         if (data.name) {
           setPresets(data);
         } else {
-          window.alert("Unable to display detail at this time");
+          showErrorAlert("Unable to display detail at this time");
         }
       } catch (error) {
         console.log("Error de: " + error);
@@ -29,6 +29,18 @@ const PresetsDetail = () => {
     }
     fetchPreset();
   }, [id, URL]);
+
+  //////////////////////////////////////////////////////////////////////
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Not detail",
+      confirmButtonColor: "rgb(94 195 191)",
+      text: `${message}`,
+    });
+  };
+  //////////////////////////////////////////////////////////////////////
+
   return (
     <>
       <Banner />
