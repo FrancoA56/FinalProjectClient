@@ -88,7 +88,7 @@ const Plantillas = ({
           </Link>
           <div className="px-6 py-4">
             <div className="font-medium uppercase leading-normal  text-white">
-              <Link to={`/detail/${img.name}`} >
+              <Link to={`/detail/${img.id}`} >
               {img.name}{" "}
               </Link>
               <span className="text-white font-thin capitalize" >| {img.type}</span>

@@ -53,51 +53,88 @@ const CartComponent = () => {
             >
               {models.map((model) => (
                 <div
-                  className="m-2 grid grid-cols-7 h-48 rounded-md"
+                  className="m-2 grid grid-cols-7 h-48 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  // style={{
+                  //   background:
+                  //     "radial-gradient(40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
+                  // }}
                   style={{
                     background:
-                      "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
+                      "linear-gradient(to left, rgb(50, 50, 50), rgb(40,40,40))",
                   }}
                   key={model.id}
                 >
                   {/* imagen */}
                   <div className="col-span-3 flex items-center justify-center m-1 overflow-hidden rounded-md">
-                    <img
-                      src={plantilla}
-                      alt={model.name}
-                      className="object-cover"
-                    />
+                    <NavLink to={`/detail/${model.id}`}>
+                      <img
+                        src={plantilla}
+                        alt={model.name}
+                        className="object-cover"
+                      />
+                    </NavLink>
                   </div>
                   {/* El resto */}
-                  <div className=" grid grid-cols-5 col-span-4 ">
-                    <div className="col-span-2 flex flex-col items-center justify-center">
-                      <h1 className="text-3xl font-bold uppercase">
-                        {model.name}
-                      </h1>
-                      <hr />
-                      <p className="font-semibold mt-4 text-[#303030]">
-                        {model.category}
-                        <span className="text-[#303030]"> | {model.type}</span>
-                      </p>
-
-                      <p className="font-semibold mt-4">
-                        {model.rating}{" "}
-                        <i className="fa-solid fa-star text-yellow-600" />{" "}
-                      </p>
-                    </div>
-                    {/* Precio */}
-                    <div className="col-span-2 flex items-center justify-center">
-                      <h1 className="text-3xl font-bold">$ {model.price}</h1>
-                    </div>
-                    {/* cerrar */}
-                    <div className="flex items-start justify-end mr-2">
+                  <div className=" grid grid-rows-5 col-span-4">
+                    {/* PRIMER FILA */}
+                    <div className="flex items-center justify-end pr-3 pb-3">
                       <button
                         onClick={() => dispatch(removeModelFromCart(model.id))}
-                        className="text-[#505050  ] font-semibold bottom-16 left-16"
+                        className="text-[#505050] font-semibold hover:text-[#cecece]"
                       >
-                        <i class="fa-solid fa-xmark" />
+                        <i class="fa-solid fa-xmark " />
                       </button>
                     </div>
+                    {/* Segunda FILA */}
+                    <div className="px-12">
+                      {" "}
+                      <NavLink to={`/detail/${model.id}`}>
+                        <h1 className="text-2xl font-bold uppercase text-[#cecece] border-b border-[#cecece]">
+                          {model.name}
+                        </h1>
+                      </NavLink>
+                    </div>
+                    {/* Tercera FILA */}
+                    <div className="row-span-2 grid grid-cols-4">
+                      <div>
+                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          {model.rating}{" "}
+                          <i className="fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />{" "}
+                        </p>
+                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          rating
+                        </span>
+                      </div>
+                      <div>
+                        {" "}
+                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          {model.category}
+                        </p>
+                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          category
+                        </span>
+                      </div>
+                      <div>
+                        {" "}
+                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          {model.type}
+                        </p>
+                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          Type
+                        </span>
+                      </div>
+                      <div>
+                        {" "}
+                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          {model.color}
+                        </p>
+                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          color
+                        </span>
+                      </div>
+                    </div>
+                    {/* cuarta FILA */}
+                    <div></div>
                   </div>
                 </div>
               ))}
@@ -117,7 +154,7 @@ const CartComponent = () => {
                   Deployment Service
                 </label>
                 <select
-                  className="w-3/4 p-2 border-2 shadow-lg rounded text-sm font-medium uppercase leading-normal"
+                  className="w-3/4 p-2 border-2  rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   onChange={(e) => setDeployService(e.target.value === "true")}
                 >
                   <option
@@ -140,7 +177,7 @@ const CartComponent = () => {
                 {models.map((model) => (
                   <div
                     key={model.id}
-                    className="w-3/4 border-b border-gray-300 py-3 mt-3"
+                    className="w-3/4 border rounded-md border-[#909090] py-3 mt-3 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   >
                     <div className="grid grid-cols-7">
                       <div className="font-semibold col-span-2 uppercase ">
@@ -163,8 +200,8 @@ const CartComponent = () => {
                 ))}
               </div>
               {/* Detalles del carrito */}
-              <div className="row-span-1 flex flex-col justify-start">
-                <div className="grid grid-cols-2">
+              <div className="row-span-1 flex flex-col items-center  justify-end pb-3">
+                <div className="grid grid-cols-2 w-3/4">
                   <label className="flex ml-2 text-sm font-medium uppercase leading-normal col-span-1">
                     Subtotal
                   </label>
@@ -173,7 +210,7 @@ const CartComponent = () => {
                   </p>
                 </div>
                 {deployService && (
-                  <div className="grid grid-cols-2">
+                   <div className="grid grid-cols-2 w-3/4">
                     <label className="text-sm font-medium uppercase leading-normal col-span-1 flex ml-2">
                       Deployment Cost
                     </label>
@@ -182,11 +219,11 @@ const CartComponent = () => {
                     </p>
                   </div>
                 )}
-                <div className="grid grid-cols-2">
-                  <label className="flex ml-2 text-sm font-medium uppercase leading-normal col-span-1">
+                 <div className="grid grid-cols-2 w-3/4">
+                  <label className="flex ml-2 text-m font-medium uppercase leading-normal col-span-1 border-t border-[#505050]">
                     Total
                   </label>
-                  <p className="flex justify-end mr-2 text-sm font-medium uppercase leading-normal">
+                  <p className="flex justify-end mr-2 text-m font-medium uppercase leading-normal border-t border-[#505050]">
                     ${totalPrice(models) + (deployService ? deployCost : 0)}
                   </p>
                 </div>
@@ -196,8 +233,7 @@ const CartComponent = () => {
               <div className="row-span-1 flex flex-col items-center">
                 <NavLink
                   to="/pay"
-                  className="inline-block bg-logo w-3/4 rounded mt-5 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                className="mt-7 inline-block w-3/4 bg-logo rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                 >
                   Continue to Payment
                 </NavLink>
