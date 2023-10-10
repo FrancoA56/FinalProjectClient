@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "tailwindcss/tailwind.css";
+import { format } from "date-fns";
 
 // COMPONENTES
 import Nav from "../Nav/Nav";
@@ -52,7 +53,8 @@ const PresetsDetail = () => {
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8"
+        >
           <div>
             <h2 className="text-3xl text-gray-500 font-medium uppercase leading-normal tracking-tight sm:text-4xl">
               Preset Specifications
@@ -61,39 +63,55 @@ const PresetsDetail = () => {
               Brief text explaining the preset
             </p>
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-              <div className="border-t border-gray-200 pt-4">
-                <dt className="text-gray-400 font-medium uppercase leading-normal">
+              <div>
+                {" "}
+                <p className="font-semibold mt-2 mb-2 text-xl text-[#909090] capitalize">
+                  {presets.type}
+                </p>
+                <span className="block border-t border-[#909090] uppercase text-sm text-[#909090]">
                   Type
-                </dt>
-                <dd className="mt-2 text-sm text-gray-500">{presets.type}</dd>
+                </span>
               </div>
-              <div className="border-t border-gray-200 pt-4">
-                <dt className="text-gray-400 font-medium uppercase leading-normal">
+              <div>
+                {" "}
+                <p className="font-semibold mt-2 mb-2  text-xl text-[#909090] capitalize">
+                  {presets.category}
+                </p>
+                <span className="block border-t border-[#909090]  uppercase text-sm text-[#909090]">
                   Category
-                </dt>
-                <dd className="mt-2 text-sm text-gray-500">
-                  {presets.category}{" "}
-                </dd>
+                </span>
               </div>
-              <div className="border-t border-gray-200 pt-4">
-                <dt className="text-gray-400 font-medium uppercase leading-normal">
+
+              <div>
+                {" "}
+                <p className="font-semibold mt-2 mb-2  text-xl text-[#909090] capitalize">
+                  {presets.price}
+                </p>
+                <span className="block border-t border-[#909090] uppercase text-sm text-[#909090]">
                   Price
-                </dt>
-                <dd className="mt-2 text-sm text-gray-500">{presets.price}</dd>
+                </span>
               </div>
-              <div className="border-t border-gray-200 pt-4">
-                <dt className="text-gray-400 font-medium uppercase leading-normal">
-                  Default Color
-                </dt>
-                <dd className="mt-2 text-sm text-gray-500">{presets.color}</dd>
+              <div>
+                {" "}
+                <p className="font-semibold mt-2 mb-2 text-xl text-[#909090] capitalize">
+                  {presets.color}
+                </p>
+                <span className="block border-t border-[#909090] uppercase text-sm text-[#909090]">
+                  Default color
+                </span>
               </div>
-              <div className="border-t border-gray-200 pt-4">
-                <dt className="text-gray-400 font-medium uppercase leading-normalont-medium">
+              <div>
+                {" "}
+                <p className="font-semibold mt-2 mb-2 text-xl text-[#909090] capitalize">
+                  {new Date(presets.release).toLocaleDateString("es-ES", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </p>
+                <span className="block border-t border-[#909090] uppercase text-sm text-[#909090]">
                   Released At
-                </dt>
-                <dd className="mt-2 text-sm text-gray-500">
-                  {Date(presets.release)}
-                </dd>
+                </span>
               </div>
             </dl>
           </div>
