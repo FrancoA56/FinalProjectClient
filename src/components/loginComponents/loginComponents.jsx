@@ -6,7 +6,6 @@ import { useNavigate, Link, NavLink } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
-import LoginGoogle from '../LoginGoogle/loginGoogle';
 import decodeToken from "./decodeToken";
 
 /* Requirements to validate the login
@@ -67,7 +66,7 @@ const LoginComponents = () => {
     setShowPassword(!showPassword);
   };
 
-  return (
+    return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
       {/* Columna izq */}
       <div
@@ -169,16 +168,11 @@ const LoginComponents = () => {
             <a
               class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               style={{ "background-color": "#303030" }}
-              // href="#!"
+              href="#!"
               role="button"
               data-te-ripple-init
               data-te-ripple-color="light"
-              // onClick={} // Llamar a la función para iniciar sesión con Google
-            >
-              <div > 
-                  <LoginGoogle />                            
-              </div>                           
-
+            > 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="mr-2 h-5 w-5"

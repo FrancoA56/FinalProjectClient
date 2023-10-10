@@ -19,7 +19,6 @@ import {
   LOGOUT_USER,
   CREATE_PRESETS,
   EDIT_USER,
-  USER_LOGIN_GOOGLE,
   WITH_DEPLOYMENT,
   WITHOUT_DEPLOYMENT,
   LOGIN_TRUE,
@@ -199,15 +198,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         presets: 0,
       };
 
-  ///////////////////////////////////////////////////
-  ///////////////////Agregado Google Login
-      case USER_LOGIN_GOOGLE:
-        return {
-            ...state,
-            userInfo: payload,
-        }
-  //////////////////////////////////////////////////  
-  
     case WITH_DEPLOYMENT:
       return {
         ...state,

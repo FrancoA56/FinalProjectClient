@@ -22,10 +22,6 @@ export const FILTER_MODELS_BY_COLORS = "FILTER_BY_COLORS";
 export const GET_USER = "GET_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
-////////////////////////////////////////
-// Agregado
-export const USER_LOGIN_GOOGLE = "USER_LOGIN_GOOGLE"
-////////////////////////////////////////
 export const WITH_DEPLOYMENT = "WITH_DEPLOYMENT";
 export const WITHOUT_DEPLOYMENT = "WITHOUT_DEPLOYMENT";
 export const CREATE_PRESETS = "CREATE_PRESETS";
