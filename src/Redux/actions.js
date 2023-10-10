@@ -24,6 +24,7 @@ import {
   DEPLOYMENT_COST,
 } from "./types";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const URL = process.env.REACT_APP_API;
 // --------------------------------------------------------------------------Alert-⛔-----------
