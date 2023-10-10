@@ -4,6 +4,7 @@ import { useLocation, NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
 import { logOutUser, addAllModelsToCart } from "../../Redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Nav() {
   // Traemos el estado Global "user"
@@ -23,6 +24,8 @@ function Nav() {
 
   // Hook para ir al home
   const navigate = useNavigate();
+
+  const {logout,isAuthenticated} = useAuth0();
 
   // useEffect para cargar el cart del localStorage
   useEffect(() => {
@@ -44,6 +47,7 @@ function Nav() {
       cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {
+      if(isAuthenticated) logout();
       if (result.isConfirmed) {
         dispatch(logOutUser(user.name));
         navigate("/");
@@ -293,7 +297,7 @@ function Nav() {
               aria-labelledby="dropdownMenuButton1"
             >
               {/* Second dropdown menu items */}
-              {user.name ? (
+              {(user.name || isAuthenticated) ? (
                 <>
                   <li>
                     <NavLink
