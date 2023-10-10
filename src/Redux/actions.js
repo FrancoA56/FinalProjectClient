@@ -26,7 +26,16 @@ import {
 import axios from "axios";
 
 const URL = process.env.REACT_APP_API;
-
+// --------------------------------------------------------------------------Alert-⛔-----------
+const showErrorAlert = (message) => {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    confirmButtonColor: "rgb(94 195 191)",
+    text: `${message}`,
+  });
+};
+// --------------------------------------------------------------------------------⛔------------
 export const addModel = (model) => {
   return function (dispatch) {
     try {
@@ -35,7 +44,7 @@ export const addModel = (model) => {
         payload: model,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -48,7 +57,7 @@ export const addAllModels = (id) => {
         payload: id,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -60,8 +69,13 @@ export const addModelToCart = (id) => {
       const allreadyOnCart = state.cart.filter((c) => c.id === id);
 
       if (allreadyOnCart.length)
-        return window.alert("This preset is allready on cart");
-
+        return (
+        Swal.fire({
+          text: "This preset is allready on cart",
+          title: "Warning",
+          icon: "warning",
+          confirmButtonColor: "rgb(94 195 191)",
+        }));
       const { data } = await axios.get(`${URL}/api/preset/${id}`);
       const preset = {
         id: data.id,
@@ -85,7 +99,7 @@ export const addModelToCart = (id) => {
       // Guardar el carrito actualizado en el localStorage
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -98,7 +112,7 @@ export const addAllModelsToCart = (localStorage) => {
         payload: localStorage,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -111,7 +125,7 @@ export const removeModel = (id) => {
         payload: id,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -126,7 +140,7 @@ export const removeModelDisable = (id) => {
         payload: id,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -136,13 +150,13 @@ export const removeModelDisable = (id) => {
 export const editUserRedux = (userData) => {
   return async function (dispatch) {
     try {
-      localStorage.setItem("user", JSON.stringify(userData)); // Guardar la data en el localStorage
+      localStorage.setItem("token", JSON.stringify(userData)); // Guardar la data en el localStorage
       return dispatch({
         type: EDIT_USER,
         payload: userData,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -156,7 +170,7 @@ export const removeModelFromCart = (id) => {
         payload: id,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -224,7 +238,7 @@ export const logInUser = (payload) => {
         payload: payload,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -288,3 +302,4 @@ export const deploymentCost = (value) => {
     }
   };
 };
+

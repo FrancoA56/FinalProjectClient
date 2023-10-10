@@ -69,12 +69,12 @@ const Plantillas = ({
 
   return (
     /* contenedor */
-    <div className="flex flex-wrap my-6 justify-center">
+    <div className="flex flex-wrap w-full items-start my-6 justify-center">
       {templates.map((img, index) => (
         /* Contenedor cards */
         <div
           key={index}
-          className="rounded-md overflow-hidden shadow-xl m-4 w-1/3 hover:scale-105 ease-in duration-200"
+          className="rounded-md overflow-hidden shadow-xl m-4 w-1/4 hover:scale-105 ease-in duration-200"
           style={{
             background:
               "radial-gradient(20rem circle at bottom, rgb(0, 0, 0), rgb(50, 50, 50)",
@@ -82,7 +82,7 @@ const Plantillas = ({
         >
           <Link to={`/detail/${img.id}`}>
             <img
-              src={imagen}
+              src={imagen} 
               alt={img.name}
               className="w-full h-64 object-cover"
             />
