@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
+import Banner from "../Banner/Banner";
 
 const PayComponent = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const PayComponent = () => {
 
   // Estado para el método de pago seleccionado
   const [paymentMethod, setPaymentMethod] = useState("");
-  
+
   // Estado para controlar la visibilidad del formulario de tarjeta de débito/credito
   const [showCardForm, setShowCardForm] = useState(false);
 
@@ -56,50 +56,61 @@ const PayComponent = () => {
 
   return (
     <>
+      <Banner />
       <Nav />
-      <h2
-        className="inline-block bg-[#5ec3bf] mb-4 w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+      <div>
+      <div className="container mx-auto p-1 mt-2 mb-2">
+        <h2
+          className="inline-block mb-2 mt-2 w-full p-1  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+          text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+          style={{ "background-color": "#303030" }}
+        >
+          Checkout
+        </h2>
+        </div>
+        <div className="bg-gray-300 mb-2 container mx-auto p-4 rounded 5ec3bf">
+
+        <div className="grid grid-cols-5 text-sm font-medium uppercase leading-normal">
+          <div>Presets</div>
+          <div>SubTotal</div>
+          <div>With deployment</div>
+          <div>Deployment Cost</div>
+          <div>Total</div>
+          <div>{cart.length}</div>
+          <div>{subTotal}</div>
+          {deployment ? <div>Yes</div> : <div>No</div>}
+          <div>{calculateDeployCost()}</div>
+          <div>{total()}</div>
+        </div>
+        <h3
+          className="inline-block bg-[#5ec3bf] mb-1 my-8 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
                      text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-        style={{ "background-color": "#303030" }}
-      >
-        Checkout
-      </h2>
-      <div className="grid grid-cols-5">
-        <div>Presets</div>
-        <div>SubTotal</div>
-        <div>With deployment</div>
-        <div>Deployment Cost</div>
-        <div>Total</div>
-        <div>{cart.length}</div>
-        <div>{subTotal}</div>
-        {deployment ? <div>Yes</div> : <div>No</div>}
-        <div>{calculateDeployCost()}</div>
-        <div>{total()}</div>
+          style={{ "background-color": "#303030" }}
+        >
+          How do you want to pay?
+        </h3>
       </div>
-      <h3
-        className="inline-block bg-[#5ec3bf] my-8 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                     text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+      </div>
+      <div
+        className="flex flex-col justify-center items-center container mx-auto p-2 mt-2 rounded 5ec3bf w-full mb-4"
         style={{ "background-color": "#303030" }}
       >
-        How do you want to pay?
-      </h3>
-      <div className="bg-gray-100 flex flex-col justify-center items-center">
         <div className="flex justify-between gap-12 my-10">
           <button
             onClick={() => {
               setPaymentMethod("debit-credit-card");
               setShowCardForm(!showCardForm); // Toggle visibility del formulario
             }}
-            className={`bg-logo text-white p-2 rounded-md w-44 ${
-              paymentMethod === "debit-credit-card" ? "bg-blue-700" : ""
+            className={`bg-logo text-white text-sm font-medium uppercase leading-normal p-2 rounded-md w-64 ${
+              paymentMethod === "debit-credit-card" ? "bg-logo" : ""
             }`}
           >
             {showCardForm ? "Cancel" : "Pay with Debit/Credit Card"}
           </button>
           <button
             onClick={() => setPaymentMethod("paypal")}
-            className={`bg-logo text-white p-2 rounded-md w-44 ${
-              paymentMethod === "paypal" ? "bg-blue-700" : ""
+            className={`bg-logo text-white text-sm font-medium uppercase leading-normal p-2 rounded-md w-64 ${
+              paymentMethod === "paypal" ? "bg-logo" : ""
             }`}
             disabled={paymentMethod === "debit-credit-card"}
           >
@@ -112,8 +123,8 @@ const PayComponent = () => {
             onSubmit={handlePaymentSubmit}
           >
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Titular Name:
+              <label className="block text-sm font-medium leading-normal text-gray-700">
+                Holder's Name:
               </label>
               <input
                 type="text"
@@ -136,42 +147,41 @@ const PayComponent = () => {
               />
             </div>
             <div className="flex gap-10 mb-7 ">
-            <div className="w-2/4">
-              <label className="block text-sm font-medium text-gray-700">
-                Expiration MM/YY:
-              </label>
-              <input
-                type="text"
-                className="mt-1 p-2 w-full border rounded-md"
-                value={expiryDate}
-                onChange={(e) => setExpiryDate(e.target.value)}
-                required
-              />
-            </div>
-            <div className="w-2/4">
-              <label className="block text-sm font-medium text-gray-700">
-                CVV:
-              </label>
-              <input
-                type="text"
-                className="mt-1 p-2 w-full border rounded-md"
-                value={cvv}
-                onChange={(e) => setCvv(e.target.value)}
-                required
-              />
-            </div>
+              <div className="w-2/4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Expiration MM/YY:
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  value={expiryDate}
+                  onChange={(e) => setExpiryDate(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="w-2/4">
+                <label className="block text-sm font-medium text-gray-700">
+                  CVV:
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 p-2 w-full border rounded-md"
+                  value={cvv}
+                  onChange={(e) => setCvv(e.target.value)}
+                  required
+                />
+              </div>
             </div>
             <button
               onClick={console.log(cart)}
               type="submit"
-              className="bg-blue-500 text-white p-2 rounded-md w-full"
+              className="bg-logo text-white text-sm font-medium uppercase leading-normal p-2 rounded-md w-full"
             >
               Pay
             </button>
           </form>
         )}
       </div>
-      <Footer />
     </>
   );
 };

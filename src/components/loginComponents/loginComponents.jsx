@@ -6,7 +6,8 @@ import { useNavigate, Link, NavLink } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
-import decodeToken from "./decodeToken";
+import decodeToken from "./decodeToken"
+import { useAuth0 } from "@auth0/auth0-react";
 
 /* Requirements to validate the login
 -----------------------------------------------------------------
@@ -17,7 +18,8 @@ const LoginComponents = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
-  
+  const { loginWithPopup, user, getAccessTokenSilently, isAuthenticated } =
+    useAuth0();
 
   const [input, setInput] = useState({
     email: "",
@@ -30,6 +32,31 @@ const LoginComponents = () => {
       [e.target.name]: e.target.value,
     });
   }
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (isAuthenticated && !storedToken) {
+      const auth = async () => {
+        try {
+          const userAuth = {
+            name: user.nickname,
+            email: user.email, // Se obtienen los datos del usuario
+            password: "contraseñaauth0",
+          };
+          const token = await getAccessTokenSilently(); //Se obtiene el token del usuario
+
+          localStorage.setItem("token", token); // Guarda el token en el localStorage
+          dispatch(logInUser(userAuth)); // Guarda los datos del usuario en el estado global
+          await axios.post(`${URL}/api/user/register`, userAuth); // Guarda al usuario en la base de datos
+          navigate("/"); // Va pal home
+        } catch (error) {
+          navigate("/");
+          console.log(error.message);
+        }
+      };
+      auth();
+    }
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -164,10 +191,12 @@ const LoginComponents = () => {
             </div>
 
             {/* <!-- Social login buttons --> */}
-            {/*  Google */}
+            {/*  Auth0 */}
             <a
-              class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               style={{ "background-color": "#303030" }}
+              onClick={() => loginWithPopup()}
+              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+
               href="#!"
               role="button"
               data-te-ripple-init
@@ -179,13 +208,13 @@ const LoginComponents = () => {
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path
+                {/* <path
                   d="M7 11v2.4h3.97c-.16 1.029-1.2 3.02-3.97 3.02-2.39 0-4.34-1.979-4.34-4.42 0-2.44 1.95-4.42 4.34-4.42 1.36 0 2.27.58 2.79 1.08l1.9-1.83c-1.22-1.14-2.8-1.83-4.69-1.83-3.87 0-7 3.13-7 7s3.13 7 7 7c4.04 0 6.721-2.84 6.721-6.84 0-.46-.051-.81-.111-1.16h-6.61zm0 0 17 2h-3v3h-2v-3h-3v-2h3v-3h2v3h3v2z"
                   fill-rule="evenodd"
                   clip-rule="evenodd"
-                />
+                /> */}
               </svg>
-              Continue with Google
+              Continue with Auth0
             </a>
             {/* <!-- Twitter --> */}
             {/* <a

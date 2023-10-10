@@ -4,11 +4,12 @@ import axios from "axios";
 import Banner from "../Banner/Banner";
 import Nav from "../Nav/Nav";
 import { editUserRedux, logInUser } from "../../Redux/actions";
+import decodeToken from "../loginComponents/decodeToken";
 
 const Profile = () => {
   // traigo el usuario del estado global
   const user = useSelector((state) => state.user);
-  console.log(user);
+  // console.log(user);
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
 
@@ -52,10 +53,18 @@ const Profile = () => {
   // funcion edita la base de datos
   const editUser = async (userEdit) => {
     try {
-      await axios.put(`${URL}/api/user/${user.email}`, userEdit);
+      if(!userEdit.logo) {delete userEdit.logo}
+      const {data} = await axios.put(`${URL}/api/user/${user.email}`, userEdit); // Recibe el token actualizado
+
+      localStorage.setItem("token", data); // Almanecena el nuevo token en el localStorage
+
+      const userDecode = decodeToken(data); // Decodifica el token
+
+      dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
       window.alert("se subio");
-      dispatch(editUserRedux(userEdit));
+      
     } catch (error) {
+      console.log(error.message)
       window.alert("se rompe");
     }
   };
@@ -63,7 +72,7 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     editUser(userLocal);
-    logInUser(userLocal)
+    // logInUser(userLocal)
   };
 
   return (

@@ -1,14 +1,13 @@
 // LIBRERIAS
-import React from 'react';
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "tailwindcss/tailwind.css";
 
 // COMPONENTES
-import Nav from "../Nav/Nav"
-import Banner from '../Banner/Banner';
-
+import Nav from "../Nav/Nav";
+import Banner from "../Banner/Banner";
 
 const PresetsDetail = () => {
   const URL = process.env.REACT_APP_API;
@@ -18,9 +17,9 @@ const PresetsDetail = () => {
   useEffect(() => {
     async function fetchPreset() {
       try {
-        const {data} = await axios.get(`${URL}/api/preset/${id}`)
+        const { data } = await axios.get(`${URL}/api/preset/${id}`);
         if (data.name) {
-          setPresets(data)
+          setPresets(data);
         } else {
           window.alert("Unable to display detail at this time");
         }
@@ -28,8 +27,8 @@ const PresetsDetail = () => {
         console.log("Error de: " + error);
       }
     }
-    fetchPreset()
-  },[id])
+    fetchPreset();
+  }, [id, URL]);
   return (
     <>
       <Banner />
@@ -47,7 +46,7 @@ const PresetsDetail = () => {
               Preset Specifications
             </h2>
             <p className="mt-4 text-gray-500 font-medium uppercase leading-normal">
-              Texto breve explicando la plantilla
+              Brief text explaining the preset
             </p>
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
               <div className="border-t border-gray-200 pt-4">
@@ -60,7 +59,9 @@ const PresetsDetail = () => {
                 <dt className="text-gray-400 font-medium uppercase leading-normal">
                   Category
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500">{presets.category} </dd>
+                <dd className="mt-2 text-sm text-gray-500">
+                  {presets.category}{" "}
+                </dd>
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <dt className="text-gray-400 font-medium uppercase leading-normal">
@@ -72,13 +73,15 @@ const PresetsDetail = () => {
                 <dt className="text-gray-400 font-medium uppercase leading-normal">
                   Default Color
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500">{presets.defaultColor}</dd>
+                <dd className="mt-2 text-sm text-gray-500">{presets.color}</dd>
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <dt className="text-gray-400 font-medium uppercase leading-normalont-medium">
                   Released At
                 </dt>
-                <dd className="mt-2 text-sm text-gray-500">{presets.releasedAt}</dd>
+                <dd className="mt-2 text-sm text-gray-500">
+                  {Date(presets.release)}
+                </dd>
               </div>
             </dl>
           </div>

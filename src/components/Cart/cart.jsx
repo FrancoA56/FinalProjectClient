@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import plantilla from "../../utils/img/plantilla.png";
-import {
-  removeModelFromCart,
-} from "../../Redux/actions";
+import { removeModelFromCart } from "../../Redux/actions";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
 //import Footer from "../Footer/Footer";
@@ -47,7 +45,7 @@ const CartComponent = () => {
           <div className="grid grid-cols-12 gap-4">
             {/* Columna izquierda para la imagen del producto */}
             <div
-              className="col-span-12 md:col-span-8"
+              className="col-span-12 md:col-span-8 h-screen rounded-md overflow-auto"
               style={{
                 background:
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
@@ -55,26 +53,88 @@ const CartComponent = () => {
             >
               {models.map((model) => (
                 <div
-                  className="m-2 bg-logo grid grid-cols-7 h-72 "
+                  className="m-2 grid grid-cols-7 h-48 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  // style={{
+                  //   background:
+                  //     "radial-gradient(40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
+                  // }}
+                  style={{
+                    background:
+                      "linear-gradient(to left, rgb(50, 50, 50), rgb(40,40,40))",
+                  }}
                   key={model.id}
                 >
-                  <img
-                    src={plantilla}
-                    alt={model.name}
-                    className="w-full h-64 m-4 col-span-3"
-                  />
-                  <div className=" grid grid-cols-3 col-span-4 ">
-                    <div className="col-span-1 mt-7">{model.name}</div>
-                    <div className="mt-7 col-span-1">{model.category}</div>
-                    <button
-                      onClick={() => dispatch(removeModelFromCart(model.id))}
-                      className="text-red-500 font-semibold relative bottom-16 left-16"
-                    >
-                      X
-                    </button>
-                    <div className="col-span-1">{model.type}</div>
-                    <div className="col-span-1">{model.rating}</div>
-                    <div className="col-span-1">${model.price}</div>
+                  {/* imagen */}
+                  <div className="col-span-3 flex items-center justify-center m-1 overflow-hidden rounded-md">
+                    <NavLink to={`/detail/${model.id}`}>
+                      <img
+                        src={plantilla}
+                        alt={model.name}
+                        className="object-cover"
+                      />
+                    </NavLink>
+                  </div>
+                  {/* El resto */}
+                  <div className=" grid grid-rows-5 col-span-4">
+                    {/* PRIMER FILA */}
+                    <div className="flex items-center justify-end pr-3 pb-3">
+                      <button
+                        onClick={() => dispatch(removeModelFromCart(model.id))}
+                        className="text-[#505050] font-semibold hover:text-[#cecece]"
+                      >
+                        <i class="fa-solid fa-xmark " />
+                      </button>
+                    </div>
+                    {/* Segunda FILA */}
+                    <div className="px-12">
+                      {" "}
+                      <NavLink to={`/detail/${model.id}`}>
+                        <h1 className="text-2xl font-bold uppercase text-[#cecece] border-b border-[#cecece]">
+                          {model.name}
+                        </h1>
+                      </NavLink>
+                    </div>
+                    {/* Tercera FILA */}
+                    <div className="row-span-2 grid grid-cols-4">
+                      <div>
+                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          {model.rating}{" "}
+                          <i className="fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />{" "}
+                        </p>
+                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          rating
+                        </span>
+                      </div>
+                      <div>
+                        {" "}
+                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          {model.category}
+                        </p>
+                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          category
+                        </span>
+                      </div>
+                      <div>
+                        {" "}
+                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          {model.type}
+                        </p>
+                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          Type
+                        </span>
+                      </div>
+                      <div>
+                        {" "}
+                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          {model.color}
+                        </p>
+                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          color
+                        </span>
+                      </div>
+                    </div>
+                    {/* cuarta FILA */}
+                    <div></div>
                   </div>
                 </div>
               ))}
@@ -82,44 +142,19 @@ const CartComponent = () => {
 
             {/* Columna derecha para el contenido del carrito */}
             <div
-              className="col-span-12 md:col-span-4"
+              className="col-span-12 md:col-span-4 rounded-md h-screen grid grid-rows-6"
               style={{
                 background:
                   "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
               }}
             >
-              {models.map((model) => (
-                <div
-                  key={model.id}
-                  className="items-center border-b border-gray-300 p-4 mb-4 "
-                >
-                  <div className="grid grid-cols-7">
-                    <div className="text-lg font-semibold col-span-2 text-start">
-                      {model.name}
-                    </div>
-                    <div className="text-lg font-semibold col-span-2">
-                      {model.type}
-                    </div>
-                    <div className="text-gray-600 font-semibold col-span-2">
-                      ${model.price}
-                    </div>
-                    <button
-                      onClick={() => dispatch(removeModelFromCart(model.id))}
-                      className="text-red-500 font-semibold col-span-1"
-                    >
-                      X
-                    </button>
-                  </div>
-                </div>
-              ))}
-
-              {/* Detalles del carrito */}
-              <div className="mb-2 left">
+              {/* Encabezado */}
+              <div className="mt-5 flex flex-col items-center justify-center row-span-1">
                 <label className="block m-3 text-sm font-medium uppercase leading-normal">
                   Deployment Service
                 </label>
                 <select
-                  className="w-full p-2 border-2 shadow-lg rounded text-sm font-medium uppercase leading-normal"
+                  className="w-3/4 p-2 border-2  rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   onChange={(e) => setDeployService(e.target.value === "true")}
                 >
                   <option
@@ -136,37 +171,69 @@ const CartComponent = () => {
                   </option>
                 </select>
               </div>
-              <div className="mb-2 left">
-                <label className="block mt-4 text-sm font-medium uppercase leading-normal">
-                  Subtotal
-                </label>
-                <p className="text-sm font-medium uppercase leading-normal">
-                  ${totalPrice(models)}
-                </p>
+
+              {/* medio */}
+              <div className="row-span-3 flex flex-col mt-5 items-center overflow-auto">
+                {models.map((model) => (
+                  <div
+                    key={model.id}
+                    className="w-3/4 border rounded-md border-[#909090] py-3 mt-3 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  >
+                    <div className="grid grid-cols-7">
+                      <div className="font-semibold col-span-2 uppercase ">
+                        <h1> {model.name} </h1>
+                      </div>
+                      <div className="text-sm font-semibold text-[#303030] col-span-2 pt-1">
+                        <h1> {model.type} </h1>
+                      </div>
+                      <div className="font-semibold col-span-2">
+                        <h1> $ {model.price} </h1>
+                      </div>
+                      <button
+                        onClick={() => dispatch(removeModelFromCart(model.id))}
+                        className="text-[#505050] font-semibold col-span-1"
+                      >
+                        <i class="fa-solid fa-xmark" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
-              {deployService && (
-                <div className="mb-2">
-                  <label className="block mt-4 text-sm font-medium uppercase leading-normal">
-                    Deployment Cost
+              {/* Detalles del carrito */}
+              <div className="row-span-1 flex flex-col items-center  justify-end pb-3">
+                <div className="grid grid-cols-2 w-3/4">
+                  <label className="flex ml-2 text-sm font-medium uppercase leading-normal col-span-1">
+                    Subtotal
                   </label>
-                  <p className="block mt-4 text-sm font-medium uppercase leading-normal">
-                    ${deployCost}
+                  <p className="flex justify-end mr-2 text-sm font-medium uppercase leading-normal">
+                    ${totalPrice(models)}
                   </p>
                 </div>
-              )}
-              <div className="mb-2">
-                <label className="block mt-4 font-semibold text-sm font-medium uppercase leading-normal">
-                  Total
-                </label>
-                <p className="text-sm font-medium uppercase leading-normal">
-                  ${totalPrice(models) + (deployService ? deployCost : 0)}
-                </p>
+                {deployService && (
+                   <div className="grid grid-cols-2 w-3/4">
+                    <label className="text-sm font-medium uppercase leading-normal col-span-1 flex ml-2">
+                      Deployment Cost
+                    </label>
+                    <p className="flex justify-end mr-2 text-sm font-medium uppercase leading-normal">
+                      ${deployCost}
+                    </p>
+                  </div>
+                )}
+                 <div className="grid grid-cols-2 w-3/4">
+                  <label className="flex ml-2 text-m font-medium uppercase leading-normal col-span-1 border-t border-[#505050]">
+                    Total
+                  </label>
+                  <p className="flex justify-end mr-2 text-m font-medium uppercase leading-normal border-t border-[#505050]">
+                    ${totalPrice(models) + (deployService ? deployCost : 0)}
+                  </p>
+                </div>
               </div>
-              <div className="flex justify-between mx-4 my-8">
+
+              {/* Botones */}
+              <div className="row-span-1 flex flex-col items-center">
                 <NavLink
                   to="/pay"
-                  className="inline-block bg-logo w-auto rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                className="mt-7 inline-block w-3/4 bg-logo rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                 >
                   Continue to Payment
                 </NavLink>
