@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
-// import styles from "../registerComponents/register.module.css";
+import styles from "../registerComponents/register.module.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { validation } from "../validation";
@@ -165,11 +165,12 @@ function RegisterComponents() {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   required
                 />
-                <span className="absolute mr-2" title={errors.name}>
-                  {" "}
+                <span className={styles.warning}>
+                  {/* <span className="absolute mr-2" title={errors.name}> */}{" "}
                   {errors.name && (
-                    <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                    <i class="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800" />
                   )}
+                  <span className={styles.bubble}>{errors.name}</span>
                 </span>
               </div>
             </div>
@@ -190,11 +191,12 @@ function RegisterComponents() {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   required
                 />
-                <span className="absolute mr-2" title={errors.email}>
-                  {" "}
+                <span className={styles.warning}>
+                  {/* <span className="absolute mr-2" title={errors.email}> */}{" "}
                   {errors.email && (
-                    <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                    <i class="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800" />
                   )}
+                  <span className={styles.bubble}>{errors.email}</span>
                 </span>
               </div>
               {/* <p className="text-txcval text-xs absolute indent-3 mt-1">
@@ -240,6 +242,59 @@ function RegisterComponents() {
                 </span>
                 {/* ---------------------------------------------------------------------------------------------- */}
               </div>
+
+              <div>
+                <p className="mt-3 text-sm text-[#606060]">
+                  <strong> Password must have:</strong>
+                </p>
+                <ul className="grid grid-cols-2 text-sm text-[#606060]">
+                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
+                    <li>
+                      {validations.hasUppercase ? (
+                        <i class="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i class="fa-solid fa-xmark text-red-600" />
+                      )}{" "}
+                      An uppercase character
+                    </li>
+                    <li>
+                      {validations.hasLowercase ? (
+                        <i class="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i class="fa-solid fa-xmark text-red-600" />
+                      )}{" "}
+                      An lowercase character
+                    </li>
+                    <li className="line-clamp-1">
+                      {validations.isBetween8And30 ? (
+                        <i class="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i class="fa-solid fa-xmark text-red-600" />
+                      )}{" "}
+                      A between 8 and 30 char...
+                    </li>
+                  </div>
+                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
+                    <li>
+                      {validations.hasNumber ? (
+                        <i class="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i class="fa-solid fa-xmark text-red-600" />
+                      )}{" "}
+                      A number
+                    </li>
+                    <li>
+                      {validations.hasSpecialChar ? (
+                        <i class="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i class="fa-solid fa-xmark text-red-600" />
+                      )}{" "}
+                      A special character
+                    </li>
+                  </div>
+                </ul>
+              </div>
+
               <div className="mt-3">
                 <div className="flex items-center justify-end">
                   <input
@@ -253,14 +308,17 @@ function RegisterComponents() {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     required
                   />
-                  <span
-                    className="absolute mr-2"
-                    title={errors.confirmPassword}
-                  >
+                  <span className={styles.warning}>
                     {" "}
                     {errors.confirmPassword && (
-                      <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                      <i
+                        className={styles.icon}
+                        class="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800 "
+                      />
                     )}
+                    <span className={styles.bubble}>
+                      {errors.confirmPassword}
+                    </span>
                   </span>
                 </div>
                 {/* <p className="text-txcval text-xs absolute indent-3 mt-1">
@@ -271,55 +329,6 @@ function RegisterComponents() {
                 {errors.password}
               </p> */}
               {/* <div className={(validations.hasLowercase || validations.hasUppercase || validations.hasNumber || validations.hasSpecialChar || validations.isBetween8And30) ? "visible" : "invisible"}> */}
-              <p className="mt-3 text-sm text-[#606060]">
-                <strong> Password must have:</strong>
-              </p>
-              <ul className="grid grid-cols-2 text-sm text-[#606060]">
-                <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                  <li>
-                    {validations.hasUppercase ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    An uppercase character
-                  </li>
-                  <li>
-                    {validations.hasLowercase ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    An lowercase character
-                  </li>
-                  <li className="line-clamp-1">
-                    {validations.isBetween8And30 ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    A between 8 and 30 char...
-                  </li>
-                </div>
-                <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                  <li>
-                    {validations.hasNumber ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    A number
-                  </li>
-                  <li>
-                    {validations.hasSpecialChar ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    A special character
-                  </li>
-                </div>
-              </ul>
             </div>
             {/* </div> */}
             <hr className="mt-2 border border-[#909090] rounded-sm" />
