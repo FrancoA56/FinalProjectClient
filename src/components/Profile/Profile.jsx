@@ -120,9 +120,9 @@ const Profile = () => {
             >
               <div className="flex items-center">
                 <div>
-                  <label className="block m-3 text-sm font-medium uppercase leading-normal">
+                  <div className="block m-3 text-sm font-medium uppercase leading-normal">
                     Edit Profile
-                  </label>
+                  </div>
                   <form>
                     <div className="mt-8 mb-9">
                       {/* //////////////////////////// */}

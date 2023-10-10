@@ -20,8 +20,8 @@ import {
   CREATE_PRESETS,
   EDIT_USER,
   WITH_DEPLOYMENT,
-  WITHOUT_DEPLOYMENT,
   LOGIN_TRUE,
+  DEPLOYMENT_COST,
 } from "./types";
 import axios from "axios";
 
@@ -257,14 +257,34 @@ export const createPresets = () => {
   };
 };
 
-export const withDeployment = () => {
+export const withDeployment = (value) => {
+  if (value === "true") value = true;
+  if (value === "false") value = false;
   return {
     type: WITH_DEPLOYMENT,
+    payload: value,
   };
 };
 
-export const withoutDeployment = () => {
-  return {
-    type: WITHOUT_DEPLOYMENT,
+export const deploymentCost = (value) => {
+  return async function (dispatch, getState) {
+    try {
+      if (value === "true") value = true;
+      if (value === "false") value = false;
+      const state = getState();
+      if (value) {
+        const calculateDeployCost = () => {
+          // Lógica para calcular el costo de despliegue
+          return state.models.length * 10 + 30; // Por ejemplo, $10 por cada producto
+        };
+        value = calculateDeployCost();
+      } else value = 0;
+      return dispatch({
+        type: DEPLOYMENT_COST,
+        payload: value,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
   };
 };

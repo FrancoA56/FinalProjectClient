@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import plantilla from "../../utils/img/plantilla.png";
-import { removeModelFromCart } from "../../Redux/actions";
+import {
+  removeModelFromCart,
+  withDeployment,
+  deploymentCost,
+} from "../../Redux/actions";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
 //import Footer from "../Footer/Footer";
 
 const CartComponent = () => {
   const models = useSelector((state) => state.cart);
+  const deployService = useSelector((state) => state.deployment);
+  const deployCost = useSelector((state) => state.deploymentCost);
   const dispatch = useDispatch();
+
+  const deploymentThing = (e) => {
+    dispatch(withDeployment(e.target.value));
+    dispatch(deploymentCost(e.target.value));
+  };
 
   const totalPrice = (models) => {
     const total = models.reduce(
@@ -19,15 +30,6 @@ const CartComponent = () => {
     );
     return total;
   };
-
-  const [deployService, setDeployService] = useState(false);
-
-  const calculateDeployCost = () => {
-    // Lógica para calcular el costo de despliegue
-    return models.length * 10 + 30; // Por ejemplo, $10 por cada producto
-  };
-
-  const deployCost = calculateDeployCost();
 
   return (
     <>
@@ -149,22 +151,22 @@ const CartComponent = () => {
               }}
             >
               {/* Encabezado */}
-              <div className="mt-5 flex flex-col items-center justify-center row-span-1">
+              <div className="flex flex-col items-center justify-center row-span-1">
                 <label className="block m-3 text-sm font-medium uppercase leading-normal">
                   Deployment Service
                 </label>
                 <select
                   className="w-3/4 p-2 border-2  rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                  onChange={(e) => setDeployService(e.target.value === "true")}
+                  onChange={(e) => deploymentThing(e)}
                 >
                   <option
-                    value="false"
+                    value={false}
                     className="text-sm font-medium uppercase leading-normal"
                   >
                     Without Deployment
                   </option>
                   <option
-                    value="true"
+                    value={true}
                     className="text-sm font-medium uppercase leading-normal"
                   >
                     With Deployment
@@ -200,7 +202,7 @@ const CartComponent = () => {
                 ))}
               </div>
               {/* Detalles del carrito */}
-              <div className="row-span-1 flex flex-col items-center  justify-end pb-3">
+              <div className="row-span-1 flex flex-col items-center  justify-start pb-3">
                 <div className="grid grid-cols-2 w-3/4">
                   <label className="flex ml-2 text-sm font-medium uppercase leading-normal col-span-1">
                     Subtotal
@@ -210,7 +212,7 @@ const CartComponent = () => {
                   </p>
                 </div>
                 {deployService && (
-                   <div className="grid grid-cols-2 w-3/4">
+                  <div className="grid grid-cols-2 w-3/4">
                     <label className="text-sm font-medium uppercase leading-normal col-span-1 flex ml-2">
                       Deployment Cost
                     </label>
@@ -219,7 +221,7 @@ const CartComponent = () => {
                     </p>
                   </div>
                 )}
-                 <div className="grid grid-cols-2 w-3/4">
+                <div className="grid grid-cols-2 w-3/4">
                   <label className="flex ml-2 text-m font-medium uppercase leading-normal col-span-1 border-t border-[#505050]">
                     Total
                   </label>
@@ -230,10 +232,10 @@ const CartComponent = () => {
               </div>
 
               {/* Botones */}
-              <div className="row-span-1 flex flex-col items-center">
+              <div className="row-span-1 flex flex-col items-center relative bottom-16">
                 <NavLink
                   to="/pay"
-                className="mt-7 inline-block w-3/4 bg-logo rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  className="mt-7 inline-block w-3/4 bg-logo rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                 >
                   Continue to Payment
                 </NavLink>
