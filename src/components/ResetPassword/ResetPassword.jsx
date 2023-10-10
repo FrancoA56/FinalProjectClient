@@ -10,12 +10,32 @@ const PasswordReset = () => {
     e.preventDefault();
     try {
       await axios.put(`${URL}/api/user/editUser/${token}`, { password });
-      alert('Contraseña actualizada con éxito.');
+      showSuccessAlert('Password successfully updated.');
     } catch (error) {
-      alert('Hubo un problema al actualizar la contraseña.');
+      showErrorAlert('There was a problem updating the password.');
       console.error(error);
     }
   };
+
+  // --------------------------------------------------------------------------Alert-✅-----------
+  const showSuccessAlert = (message) => {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      confirmButtonColor: "rgb(94 195 191)",
+      text: `${message}`,
+    });
+  };
+
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      confirmButtonColor: "rgb(94 195 191)",
+      text: `${message}`,
+    });
+  };
+  // --------------------------------------------------------------------------------⛔------------
 
   return (
     <form onSubmit={handleSubmit}>

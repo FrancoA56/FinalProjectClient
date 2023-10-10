@@ -16,15 +16,17 @@ const ForgotPassword = () => {
         setIsLoading(false)
         swal.fire({
           showConfirmButton: true,
+          confirmButtonColor: "rgb(94 195 191)",
           icon: 'success',
-          text: 'Revise su email, se le ha enviado un enlace para crear una nueva contraseña'
+          text: 'Check your email, you have been sent a link to create a new password'
         })
       } catch (error) {
         setIsLoading(false)
         swal.fire({
           showConfirmButton: true,
+          confirmButtonColor: "rgb(94 195 191)",
           icon: 'error',
-          text: 'Hubo un error al tratar de enviar los datos, compruebe el correo introsucido o intentelo mas tarde'
+          text: 'There was an error trying to send the data, check the email entered or try again later'
         })
       }
   }

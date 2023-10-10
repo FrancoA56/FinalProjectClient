@@ -5,6 +5,7 @@ import Banner from "../Banner/Banner";
 import Nav from "../Nav/Nav";
 import { editUserRedux, logInUser } from "../../Redux/actions";
 import decodeToken from "../loginComponents/decodeToken";
+import Swal from "sweetalert2";
 
 const Profile = () => {
   // traigo el usuario del estado global
@@ -43,10 +44,10 @@ const Profile = () => {
       );
       // data.secure_url me devuelve el url de la imagen el cloudinary
       // seteo el logo del estado local
+      showSuccessAlert("Se subio la imagen a tu perfil");
       setuserLocal({ ...userLocal, logo: data.secure_url });
-      window.alert("anda el cloudi");
     } catch (error) {
-      window.alert("se rompe cloudy");
+      showErrorAlert("Error al cargar tu imagen");
     }
   };
 
@@ -61,11 +62,10 @@ const Profile = () => {
       const userDecode = decodeToken(data); // Decodifica el token
 
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
-      window.alert("se subio");
-      
+      showSuccessAlert("Se actualizaron los datos de tu perfil");
     } catch (error) {
       console.log(error.message)
-      window.alert("se rompe");
+      showErrorAlert("Error");
     }
   };
   // funcion que ejecuta todo
@@ -75,6 +75,28 @@ const Profile = () => {
     // logInUser(userLocal)
   };
 
+
+   // --------------------------------------------------------------------------Alert-✅-----------
+   const showSuccessAlert = (message) => {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      confirmButtonColor: "rgb(94 195 191)",
+      text: `${message}`,
+    });
+  };
+
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      confirmButtonColor: "rgb(94 195 191)",
+      text: `${message}`,
+    });
+  };
+  // --------------------------------------------------------------------------------⛔------------
+
+  
   return (
     <>
       <div className="bg-gray-100 min-h-screen">
@@ -106,7 +128,7 @@ const Profile = () => {
                 <img
                   // className="max-w-full max-h-full rounded-md shadow"
                   className="h-72 object-cover rounded-md shadow"
-                  src={user.logo ? user.logo : "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1696687386/no_imagen_am0gxq.jpg"}
+                  src={user.logo ? userLocal.logo || user.logo : userLocal.logo || "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1696687386/no_imagen_am0gxq.jpg"}
                   alt=""
                 />
               </div>
