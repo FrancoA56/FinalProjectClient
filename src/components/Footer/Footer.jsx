@@ -2,14 +2,18 @@ import "tailwindcss/tailwind.css";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 
-/* import { useRef } from "react";
+import { useRef } from "react";
 import emailjs from "@emailjs/browser";
-  // ? FUNCIONES PARA USAR EMAIL JS
+
+
+// Footer container
+function Footer() {
+    // ? FUNCIONES PARA USAR EMAIL JS
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+if(formData.user_email && formData.message){
     emailjs
       .sendForm(
         "service_rjik02h",
@@ -24,17 +28,14 @@ import emailjs from "@emailjs/browser";
         (error) => {
           console.log(error.text);
         }
-      );
-  }; */
-
-// Footer container
-function Footer() {
+      );}
+  };
   const [isPopupOpen, setPopupOpen] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    text: "",
+    user_name: "",
+    user_email: "",
+    message: "",
   });
 
   //Función para manejar el cambio en los inputs del form
@@ -56,7 +57,7 @@ function Footer() {
   //Función para manejar el envío del form
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.email && formData.message) {
+    if (formData.user_email && formData.message) {
       console.log("Form Data:", formData);
       showSuccessAlert("Your form was submitted successfully!");
     } else {
@@ -224,7 +225,13 @@ function Footer() {
               {isPopupOpen && (
                 <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
                   <div className="p-1 rounded-md">
-                    <form onSubmit={handleSubmit}>
+                    <form
+                      ref={form}
+                      onSubmit={(e) => {
+                        handleSubmit(e);
+                        sendEmail(e);
+                      }}
+                    >
                       {/* ... Tu formulario aquí */}
                       <div class="isolate w-80 h-90 bg-gray-300 px-6 py-24 sm:py-3 lg:px-3">
                         <div
@@ -248,7 +255,7 @@ function Footer() {
                             us to improve:
                           </p>
                         </div>
-                        <form
+                        <div
                           action="#"
                           method="POST"
                           class="mx-auto mt-16 max-w-xl sm:mt-20"
@@ -264,11 +271,11 @@ function Footer() {
                               <div class="mt-2.5">
                                 <input
                                   type="text"
-                                  name="name"
+                                  name="user_name"
                                   id="name"
                                   autocomplete="given-name"
                                   onChange={handleChange}
-                                  value={formData.name}
+                                  value={formData.user_name}
                                   class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
@@ -317,11 +324,11 @@ function Footer() {
                               <div class="mt-2.5">
                                 <input
                                   type="email"
-                                  name="email"
+                                  name="user_email"
                                   id="email"
                                   autocomplete="email"
                                   onChange={handleChange}
-                                  value={formData.email}
+                                  value={formData.user_email}
                                   class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                               </div>
@@ -349,7 +356,7 @@ function Footer() {
                               <div class="flex h-6 items-center"></div>
                             </div>
                           </div>
-                        </form>
+                        </div>
                       </div>
                       <div className="flex justify-end">
                         <button
@@ -361,7 +368,9 @@ function Footer() {
                         </button>
                         <button
                           type="submit"
+                          name="submit"
                           className="bg-logo text-white text-sm font-medium uppercase leading-normal px-4 py-2 ml-2 rounded"
+                          value="Send"
                         >
                           Submit
                         </button>
