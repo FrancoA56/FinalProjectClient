@@ -20,13 +20,23 @@ import {
   CREATE_PRESETS,
   EDIT_USER,
   WITH_DEPLOYMENT,
-  WITHOUT_DEPLOYMENT,
   LOGIN_TRUE,
+  DEPLOYMENT_COST,
 } from "./types";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const URL = process.env.REACT_APP_API;
-
+// --------------------------------------------------------------------------Alert-⛔-----------
+const showErrorAlert = (message) => {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    confirmButtonColor: "rgb(94 195 191)",
+    text: `${message}`,
+  });
+};
+// --------------------------------------------------------------------------------⛔------------
 export const addModel = (model) => {
   return function (dispatch) {
     try {
@@ -35,7 +45,7 @@ export const addModel = (model) => {
         payload: model,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -48,7 +58,7 @@ export const addAllModels = (id) => {
         payload: id,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -60,8 +70,13 @@ export const addModelToCart = (id) => {
       const allreadyOnCart = state.cart.filter((c) => c.id === id);
 
       if (allreadyOnCart.length)
-        return window.alert("This preset is allready on cart");
-
+        return (
+        Swal.fire({
+          text: "This preset is allready on cart",
+          title: "Warning",
+          icon: "warning",
+          confirmButtonColor: "rgb(94 195 191)",
+        }));
       const { data } = await axios.get(`${URL}/api/preset/${id}`);
       const preset = {
         id: data.id,
@@ -85,7 +100,7 @@ export const addModelToCart = (id) => {
       // Guardar el carrito actualizado en el localStorage
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -98,7 +113,7 @@ export const addAllModelsToCart = (localStorage) => {
         payload: localStorage,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -111,7 +126,7 @@ export const removeModel = (id) => {
         payload: id,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -126,7 +141,7 @@ export const removeModelDisable = (id) => {
         payload: id,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -136,13 +151,13 @@ export const removeModelDisable = (id) => {
 export const editUserRedux = (userData) => {
   return async function (dispatch) {
     try {
-      // localStorage.setItem("token", JSON.stringify(userData)); // Guardar la data en el localStorage
+      localStorage.setItem("token", JSON.stringify(userData)); // Guardar la data en el localStorage
       return dispatch({
         type: EDIT_USER,
         payload: userData,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -156,7 +171,7 @@ export const removeModelFromCart = (id) => {
         payload: id,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -224,7 +239,7 @@ export const logInUser = (payload) => {
         payload: payload,
       });
     } catch (error) {
-      window.alert(error.message);
+      showErrorAlert(error.message);
     }
   };
 };
@@ -257,14 +272,35 @@ export const createPresets = () => {
   };
 };
 
-export const withDeployment = () => {
+export const withDeployment = (value) => {
+  if (value === "true") value = true;
+  if (value === "false") value = false;
   return {
     type: WITH_DEPLOYMENT,
+    payload: value,
   };
 };
 
-export const withoutDeployment = () => {
-  return {
-    type: WITHOUT_DEPLOYMENT,
+export const deploymentCost = (value) => {
+  return async function (dispatch, getState) {
+    try {
+      if (value === "true") value = true;
+      if (value === "false") value = false;
+      const state = getState();
+      if (value) {
+        const calculateDeployCost = () => {
+          // Lógica para calcular el costo de despliegue
+          return state.models.length * 10 + 30; // Por ejemplo, $10 por cada producto
+        };
+        value = calculateDeployCost();
+      } else value = 0;
+      return dispatch({
+        type: DEPLOYMENT_COST,
+        payload: value,
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
   };
 };
+

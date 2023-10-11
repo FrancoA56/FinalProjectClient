@@ -43,7 +43,7 @@ function Nav() {
       text: "You are about to log out",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#5ec3bf",
+      confirmButtonColor: "rgb(94 195 191)",
       cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {

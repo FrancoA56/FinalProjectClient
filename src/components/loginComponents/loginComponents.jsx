@@ -84,6 +84,7 @@ const LoginComponents = () => {
     Swal.fire({
       icon: "error",
       title: "Error",
+      confirmButtonColor: "rgb(94 195 191)",
       text: `>>> email does not match password <<<`,
     });
   };
@@ -141,9 +142,9 @@ const LoginComponents = () => {
                 className="absolute mr-2 text-[#909090] hover:text-[#303030]"
               >
                 {showPassword ? (
-                  <i class="fa-solid fa-eye-slash" />
+                  <i class= "fa-solid fa-eye"/>
                 ) : (
-                  <i class="fa-solid fa-eye" />
+                  <i class="fa-solid fa-eye-slash" />
                 )}
               </span>
             </div>
