@@ -33,9 +33,11 @@ const LoginComponents = () => {
     });
   }
 
+  
   useEffect(() => {
+    
     const storedToken = localStorage.getItem("token");
-    if (isAuthenticated && !storedToken) {
+    if (isAuthenticated && !storedToken ) {
       const auth = async () => {
         try {
           const userAuth = {
@@ -216,7 +218,7 @@ const LoginComponents = () => {
                   clip-rule="evenodd"
                 /> */}
               </svg>
-              Continue with Auth0
+              Sing in with...
             </a>
             {/* <!-- Twitter --> */}
             {/* <a
