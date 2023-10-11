@@ -104,7 +104,7 @@ function Nav() {
             className="mb-4 ml-2 mr-5  flex items-center text-neutral-900 hover:text-neutral-900
             focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 
             lg:mb-0 lg:"
-            href=""
+            href="#!"
           >
             <img
               src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/iso_wfaz4p.png"
