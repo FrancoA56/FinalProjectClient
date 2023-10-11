@@ -164,7 +164,7 @@ if(formData.user_email && formData.message){
             {/* LinkedIn section */}
             <p className="mr-6 mt-1.5 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
               <a
-                href="www.linkedin.com/in/code-crafted-templates"
+                href="http://www.linkedin.com/in/code-crafted-templates"
                 target="_blank"
                 rel="noreferrer"
                 className="mb-3 flex items-center justify-center md:justify-center"
