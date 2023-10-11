@@ -182,7 +182,7 @@ const Profile = () => {
                       <label
                         title="Nahue"
                         for="file"
-                        class="inline-block mt-5 bg-[#909090] hover:bg-[#303030] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        className="inline-block mt-5 bg-[#909090] hover:bg-[#303030] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       >
                         upload Image
                       </label>
@@ -200,7 +200,7 @@ const Profile = () => {
                         placeholder="..."
                         className="indent-2 w-3/4 mt-5 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       ></textarea>
-                      <p class="mt-1 text-sm leading-6 text-gray-600 mb-10">
+                      <p className="mt-1 text-sm leading-6 text-gray-600 mb-10">
                         Write a few sentences about your company.
                       </p>
                       {/* //////////////////////////// */}
@@ -209,7 +209,7 @@ const Profile = () => {
                       {/* BOTON */}
                       <button
                         /* type="submit" */
-                        class="mt-10 inline-block bg-logo w-3/4 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        className="mt-10 inline-block bg-logo w-3/4 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         // data-te-ripple-init
                         // data-te-ripple-color="light"
                         onClick={handleSubmit}
@@ -233,29 +233,29 @@ export default Profile;
 
 //! Modificar checkbox
 {
-  /* <div class="flex h-6 items-center">
+  /* <div className="flex h-6 items-center">
 <input
   id="candidates"
   name="candidates"
   type="checkbox"
-  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
 />
 </div> */
 }
 
 //! Agregar una foto
 {
-  /* <div class="col-span-full">
+  /* <div className="col-span-full">
 <label
   for="cover-photo"
-  class="block text-sm font-medium leading-6 text-gray-900"
+  className="block text-sm font-medium leading-6 text-gray-900"
 >
   Cover photo
 </label>
-<div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-  <div class="text-center">
+<div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+  <div className="text-center">
     <svg
-      class="mx-auto h-12 w-12 text-gray-300"
+      className="mx-auto h-12 w-12 text-gray-300"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden="true"
@@ -266,22 +266,22 @@ export default Profile;
         clip-rule="evenodd"
       />
     </svg>
-    <div class="mt-4 flex text-sm leading-6 text-gray-600">
+    <div className="mt-4 flex text-sm leading-6 text-gray-600">
       <label
         for="file-upload"
-        class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
       >
         <span>Upload a file</span>
         <input
           id="file-upload"
           name="file-upload"
           type="file"
-          class="sr-only"
+          className="sr-only"
         />
       </label>
-      <p class="pl-1">or drag and drop</p>
+      <p className="pl-1">or drag and drop</p>
     </div>
-    <p class="text-xs leading-5 text-gray-600">
+    <p className="text-xs leading-5 text-gray-600">
       PNG, JPG, GIF up to 10MB
     </p>
   </div>

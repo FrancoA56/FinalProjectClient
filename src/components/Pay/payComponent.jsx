@@ -35,9 +35,7 @@ const PayComponent = () => {
       // console.log("Form Data:", formData);
       showSuccessAlert("Your email has been sent successfully!");
     } else {
-      showErrorAlert(
-        "You must fill all the data to submit the form"
-      );
+      showErrorAlert("You must fill all the data to submit the form");
     }
     setPopupOpen(false);
   };
@@ -58,9 +56,6 @@ const PayComponent = () => {
       text: `${message}`,
     });
   };
-
-  // Estado para controlar la visibilidad del formulario de tarjeta de débito/credito
-  const [showCardForm, setShowCardForm] = useState(false);
 
   const subTotal = cart.reduce(
     (accumulator, preset) => accumulator + preset.price,
@@ -85,27 +80,58 @@ const PayComponent = () => {
             Checkout
           </h2>
         </div>
-        <div className="bg-gray-300 mb-2 container mx-auto p-4 rounded 5ec3bf">
+        <div className="bg-gray-300 mb-2 container mx-auto p-4 rounded shadow-2xl shadow-black">
           <div className="grid grid-cols-5 text-sm font-medium uppercase leading-normal">
             <div>Presets</div>
             <div>SubTotal</div>
             <div>With deployment</div>
             <div>Deployment Cost</div>
             <div>Total</div>
-            <div>{cart.length} Units</div>
+            <div>{cart.length}</div>
             <div>${subTotal}</div>
             {deployment ? <div>Yes</div> : <div>No</div>}
             <div>${deploymentCost}</div>
             <div>${total()}</div>
           </div>
-          <h3
-            className="inline-block bg-[#5ec3bf] mb-1 my-8 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                     text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-            style={{ "background-color": "#303030" }}
-          >
-            How do you want to pay?
-          </h3>
         </div>
+        <form
+          action="#"
+          method="POST"
+          className="grid grid-cols-2 pt-7 pb-3 w-2/3 mx-auto my-8 bg-gray-300 rounded shadow-2xl shadow-black "
+        >
+          <div className="my-3 mx-20 flex flex-col w-2/3">
+            <input type="text" className="bg-logo rounded shadow-lg mb-1" />
+            <label htmlFor="">Name</label>
+          </div>
+          <div className="my-3 mx-20 text-center flex flex-col w-2/3">
+            <input type="text" className="bg-logo rounded shadow-lg mb-1" />
+            <label htmlFor="">Lastname</label>
+          </div>
+          <div className="my-3 mx-20 flex flex-col w-2/3">
+            <input type="text" className="bg-logo rounded shadow-lg mb-1" />
+            <label htmlFor="">Company</label>
+          </div>
+          <div className="my-3 mx-20 flex flex-col w-2/3">
+            <input type="text" className="bg-logo rounded shadow-lg mb-1" />
+            <label htmlFor="">Country</label>
+          </div>
+          <div className="my-3 mx-20 flex flex-col w-2/3">
+            <input type="text" className="bg-logo rounded shadow-lg mb-1" />
+            <label htmlFor="">City</label>
+          </div>
+          <div className="my-3 mx-20 flex flex-col w-2/3">
+            <input type="text" className="bg-logo rounded shadow-lg mb-1" />
+            <label htmlFor="">CP</label>
+          </div>
+        </form>
+
+        <h3
+          className="inline-block bg-[#5ec3bf] mb-1 my-8 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                     text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+          style={{ "background-color": "#303030" }}
+        >
+          How do you want to pay?
+        </h3>
       </div>
       <div
         className="flex flex-col justify-center items-center container mx-auto p-2 mt-2 rounded 5ec3bf w-full mb-4"
@@ -123,24 +149,24 @@ const PayComponent = () => {
               <div className="p-1 rounded-md">
                 <form onSubmit={handleSubmit}>
                   {/* ... Tu formulario aquí */}
-                  <div class="isolate w-full h-2/3 bg-gray-300 px-6 py-24 sm:py-3 lg:px-3">
+                  <div className="isolate w-full h-2/3 bg-gray-300 px-6 py-24 sm:py-3 lg:px-3">
                     <div
-                      class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+                      className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
                       aria-hidden="true"
                     >
                       <div
-                        class="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w- -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-grey to-white opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+                        className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w- -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-grey to-white opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
                         style={{
                           "clip-path":
                             "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
                         }}
                       ></div>
                     </div>
-                    <div class="mx-auto max-w-2xl text-center">
-                      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-sm font-medium uppercase leading-normal">
+                    <div className="mx-auto max-w-2xl text-center">
+                      <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-sm font-medium uppercase leading-normal">
                         Insert your data
                       </h2>
-                      <p class="mt-2 text-sm font-medium uppercase leading-normal leading-8 text-gray-600">
+                      <p className="mt-2 text-sm font-medium uppercase leading-normal leading-8 text-gray-600">
                         We'll send you an email with the bank account details
                         for the transfer
                       </p>
@@ -148,17 +174,17 @@ const PayComponent = () => {
                     <form
                       action="#"
                       method="POST"
-                      class="mx-auto mt-16 max-w-xl sm:mt-20"
+                      className="mx-auto mt-16 max-w-xl sm:mt-20"
                     >
-                      <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                      <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
                           <label
                             for="first-name"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
                           >
                             First name
                           </label>
-                          <div class="mt-2.5">
+                          <div className="mt-2.5">
                             <input
                               type="text"
                               name="name"
@@ -166,52 +192,52 @@ const PayComponent = () => {
                               autocomplete="given-name"
                               onChange={handleChange}
                               value={formData.name}
-                              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                           </div>
                         </div>
                         <div>
                           <label
                             for="last-name"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
                           >
                             Last name
                           </label>
-                          <div class="mt-2.5">
+                          <div className="mt-2.5">
                             <input
                               type="text"
                               name="last-name"
                               id="last-name"
                               autocomplete="family-name"
-                              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                           </div>
                         </div>
-                        <div class="sm:col-span-2">
+                        <div className="sm:col-span-2">
                           <label
                             for="company"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
                           >
                             Company
                           </label>
-                          <div class="mt-2.5">
+                          <div className="mt-2.5">
                             <input
                               type="text"
                               name="company"
                               id="company"
                               autocomplete="organization"
-                              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                           </div>
                         </div>
-                        <div class="sm:col-span-2">
+                        <div className="sm:col-span-2">
                           <label
                             for="email"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            className="block text-sm font-semibold leading-6 text-gray-900"
                           >
                             Email
                           </label>
-                          <div class="mt-2.5">
+                          <div className="mt-2.5">
                             <input
                               type="email"
                               name="email"
@@ -219,13 +245,13 @@ const PayComponent = () => {
                               autocomplete="email"
                               onChange={handleChange}
                               value={formData.email}
-                              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                           </div>
                         </div>
 
-                        <div class="flex gap-x-4 sm:col-span-2">
-                          <div class="flex h-6 items-center"></div>
+                        <div className="flex gap-x-4 sm:col-span-2">
+                          <div className="flex h-6 items-center"></div>
                         </div>
                       </div>
                     </form>
