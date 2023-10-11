@@ -44,10 +44,10 @@ const Profile = () => {
       );
       // data.secure_url me devuelve el url de la imagen el cloudinary
       // seteo el logo del estado local
-      showSuccessAlert("Se subio la imagen a tu perfil");
+      showSuccessAlert("The image was uploaded to your profile");
       setuserLocal({ ...userLocal, logo: data.secure_url });
     } catch (error) {
-      showErrorAlert("Error al cargar tu imagen");
+      showErrorAlert("Error loading your image");
     }
   };
 
@@ -62,7 +62,7 @@ const Profile = () => {
       const userDecode = decodeToken(data); // Decodifica el token
 
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
-      showSuccessAlert("Se actualizaron los datos de tu perfil");
+      showSuccessAlert("Your profile data has been updated");
     } catch (error) {
       console.log(error.message)
       showErrorAlert("Error");

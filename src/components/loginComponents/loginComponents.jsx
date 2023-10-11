@@ -33,9 +33,11 @@ const LoginComponents = () => {
     });
   }
 
+  
   useEffect(() => {
+    
     const storedToken = localStorage.getItem("token");
-    if (isAuthenticated && !storedToken) {
+    if (isAuthenticated && !storedToken ) {
       const auth = async () => {
         try {
           const userAuth = {
@@ -44,12 +46,13 @@ const LoginComponents = () => {
             password: "contraseñaauth0",
           };
           const token = await getAccessTokenSilently(); //Se obtiene el token del usuario
-
           localStorage.setItem("token", token); // Guarda el token en el localStorage
           dispatch(logInUser(userAuth)); // Guarda los datos del usuario en el estado global
+          dispatch(logInSet(true));
           await axios.post(`${URL}/api/user/register`, userAuth); // Guarda al usuario en la base de datos
           navigate("/"); // Va pal home
         } catch (error) {
+          dispatch(logInSet(true));
           navigate("/");
           console.log(error.message);
         }
@@ -212,7 +215,7 @@ const LoginComponents = () => {
                   clip-rule="evenodd"
                 /> */}
               </svg>
-              Continue with Auth0
+              Sing in with...
             </a>
             {/* <!-- Twitter --> */}
             {/* <a
