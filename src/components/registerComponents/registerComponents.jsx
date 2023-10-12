@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
 import styles from "../registerComponents/register.module.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { validation } from "../validation";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+// import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
@@ -160,16 +160,16 @@ function RegisterComponents() {
   // -----------------------------------------------------------------------------------------------
 
   return (
-    <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
+    <div className="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
       {/* Columna izq */}
       <div
-        class="grid-span-1 flex justify-center items-center"
+        className="grid-span-1 flex justify-center items-center"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div class="md:w-full lg:w-full flex justify-center items-center">
+        <div className="md:w-full lg:w-full flex justify-center items-center">
           <img
             src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
             alt="CodecraftedLogo_image"
@@ -178,14 +178,14 @@ function RegisterComponents() {
       </div>
       {/* Columna der */}
       <div
-        class="grid-span-2 flex justify-center 
+        className="grid-span-2 flex justify-center 
         items-center py-3"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
         }}
       >
-        <div class="md:w-8/12 lg:w-8/12 ">
+        <div className="md:w-8/12 lg:w-8/12 ">
           <form onSubmit={(e) => handleSubmit(e)}>
             {/* Name input */}
             <div className="">
@@ -203,7 +203,7 @@ function RegisterComponents() {
                 <span className={styles.warning}>
                   {/* <span className="absolute mr-2" title={errors.name}> */}{" "}
                   {errors.name && (
-                    <i class="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800" />
+                    <i className="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800" />
                   )}
                   <span className={styles.bubble}>{errors.name}</span>
                 </span>
@@ -229,7 +229,7 @@ function RegisterComponents() {
                 <span className={styles.warning}>
                   {/* <span className="absolute mr-2" title={errors.email}> */}{" "}
                   {errors.email && (
-                    <i class="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800" />
+                    <i className="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800" />
                   )}
                   <span className={styles.bubble}>{errors.email}</span>
                 </span>
@@ -265,9 +265,9 @@ function RegisterComponents() {
                 >
                   {
                     showPassword ? (
-                      <i  class="fa-solid fa-eye"/>
+                      <i className="fa-solid fa-eye" />
                     ) : (
-                      <i class="fa-solid fa-eye-slash" />
+                      <i className="fa-solid fa-eye-slash" />
                     ) /* (
                         <FaEye style={{ color: "gray" }} />
                         ) : (
@@ -286,25 +286,25 @@ function RegisterComponents() {
                   <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
                     <li>
                       {validations.hasUppercase ? (
-                        <i class="fa-solid fa-check text-green-600" />
+                        <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i class="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-600" />
                       )}{" "}
                       An uppercase character
                     </li>
                     <li>
                       {validations.hasLowercase ? (
-                        <i class="fa-solid fa-check text-green-600" />
+                        <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i class="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-600" />
                       )}{" "}
                       An lowercase character
                     </li>
                     <li className="line-clamp-1">
                       {validations.isBetween8And30 ? (
-                        <i class="fa-solid fa-check text-green-600" />
+                        <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i class="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-600" />
                       )}{" "}
                       A between 8 and 30 char...
                     </li>
@@ -312,17 +312,17 @@ function RegisterComponents() {
                   <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
                     <li>
                       {validations.hasNumber ? (
-                        <i class="fa-solid fa-check text-green-600" />
+                        <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i class="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-600" />
                       )}{" "}
                       A number
                     </li>
                     <li>
                       {validations.hasSpecialChar ? (
-                        <i class="fa-solid fa-check text-green-600" />
+                        <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i class="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-600" />
                       )}{" "}
                       A special character
                     </li>
@@ -372,28 +372,26 @@ function RegisterComponents() {
             <div className="grid grid-cols-2 text-[#606060] text-sm">
               <div className="cols-span-1 text-sm flex pt-2 pl-2">
                 <p> Are you already a member? </p>
-                <NavLink to="/login">
-                  <a class="text-[#3a8a87] ml-1">
-                    <strong> Login </strong>
-                  </a>
+                <NavLink to="/login" className="text-[#3a8a87] ml-1">
+                  <strong> Login </strong>
                 </NavLink>
               </div>
 
-              <div class="flex justify-end items-end text-sm pt-2 pr-2">
+              <div className="flex justify-end items-end text-sm pt-2 pr-2">
                 {/* Agregar enlace de Home */}
-                <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
+                <div className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
                   Back to Home
-                </a>
-                <Link to="/" className="flex items-center ml-2 mb-1">
+                </div>
+                <NavLink to="/" className="flex items-center ml-2 mb-1">
                   <i className="text-[#3a8a87] fa-solid fa-house"></i>
-                </Link>
+                </NavLink>
               </div>
             </div>
 
             {/* <!-- Submit button --> */}
             <button
               type="submit"
-              class="inline-block mt-10 bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              className="inline-block mt-10 bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               data-te-ripple-init
               data-te-ripple-color="light"
             >
@@ -401,8 +399,8 @@ function RegisterComponents() {
             </button>
 
             {/* <!-- Divider --> */}
-            <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-              <p class="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+              <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                 OR
               </p>
             </div>
@@ -434,7 +432,7 @@ function RegisterComponents() {
             {/* <!-- Twitter --> */}
 
             {/* <a
-              class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              className="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               style={{ "background-color": "#505050" }}
               href="#!"
               role="button"
@@ -443,7 +441,7 @@ function RegisterComponents() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="mr-2 h-3.5 w-3.5"
+                className="mr-2 h-3.5 w-3.5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -460,48 +458,48 @@ function RegisterComponents() {
 
 export default RegisterComponents;
 
-{
-  /*  LO QUE QUIRE TOM PARA LOS ERRORES*/
-}
-{
-  /* {errors.password?.length ? (
-                <span
-                  styles={{
-                    display: "flex",
-                    height: "40px",
-                    color: "red",
-                    width: "40px",
-                  }}
-                >
-                  <i className="fa-solid fa-circle-exclamation" />
-                  <span style={{ opacity: 0 }}>{errors.password}</span>
-                  <span style={{ opacity: 0 }} />
-                </span>
-              ) : (
-                <></>
-              )} */
-}
-{
-  /*  LO QUE QUIRE TOM PARA LOS ERRORES*/
-}
-
-{
-  /*  Twitter  
-
-//       toast.success(`${result.msg}`, {
-//         position: toast.POSITION.BOTTOM_RIGHT
-//     });
-//       navigate("/home",{replace:true})
-//     }else {
-//       toast.error(`${result.msg}`, {
-//         position: toast.POSITION.BOTTOM_RIGHT
-//     });
-//     }
-//   }
-//   } catch (error) {
-//     console.log(error)
-//   }
+// {
+//   /*  LO QUE QUIRE TOM PARA LOS ERRORES*/
 // }
-// };
-*/
-}
+// {
+//   /* {errors.password?.length ? (
+//                 <span
+//                   styles={{
+//                     display: "flex",
+//                     height: "40px",
+//                     color: "red",
+//                     width: "40px",
+//                   }}
+//                 >
+//                   <i className="fa-solid fa-circle-exclamation" />
+//                   <span style={{ opacity: 0 }}>{errors.password}</span>
+//                   <span style={{ opacity: 0 }} />
+//                 </span>
+//               ) : (
+//                 <></>
+//               )} */
+// }
+// {
+//   /*  LO QUE QUIRE TOM PARA LOS ERRORES*/
+// }
+
+// {
+//   /*  Twitter
+
+// //       toast.success(`${result.msg}`, {
+// //         position: toast.POSITION.BOTTOM_RIGHT
+// //     });
+// //       navigate("/home",{replace:true})
+// //     }else {
+// //       toast.error(`${result.msg}`, {
+// //         position: toast.POSITION.BOTTOM_RIGHT
+// //     });
+// //     }
+// //   }
+// //   } catch (error) {
+// //     console.log(error)
+// //   }
+// // }
+// // };
+// */
+// }

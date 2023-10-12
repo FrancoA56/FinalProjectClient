@@ -84,7 +84,7 @@ const CartComponent = () => {
                         onClick={() => dispatch(removeModelFromCart(model.id))}
                         className="text-[#505050] font-semibold hover:text-[#cecece]"
                       >
-                        <i class="fa-solid fa-xmark " />
+                        <i className="fa-solid fa-xmark " />
                       </button>
                     </div>
                     {/* Segunda FILA */}
@@ -195,7 +195,7 @@ const CartComponent = () => {
                         onClick={() => dispatch(removeModelFromCart(model.id))}
                         className="text-[#505050] font-semibold col-span-1"
                       >
-                        <i class="fa-solid fa-xmark" />
+                        <i className="fa-solid fa-xmark" />
                       </button>
                     </div>
                   </div>
