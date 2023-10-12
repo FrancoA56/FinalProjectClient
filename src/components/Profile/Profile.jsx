@@ -33,6 +33,14 @@ const Profile = () => {
   // Funcion que carga la imagen a cloudinary
   const uploadImage = async (files) => {
     const formData = new FormData();
+    const typeImage = files.type.split("/");
+    if (
+      typeImage.at(-1) !== "jpeg" &&
+      typeImage.at(-1) !== "bpm" &&
+      typeImage.at(-1) !== "png"
+    )
+      return showErrorAlert("Unsupported file type");
+    // files.type
     formData.append("file", files);
     // aca va el Upload presets: "codeCraftTemplates"
     formData.append("upload_preset", "codeCraftTemplates");
@@ -54,8 +62,13 @@ const Profile = () => {
   // funcion edita la base de datos
   const editUser = async (userEdit) => {
     try {
-      if(!userEdit.logo) {delete userEdit.logo}
-      const {data} = await axios.put(`${URL}/api/user/${user.email}`, userEdit); // Recibe el token actualizado
+      if (!userEdit.logo) {
+        delete userEdit.logo;
+      }
+      const { data } = await axios.put(
+        `${URL}/api/user/${user.email}`,
+        userEdit
+      ); // Recibe el token actualizado
 
       localStorage.setItem("token", data); // Almanecena el nuevo token en el localStorage
 
@@ -64,7 +77,7 @@ const Profile = () => {
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
       showSuccessAlert("Your profile data has been updated");
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       showErrorAlert("Error");
     }
   };
@@ -75,9 +88,8 @@ const Profile = () => {
     // logInUser(userLocal)
   };
 
-
-   // --------------------------------------------------------------------------Alert-✅-----------
-   const showSuccessAlert = (message) => {
+  // --------------------------------------------------------------------------Alert-✅-----------
+  const showSuccessAlert = (message) => {
     Swal.fire({
       icon: "success",
       title: "Success",
@@ -96,7 +108,6 @@ const Profile = () => {
   };
   // --------------------------------------------------------------------------------⛔------------
 
-  
   return (
     <>
       <div className="bg-gray-100 min-h-screen">
@@ -111,7 +122,7 @@ const Profile = () => {
           </h1>
           <div className="grid grid-cols-12 gap-4">
             {/* Columna izquierda */}
-            
+
             <div
               className="col-span-12 md:col-span-8 flex flex-col justify-start items-center rounded"
               style={{
@@ -121,14 +132,22 @@ const Profile = () => {
             >
               {/* //////////////////////////// */}
               <label className="block mt-3 text-xl text-white font-medium uppercase leading-normal">
-                   {user.name ? user.name : ""}
-                  </label>
+                {user.name ? user.name : ""}
+              </label>
               {/* Aca aparece el logo */}
               <div className="w-3/4 h-3/4 flex items-center justify-center">
                 <img
                   // className="max-w-full max-h-full rounded-md shadow"
                   className="h-72 object-cover rounded-md shadow"
-                  src={user.logo ? userLocal.logo || user.logo : userLocal.logo || "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1696687386/no_imagen_am0gxq.jpg"}
+                  src={
+                    user.logo
+                      ? userLocal.logo || user.logo
+                      : userLocal.logo ||
+                        "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697050849/codeCraft/logo_b_pstr1s.png"
+                    // "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045468/codeCraft/grid_landscape_wiwh59.png"
+                    // "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697050849/codeCraft/logo_c_uuyq2t.png"
+                    // "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697050849/codeCraft/logo_a_wawckx.png"
+                  }
                   alt=""
                 />
               </div>
@@ -157,7 +176,7 @@ const Profile = () => {
                   <form>
                     <div className="mt-8 mb-9">
                       {/* //////////////////////////// */}
-      
+
                       {/* input del nombre*/}
                       <input
                         type="text"
@@ -184,7 +203,7 @@ const Profile = () => {
                         for="file"
                         className="inline-block mt-5 bg-[#909090] hover:bg-[#303030] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       >
-                        upload Image
+                        upload Logo
                       </label>
                       {/* //////////////////////////// */}
 
