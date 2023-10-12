@@ -16,7 +16,7 @@ const HomeComponent = () => {
   // const user = useSelector((state) => state.user);
 
   // Click q hace que la card de la izq pase a la derecha
-  const handleImageLeftClick = (e) => { 
+  const handleImageLeftClick = (e) => {
     e.preventDefault();
     activeRigthCard && setActiveRigthCard(false);
     setActiveLeftCard(true);
@@ -36,64 +36,158 @@ const HomeComponent = () => {
 
   return (
     <>
-    <div className={style.cont}>
-      <div className={style.container}>
-        <div
-          onClick={handleImageLeftClick}
-          className={!activeLeftCard ? style.cardLeft : style.cardActiveL}
+      <div className="bg-gray-100 min-h-screen">
+        {/*  ENCABEZADO */}
+        <div className="container mx-auto p-4">
+          {/*  TITULO */}
+          <h1
+            className="inline-block mb-4 w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                     text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+            style={{ "background-color": "#303030" }}
           >
-          {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
-          {/* <NavLink to={`/detail/${bestRanked[1].id}`}> */}
-          <img
-            className={style.img}
-            src={plantillas[0].url} /* src={bestRanked[1].url} */
-            alt={plantillas[0].name} /* alt={bestRanked[1].name} */
-          />
-          {/* </NavLink> */}
-        </div>
-
-        <div
-          onClick={handleImageCenterClick}
-          className={
-            (activeLeftCard && style.cardD) ||
-            (activeRigthCard && style.cardDR) ||
-            style.cardCenter
-          }
-        >
-          {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
-          {/* <NavLink to={`/detail/${bestRanked[0].id}`}> */}
-            <img
-              className={style.img}
-              src={plantillas[1].url} /* src={bestRanked[0].url} */
-              alt={plantillas[1].name} /* alt={bestRanked[0].name} */
-            />
-          {/* </NavLink> */}
-        </div>
-
-        <div
-          onClick={handleImageRigthClick}
-          className={!activeRigthCard ? style.cardRigth : style.cardActiveR}
-          >
-          {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
-          {/* <NavLink to={`/detail/${bestRanked[2].id}`}> */}
-            <img
-              className={style.img}
-              src={plantillas[0].url} /* src={bestRanked[2].url} */
-              alt={plantillas[0].name} /* alt={bestRanked[2].name} */
-            />
-          {/* </NavLink> */}
-        </div>
-      </div>
-      <div>
-        <NavLink to={"/shop"}>
-          <button className="inline-block bg-logo w-auto rounded 5ec3bf my-16 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+            Welcome
+          </h1>
+          {/*  EMPIEZA EL ENCOLUMNADO */}
+          <div className="grid grid-cols-12 gap-4 h-screen">
+            <div
+              className="col-span-12 md:col-span-12 rounded-md grid grid-rows-6 overflow-x-hidden"
+              style={{
+                background:
+                  "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
+              }}
+            >
+              <div className="flex flex-col justify-center items-center text-[#909090]">
+                <h1 className="font-semibold uppercase ">
+                  Best selling templates
+                </h1>
+                <div className="w-3/4 border-b border-[#909090] mt-2"></div>
+              </div>
+              <div className="row-span-3 flex items-center">
+                {/* CARROUSEL */}
+                {/* Imagen de la izq */}
+                <div
+                  onClick={handleImageLeftClick}
+                  className={
+                    !activeLeftCard ? style.cardLeft : style.cardActiveL
+                  }
                 >
-            Shop plantilla
-          </button>
-        </NavLink>
+                  {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
+                  {/* <NavLink to={`/detail/${bestRanked[1].id}`}> */}
+                  <img
+                    className={style.img}
+                    src={plantillas[0].url} /* src={bestRanked[1].url} */
+                    alt={plantillas[0].name} /* alt={bestRanked[1].name} */
+                  />
+                  {/* </NavLink> */}
+                </div>
+                {/* Imagen del centro */}
+                <div
+                  onClick={handleImageCenterClick}
+                  className={
+                    (activeLeftCard && style.cardD) ||
+                    (activeRigthCard && style.cardDR) ||
+                    style.cardCenter
+                  }
+                >
+                  {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
+                  {/* <NavLink to={`/detail/${bestRanked[0].id}`}> */}
+                  <img
+                    className={style.img}
+                    src={plantillas[1].url} /* src={bestRanked[0].url} */
+                    alt={plantillas[1].name} /* alt={bestRanked[0].name} */
+                  />
+                  {/* </NavLink> */}
+                </div>
+                {/* Imagen de la derecha  */}
+                <div
+                  onClick={handleImageRigthClick}
+                  className={
+                    !activeRigthCard ? style.cardRigth : style.cardActiveR
+                  }
+                >
+                  {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
+                  {/* <NavLink to={`/detail/${bestRanked[2].id}`}> */}
+                  <img
+                    className={style.img}
+                    src={plantillas[0].url} /* src={bestRanked[2].url} */
+                    alt={plantillas[0].name} /* alt={bestRanked[2].name} */
+                  />
+                  {/* </NavLink> */}
+                </div>
+              </div>
+              {/* ************************************************* */}
+              <div className="flex justify-center items-center">
+                <p className="animate-bounce font-semibold text-[#909090]">"All templates are excellent !!!..."</p>
+                </div>{" "}
+              {/* ************************************************* */}
+              <div className="flex items-center justify-center overflow-hidden">
+                {" "}
+                <NavLink to={"/shop"}>
+                  <button
+                    className="inline-block bg-logo w-auto rounded-md 5ec3bf my-16 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  >
+                    Shop plantilla
+                  </button>
+                </NavLink>
+              </div>{" "}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* <hr />
+      <div className={style.cont}>
+        <div className={style.container}> */}
+      {/* <div
+            onClick={handleImageLeftClick}
+            className={!activeLeftCard ? style.cardLeft : style.cardActiveL}
+          >
+            QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA
+            (si es que hay)
+            <NavLink to={`/detail/${bestRanked[1].id}`}>
+              <img
+                className={style.img}
+                src={plantillas[0].url} 
+                alt={plantillas[0].name}
+              />
+            </NavLink>
+          </div> */}
+
+      {/* <div
+            onClick={handleImageCenterClick}
+            className={
+              (activeLeftCard && style.cardD) ||
+              (activeRigthCard && style.cardDR) ||
+              style.cardCenter
+            }
+          >
+            QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay)
+            <NavLink to={`/detail/${bestRanked[0].id}`}>
+            <img
+              className={style.img}
+              src={plantillas[1].url} 
+              alt={plantillas[1].name} 
+            />
+            </NavLink>
+          </div> */}
+
+      {/* <div
+            onClick={handleImageRigthClick}
+            className={!activeRigthCard ? style.cardRigth : style.cardActiveR}
+          >
+            QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay)
+            <NavLink to={`/detail/${bestRanked[2].id}`}>
+            <img
+              className={style.img}
+              src={plantillas[0].url} 
+              alt={plantillas[0].name}
+            />
+            </NavLink>
+          </div> */}
+      {/* </div>
+        <div></div>
+      </div> */}
     </>
   );
 };
