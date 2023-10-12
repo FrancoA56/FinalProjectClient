@@ -5,30 +5,30 @@ import Swal from "sweetalert2";
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 
-
 // Footer container
 function Footer() {
-    // ? FUNCIONES PARA USAR EMAIL JS
+  // ? FUNCIONES PARA USAR EMAIL JS
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
-if(formData.user_email && formData.message){
-    emailjs
-      .sendForm(
-        "service_rjik02h",
-        "template_w2je5xe",
-        form.current,
-        "ncTuTVkphxHhuJbUE"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );}
+    if (formData.user_email && formData.message) {
+      emailjs
+        .sendForm(
+          "service_rjik02h",
+          "template_w2je5xe",
+          form.current,
+          "ncTuTVkphxHhuJbUE"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
   };
   const [isPopupOpen, setPopupOpen] = useState(false);
 
@@ -46,7 +46,7 @@ if(formData.user_email && formData.message){
     });
   };
 
-/*   const handleInputChange = (e) => {
+  /*   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -275,13 +275,8 @@ if(formData.user_email && formData.message){
                                   id="name"
                                   autocomplete="given-name"
                                   onChange={handleChange}
-<<<<<<< HEAD
-                                  value={formData.name}
-                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-=======
                                   value={formData.user_name}
                                   class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
->>>>>>> 324fd76d5fc34fc7af9fa4917738b5eafb9ad937
                                 />
                               </div>
                             </div>
@@ -333,13 +328,8 @@ if(formData.user_email && formData.message){
                                   id="email"
                                   autocomplete="email"
                                   onChange={handleChange}
-<<<<<<< HEAD
-                                  value={formData.email}
-                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-=======
                                   value={formData.user_email}
                                   class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
->>>>>>> 324fd76d5fc34fc7af9fa4917738b5eafb9ad937
                                 />
                               </div>
                             </div>
