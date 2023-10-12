@@ -25,7 +25,7 @@ function Nav() {
   // Hook para ir al home
   const navigate = useNavigate();
 
-  const {logout,isAuthenticated} = useAuth0();
+  const { logout, isAuthenticated } = useAuth0();
 
   // useEffect para cargar el cart del localStorage
   useEffect(() => {
@@ -47,7 +47,7 @@ function Nav() {
       cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {
-      if(isAuthenticated) logout();
+      if (isAuthenticated) logout();
       if (result.isConfirmed) {
         dispatch(logOutUser(user.name));
         navigate("/");
@@ -285,7 +285,7 @@ function Nav() {
                   onClick={toggleDropdown}
                 >
                   {/* User avatar */}
-                  <i class="fa-solid fa-bars"></i>
+                  <i class="fa-solid fa-user"></i>
                 </a>
               </>
             )}
@@ -298,7 +298,7 @@ function Nav() {
               aria-labelledby="dropdownMenuButton1"
             >
               {/* Second dropdown menu items */}
-              {(user.name || isAuthenticated) ? (
+              {user.name || isAuthenticated ? (
                 <>
                   <li>
                     <NavLink

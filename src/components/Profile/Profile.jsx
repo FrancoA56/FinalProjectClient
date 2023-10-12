@@ -57,7 +57,6 @@ const Profile = () => {
   const editUser = async (userEdit) => {
     try {
       if(!userEdit.logo) {delete userEdit.logo}
-
       // Edita los datos del usuario y rcibe el token actualizado
       const {data} = await axios.put(`${URL}/api/user/${user.email}`, userEdit); 
       localStorage.setItem("token", data); // Almanecena el nuevo token en el localStorage
@@ -67,7 +66,7 @@ const Profile = () => {
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
       showSuccessAlert("Your profile data has been updated");
     } catch (error) {
-
+      console.log(error.message)
       showErrorAlert("Error");
     }
   };

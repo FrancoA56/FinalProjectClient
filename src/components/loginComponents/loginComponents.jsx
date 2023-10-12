@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
 import decodeToken from "./decodeToken";
+import decodeToken from "./decodeToken";
 import { useAuth0 } from "@auth0/auth0-react";
 
 /* Requirements to validate the login
@@ -91,18 +92,18 @@ const LoginComponents = () => {
     setShowPassword(!showPassword);
   };
 
-  return (
+    return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
       {/* Columna izq */}
       <div
-        class="grid-span-2 flex justify-center 
+        className="grid-span-2 flex justify-center 
         items-center py-3"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
         }}
       >
-        <div class="md:w-8/12 lg:w-8/12">
+        <div className="md:w-8/12 lg:w-8/12">
           <form onSubmit={handleSubmit}>
             {/* <!-- Email input --> */}
             {/* <!-- Email input --> */}
@@ -138,42 +139,40 @@ const LoginComponents = () => {
                 className="absolute mr-2 text-[#909090] hover:text-[#303030]"
               >
                 {showPassword ? (
-                  <i class="fa-solid fa-eye" />
+                  <i class= "fa-solid fa-eye"/>
                 ) : (
-                  <i class="fa-solid fa-eye-slash" />
+                  <i className="fa-solid fa-eye-slash" />
                 )}
               </span>
             </div>
             <div className="flex justify-start mt-2 ml-3">
-              <a className="text-sm text-[#606060]">
+              <div className="text-sm text-[#606060]">
                 <strong> Forgot password?</strong>
-              </a>
+              </div>
             </div>
             <hr className="mt-2 border border-[#909090] rounded-sm" />
             <div className="grid grid-cols-2 text-[#606060] text-sm">
               <div className="cols-span-1 text-sm flex pt-2 pl-2">
                 <p> Not a member? </p>
-                <NavLink to="/register">
-                  <a class="text-[#3a8a87] ml-1">
-                    <strong> Register </strong>
-                  </a>
+                <NavLink to="/register" className="text-[#3a8a87] ml-1">
+                  <strong> Register </strong>
                 </NavLink>
               </div>
 
-              <div class="flex justify-end items-end text-sm pt-2 pr-2">
-                <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
+              <div className="flex justify-end items-end text-sm pt-2 pr-2">
+                <div className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
                   Back to Home
-                </a>
-                <Link to="/" className="flex items-center ml-2 mb-1">
+                </div>
+                <NavLink to="/" className="flex items-center ml-2 mb-1">
                   <i className="text-[#3a8a87] fa-solid fa-house"></i>
-                </Link>
+                </NavLink>
               </div>
             </div>
 
             {/* <!-- Submit button --> */}
             <button
               type="submit"
-              class="mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              className="mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               data-te-ripple-init
               data-te-ripple-color="light"
               // onClick={handleSubmit}
@@ -182,8 +181,8 @@ const LoginComponents = () => {
             </button>
 
             {/* <!-- Divider --> */}
-            <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-              <p class="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+              <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                 OR
               </p>
             </div>
@@ -191,9 +190,10 @@ const LoginComponents = () => {
             {/* <!-- Social login buttons --> */}
             {/*  Auth0 */}
             <a
-              style={{ "background-color": "#303030" }}
+              style={{ backgroundColor: "#303030" }}
               onClick={() => loginWithPopup()}
               class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+
               href="#!"
               role="button"
               data-te-ripple-init
@@ -215,7 +215,7 @@ const LoginComponents = () => {
             </a>
             {/* <!-- Twitter --> */}
             {/* <a
-              class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              className="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               style={{ "background-color": "#505050" }}
               href="#!"
               role="button"
@@ -224,7 +224,7 @@ const LoginComponents = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="mr-2 h-3.5 w-3.5"
+                className="mr-2 h-3.5 w-3.5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -237,13 +237,13 @@ const LoginComponents = () => {
       </div>
       {/* Columna der */}
       <div
-        class="grid-span-1 flex justify-center items-center"
+        className="grid-span-1 flex justify-center items-center"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div class="mb-12 md:mb-0 md:w-10/12 lg:w-full flex items-center justify-center">
+        <div className="mb-12 md:mb-0 md:w-10/12 lg:w-full flex items-center justify-center">
           <img
             src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
             alt="CodecraftedLogo_image"
