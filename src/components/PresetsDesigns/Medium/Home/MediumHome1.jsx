@@ -3,11 +3,9 @@ import { Carousel, initTE } from "tw-elements";
 import "tailwindcss/tailwind.css";
 
 const MediumHome1 = () => {
-
   useEffect(() => {
     initTE({ Carousel });
   }, []);
-
 
   return (
     /* No declare la cantidad de filas porq no las limita */
@@ -131,7 +129,6 @@ const MediumHome1 = () => {
                   class="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-gray-700 hover:bg-gray-100 focus:bg-gray-200 focus:outline-none active:text-zinc-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-gray-400 dark:text-gray-100 dark:hover:bg-gray-600 focus:dark:bg-gray-600"
                   href="#"
                   data-theme="dark"
-
                 >
                   <div class="pointer-events-none">
                     <div
@@ -285,7 +282,6 @@ const MediumHome1 = () => {
               data-te-carousel-init
               data-te-ride="carousel"
             >
-
               {/*Carousel indicators */}
               <div
                 class="absolute bottom-0 left-0 right-0 z-[2] mx-[15%] flex list-none justify-center p-0"
@@ -315,8 +311,9 @@ const MediumHome1 = () => {
                   aria-label="Slide 3"
                 ></button>
               </div>
-                            {/*Carousel items */}
-                            <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+
+              {/*Carousel items */}
+              <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
                 {/*First item */}
                 <div
                   class="w-full transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
@@ -362,7 +359,6 @@ const MediumHome1 = () => {
                 class="absolute bottom-0 left-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-black opacity-80 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
                 type="button"
                 data-te-target="#carouselExampleCaptions"
-                data-te-slide="prev"
               >
                 <span class="inline-block h-8 w-8">
                   <svg
@@ -389,7 +385,6 @@ const MediumHome1 = () => {
                 class="absolute bottom-0 right-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-black opacity-80 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
                 type="button"
                 data-te-target="#carouselExampleCaptions"
-                data-te-slide="next"
               >
                 <span class="inline-block h-8 w-8">
                   <svg
