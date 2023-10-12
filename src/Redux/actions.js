@@ -24,6 +24,7 @@ import {
   DEPLOYMENT_COST,
 } from "./types";
 import axios from "axios";
+// import { localStorageStore } from "react-admin";
 import Swal from "sweetalert2";
 
 const URL = process.env.REACT_APP_API;
@@ -63,48 +64,6 @@ export const addAllModels = (id) => {
   };
 };
 
-export const addModelToCart = (id) => {
-  return async function (dispatch, getState) {
-    try {
-      const state = getState();
-      const allreadyOnCart = state.cart.filter((c) => c.id === id);
-
-      if (allreadyOnCart.length)
-        return (
-        Swal.fire({
-          text: "This preset is allready on cart",
-          title: "Warning",
-          icon: "warning",
-          confirmButtonColor: "rgb(94 195 191)",
-        }));
-      const { data } = await axios.get(`${URL}/api/preset/${id}`);
-      const preset = {
-        id: data.id,
-        name: data.name,
-        category: data.category,
-        price: data.price,
-        color: data.color,
-        type: data.type,
-        rating: data.ratingAverage,
-        released: data.released,
-      };
-
-      const updatedCart = [...state.cart, preset]; // Agregar el nuevo elemento al carrito existente
-
-      // Actualizar el estado con el nuevo carrito
-      dispatch({
-        type: ADD_MODEL_CART,
-        payload: updatedCart,
-      });
-
-      // Guardar el carrito actualizado en el localStorage
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-    } catch (error) {
-      showErrorAlert(error.message);
-    }
-  };
-};
-
 export const addAllModelsToCart = (localStorage) => {
   return function (dispatch) {
     try {
@@ -118,13 +77,90 @@ export const addAllModelsToCart = (localStorage) => {
   };
 };
 
-export const removeModel = (id) => {
-  return function (dispatch) {
+export const addModelToCart = (id) => {
+  return async function (dispatch, getState) {
     try {
-      return dispatch({
-        type: REMOVE_MODEL,
-        payload: id,
+      const state = getState();
+      const allreadyOnCart = state.cart.filter((c) => c.id === id);
+
+      if (allreadyOnCart.length)
+        return Swal.fire({
+          text: "This preset is allready on cart",
+          title: "Warning",
+          icon: "warning",
+          confirmButtonColor: "rgb(94 195 191)",
+        });
+
+      const { data } = await axios.get(`${URL}/api/preset/${id}`);
+      const preset = {
+        id: data.id,
+        name: data.name,
+        category: data.category,
+        price: data.price,
+        color: data.color,
+        type: data.type,
+        rating: data.ratingAverage,
+        released: data.released,
+      };
+
+      const updatedCart = [...state.cart, preset]; // Agregar el nuevo elemento al carrito existente
+      // Actualizar el estado con el nuevo carrito
+      dispatch({
+        type: ADD_MODEL_CART,
+        payload: updatedCart,
       });
+
+      //si esta logeado el usuario se guarda en su base de datos el carrito relacionado al usuario
+      if (state.login) {
+        const idsCart = updatedCart.map((c) => c.id);
+        const userAndIds = {
+          email: state.user.email,
+          products: idsCart,
+        };
+        await axios.post(`${URL}/shop/order`, userAndIds);
+      } else {
+        // si no esta logeado se guarda el carrito actualizado en el localStorage
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+      }
+    } catch (error) {
+      showErrorAlert(error.message);
+    }
+  };
+};
+
+export const removeModel = (id) => {
+  return async function (dispatch, getState) {
+    try {
+      const state = getState();
+      const filteredCart = state.cart.filter((c) => c.id !== id);
+
+      dispatch({
+        type: REMOVE_MODEL,
+        payload: filteredCart,
+      });
+
+      //si esta logeado el usuario se guarda en su base de datos el carrito relacionado al usuario
+      if (state.login) {
+        // si hay algo todavia en el carrito se actualiza en la base de datos
+        if (filteredCart.length) {
+          const idsCart = filteredCart.map((c) => c.id);
+          const userAndIds = {
+            email: state.user.email,
+            products: idsCart,
+          };
+          await axios.post(`${URL}/shop/order`, userAndIds);
+        } else {
+          // si no quedo nada en el carrito se manda un array vacio para que no quede nada en la base de datos
+          const userAndIds = {
+            email: state.user.email,
+            products: [],
+          };
+          await axios.post(`${URL}/shop/order`, userAndIds);
+        }
+      } else {
+        // si no esta logeado se guarda el carrito actualizado en el localStorage
+        localStorage.setItem("cart", JSON.stringify(filteredCart));
+      }
     } catch (error) {
       showErrorAlert(error.message);
     }
@@ -232,12 +268,30 @@ export const filterByColor = (color) => {
 };
 
 export const logInUser = (payload) => {
-  return function (dispatch) {
+  return async function (dispatch) {
     try {
-      return dispatch({
+      const localStorageCart = localStorage.getItem("cart");
+      console.log("localStorageCart", localStorageCart);
+
+      dispatch({
         type: LOGIN_USER,
         payload: payload,
       });
+
+      if (localStorageCart) {
+        const parsedCart = JSON.parse(localStorageCart);
+        if (Array.isArray(parsedCart)) {
+          const localStorageCartIds = parsedCart.map((c) => c.id);
+          const userAndIds = {
+            email: payload.email,
+            products: localStorageCartIds,
+          };
+          const { data } = await axios.post(`${URL}/shop/order`, userAndIds);
+          if (data.isSuccess) {
+            localStorage.removeItem("cart");
+          }
+        }
+      }
     } catch (error) {
       showErrorAlert(error.message);
     }
@@ -303,4 +357,3 @@ export const deploymentCost = (value) => {
     }
   };
 };
-

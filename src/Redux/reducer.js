@@ -1,8 +1,8 @@
 import {
   ADD_MODEL,
   ADD_MODELS,
-  ADD_MODEL_CART,
   ADD_ALL_MODEL_CART,
+  ADD_MODEL_CART,
   REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
@@ -21,7 +21,7 @@ import {
   EDIT_USER,
   WITH_DEPLOYMENT,
   LOGIN_TRUE,
-  DEPLOYMENT_COST
+  DEPLOYMENT_COST,
 } from "./types";
 
 const initialState = {
@@ -64,13 +64,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case REMOVE_MODEL_CART:
-      localStorage.setItem(
-        "cart",
-        JSON.stringify(state.cart.filter((model) => model.id !== payload))
-      );
       return {
         ...state,
-        cart: state.cart.filter((model) => model.id !== payload),
+        cart: payload,
       };
 
     case REMOVE_MODEL:
@@ -215,6 +211,5 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return { ...state };
   }
 };
-  
 
 export default rootReducer;
