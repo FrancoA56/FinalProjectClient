@@ -117,7 +117,7 @@ export const addModelToCart = (id) => {
           email: state.user.email,
           products: idsCart,
         };
-        await axios.post(`${URL}/shop/order`, userAndIds);
+        await axios.post(`${URL}/api/shop/order`, userAndIds);
       } else {
         // si no esta logeado se guarda el carrito actualizado en el localStorage
         localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -132,12 +132,13 @@ export const removeModel = (id) => {
   return async function (dispatch, getState) {
     try {
       const state = getState();
-      const filteredCart = state.cart.filter((c) => c.id !== id);
-
+      
       dispatch({
         type: REMOVE_MODEL,
-        payload: filteredCart,
+        payload: id,
       });
+      
+      const filteredCart = state.cart.filter((c) => c.id !== id);
 
       //si esta logeado el usuario se guarda en su base de datos el carrito relacionado al usuario
       if (state.login) {
@@ -148,7 +149,7 @@ export const removeModel = (id) => {
             email: state.user.email,
             products: idsCart,
           };
-          await axios.post(`${URL}/shop/order`, userAndIds);
+          await axios.post(`${URL}/api/shop/order`, userAndIds);
         } else {
           // si no quedo nada en el carrito se manda un array vacio para que no quede nada en la base de datos
           const userAndIds = {
@@ -286,7 +287,10 @@ export const logInUser = (payload) => {
             email: payload.email,
             products: localStorageCartIds,
           };
-          const { data } = await axios.post(`${URL}/shop/order`, userAndIds);
+          const { data } = await axios.post(
+            `${URL}/api/shop/order`,
+            userAndIds
+          );
           if (data.isSuccess) {
             localStorage.removeItem("cart");
           }

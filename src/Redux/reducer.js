@@ -66,7 +66,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case REMOVE_MODEL_CART:
       return {
         ...state,
-        cart: payload,
+        cart: state.cart.filter(model => model.id !== payload),
       };
 
     case REMOVE_MODEL:
