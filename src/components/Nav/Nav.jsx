@@ -334,7 +334,7 @@ function Nav() {
                       href="/register"
                       data-te-dropdown-item-ref
                     >
-                      Sing In
+                      Sing Up
                     </a>
                   </li>
                 </>

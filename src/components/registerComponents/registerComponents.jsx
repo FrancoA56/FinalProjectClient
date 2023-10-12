@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import styles from "../registerComponents/register.module.css";
 import Swal from "sweetalert2";
@@ -264,11 +264,7 @@ function RegisterComponents() {
                 >
                   {
                     showPassword ? (
-<<<<<<< HEAD
-                      <i class="fa-solid fa-eye" />
-=======
                       <i className="fa-solid fa-eye" />
->>>>>>> 416d8fb3a3f9eebe6f7e52a21bdfdadd34eae092
                     ) : (
                       <i className="fa-solid fa-eye-slash" />
                     ) /* (

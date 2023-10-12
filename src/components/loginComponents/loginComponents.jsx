@@ -7,7 +7,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
 import decodeToken from "./decodeToken";
-import decodeToken from "./decodeToken";
 import { useAuth0 } from "@auth0/auth0-react";
 
 /* Requirements to validate the login
