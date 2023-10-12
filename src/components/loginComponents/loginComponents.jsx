@@ -6,7 +6,7 @@ import { useNavigate, Link, NavLink } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
-import decodeToken from "./decodeToken"
+import decodeToken from "./decodeToken";
 import { useAuth0 } from "@auth0/auth0-react";
 
 /* Requirements to validate the login
@@ -18,8 +18,7 @@ const LoginComponents = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
-  const { loginWithPopup, user, getAccessTokenSilently, isAuthenticated } =
-    useAuth0();
+  const { loginWithPopup, user, isAuthenticated } = useAuth0();
 
   const [input, setInput] = useState({
     email: "",
@@ -33,28 +32,23 @@ const LoginComponents = () => {
     });
   }
 
-  
   useEffect(() => {
-    
-    const storedToken = localStorage.getItem("token");
-    if (isAuthenticated && !storedToken ) {
+    if (isAuthenticated) {
       const auth = async () => {
         try {
           const userAuth = {
             name: user.nickname,
             email: user.email, // Se obtienen los datos del usuario
-            password: "contraseñaauth0",
           };
-          const token = await getAccessTokenSilently(); //Se obtiene el token del usuario
-          localStorage.setItem("token", token); // Guarda el token en el localStorage
-          dispatch(logInUser(userAuth)); // Guarda los datos del usuario en el estado global
+          const { data } = await axios.post(`${URL}/api/user/login0`, userAuth); // Guarda al usuario en la base de datos o lo crea y obtiene el token
+
+          localStorage.setItem("token", data); // Guarda el token en el localStorage
+          const userDecoded = decodeToken(data); //Decodifica el token para obener los datos del usuario
+          dispatch(logInUser(userDecoded)); // Guarda los datos del usuario en el estado global
           dispatch(logInSet(true));
-          await axios.post(`${URL}/api/user/register`, userAuth); // Guarda al usuario en la base de datos
           navigate("/"); // Va pal home
         } catch (error) {
-          dispatch(logInSet(true));
-          navigate("/");
-          console.log(error.message);
+          showErrorAlert(error.message);
         }
       };
       auth();
@@ -82,12 +76,12 @@ const LoginComponents = () => {
   }
 
   // -----------------------------------------------------------
-  const showErrorAlert = () => {
+  const showErrorAlert = (error) => {
     Swal.fire({
       icon: "error",
       title: "Error",
       confirmButtonColor: "rgb(94 195 191)",
-      text: `>>> email does not match password <<<`,
+      text: error,
     });
   };
   // -----------------------------------------------------------
@@ -97,7 +91,7 @@ const LoginComponents = () => {
     setShowPassword(!showPassword);
   };
 
-    return (
+  return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
       {/* Columna izq */}
       <div
@@ -144,7 +138,7 @@ const LoginComponents = () => {
                 className="absolute mr-2 text-[#909090] hover:text-[#303030]"
               >
                 {showPassword ? (
-                  <i class= "fa-solid fa-eye"/>
+                  <i class="fa-solid fa-eye" />
                 ) : (
                   <i class="fa-solid fa-eye-slash" />
                 )}
@@ -200,12 +194,11 @@ const LoginComponents = () => {
               style={{ "background-color": "#303030" }}
               onClick={() => loginWithPopup()}
               class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-
               href="#!"
               role="button"
               data-te-ripple-init
               data-te-ripple-color="light"
-            > 
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="mr-2 h-5 w-5"
@@ -262,7 +255,6 @@ const LoginComponents = () => {
 };
 
 export default LoginComponents;
-
 
 // const { loginWithRedirect } = useAuth0();
 
