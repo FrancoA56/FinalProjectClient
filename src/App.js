@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser, logInSet } from "./Redux/actions";
+import { logInUser, logInSet, createPresets } from "./Redux/actions";
 import Login from "./views/login";
 import Register from "./views/register";
 import ShoppingCart from "./views/shoppingCart";
@@ -16,6 +16,7 @@ import ProfileView from "./views/profile/profileView";
 import decodeToken from "./components/loginComponents/decodeToken";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import plantillas from "./utils/img/ulisesPresets.json";
 import jwt from "jwt-decode";
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login);
 
+
+  const presets = useSelector((state) => state.presets);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -49,6 +52,22 @@ function App() {
       };
       login();
     }
+
+/*     if (presets === 1) {
+      const postData = async () => {
+        try {
+          await Promise.all(
+            plantillas.map(async (plantilla) => {
+              await axios.post(`${URL}/api/preset`, plantilla);
+            })
+          );
+          dispatch(createPresets());
+        } catch (error) {
+          console.error("Error al enviar datos:", error);
+        }
+      };
+      postData();
+    } */
   }, [dispatch, isLoggedIn, URL]);
 
   return (

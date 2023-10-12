@@ -5,30 +5,30 @@ import Swal from "sweetalert2";
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 
-
 // Footer container
 function Footer() {
-    // ? FUNCIONES PARA USAR EMAIL JS
+  // ? FUNCIONES PARA USAR EMAIL JS
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
-if(formData.user_email && formData.message){
-    emailjs
-      .sendForm(
-        "service_rjik02h",
-        "template_w2je5xe",
-        form.current,
-        "ncTuTVkphxHhuJbUE"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );}
+    if (formData.user_email && formData.message) {
+      emailjs
+        .sendForm(
+          "service_rjik02h",
+          "template_w2je5xe",
+          form.current,
+          "ncTuTVkphxHhuJbUE"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
   };
   const [isPopupOpen, setPopupOpen] = useState(false);
 
@@ -46,14 +46,6 @@ if(formData.user_email && formData.message){
     });
   };
 
-/*   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
- */
   //Función para manejar el envío del form
   const handleSubmit = (e) => {
     e.preventDefault();
