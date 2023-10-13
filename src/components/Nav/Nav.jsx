@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
 import { logOutUser, addAllModelsToCart } from "../../Redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
+import DarkMode from "../DarkMode/darkmode";
 
 function Nav() {
   // Traemos el estado Global "user"
@@ -160,6 +161,7 @@ function Nav() {
           </ul>
         </div>
 
+          <DarkMode/>
         {/* Right elements */}
         <div className="relative flex items-center justify-around ">
           {/* Cart Icon */}
