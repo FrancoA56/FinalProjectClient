@@ -3,7 +3,6 @@ import {
   ADD_MODELS,
   ADD_ALL_MODEL_CART,
   ADD_MODEL_CART,
-  REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
@@ -67,12 +66,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         cart: state.cart.filter(model => model.id !== payload),
-      };
-
-    case REMOVE_MODEL:
-      return {
-        ...state,
-        models: state.models.filter((model) => model.id !== payload),
       };
 
     case REMOVE_MODEL_DISABLE:

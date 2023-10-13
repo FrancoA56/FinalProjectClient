@@ -3,7 +3,6 @@ import {
   ADD_MODELS,
   ADD_MODEL_CART,
   ADD_ALL_MODEL_CART,
-  REMOVE_MODEL,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
@@ -128,46 +127,6 @@ export const addModelToCart = (id) => {
   };
 };
 
-export const removeModel = (id) => {
-  return async function (dispatch, getState) {
-    try {
-      const state = getState();
-      
-      dispatch({
-        type: REMOVE_MODEL,
-        payload: id,
-      });
-      
-      const filteredCart = state.cart.filter((c) => c.id !== id);
-
-      //si esta logeado el usuario se guarda en su base de datos el carrito relacionado al usuario
-      if (state.login) {
-        // si hay algo todavia en el carrito se actualiza en la base de datos
-        if (filteredCart.length) {
-          const idsCart = filteredCart.map((c) => c.id);
-          const userAndIds = {
-            email: state.user.email,
-            products: idsCart,
-          };
-          await axios.post(`${URL}/api/shop/order`, userAndIds);
-        } else {
-          // si no quedo nada en el carrito se manda un array vacio para que no quede nada en la base de datos
-          const userAndIds = {
-            email: state.user.email,
-            products: [],
-          };
-          await axios.post(`${URL}/shop/order`, userAndIds);
-        }
-      } else {
-        // si no esta logeado se guarda el carrito actualizado en el localStorage
-        localStorage.setItem("cart", JSON.stringify(filteredCart));
-      }
-    } catch (error) {
-      showErrorAlert(error.message);
-    }
-  };
-};
-
 export const removeModelDisable = (id) => {
   return async function (dispatch) {
     try {
@@ -201,12 +160,39 @@ export const editUserRedux = (userData) => {
 //////////////////////////////////////////////////////////////////////
 
 export const removeModelFromCart = (id) => {
-  return function (dispatch) {
+  return async function (dispatch, getState) {
     try {
-      return dispatch({
+      const state = getState();
+      
+      dispatch({
         type: REMOVE_MODEL_CART,
         payload: id,
       });
+      
+      const filteredCart = state.cart.filter((c) => c.id !== id);
+
+      //si esta logeado el usuario se guarda en su base de datos el carrito relacionado al usuario
+      if (state.login) {
+        // si hay algo todavia en el carrito se actualiza en la base de datos
+        if (filteredCart.length) {
+          const idsCart = filteredCart.map((c) => c.id);
+          const userAndIds = {
+            email: state.user.email,
+            products: idsCart,
+          };
+          await axios.post(`${URL}/api/shop/order`, userAndIds);
+        } else {
+          // si no quedo nada en el carrito se manda un array vacio para que no quede nada en la base de datos
+          const userAndIds = {
+            email: state.user.email,
+            products: [],
+          };
+          await axios.post(`${URL}/shop/order`, userAndIds);
+        }
+      } else {
+        // si no esta logeado se guarda el carrito actualizado en el localStorage
+        localStorage.setItem("cart", JSON.stringify(filteredCart));
+      }
     } catch (error) {
       showErrorAlert(error.message);
     }
