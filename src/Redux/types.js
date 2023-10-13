@@ -2,7 +2,6 @@ export const ADD_MODEL = "ADD_MODEL";
 export const ADD_MODELS = "ADD_MODELS";
 export const ADD_MODEL_CART = "ADD_MODEL_CART";
 export const ADD_ALL_MODEL_CART = "ADD_ALL_MODEL_CART";
-export const REMOVE_MODEL = "REMOVE_MODEL";
 export const REMOVE_MODEL_DISABLE = "REMOVE_MODEL_DISABLE";
 export const REMOVE_MODEL_CART = "REMOVE_MODEL_CART";
 ////////////////////////////////////////

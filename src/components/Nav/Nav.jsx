@@ -261,7 +261,7 @@ function Nav() {
             {user.name ? (
               <>
                 {" "}
-                <a
+                <div
                   className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
                   href="#"
                   id="dropdownMenuButton2"
@@ -271,13 +271,13 @@ function Nav() {
                 >
                   {" "}
                   {user.name}{" "}
-                </a>
+                </div>
               </>
             ) : (
               <>
                 {" "}
-                <a
-                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                <div
+                  className="hidden-arrow mr-12 flex  items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
                   href="#"
                   id="dropdownMenuButton2"
                   role="button"
@@ -286,7 +286,7 @@ function Nav() {
                 >
                   {/* User avatar */}
                   <i class="fa-solid fa-user"></i>
-                </a>
+                </div>
               </>
             )}
 

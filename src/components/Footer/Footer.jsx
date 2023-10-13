@@ -30,6 +30,7 @@ function Footer() {
         );
     }
   };
+
   const [isPopupOpen, setPopupOpen] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -45,6 +46,15 @@ function Footer() {
       [event.target.name]: event.target.value,
     });
   };
+
+  /*   const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+ */
 
   //Función para manejar el envío del form
   const handleSubmit = (e) => {
