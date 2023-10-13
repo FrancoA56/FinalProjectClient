@@ -147,7 +147,7 @@ export const removeModelDisable = (id) => {
 export const editUserRedux = (userData) => {
   return async function (dispatch) {
     try {
-      localStorage.setItem("token", JSON.stringify(userData)); // Guardar la data en el localStorage
+
       return dispatch({
         type: EDIT_USER,
         payload: userData,

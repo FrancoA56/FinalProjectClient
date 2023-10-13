@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import styles from "../registerComponents/register.module.css";
 import Swal from "sweetalert2";
@@ -9,6 +9,7 @@ import "tailwindcss/tailwind.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
 import { logInSet, logInUser } from "../../Redux/actions";
+import decodeToken from "../loginComponents/decodeToken";
 
 /* Email validity requirements
 ----------------------------------------
@@ -66,29 +67,27 @@ function RegisterComponents() {
   // --------------------------------------------------------------------------------------------------------
 
   //---------------------Auth terceros --------------------------------------
-  const dispatch = useDispatch()
-  
-  const {user, isAuthenticated,getAccessTokenSilently,loginWithPopup} = useAuth0()
+  const dispatch = useDispatch();
+
+  const { user, isAuthenticated, loginWithPopup } = useAuth0();
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (isAuthenticated && !storedToken) {
+    // const storedToken = localStorage.getItem("token");
+    if (isAuthenticated) {
       const auth = async () => {
         try {
           const userAuth = {
             name: user.nickname,
             email: user.email, // Se obtienen los datos del usuario
-            password: "contraseñaauth0",
           };
-          const token = await getAccessTokenSilently(); //Se obtiene el token del usuario
-          localStorage.setItem("token", token); // Guarda el token en el localStorage
-          dispatch(logInUser(userAuth)); // Guarda los datos del usuario en el estado global
+          const { data } = await axios.post(`${URL}/api/user/login0`, userAuth); // Guarda al usuario en la base de datos y obtiene el token
+
+          localStorage.setItem("token", data); // Guarda el token en el localStorage
+          const userDecoded = decodeToken(data);
+          dispatch(logInUser(userDecoded)); // Guarda los datos del usuario en el estado global
           dispatch(logInSet(true));
-          await axios.post(`${URL}/api/user/register`, userAuth); // Guarda al usuario en la base de datos
           navigate("/"); // Va pal home
         } catch (error) {
-          dispatch(logInSet(true));
-          navigate("/");
-          console.log(error.message);
+          showErrorAlert(error.message);
         }
       };
       auth();
@@ -408,7 +407,7 @@ function RegisterComponents() {
             {/* <!-- Social login buttons --> */}
             {/*  Google */}
             <a
-              onClick={()=>loginWithPopup()}
+              onClick={() => loginWithPopup()}
               class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               href="#!"
               role="button"

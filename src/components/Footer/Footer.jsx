@@ -29,6 +29,23 @@ function Footer() {
           }
         );
     }
+    if (formData.user_email && formData.message) {
+      emailjs
+        .sendForm(
+          "service_rjik02h",
+          "template_w2je5xe",
+          form.current,
+          "ncTuTVkphxHhuJbUE"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
   };
   const [isPopupOpen, setPopupOpen] = useState(false);
 

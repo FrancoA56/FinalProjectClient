@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logInUser, logInSet } from "./Redux/actions";
+import { logInUser, logInSet, createPresets } from "./Redux/actions";
 import Login from "./views/login";
 import Register from "./views/register";
 import ShoppingCart from "./views/shoppingCart";
@@ -16,16 +16,19 @@ import ProfileView from "./views/profile/profileView";
 import decodeToken from "./components/loginComponents/decodeToken";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import plantillas from "./utils/img/ulisesPresets.json";
+import jwt from "jwt-decode";
 
 function App() {
   const URL = process.env.REACT_APP_API;
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login);
-  const { isAuthenticated } = useAuth0();
+
+
+  const presets = useSelector((state) => state.presets);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-
     if (storedToken && !isLoggedIn) {
       const login = async () => {
         try {
@@ -34,22 +37,37 @@ function App() {
               Authorization: `${storedToken}`,
             },
           };
-          // console.log("headerToken", headerToken);
-          const { data } = await axios.get(
-            `${URL}/api/user/validate`,headerToken);
-          // console.log("data", data);
+
+          const { data } = await axios.get(`${URL}/api/user/validate`,headerToken); // Verigica que el token no haya expirado
+
           if (data) {
-            const user = decodeToken(storedToken);
-            dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
+            const user = decodeToken(storedToken); // Decodifica el token y se obtienen los datos del usuario ya logueado
+            dispatch(logInUser(user)); // Actualiza el estado global con el usuario logueado
             dispatch(logInSet(true));
-          }
+          }else{
+          localStorage.removeItem("token");}
         } catch (error) {
-          localStorage.removeItem("token");
-          console.error("Token expired");
+          console.log(error)
         }
       };
       login();
     }
+
+/*     if (presets === 1) {
+      const postData = async () => {
+        try {
+          await Promise.all(
+            plantillas.map(async (plantilla) => {
+              await axios.post(`${URL}/api/preset`, plantilla);
+            })
+          );
+          dispatch(createPresets());
+        } catch (error) {
+          console.error("Error al enviar datos:", error);
+        }
+      };
+      postData();
+    } */
   }, [dispatch, isLoggedIn, URL]);
 
   return (
