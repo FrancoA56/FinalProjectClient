@@ -29,24 +29,8 @@ function Footer() {
           }
         );
     }
-    if (formData.user_email && formData.message) {
-      emailjs
-        .sendForm(
-          "service_rjik02h",
-          "template_w2je5xe",
-          form.current,
-          "ncTuTVkphxHhuJbUE"
-        )
-        .then(
-          (result) => {
-            console.log(result.text);
-          },
-          (error) => {
-            console.log(error.text);
-          }
-        );
-    }
   };
+
   const [isPopupOpen, setPopupOpen] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -71,6 +55,7 @@ function Footer() {
     }));
   };
  */
+
   //Función para manejar el envío del form
   const handleSubmit = (e) => {
     e.preventDefault();
