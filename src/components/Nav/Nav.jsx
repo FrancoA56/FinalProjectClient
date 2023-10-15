@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
 import { logOutUser, addAllModelsToCart } from "../../Redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
+import DarkMode from "../DarkMode/darkmode";
 
 
 function Nav() {
@@ -26,7 +27,7 @@ function Nav() {
   // Hook para ir al home
   const navigate = useNavigate();
 
-  const {logout,isAuthenticated} = useAuth0();
+  const { logout, isAuthenticated } = useAuth0();
 
   // useEffect para cargar el cart del localStorage
   useEffect(() => {
@@ -48,7 +49,7 @@ function Nav() {
       cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {
-      if(isAuthenticated) logout();
+      if (isAuthenticated) logout();
       if (result.isConfirmed) {
         dispatch(logOutUser(user.name));
         navigate("/");
@@ -161,6 +162,7 @@ function Nav() {
           </ul>
         </div>
 
+          <DarkMode/>
         {/* Right elements */}
         <div className="relative flex items-center justify-around ">
           {/* Cart Icon */}
@@ -262,7 +264,7 @@ function Nav() {
             {user.name ? (
               <>
                 {" "}
-                <a
+                <div
                   className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
                   href="#"
                   id="dropdownMenuButton2"
@@ -272,13 +274,13 @@ function Nav() {
                 >
                   {" "}
                   {user.name}{" "}
-                </a>
+                </div>
               </>
             ) : (
               <>
                 {" "}
-                <a
-                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                <div
+                  className="hidden-arrow mr-12 flex  items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
                   href="#"
                   id="dropdownMenuButton2"
                   role="button"
@@ -286,8 +288,8 @@ function Nav() {
                   onClick={toggleDropdown}
                 >
                   {/* User avatar */}
-                  <i class="fa-solid fa-bars"></i>
-                </a>
+                  <i class="fa-solid fa-user"></i>
+                </div>
               </>
             )}
 
@@ -335,7 +337,7 @@ function Nav() {
                       href="/register"
                       data-te-dropdown-item-ref
                     >
-                      Sing In
+                      Sing Up
                     </a>
                   </li>
                 </>

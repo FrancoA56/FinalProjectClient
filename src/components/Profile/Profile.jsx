@@ -6,6 +6,7 @@ import Nav from "../Nav/Nav";
 import { editUserRedux, logInUser } from "../../Redux/actions";
 import decodeToken from "../loginComponents/decodeToken";
 import Swal from "sweetalert2";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
   // traigo el usuario del estado global
@@ -52,11 +53,12 @@ const Profile = () => {
   };
 
   // funcion edita la base de datos
+ 
   const editUser = async (userEdit) => {
     try {
       if(!userEdit.logo) {delete userEdit.logo}
-      const {data} = await axios.put(`${URL}/api/user/${user.email}`, userEdit); // Recibe el token actualizado
-
+      // Edita los datos del usuario y rcibe el token actualizado
+      const {data} = await axios.put(`${URL}/api/user/${user.email}`, userEdit); 
       localStorage.setItem("token", data); // Almanecena el nuevo token en el localStorage
 
       const userDecode = decodeToken(data); // Decodifica el token

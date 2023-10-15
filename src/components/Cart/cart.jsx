@@ -53,93 +53,99 @@ const CartComponent = () => {
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
               }}
             >
-              {models.map((model) => (
-                <div
-                  className="m-2 grid grid-cols-7 h-48 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                  // style={{
-                  //   background:
-                  //     "radial-gradient(40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-                  // }}
-                  style={{
-                    background:
-                      "linear-gradient(to left, rgb(50, 50, 50), rgb(40,40,40))",
-                  }}
-                  key={model.id}
-                >
-                  {/* imagen */}
-                  <div className="col-span-3 flex items-center justify-center m-1 overflow-hidden rounded-md">
-                    <NavLink to={`/detail/${model.id}`}>
-                      <img
-                        src={plantilla}
-                        alt={model.name}
-                        className="object-cover"
-                      />
-                    </NavLink>
-                  </div>
-                  {/* El resto */}
-                  <div className=" grid grid-rows-5 col-span-4">
-                    {/* PRIMER FILA */}
-                    <div className="flex items-center justify-end pr-3 pb-3">
-                      <button
-                        onClick={() => dispatch(removeModelFromCart(model.id))}
-                        className="text-[#505050] font-semibold hover:text-[#cecece]"
-                      >
-                        <i class="fa-solid fa-xmark " />
-                      </button>
-                    </div>
-                    {/* Segunda FILA */}
-                    <div className="px-12">
-                      {" "}
+              {models && models.length > 0 ? (
+                models.map((model) => (
+                  <div
+                    className="m-2 grid grid-cols-7 h-48 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                    // style={{
+                    //   background:
+                    //     "radial-gradient(40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
+                    // }}
+                    style={{
+                      background:
+                        "linear-gradient(to left, rgb(50, 50, 50), rgb(40,40,40))",
+                    }}
+                    key={model.id}
+                  >
+                    {/* imagen */}
+                    <div className="col-span-3 flex items-center justify-center m-1 overflow-hidden rounded-md">
                       <NavLink to={`/detail/${model.id}`}>
-                        <h1 className="text-2xl font-bold uppercase text-[#cecece] border-b border-[#cecece]">
-                          {model.name}
-                        </h1>
+                        <img
+                          src={plantilla}
+                          alt={model.name}
+                          className="object-cover"
+                        />
                       </NavLink>
                     </div>
-                    {/* Tercera FILA */}
-                    <div className="row-span-2 grid grid-cols-4">
-                      <div>
-                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
-                          {model.rating}{" "}
-                          <i className="fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />{" "}
-                        </p>
-                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
-                          rating
-                        </span>
+                    {/* El resto */}
+                    <div className=" grid grid-rows-5 col-span-4">
+                      {/* PRIMER FILA */}
+                      <div className="flex items-center justify-end pr-3 pb-3">
+                        <button
+                          onClick={() =>
+                            dispatch(removeModelFromCart(model.id))
+                          }
+                          className="text-[#505050] font-semibold hover:text-[#cecece]"
+                        >
+                          <i className="fa-solid fa-xmark " />
+                        </button>
                       </div>
-                      <div>
+                      {/* Segunda FILA */}
+                      <div className="px-12">
                         {" "}
-                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
-                          {model.category}
-                        </p>
-                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
-                          category
-                        </span>
+                        <NavLink to={`/detail/${model.id}`}>
+                          <h1 className="text-2xl font-bold uppercase text-[#cecece] border-b border-[#cecece]">
+                            {model.name}
+                          </h1>
+                        </NavLink>
                       </div>
-                      <div>
-                        {" "}
-                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
-                          {model.type}
-                        </p>
-                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
-                          Type
-                        </span>
+                      {/* Tercera FILA */}
+                      <div className="row-span-2 grid grid-cols-4">
+                        <div>
+                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                            {model.rating}{" "}
+                            <i className="fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />{" "}
+                          </p>
+                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                            rating
+                          </span>
+                        </div>
+                        <div>
+                          {" "}
+                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                            {model.category}
+                          </p>
+                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                            category
+                          </span>
+                        </div>
+                        <div>
+                          {" "}
+                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                            {model.type}
+                          </p>
+                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                            Type
+                          </span>
+                        </div>
+                        <div>
+                          {" "}
+                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                            {model.color}
+                          </p>
+                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                            color
+                          </span>
+                        </div>
                       </div>
-                      <div>
-                        {" "}
-                        <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
-                          {model.color}
-                        </p>
-                        <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
-                          color
-                        </span>
-                      </div>
+                      {/* cuarta FILA */}
+                      <div></div>
                     </div>
-                    {/* cuarta FILA */}
-                    <div></div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>Your cart is empty</p>
+              )}
             </div>
 
             {/* Columna derecha para el contenido del carrito */}
@@ -195,7 +201,7 @@ const CartComponent = () => {
                         onClick={() => dispatch(removeModelFromCart(model.id))}
                         className="text-[#505050] font-semibold col-span-1"
                       >
-                        <i class="fa-solid fa-xmark" />
+                        <i className="fa-solid fa-xmark" />
                       </button>
                     </div>
                   </div>
