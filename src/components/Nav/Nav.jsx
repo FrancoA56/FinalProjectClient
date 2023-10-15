@@ -65,11 +65,8 @@ function Nav() {
 
   return (
     <nav
-      style={{
-        background:
-          "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-      }}
-      className="flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
+   
+      className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-gray-700 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
     >
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <button
@@ -221,7 +218,7 @@ function Nav() {
               </span>
               {/* Notification counter */}
               <span className="absolute -mt-4 ml-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white">
-                1
+                0
               </span>
             </a>
 
@@ -288,7 +285,7 @@ function Nav() {
                   onClick={toggleDropdown}
                 >
                   {/* User avatar */}
-                  <i class="fa-solid fa-user"></i>
+                  <i class="fa-solid fa-user h-5 w-5 text-neutral-600 dark:text-white"></i>
                 </div>
               </>
             )}

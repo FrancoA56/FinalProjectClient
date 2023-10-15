@@ -77,11 +77,8 @@ function Footer() {
 
   return (
     <footer
-      style={{
-        background:
-          "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-      }}
-      className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left"
+  
+      className="bg-gray-300 text-center text-neutral-600 dark:bg-gray-700 dark:text-white lg:text-left"
     >
       {/* Main content container */}
       <div className="mx-6 py-5 text-center md:text-left">
@@ -377,10 +374,10 @@ function Footer() {
       </div>
 
       {/* Copyright section */}
-      <div className="bg-logo opacity-50 p-3 mb- text-center dark:bg-neutral-700">
+      <div className="bg-logo opacity-50 p-3 mb- text-center dark:bg-logo opacity-70 ">
         <span className="text-black">© 2023 Copyright: </span>
         <a
-          className="font-semibold text-black dark:text-neutral-400"
+          className="font text-black dark: text-white"
           href="https://tailwind-elements.com/"
         >
           CodeCrafted Templates
