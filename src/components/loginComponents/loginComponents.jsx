@@ -152,7 +152,9 @@ const LoginComponents = () => {
             </div>
             <div className="flex justify-start mt-2 ml-3">
               <div className="text-sm text-[#606060]">
-                <strong> Forgot password?</strong>
+                <NavLink to="/forgotpassword" className="text-[#3a8a87] ml-1">
+                  <strong> Forgot password?</strong>
+                </NavLink>
               </div>
             </div>
             <hr className="mt-2 border border-[#909090] rounded-sm" />
