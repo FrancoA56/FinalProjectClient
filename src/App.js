@@ -14,6 +14,7 @@ import Detail from "./views/detail/detail";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import ProfileView from "./views/profile/profileView";
 import decodeToken from "./components/loginComponents/decodeToken";
+import AboutPage from "./views/aboutPage/aboutPage";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -64,6 +65,7 @@ function App() {
         <Route path="/pay" element={<Pay />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/profile" element={<ProfileView />} />
+        <Route path="/about" element={<AboutPage/>}/>
       </Routes>
     </div>
   );

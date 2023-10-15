@@ -1,7 +1,6 @@
 import "tailwindcss/tailwind.css";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 
@@ -46,14 +45,6 @@ if(formData.user_email && formData.message){
     });
   };
 
-/*   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
- */
   //Función para manejar el envío del form
   const handleSubmit = (e) => {
     e.preventDefault();
