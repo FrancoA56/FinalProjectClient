@@ -1,14 +1,14 @@
 const SelectOrder = ({ handleOrderChange, selectedOrder }) => {
   return (
-    <div className="flex flex-col items-start ml-5">
+    <div className="flex flex-col items-start ml-5 ">
       {/*       <h6 className="text-lg font-semibold mb-2">Order by:</h6> */}
-      <h1 className="font-mediun uppercase leading-normal font-semibold mb-2 mt-5">
+      <h1 className="font-mediun uppercase leading-normal font-semibold mb-2 mt-5 ">
         Order By:
       </h1>
 
       <div className="relative">
         <select
-          className="block px-4 py-2 pr-8 leading-tight border rounded-md shadow appearance-none focus:outline-none focus:shadow-outline text-sm"
+          className="block px-4 py-2 pr-8 leading-tight border rounded-md shadow appearance-none focus:outline-none focus:shadow-outline text-sm  text-neutral-600 dark:text-gray-700"
           onChange={handleOrderChange}
           value={selectedOrder}
         >

@@ -36,7 +36,7 @@ const HomeComponent = () => {
 
   return (
     <>
-      <div className="bg-gray-100 min-h-screen">
+      <div className="bg-gray-100 min-h-screen dark:bg-gray-400">
         {/*  ENCABEZADO */}
         <div className="container mx-auto p-4">
           {/*  TITULO */}
