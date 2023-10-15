@@ -19,7 +19,9 @@ const LoginComponents = () => {
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
   const { loginWithPopup, user, getAccessTokenSilently, isAuthenticated } =
-    useAuth0();
+  useAuth0();
+  
+  const [PopupForgot, setPopupForgot] = useState(false);
 
   const [input, setInput] = useState({
     email: "",
@@ -152,9 +154,12 @@ const LoginComponents = () => {
             </div>
             <div className="flex justify-start mt-2 ml-3">
               <div className="text-sm text-[#606060]">
-                <NavLink to="/forgotpassword" className="text-[#3a8a87] ml-1">
-                  <strong> Forgot password?</strong>
-                </NavLink>
+                
+                <p onClick={() => setPopupForgot(true)} 
+                   className="text-[#3a8a87] ml-1 cursor-pointer">
+                      <strong> Forgot password?</strong>  
+                </p>
+
               </div>
             </div>
             <hr className="mt-2 border border-[#909090] rounded-sm" />
@@ -256,6 +261,60 @@ const LoginComponents = () => {
           />
         </div>
       </div>
+
+        {/* PopUp Forgot Pasword */}    
+              
+              {PopupForgot && (
+                
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
+                  
+                    <div className="bg-gray-300 w-1/3 h-3/4 p-8 rounded-lg text-black">
+                                      {/* "relative grid-rows-6 flex items-center justify-center w-1/3 h-3/4 bg-gray-300 px-6 py-24 sm:py-3 lg:px-3" */}
+                                   
+                      <form >
+                        <div className="bg-black text-white p-4 mb-4">
+                          <img
+                            src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/iso_wfaz4p.png"
+                            alt="CodecraftedLogo_image"
+                            width={"30px"}
+                          />
+                        </div>
+                    
+                        <div className="bg-blue-500 text-white p-2 mb-2">
+                          <h2 className="text-xl font-bold">Forgot Password</h2>
+                        </div>
+                        <p className="bg-yellow-400 text-black p-2 mb-2">
+                            Enter your email address
+                        </p>
+                        
+                        <label className="block text-sm font-semibold mb-1">Email</label>
+                        
+                        <input
+                          type="email"
+                          name="email"
+                          className="block w-full rounded-md border border-gray-400 px-3.5 py-2 mb-4"
+                          placeholder="Enter your email address"
+                          required
+                          autoComplete="given-email"
+                        />
+                           
+                        <div className="flex justify-between">
+                          <button className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2">Aceptar</button>
+                          <button className="bg-red-500 text-white px-4 py-2 rounded-md">Cancelar</button>
+                        </div>
+                              
+                        <div className="bg-logo opacity-50 p-2 mt-4 text-center dark:bg-neutral-700">
+                          <span className="text-black">© 2023 Copyright: CodeCrafted Templates</span>
+                        </div> 
+
+                      </form>
+                    </div>                 
+                </div>
+                
+              )}
+            
+              
+    
     </div>
   );
 };
@@ -274,3 +333,98 @@ export default LoginComponents;
 // localStorage.setItem('token', 'yourAuthTokenHere'); // Guardar el token
 
 //! Estilos
+
+// ----------------------------------------------------------------------
+
+
+//////////////////////////////////////////////////////////////
+{/* <form
+
+ref={form}
+onSubmit={(e) => {
+  handleSubmit(e);
+  sendEmail(e);
+}}
+>
+
+... Tu formulario aquí
+
+<div className="isolate w-200 h-190 bg-gray-300 px-6 py-24 sm:py-3 lg:px-3">
+  
+  <div
+    className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+    aria-hidden="true"
+  >
+    
+    <div
+      className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w- -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-grey to-white opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+      style={{
+        "clip-path":
+          "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+      }}
+    ></div>
+
+  </div>
+-----------------------------------------
+    <div className="mx-auto max-w-2xl text-center">
+      <h2 className="border-black bg-red text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl text-sm font-medium uppercase leading-normal">
+        Forgot Password
+      </h2>
+        <p className="bg-blue mt-2 text-sm font-medium uppercase leading-normal leading-8 text-gray-600">
+          Enter your email address:
+        </p>
+    </div>
+------------------------------------------      
+  <div
+    action="#"
+    method="POST"
+    className="mx-auto mt-16 max-w-xl sm:mt-5"
+  >
+    <div className="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2">
+      
+      <div>
+        <label
+          for="first-name"
+          className="block text-sm font-semibold leading-6 text-gray-900"
+        >
+          Email
+        </label>
+      </div>
+
+        <div className="mt-2.5 mx-auto w-full">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email address"
+            required
+            autocomplete="given-email"
+            // value={email}
+            // onChange={(e) => setEmail(e.target.value)}
+            // onChange={handleChange}
+            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
+  </div>
+-------------------------------------------------   
+  <div className="flex justify-center">
+    <button
+      type="button"
+      className="bg-gray-400 text-white text-sm font-medium uppercase leading-normal px-4 py-2 rounded"
+      onClick={() => setPopupForgot(false)}
+    >
+      Close
+    </button>
+    
+    <button
+      type="submit"
+      name="submit"
+      className="bg-logo text-white text-sm font-medium uppercase leading-normal px-4 py-2 ml-2 rounded"
+      value="Send"
+    >
+      Submit
+    </button>
+  </div>
+---------------------------------------------------
+</div>
+
+</form> */}
