@@ -6,6 +6,7 @@ import Nav from "../Nav/Nav";
 import { editUserRedux, logInUser } from "../../Redux/actions";
 import decodeToken from "../loginComponents/decodeToken";
 import Swal from "sweetalert2";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
   // traigo el usuario del estado global
@@ -33,14 +34,6 @@ const Profile = () => {
   // Funcion que carga la imagen a cloudinary
   const uploadImage = async (files) => {
     const formData = new FormData();
-    const typeImage = files.type.split("/");
-    if (
-      typeImage.at(-1) !== "jpeg" &&
-      typeImage.at(-1) !== "bpm" &&
-      typeImage.at(-1) !== "png"
-    )
-      return showErrorAlert("Unsupported file type");
-    // files.type
     formData.append("file", files);
     // aca va el Upload presets: "codeCraftTemplates"
     formData.append("upload_preset", "codeCraftTemplates");
@@ -60,16 +53,12 @@ const Profile = () => {
   };
 
   // funcion edita la base de datos
+ 
   const editUser = async (userEdit) => {
     try {
-      if (!userEdit.logo) {
-        delete userEdit.logo;
-      }
-      const { data } = await axios.put(
-        `${URL}/api/user/${user.email}`,
-        userEdit
-      ); // Recibe el token actualizado
-
+      if(!userEdit.logo) {delete userEdit.logo}
+      // Edita los datos del usuario y rcibe el token actualizado
+      const {data} = await axios.put(`${URL}/api/user/${user.email}`, userEdit); 
       localStorage.setItem("token", data); // Almanecena el nuevo token en el localStorage
 
       const userDecode = decodeToken(data); // Decodifica el token
@@ -77,7 +66,7 @@ const Profile = () => {
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
       showSuccessAlert("Your profile data has been updated");
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
       showErrorAlert("Error");
     }
   };
@@ -88,8 +77,9 @@ const Profile = () => {
     // logInUser(userLocal)
   };
 
-  // --------------------------------------------------------------------------Alert-✅-----------
-  const showSuccessAlert = (message) => {
+
+   // --------------------------------------------------------------------------Alert-✅-----------
+   const showSuccessAlert = (message) => {
     Swal.fire({
       icon: "success",
       title: "Success",
@@ -108,6 +98,7 @@ const Profile = () => {
   };
   // --------------------------------------------------------------------------------⛔------------
 
+  
   return (
     <>
       <div className="bg-gray-100 min-h-screen">
@@ -122,7 +113,7 @@ const Profile = () => {
           </h1>
           <div className="grid grid-cols-12 gap-4">
             {/* Columna izquierda */}
-
+            
             <div
               className="col-span-12 md:col-span-8 flex flex-col justify-start items-center rounded"
               style={{
@@ -132,22 +123,14 @@ const Profile = () => {
             >
               {/* //////////////////////////// */}
               <label className="block mt-3 text-xl text-white font-medium uppercase leading-normal">
-                {user.name ? user.name : ""}
-              </label>
+                   {user.name ? user.name : ""}
+                  </label>
               {/* Aca aparece el logo */}
               <div className="w-3/4 h-3/4 flex items-center justify-center">
                 <img
                   // className="max-w-full max-h-full rounded-md shadow"
                   className="h-72 object-cover rounded-md shadow"
-                  src={
-                    user.logo
-                      ? userLocal.logo || user.logo
-                      : userLocal.logo ||
-                        "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697050849/codeCraft/logo_b_pstr1s.png"
-                    // "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045468/codeCraft/grid_landscape_wiwh59.png"
-                    // "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697050849/codeCraft/logo_c_uuyq2t.png"
-                    // "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697050849/codeCraft/logo_a_wawckx.png"
-                  }
+                  src={user.logo ? userLocal.logo || user.logo : userLocal.logo || "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1696687386/no_imagen_am0gxq.jpg"}
                   alt=""
                 />
               </div>
@@ -176,7 +159,7 @@ const Profile = () => {
                   <form>
                     <div className="mt-8 mb-9">
                       {/* //////////////////////////// */}
-
+      
                       {/* input del nombre*/}
                       <input
                         type="text"
@@ -201,9 +184,9 @@ const Profile = () => {
                       <label
                         title="Nahue"
                         for="file"
-                        className="inline-block mt-5 bg-[#909090] hover:bg-[#303030] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        class="inline-block mt-5 bg-[#909090] hover:bg-[#303030] w-3/4 rounded-md pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       >
-                        upload Logo
+                        upload Image
                       </label>
                       {/* //////////////////////////// */}
 
@@ -219,7 +202,7 @@ const Profile = () => {
                         placeholder="..."
                         className="indent-2 w-3/4 mt-5 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       ></textarea>
-                      <p className="mt-1 text-sm leading-6 text-gray-600 mb-10">
+                      <p class="mt-1 text-sm leading-6 text-gray-600 mb-10">
                         Write a few sentences about your company.
                       </p>
                       {/* //////////////////////////// */}
@@ -228,7 +211,7 @@ const Profile = () => {
                       {/* BOTON */}
                       <button
                         /* type="submit" */
-                        className="mt-10 inline-block bg-logo w-3/4 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        class="mt-10 inline-block bg-logo w-3/4 rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         // data-te-ripple-init
                         // data-te-ripple-color="light"
                         onClick={handleSubmit}
@@ -252,29 +235,29 @@ export default Profile;
 
 //! Modificar checkbox
 {
-  /* <div className="flex h-6 items-center">
+  /* <div class="flex h-6 items-center">
 <input
   id="candidates"
   name="candidates"
   type="checkbox"
-  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+  class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
 />
 </div> */
 }
 
 //! Agregar una foto
 {
-  /* <div className="col-span-full">
+  /* <div class="col-span-full">
 <label
   for="cover-photo"
-  className="block text-sm font-medium leading-6 text-gray-900"
+  class="block text-sm font-medium leading-6 text-gray-900"
 >
   Cover photo
 </label>
-<div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-  <div className="text-center">
+<div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+  <div class="text-center">
     <svg
-      className="mx-auto h-12 w-12 text-gray-300"
+      class="mx-auto h-12 w-12 text-gray-300"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden="true"
@@ -285,22 +268,22 @@ export default Profile;
         clip-rule="evenodd"
       />
     </svg>
-    <div className="mt-4 flex text-sm leading-6 text-gray-600">
+    <div class="mt-4 flex text-sm leading-6 text-gray-600">
       <label
         for="file-upload"
-        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+        class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
       >
         <span>Upload a file</span>
         <input
           id="file-upload"
           name="file-upload"
           type="file"
-          className="sr-only"
+          class="sr-only"
         />
       </label>
-      <p className="pl-1">or drag and drop</p>
+      <p class="pl-1">or drag and drop</p>
     </div>
-    <p className="text-xs leading-5 text-gray-600">
+    <p class="text-xs leading-5 text-gray-600">
       PNG, JPG, GIF up to 10MB
     </p>
   </div>

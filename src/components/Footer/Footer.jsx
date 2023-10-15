@@ -1,7 +1,6 @@
 import "tailwindcss/tailwind.css";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 
@@ -30,6 +29,7 @@ function Footer() {
         );
     }
   };
+
   const [isPopupOpen, setPopupOpen] = useState(false);
 
   const [formData, setFormData] = useState({

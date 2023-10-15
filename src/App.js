@@ -14,21 +14,22 @@ import Detail from "./views/detail/detail";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import ProfileView from "./views/profile/profileView";
 import decodeToken from "./components/loginComponents/decodeToken";
+import AboutPage from "./views/aboutPage/aboutPage";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import plantillas from "./utils/img/ulisesPresets.json";
+import jwt from "jwt-decode";
 
 function App() {
   const URL = process.env.REACT_APP_API;
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login);
-  const { isAuthenticated } = useAuth0();
+
 
   const presets = useSelector((state) => state.presets);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-
     if (storedToken && !isLoggedIn) {
       const login = async () => {
         try {
@@ -37,20 +38,17 @@ function App() {
               Authorization: `${storedToken}`,
             },
           };
-          // console.log("headerToken", headerToken);
-          const { data } = await axios.get(
-            `${URL}/api/user/validate`,
-            headerToken
-          );
-          // console.log("data", data);
+
+          const { data } = await axios.get(`${URL}/api/user/validate`,headerToken); // Verigica que el token no haya expirado
+
           if (data) {
-            const user = decodeToken(storedToken);
-            dispatch(logInUser(user)); // Actualizar el estado con el usuario almacenado
+            const user = decodeToken(storedToken); // Decodifica el token y se obtienen los datos del usuario ya logueado
+            dispatch(logInUser(user)); // Actualiza el estado global con el usuario logueado
             dispatch(logInSet(true));
-          }
+          }else{
+          localStorage.removeItem("token");}
         } catch (error) {
-          localStorage.removeItem("token");
-          console.error("Token expired");
+          console.log(error)
         }
       };
       login();
@@ -85,6 +83,7 @@ function App() {
         <Route path="/pay" element={<Pay />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/profile" element={<ProfileView />} />
+        <Route path="/about" element={<AboutPage/>}/>
       </Routes>
     </div>
   );
