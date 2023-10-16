@@ -6,11 +6,24 @@ const BasicHome02 = () => {
   console.log(user);
   const [color, setColor] = useState({
     primary: "bg-[#101010]",
-    secondary: "[#505050]",
+    secondary: "bg-[#505050]",
     text01: "text-[#922c29]",
     text02: "text-[#cacaca]",
-    text03: "[#303030]",
+    text03: "text-[#303030]",
   });
+
+  const handlerPrimaryClick = (value) => {
+    setColor({...color, primary:value})
+  }
+  const handlerSecondaryClick = (value) => {
+    setColor({...color, secondary:value})
+  }
+  const handlerText02Click = (value) => {
+    setColor({...color, text02:value})
+  }
+  const handlerText03Click = (value) => {
+    setColor({...color, text03:value})
+  }
 
   return (
     <div
@@ -21,15 +34,50 @@ const BasicHome02 = () => {
         backgroundSize: "cover",
       }}
     >
+
+      {/* ******************** SET COLOR PRIMARY ****************** */}
+      <div>
+      <button onClick={()=>handlerPrimaryClick("bg-[#901010]")} className="w-5 h-5 rounded-md bg-[#901010]"/>
+      <button onClick={()=>handlerPrimaryClick("bg-[#109010]")} className="w-5 h-5 rounded-md bg-[#109010]"/>
+      <button onClick={()=>handlerPrimaryClick("bg-[#101090]")} className="w-5 h-5 rounded-md bg-[#101090]"/>
+      <button onClick={()=>handlerPrimaryClick("bg-[#000000]")} className="w-5 h-5 rounded-md bg-[#000000]"/>
+      <button onClick={()=>handlerPrimaryClick("bg-[#909010]")} className="w-5 h-5 rounded-md bg-[#909010]"/>
+      </div>
+      {/* ******************** SET COLOR SECONDARY ****************** */}
+      <div>
+      <button onClick={()=>handlerSecondaryClick("bg-[#901010]")} className="w-5 h-5 rounded-md bg-[#901010]"/>
+      <button onClick={()=>handlerSecondaryClick("bg-[#109010]")} className="w-5 h-5 rounded-md bg-[#109010]"/>
+      <button onClick={()=>handlerSecondaryClick("bg-[#101090]")} className="w-5 h-5 rounded-md bg-[#101090]"/>
+      <button onClick={()=>handlerSecondaryClick("bg-[#000000]")} className="w-5 h-5 rounded-md bg-[#000000]"/>
+      <button onClick={()=>handlerSecondaryClick("bg-[#9e5612]")} className="w-5 h-5 rounded-md bg-[#9e5612]"/>
+      </div>
+      {/* ******************** SET COLOR TEXT02 ****************** */}
+      <div>
+      <button onClick={()=>handlerText02Click("text-[#901010]")} className="w-5 h-5 rounded-md bg-[#901010]"/>
+      <button onClick={()=>handlerText02Click("text-[#109010]")} className="w-5 h-5 rounded-md bg-[#109010]"/>
+      <button onClick={()=>handlerText02Click("text-[#101090]")} className="w-5 h-5 rounded-md bg-[#101090]"/>
+      <button onClick={()=>handlerText02Click("text-[#000000]")} className="w-5 h-5 rounded-md bg-[#000000]"/>
+      <button onClick={()=>handlerText02Click("text-[#9e5612]")} className="w-5 h-5 rounded-md bg-[#9e5612]"/>
+      </div>
+      {/* ******************** SET COLOR TEXT03 ****************** */}
+      <div>
+      <button onClick={()=>handlerText03Click("text-[#901010]")} className="w-5 h-5 rounded-md bg-[#901010]"/>
+      <button onClick={()=>handlerText03Click("text-[#109010]")} className="w-5 h-5 rounded-md bg-[#109010]"/>
+      <button onClick={()=>handlerText03Click("text-[#101090]")} className="w-5 h-5 rounded-md bg-[#101090]"/>
+      <button onClick={()=>handlerText03Click("text-[#000000]")} className="w-5 h-5 rounded-md bg-[#000000]"/>
+      <button onClick={()=>handlerText03Click("text-[#9e5612]")} className="w-5 h-5 rounded-md bg-[#9e5612]"/>
+      </div>
       {/* ********************* NAVBAR ************************* */}
       <div
-        className={`bg-${color.secondary} fixed h-16 max-h-16 w-screen z-50 overflow-hidden grid grid-cols-6 items-center shadow-md pr-5`}
+        className={`${color.secondary} fixed h-16 max-h-16 w-screen z-50 overflow-hidden grid grid-cols-6 items-center shadow-md pr-5`}
       >
-        <div
-          className={`h-16 flex items-center justify-center py-1`}
-        > 
+        <div className={`h-16 flex items-center justify-center py-1`}>
           <img
-            src={user.logo ? user.logo : "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697050849/codeCraft/logo_c_uuyq2t.png"}
+            src={
+              user.logo
+                ? user.logo
+                : "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697050849/codeCraft/logo_c_uuyq2t.png"
+            }
             alt="logo"
             className={`h-full`}
           />
@@ -41,17 +89,17 @@ const BasicHome02 = () => {
             {user.name ? user.name : "your company name"}
           </h1>
         </div>
-        <div className={`capitalize font-medium`}>
-          <a href="#home">Home</a>
+        <div className={`${color.text02}`}>
+          <a href="#home"><i class="fa-solid fa-house"/></a>
         </div>
-        <div className={`capitalize font-medium`}>
-          <a href="#elaboration">Elaboration</a>
+        <div className={`${color.text02}`}>
+          <a href="#elaboration"><i class="fa-solid fa-store"/></a>
         </div>
-        <div className={`capitalize font-medium`}>
-          <a href="#about">About</a>
+        <div className={`${color.text02}`}>
+          <a href="#about"><i class="fa-solid fa-users"/></a>
         </div>
-        <div className={`capitalize font-medium`}>
-          <a href="#contact">Contact</a>
+        <div className={`${color.text02}`}>
+          <a href="#contact"><i class="fa-solid fa-address-card"/></a>
         </div>
       </div>
       {/* ********************************************** */}
@@ -74,7 +122,7 @@ const BasicHome02 = () => {
               >
                 Add Your Title
               </h1>
-              <p className={`w-1/2`}>
+              <p className={`w-1/2 pt-2`}>
                 Use this space to elaborate on the ideas introduced in the
                 title. Include the information that makes the most sense for
                 your brand.
@@ -94,10 +142,10 @@ const BasicHome02 = () => {
               <div
                 className={`flex flex-col items-center justify-center h-3/4 w-3/4 border-2 border-[#909090] rounded-xl  bg-[#922c29] shadow-md px-5`}
               >
-                <h1 className={`pb-5 uppercase font-bold ${color.text02}`}>
+                <h1 className={`pb-3 uppercase font-bold ${color.text02}`}>
                   Introduce your idea
                 </h1>
-                <p className={`pb-10 ${color.text03}`}>
+                <p className={`pb-5 ${color.text03}`}>
                   Use this space to elaborate on your headline and connect with
                   your visitors.
                 </p>
@@ -124,10 +172,10 @@ const BasicHome02 = () => {
               <div
                 className={`flex flex-col items-center justify-center h-3/4 w-3/4 border-2 border-[#909090] rounded-xl bg-[#922c29] shadow-md px-5`}
               >
-                <h1 className={`pb-5 uppercase font-bold ${color.text02}`}>
+                <h1 className={`pb-3 uppercase font-bold ${color.text02}`}>
                   Introduce your idea
                 </h1>
-                <p className={`pb-10 ${color.text03}`}>
+                <p className={`pb-5 ${color.text03}`}>
                   Use this space to elaborate on your headline and connect with
                   your visitors.
                 </p>
@@ -148,83 +196,6 @@ const BasicHome02 = () => {
                   alt=""
                 />
               </div>
-            </div>
-          </div>
-          {/* ************* ABOUT *****************/}
-          <div
-            id="about"
-            className={`${color.primary} h-16 flex items-end justify-center`}
-          >
-            {" "}
-            <hr className="border border-[#922c29] w-11/12" />
-          </div>
-
-          <div
-            className={`${color.primary} grid grid-cols-2 h-96 pt-10 overflow-hidden`}
-          >
-            <div className={`flex flex-col justify-center items-center`}>
-              <div
-                className={`flex flex-col items-end justify-center h-full w-3/4 rounded-sm overflow-hidden grayscale`}
-              >
-                <img
-                  src="https://img.freepik.com/foto-gratis/chef-realiza-como-hacer-buger-adecuado-comida-deliciosa_482257-24283.jpg?size=626&ext=jpg"
-                  alt=""
-                  className="pb-5"
-                />
-              </div>
-            </div>
-            <div className={`flex flex-col items-start justify-start`}>
-              <p className={`text-left w-3/4 h-3/4 ${color.text02}`}>
-                {" "}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Molestias doloribus, reprehenderit repellat dignissimos magni
-                expedita unde doloremque voluptatum culpa fugiat sequi error
-                quidem fuga placeat. Et quisquam ab qui vitae. Lorem ipsum,
-                dolor sit amet consectetur adipisicing elit. Blanditiis beatae
-                cum officiis perferendis cumque. Eveniet maxime architecto,
-                aperiam id asperiores repellat culpa quas natus. Velit dolorum
-                excepturi omnis doloremque molestiae. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Officiis dolorum reiciendis
-                libero, porro id consectetur, expedita accusantium quo nulla
-                placeat vitae. Alias repellendus pariatur laboriosam cumque
-                quasi delectus nemo asperiores...
-              </p>
-            </div>
-          </div>
-          {/* ************* CONTACT *****************/}
-          <div
-            id="contact"
-            className={`${color.primary} h-16 flex items-end justify-center`}
-          >
-            <hr className="border border-[#922c29] w-11/12" />
-          </div>
-          <div
-            className={`h-32 flex flex-col items-center justify-center ${color.primary}`}
-          >
-            <h1
-              className={`uppercase font-bold ${color.text02} pb-2 border-b border-[#922c29]`}
-            >
-              Contact us
-            </h1>
-            <div className={`flex pt-5`}>
-              <a href="#" target="_blank">
-                <i class={`text-3xl fa-brands ${color.text01} fa-facebook `} />
-              </a>
-              <a href="#" target="_blank">
-                <i
-                  class={`text-3xl fa-brands ${color.text01} fa-instagram ml-20`}
-                />
-              </a>
-              <a href="#" target="_blank">
-                <i
-                  class={`text-3xl fa-brands ${color.text01} fa-whatsapp ml-20`}
-                />
-              </a>
-              <a href="#" target="_blank">
-                <i
-                  class={`text-3xl fa-brands ${color.text01} fa-twitter ml-20`}
-                />
-              </a>
             </div>
           </div>
         </div>
