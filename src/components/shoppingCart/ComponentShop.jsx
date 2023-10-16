@@ -85,7 +85,7 @@ const ComponentShop = () => {
 
   return (
     <>
-      <div className="bg-gray-100 min-h-screen">
+      <div className="bg-gray-100 min-h-screen dark:bg-gray-400">
         <div className="container mx-auto p-4">
           {/* Encabezado */}
           <h1
@@ -99,15 +99,13 @@ const ComponentShop = () => {
           <div className="grid grid-cols-12 gap-4">
             {/* Columna IZQ */}
             <div
-              className="col-span-12 md:col-span-2 rounded sm:h-full sm:flex sm:justify-center md:flex md:flex-col md:justify-start md:items-start flex flex-col items-start justify-start"
-              style={{
-                background:
-                  "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-              }}
+              className="col-span-12 md:col-span-2 rounded sm:h-full sm:flex sm:justify-center md:flex md:flex-col md:justify-start md:items-start flex flex-col items-start justify-start
+              bg-gray-300 text-neutral-600 dark:bg-gray-700 dark:text-white"
+         
             >
               {/* /////////////////////////////////// */}
               {/* Order */}
-              <div>
+              <div className="text-neutral-100 ">
                 <SelectOrder
                   handleOrderChange={handleOrderChange}
                   selectedFilterColor={selectedFilterColor}
@@ -119,12 +117,12 @@ const ComponentShop = () => {
               {/* /////////////////////////////////// */}
               {/* Category */}
               <div className="flex flex-col justify-start">
-                <h1 className="justify-start uppercase leading-normal font-semibold mb-1 mt-5 ml-5">
+                <h1 className="justify-start uppercase leading-normal font-semibold mb-1 mt-5 ml-5 ">
                   Category:
                 </h1>
                 {/* All */}
                 <div>
-                  <label className="my-1 flex items-center ml-5 ">
+                  <label className="my-1 flex items-center ml-5">
                     <input
                       type="checkbox"
                       value={[]}
@@ -135,7 +133,7 @@ const ComponentShop = () => {
                       }}
                       className="mr-2"
                     />
-                    <span className="text-sm font-medium uppercase leading-normal text-[#303030]">
+                    <span className="text-sm font-medium uppercase leading-normal  text-neutral-600 dark:text-white ">
                       All
                     </span>
                   </label>
@@ -146,7 +144,7 @@ const ComponentShop = () => {
                     return (
                       <label
                         key={index}
-                        className=" my-1 flex items-center ml-5"
+                        className=" my-1 flex items-center ml-5 "
                       >
                         <input
                           type="checkbox"
@@ -155,9 +153,9 @@ const ComponentShop = () => {
                           onChange={(event) => {
                             handleCategoryChange(event);
                           }}
-                          className="mr-2"
+                          className="mr-2 "
                         />
-                        <span className="text-sm font-medium uppercase leading-normal text-[#303030]">
+                        <span className="text-sm font-medium uppercase leading-normal  text-neutral-600 dark:text-white ]">
                           {typeName}
                         </span>
                       </label>
@@ -186,7 +184,7 @@ const ComponentShop = () => {
                         }}
                         className="mr-2"
                       />
-                      <span className="text-sm font-medium uppercase leading-normal text-[#303030]">
+                      <span className="text-sm font-medium uppercase leading-normal  text-neutral-600 dark:text-white ">
                         {colorName}
                       </span>
                     </label>
@@ -215,7 +213,7 @@ const ComponentShop = () => {
                         }}
                         className="mr-2"
                       />
-                      <span className="text-sm font-medium uppercase leading-normal text-[#303030]">
+                      <span className="text-sm font-medium uppercase leading-normal  text-neutral-600 dark:text-white ">
                         {modelsName}
                       </span>
                     </label>
