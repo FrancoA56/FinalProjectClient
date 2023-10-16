@@ -92,15 +92,12 @@ const LoginComponents = () => {
   };
 
     return (
-    <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
+    <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen ">
       {/* Columna izq */}
       <div
         className="grid-span-2 flex justify-center 
-        items-center py-3"
-        style={{
-          background:
-            "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-        }}
+        items-center py-3 bg-gray-300 dark:bg-gray-700"
+       
       >
         <div className="md:w-8/12 lg:w-8/12">
           <form onSubmit={handleSubmit}>

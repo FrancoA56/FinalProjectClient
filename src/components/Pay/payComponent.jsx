@@ -92,14 +92,14 @@ const PayComponent = () => {
     return deploymentCost + subTotal;
   };
   return (
-    <div className="dark:bg-[#101010]">
+    <div className="bg-gray-100 dark:bg-gray-400 ">
       <Banner />
       <Nav />
       <div>
         <div className="container mx-auto p-1 mt-2 mb-2">
           <h2
             className="inline-block mb-2 mt-2 w-full p-1 bg-[#303030]  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-          text-white dark:text-[#909090] shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+          text-white dark:text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-gray-300 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
            
           >
             Checkout
