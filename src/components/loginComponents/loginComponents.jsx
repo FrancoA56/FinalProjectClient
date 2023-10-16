@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 import styles from "../loginComponents/login.module.css";
 import decodeToken from "./decodeToken";
 import { useAuth0 } from "@auth0/auth0-react";
-import ForgotPassword from "../ForgotPassword/ForgotPassword"
 import Banner from "../../components/Banner/Banner";
 import { validation } from "../validation";
 
@@ -23,32 +22,16 @@ const LoginComponents = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
-  const { loginWithPopup, user, getAccessTokenSilently, isAuthenticated } = useAuth0();
-  const [errors, setErrors] = useState({});
-  const [PopupForgot, setPopupForgot] = useState (false)
-  const [PopupReset, setPopupReset] = useState (false)
-  const [password, setPassword] = useState("");
-  const [validations, setValidations] = useState({
-    hasUppercase: false,
-    hasLowercase: false,
-    hasNumber: false,
-    hasSpecialChar: false,
-    isBetween8And30: false,
-  });
+  const { loginWithPopup, user, isAuthenticated } = useAuth0();
+  const [PopupForgot, setPopupForgot] = useState(false);
 
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
-  
+
   const [inputForgot, setInputForgot] = useState({
     email: "",
-  });
-  
-  const [inputReset, setInputReset] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
   });
 
   function handleChange(e) {
@@ -57,27 +40,36 @@ const LoginComponents = () => {
       [e.target.name]: e.target.value,
     });
   }
-  
+
   function handleForgot(e) {
     setInputForgot({
       ...inputForgot,
       [e.target.name]: e.target.value,
-    });
+    })
+    
   }
 
-  function handleReset(e) {
-    setInputReset({
-      ...inputReset,
-      [e.target.name]: e.target.value,
-    });
-    setErrors(
-      validation({
-        ...inputReset,
-        [e.target.name]: e.target.value,
+  async function forgotPassword (){
+    try {
+      const user = {
+        email: inputForgot.email}
+      console.log(user)
+      await axios.post(`${URL}/api/user/forgot`,user)
+      Swal.fire({
+        showConfirmButton: true,
+        confirmButtonColor: "rgb(94 195 191)",
+        icon: 'success',
+        text: 'Check your email, you have been sent a link to create a new password'
       })
-    );
+    } catch (error) {
+      Swal.fire({
+        showConfirmButton: true,
+        confirmButtonColor: "rgb(94 195 191)",
+        icon: 'error',
+        text: error
+      })
+    }
   }
-
   useEffect(() => {
     if (isAuthenticated) {
       const auth = async () => {
@@ -117,11 +109,11 @@ const LoginComponents = () => {
         navigate("/");
       }
     } catch (error) {
-      showErrorAlert(error.message);
+      showErrorAlert(error.response.data.error);
     }
   }
 
-// -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
   const showErrorAlert = (error) => {
     Swal.fire({
       icon: "error",
@@ -130,8 +122,8 @@ const LoginComponents = () => {
       text: error,
     });
   };
-// ------------------------------------------------------------------------------------------------------
-// --------------------------------------Password validity requirements----------------------------------
+  // ------------------------------------------------------------------------------------------------------
+  // --------------------------------------Password validity requirements----------------------------------
   const validatePassword = (e) => {
     const uppercaseRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
@@ -147,25 +139,21 @@ const LoginComponents = () => {
     });
     setPassword(e);
   };
-// --------------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------- Ojito Password Login---------
+  // --------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------- Ojito Password Login---------
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-// --------------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------- Ojito Password Reset---------
-const [showPasswordReset, setShowPasswordReset] = useState(false);
-const togglePasswordVisibilityReset = () => {
-  setShowPasswordReset(!showPasswordReset);
-};
-// --------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------- Ojito Password Reset---------
+  // --------------------------------------------------------------------------------------------------------
 
-    return (
+  return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen ">
       {/* Columna izq */}
       <div
-      //className="grid-span-2 flex justify-center items-center py-3"
+        //className="grid-span-2 flex justify-center items-center py-3"
         className="grid-span-2 flex justify-center items-center py-3 bg-gray-300 dark:bg-gray-700"
         style={{
           background:
@@ -207,7 +195,7 @@ const togglePasswordVisibilityReset = () => {
                 className="absolute mr-2 text-[#909090] hover:text-[#303030]"
               >
                 {showPassword ? (
-                  <i class= "fa-solid fa-eye"/>
+                  <i class="fa-solid fa-eye" />
                 ) : (
                   <i className="fa-solid fa-eye-slash" />
                 )}
@@ -215,12 +203,12 @@ const togglePasswordVisibilityReset = () => {
             </div>
             <div className="flex justify-start mt-2 ml-3">
               <div className="text-sm text-[#606060]">
-                
-                <p onClick={() => setPopupForgot(true)} 
-                   className="text-[#3a8a87] ml-1 cursor-pointer">
-                      <strong> Forgot password?</strong>  
+                <p
+                  onClick={() => setPopupForgot(true)}
+                  className="text-[#3a8a87] ml-1 cursor-pointer"
+                >
+                  <strong> Forgot password?</strong>
                 </p>
-
               </div>
             </div>
             <hr className="mt-2 border border-[#909090] rounded-sm" />
@@ -266,7 +254,6 @@ const togglePasswordVisibilityReset = () => {
               style={{ backgroundColor: "#303030" }}
               onClick={() => loginWithPopup()}
               class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-
               href="#!"
               role="button"
               data-te-ripple-init
@@ -305,240 +292,80 @@ const togglePasswordVisibilityReset = () => {
         </div>
       </div>
 
-{/* --------------------------------------------------------------------------------------------------------*/}
-    {/* PopUp Forgot Pasword */}    
-    
-      {PopupForgot && (
-                
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center h-screen">            
-          <div className="relative bg-gray-300 w-1/3 h-3/4 p-4 text-black">
-            <form >
+      {/* --------------------------------------------------------------------------------------------------------*/}
+      {/* PopUp Forgot Pasword */}
 
+      {PopupForgot && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center h-screen">
+          <div className="relative bg-gray-300 w-1/3 h-3/4 p-4 text-black">
+            <form>
               <div className="absolute top-0 left-0 w-full">
-                <Banner />                       
+                <Banner />
               </div>
-                    
+
               <div className="static text-black p-2 mt-14 mb-2">
                 <h2 className="text-xl font-bold">Forgot Password</h2>
-                  </div>
-                    <p className="text-black p-2 mt-2 mb-6">
-                      Please enter the email address you'd like your password reset information sent to
-                    </p>
-                        
-                    <label className="block text-sm font-semibold text-left mb-2 ml-2">Enter email address</label>
-                        
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      // value={inputForgot.email}
-                      // onChange={(e) => {handleForgot}}
-                      className="block w-full rounded-md border border-gray-400 px-3.5 py-2 mb-4"
-                      placeholder="Enter your email address"
-                      required
-                      autoComplete="given-email"
-                    />
-                         
-                  <div>
-                    <button 
-                      // onClick={(ForgotPassword)}
-                      // value="Send"
-                      // type="submit"
-                      onClick={() => {setPopupReset(true), setPopupForgot(false)}} 
-                      className="mt-1 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                      data-te-ripple-init
-                      data-te-ripple-color="light"
-                    >
-                      Request Password Reset
-                    </button>
-                          
-                    <p onClick={() => setPopupForgot(false)} 
-                      className="text-[#3a8a87] cursor-pointer mt-6">
-                        <strong>Back to login</strong>  
-                    </p>
-                  </div>
-                              
-                  <div className="bg-logo opacity-50 p-2 mt-4 text-center dark:bg-neutral-700 absolute bottom-0 left-0 w-full">
-                    <span className="text-black">© 2023 Copyright: CodeCrafted Templates</span>
-                  </div> 
+              </div>
+              <p className="text-black p-2 mt-2 mb-6">
+                Please enter the email address you'd like your password reset
+                information sent to
+              </p>
 
+              <label className="block text-sm font-semibold text-left mb-2 ml-2">
+                Enter email address
+              </label>
+
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={inputForgot.email}
+                onChange={handleForgot}
+                className="block w-full rounded-md border border-gray-400 px-3.5 py-2 mb-4"
+                placeholder="Enter your email address"
+                required
+                autoComplete="given-email"
+              />
+
+              <div>
+                <button
+                  // onClick={(ForgotPassword)}
+                  // value="Send"
+                  type="submit"
+                  onClick={() => { setPopupForgot(false),forgotPassword() }}
+                  className="mt-1 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  data-te-ripple-init
+                  data-te-ripple-color="light"
+                >
+                  Request Password Reset
+                </button>
+
+                <p
+                  onClick={() => setPopupForgot(false)}
+                  className="text-[#3a8a87] cursor-pointer mt-6"
+                >
+                  <strong>Back to login</strong>
+                </p>
+              </div>
+
+              <div className="bg-logo opacity-50 p-2 mt-4 text-center dark:bg-neutral-700 absolute bottom-0 left-0 w-full">
+                <span className="text-black">
+                  © 2023 Copyright: CodeCrafted Templates
+                </span>
+              </div>
             </form>
-          </div>                 
+          </div>
         </div>
-                
       )}
-{/* --------------------------------------------------------------------------------------------------------- */}
-{/* --------------------------------------------------------------------------------------------------------- */}
-    {/* PopUp Reset Pasword */} 
 
-      {PopupReset && (
-                
-                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">            
-                  <div className="relative bg-gray-300 w-1/3 h-[90%] p-4 text-black">
-                    <form >
-        
-                      <div className="absolute top-0 left-0 w-full">
-                        <Banner />                       
-                      </div>
-                            
-                      <div className="static text-black p-2 mt-11 ">
-                        <h2 className="text-xl font-bold">Reset Your Password</h2>
-                      </div>
-                        <p className="text-black p-2 mb-2">
-                          Enter a new password to reset the password on your account. We'll ask for this password wherever you login
-                        </p>
-                                
-                        <label className="block text-sm font-semibold text-left mb-2 ml-2">Enter your password</label>
-                      
-{/* --------------------------------------------------------------------------------------------------------- */}
-                      <div className="mt-3 flex items-center justify-end">          
-                        <input
-                          type={showPasswordReset ? "text" : "password"}
-                          name="password"
-                          id= "password"
-                          value={inputReset.password}
-                          onChange={(e) => {
-                            validatePassword(e.target.value);
-                            handleReset(e);
-                          }}
-                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          placeholder="Enter your new password"
-                          required
-                        />
-                        <span // Boton de ojito de contraseña
-                          type="button"
-                          onClick={togglePasswordVisibilityReset}
-                          className="absolute mr-2 text-[#909090] hover:text-[#303030]"
-                        >
-                          {
-                            showPasswordReset ? (
-                              <i className="fa-solid fa-eye" />
-                            ) : (
-                              <i className="fa-solid fa-eye-slash" />
-                            )}
-                        </span>
-                      </div>
-{/* --------------------------------------------------------------------------------------------------------- */}
-{/* ------------------Validacion del password---------------------------------------------------------------- */}
-                      <div className="static mt-1 mb-2"> 
-                        <p className="static mt-2 text-sm text-[#606060]">
-                          <strong> Password must have:</strong>   
-                        </p>
-                        <ul className="grid grid-cols-2 text-sm text-[#606060]">
-                      
-                        <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                          <li>
-                            {validations.hasUppercase ? (
-                              <i className="fa-solid fa-check text-green-600" />
-                                ) : (
-                              <i className="fa-solid fa-xmark text-red-600" />
-                                )}{" "}
-                                  An uppercase character
-                          </li>
-                          <li>
-                            {validations.hasLowercase ? (
-                              <i className="fa-solid fa-check text-green-600" />
-                                ) : (
-                              <i className="fa-solid fa-xmark text-red-600" />
-                                )}{" "}
-                                  An lowercase character
-                          </li>
-                          <li className="line-clamp-1">
-                            {validations.isBetween8And30 ? (
-                              <i className="fa-solid fa-check text-green-600" />
-                                ) : (
-                              <i className="fa-solid fa-xmark text-red-600" />
-                                )}{" "}
-                                  A between 8 and 30 char...
-                          </li>
-                        </div>
-                  
-                        <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                          <li>
-                            {validations.hasNumber ? (
-                              <i className="fa-solid fa-check text-green-600" />
-                                ) : (
-                              <i className="fa-solid fa-xmark text-red-600" />
-                               )}{" "}
-                                  At least one number
-                          </li>
-                          <li>
-                            {validations.hasSpecialChar ? (
-                              <i className="fa-solid fa-check text-green-600" />
-                                ) : (
-                              <i className="fa-solid fa-xmark text-red-600" />
-                                )}{" "}
-                                  A special character
-                          </li>
-                        </div>
-                        </ul>
-                      </div>
-{/* -------------------------------------------------------------------------------------------------------- */}
-                              
-                      <div className="flex items-center justify-end mb-2">
-                        <input
-                          type={showPasswordReset ? "text" : "password"}
-                          name="confirmPassword"
-                          id="confirmPassword"
-                          placeholder="Confirm your new password"
-                          value={inputReset.confirmPassword}
-                          onChange={(e) => handleReset(e)}
-                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          required
-                        />
-                        <span className={styles.warning}>
-                          {" "}
-                            {errors.confirmPassword && (
-                          <i
-                            className={styles.icon}
-                            class="fa-solid fa-circle-exclamation text-red-600 hover:text-red-800 "
-                          />
-                            )}
-                        <span className={styles.bubble}>
-                          {errors.confirmPassword}
-                        </span>
-                        </span>
-                      </div>
-{/* ------------------------------------------------------------------------------------------------------- */}
-                      <div>
-                        <button 
-                          // onClick={(ForgotPassword)}
-                          value="Send"
-                          type="submit"
-                          className="mt-2 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                          data-te-ripple-init
-                          data-te-ripple-color="light"
-                         >
-                          Reset Password
-                        </button>
-                                  
-                        <p onClick={() => setPopupReset(false)} 
-                          className="text-[#3a8a87] cursor-pointer mt-6">
-                            <strong>Back to login</strong>  
-                        </p>
-                      </div>
-                                      
-                      <div className="bg-logo opacity-50 p-2 mt-4 text-center dark:bg-neutral-700 absolute bottom-0 left-0 w-full">
-                        <span className="text-black">© 2023 Copyright: CodeCrafted Templates</span>
-                      </div> 
-        
-                    </form>
-                  </div>                 
-                </div>
-                        
-              )}
-
-
-{/* --------------------------------------------------------------------------------------------------------- */}
-    
     </div>
   );
 };
 
 export default LoginComponents;
 
-
-{/* <form
+{
+  /* <form
 
 ref={form}
 onSubmit={(e) => {
@@ -627,4 +454,5 @@ onSubmit={(e) => {
 ---------------------------------------------------
 </div>
 
-</form> */}
+</form> */
+}
