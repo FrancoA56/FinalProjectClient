@@ -3,11 +3,11 @@ import axios from "axios"
 import swal from "sweetalert2"
 import loading from "../../utils/img/loading.png"
 
-const ForgotPassword = () => {
+const ForgotPassword = async () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
 
-  const handleSubmit = async (e) => {
+  // const handleForgot = async (e) => {
     e.preventDefault();
    
     setIsLoading (true);
@@ -28,35 +28,35 @@ const ForgotPassword = () => {
           icon: 'error',
           text: 'There was an error trying to send the data, check the email entered or try again later'
         })
-      }
+      // }
   }
 
-  return (
-    <div className="main">
-      <form className="mainContainer" onSubmit={handleSubmit}>
-        <h3>Recuperar cuenta</h3>
-        <div>Correo electronico:</div>
-        <input
-          type="email"
-          name="email"
-          placeholder="Introduce tu email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <div className="divButton">
-          {isLoading
-            ?
-            <div className="loadingImage">
-              <img src={loading} alt="loading"/>
-            </div>
-            :
-            <button type="submit">Enviar</button>
-          }
-        </div> 
-      </form>
-    </div>
-  )
+  // return (
+  //   <div className="main">
+  //     <form className="mainContainer" onSubmit={handleSubmit}>
+  //       <h3>Recuperar cuenta</h3>
+  //       <div>Correo electronico:</div>
+  //       <input
+  //         type="email"
+  //         name="email"
+  //         placeholder="Introduce tu email"
+  //         value={email}
+  //         onChange={(e) => setEmail(e.target.value)}
+  //         required
+  //       />
+  //       <div className="divButton">
+  //         {isLoading
+  //           ?
+  //           <div className="loadingImage">
+  //             <img src={loading} alt="loading"/>
+  //           </div>
+  //           :
+  //           <button type="submit">Enviar</button>
+  //         }
+  //       </div> 
+  //     </form>
+  //   </div>
+  // )
 
 }
 export default ForgotPassword
