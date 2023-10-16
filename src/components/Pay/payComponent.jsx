@@ -29,7 +29,7 @@ const PayComponent = () => {
     country: "",
   });
 
-  // funcion edita la base de datos
+  // funcion edita la base de datos USER
   const editUser = async (userEdit) => {
     try {
       const { data } = await axios.put(
@@ -49,22 +49,25 @@ const PayComponent = () => {
       showErrorAlert("Error");
     }
   };
+  // funcion edita la base de datos USER
+  const payOrderPost = async (order) => {
+    try {
+      const { data } = await axios.post(
+        `${URL}/api/shop/pay_order`,
+        order
+      );
+      // Aca tengo data pero todavia no hace nada (x ahora devuelve "{isSucces:True}")
+      // console.log(data)
+    } catch (error) {
+      showErrorAlert(error.message);
+    }
+  };
 
   const handleChange = (event) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
-  };
-  // Hay que cambiar el link de navigate para paypal
-  const handlePaypalSubmit = (e) => {
-    e.preventDefault();
-    editUser(formData) && navigate("/cart");
-  };
-  // Hay que cambiar el link de navigate para algun lado
-  const handleTransferSubmit = (e) => {
-    e.preventDefault();
-    editUser(formData) && navigate("/shop");
   };
 
   const showSuccessAlert = (message) => {
@@ -91,8 +94,37 @@ const PayComponent = () => {
   const total = () => {
     return deploymentCost + subTotal;
   };
+
+  // Nuevo array para pasarle solo id|price al back
+  const productsCart = cart.map((product) => {
+    return { id: product.id, price: product.price };
+  });
+  // Estado local para mandarle a shop_pay_order
+  const [payOrder, setPayOrder] = useState({
+    email: user.email,
+    products: productsCart,
+    totalAmount: deploymentCost + subTotal,
+    paymentMethod: "",
+  });
+  // Hay que cambiar el link de navigate para paypal
+  const handlePaypalSubmit = (e) => {
+    e.preventDefault();
+    setPayOrder({ ...payOrder, paymentMethod: "paypal" });
+    editUser(formData) 
+    payOrderPost(payOrder)
+    //navigate("/cart");
+  };
+  // Hay que cambiar el link de navigate para algun lado
+  const handleTransferSubmit = (e) => {
+    e.preventDefault();
+    setPayOrder({ ...payOrder, paymentMethod: "Bank transfer" });
+    editUser(formData)
+    payOrderPost(payOrder)
+    //navigate("/shop");
+  };
+
   return (
-    <div className="bg-gray-100 dark:bg-gray-400 ">
+    <div className="bg-gray-100 dark:bg-[#505050] ">
       <Banner />
       <Nav />
       <div>
@@ -100,7 +132,6 @@ const PayComponent = () => {
           <h2
             className="inline-block mb-2 mt-2 w-full p-1 bg-[#303030]  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
           text-white dark:text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-gray-300 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-           
           >
             Checkout
           </h2>
@@ -347,7 +378,7 @@ const PayComponent = () => {
                         </button>
                         <button
                           onClick={handleTransferSubmit}
-                          className="h-10 w-11/12 mt-2 bg-logo rounded-md md:px-2 md:w-1/3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                          className="h-10 w-11/12 mt-2 bg-logo rounded-md md:px-2 md:w-1/2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         >
                           pay by bank transfer
                         </button>
