@@ -11,7 +11,7 @@ import Cart from "./views/cart/cart.jsx";
 import Pay from "./views/pay/pay.jsx";
 import Home from "./views/home/HomeViews";
 import Detail from "./views/detail/detail";
-import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 import ProfileView from "./views/profile/profileView";
 import decodeToken from "./components/loginComponents/decodeToken";
 import AboutPage from "./views/aboutPage/aboutPage";
@@ -76,7 +76,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/shop" element={<ShoppingCart />} />
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
