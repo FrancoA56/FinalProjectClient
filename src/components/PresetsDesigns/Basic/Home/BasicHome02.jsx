@@ -1,30 +1,94 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import ColorPanel from "../../../../utils/ColorPanel";
 
 const BasicHome02 = () => {
   const user = useSelector((state) => state.user);
-  console.log(user);
+  // console.log(user);
   const [color, setColor] = useState({
     primary: "bg-[#101010]",
     secondary: "bg-[#505050]",
-    text01: "text-[#922c29]",
-    text02: "text-[#cacaca]",
-    text03: "text-[#303030]",
+    text01: "text-[#cacaca]",
+    text02: "text-[#303030]",
   });
 
   const handlerPrimaryClick = (value) => {
-    setColor({...color, primary:value})
-  }
+    setColor({ ...color, primary: value });
+  };
   const handlerSecondaryClick = (value) => {
-    setColor({...color, secondary:value})
-  }
+    setColor({ ...color, secondary: value });
+  };
+  const handlerText01Click = (value) => {
+    setColor({ ...color, text01: value });
+  };
   const handlerText02Click = (value) => {
-    setColor({...color, text02:value})
-  }
-  const handlerText03Click = (value) => {
-    setColor({...color, text03:value})
-  }
+    setColor({ ...color, text02: value });
+  };
 
+  const bgColors = [
+    "bg-white",
+    "bg-yellow-300",
+    "bg-yellow-500",
+    "bg-yellow-700",
+    "bg-yellow-900",
+    "bg-orange-100",
+    "bg-orange-300",
+    "bg-orange-500",
+    "bg-orange-900",
+    "bg-red-300",
+    "bg-red-500",
+    "bg-red-700",
+    "bg-red-900",
+    "bg-purple-300",
+    "bg-purple-500",
+    "bg-purple-700",
+    "bg-purple-900",
+    "bg-blue-300",
+    "bg-blue-500",
+    "bg-blue-700",
+    "bg-blue-900",
+    "bg-green-300",
+    "bg-green-500",
+    "bg-green-700",
+    "bg-green-900",
+    "bg-stone-300",
+    "bg-stone-500",
+    "bg-stone-700",
+    "bg-stone-900",
+    "bg-black",
+  ];
+  const colors = [
+    "white",
+    "yellow-300",
+    "yellow-500",
+    "yellow-700",
+    "yellow-900",
+    "orange-100",
+    "orange-300",
+    "orange-500",
+    "orange-900",
+    "red-300",
+    "red-500",
+    "red-700",
+    "red-900",
+    "purple-300",
+    "purple-500",
+    "purple-700",
+    "purple-900",
+    "blue-300",
+    "blue-500",
+    "blue-700",
+    "blue-900",
+    "green-300",
+    "green-500",
+    "green-700",
+    "green-900",
+    "stone-300",
+    "stone-500",
+    "stone-700",
+    "stone-900",
+    "black",
+  ];
   return (
     <div
       class={`bg-fixed`}
@@ -34,39 +98,7 @@ const BasicHome02 = () => {
         backgroundSize: "cover",
       }}
     >
-
-      {/* ******************** SET COLOR PRIMARY ****************** */}
-      <div>
-      <button onClick={()=>handlerPrimaryClick("bg-[#901010]")} className="w-5 h-5 rounded-md bg-[#901010]"/>
-      <button onClick={()=>handlerPrimaryClick("bg-[#109010]")} className="w-5 h-5 rounded-md bg-[#109010]"/>
-      <button onClick={()=>handlerPrimaryClick("bg-[#101090]")} className="w-5 h-5 rounded-md bg-[#101090]"/>
-      <button onClick={()=>handlerPrimaryClick("bg-[#000000]")} className="w-5 h-5 rounded-md bg-[#000000]"/>
-      <button onClick={()=>handlerPrimaryClick("bg-[#909010]")} className="w-5 h-5 rounded-md bg-[#909010]"/>
-      </div>
-      {/* ******************** SET COLOR SECONDARY ****************** */}
-      <div>
-      <button onClick={()=>handlerSecondaryClick("bg-[#901010]")} className="w-5 h-5 rounded-md bg-[#901010]"/>
-      <button onClick={()=>handlerSecondaryClick("bg-[#109010]")} className="w-5 h-5 rounded-md bg-[#109010]"/>
-      <button onClick={()=>handlerSecondaryClick("bg-[#101090]")} className="w-5 h-5 rounded-md bg-[#101090]"/>
-      <button onClick={()=>handlerSecondaryClick("bg-[#000000]")} className="w-5 h-5 rounded-md bg-[#000000]"/>
-      <button onClick={()=>handlerSecondaryClick("bg-[#9e5612]")} className="w-5 h-5 rounded-md bg-[#9e5612]"/>
-      </div>
-      {/* ******************** SET COLOR TEXT02 ****************** */}
-      <div>
-      <button onClick={()=>handlerText02Click("text-[#901010]")} className="w-5 h-5 rounded-md bg-[#901010]"/>
-      <button onClick={()=>handlerText02Click("text-[#109010]")} className="w-5 h-5 rounded-md bg-[#109010]"/>
-      <button onClick={()=>handlerText02Click("text-[#101090]")} className="w-5 h-5 rounded-md bg-[#101090]"/>
-      <button onClick={()=>handlerText02Click("text-[#000000]")} className="w-5 h-5 rounded-md bg-[#000000]"/>
-      <button onClick={()=>handlerText02Click("text-[#9e5612]")} className="w-5 h-5 rounded-md bg-[#9e5612]"/>
-      </div>
-      {/* ******************** SET COLOR TEXT03 ****************** */}
-      <div>
-      <button onClick={()=>handlerText03Click("text-[#901010]")} className="w-5 h-5 rounded-md bg-[#901010]"/>
-      <button onClick={()=>handlerText03Click("text-[#109010]")} className="w-5 h-5 rounded-md bg-[#109010]"/>
-      <button onClick={()=>handlerText03Click("text-[#101090]")} className="w-5 h-5 rounded-md bg-[#101090]"/>
-      <button onClick={()=>handlerText03Click("text-[#000000]")} className="w-5 h-5 rounded-md bg-[#000000]"/>
-      <button onClick={()=>handlerText03Click("text-[#9e5612]")} className="w-5 h-5 rounded-md bg-[#9e5612]"/>
-      </div>
+             
       {/* ********************* NAVBAR ************************* */}
       <div
         className={`${color.secondary} fixed h-16 max-h-16 w-screen z-50 overflow-hidden grid grid-cols-6 items-center shadow-md pr-5`}
@@ -84,37 +116,100 @@ const BasicHome02 = () => {
         </div>
         <div className={`flex`}>
           <h1
-            className={`pl-2 font-semibold text-title uppercase ${color.text02}`}
+            className={`pl-2 font-semibold text-title uppercase ${color.text01}`}
           >
             {user.name ? user.name : "your company name"}
           </h1>
         </div>
-        <div className={`${color.text02}`}>
-          <a href="#home"><i class="fa-solid fa-house"/></a>
+        <div className={`${color.text01}`}>
+          <a href="#home">
+            <i class="fa-solid fa-house" />
+          </a>
         </div>
-        <div className={`${color.text02}`}>
-          <a href="#elaboration"><i class="fa-solid fa-store"/></a>
+        <div className={`${color.text01}`}>
+          <a href="#elaboration">
+            <i class="fa-solid fa-store" />
+          </a>
         </div>
-        <div className={`${color.text02}`}>
-          <a href="#about"><i class="fa-solid fa-users"/></a>
+        <div className={`${color.text01}`}>
+          <a href="#about">
+            <i class="fa-solid fa-users" />
+          </a>
         </div>
-        <div className={`${color.text02}`}>
-          <a href="#contact"><i class="fa-solid fa-address-card"/></a>
+        <div className={`${color.text01}`}>
+          <a href="#contact">
+            <i class="fa-solid fa-palette"></i>
+          </a>
         </div>
       </div>
       {/* ********************************************** */}
 
+           {/* ********************  COLOR PANEL ****************** */}
+      <div className={`bg-[#303030] w-full pt-16 flex flex-col items-center justify-center`}>
+        {/* ******************** SET COLOR PRIMARY ****************** */}
+        <div className="flex flex-row">
+          {bgColors.map((color) => {
+            return (
+              <div>
+                <button
+                  onClick={() => handlerPrimaryClick(`${color}`)}
+                  className={`w-8 h-4 ${color} border border-transparent focus:border-double focus:border-logo`}
+                />
+              </div>
+            );
+          })}
+        </div>
+        {/* ******************** SET COLOR SECONDARY ****************** */}
+        <div className="flex flex-row">
+          {bgColors.map((color) => {
+            return (
+              <div>
+                <button
+                  onClick={() => handlerSecondaryClick(`${color}`)}
+                  className={`w-8 h-4 ${color} border border-transparent focus:border-double focus:border-logo `}
+                />
+              </div>
+            );
+          })}
+        </div>
+        {/* ******************** SET COLOR TEXT01 ****************** */}
+        <div className="flex flex-row">
+          {colors.map((color) => {
+            return (
+              <div>
+                <button
+                  onClick={() => handlerText01Click(`text-${color}`)}
+                  className={`w-8 h-4 bg-${color} border border-transparent focus:border-double focus:border-logo `}
+                />
+              </div>
+            );
+          })}
+        </div>
+        {/* ******************** SET COLOR TEXT02 ****************** */}
+        <div className="flex flex-row">
+          {colors.map((color) => {
+            return (
+              <div>
+                <button
+                  onClick={() => handlerText02Click(`text-${color}`)}
+                  className={`w-8 h-4 bg-${color} border border-transparent focus:border-double focus:border-logo `}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
       <div className={`grid grid-flow-col`}>
         <div className={`col-span-2 ${color.primary} w-16`}></div>
         <div className={`col-span-7`}>
           <div
             id="home"
-            className={`${color.primary} h-16 mt-16 grid grid-cols-2`}
+            className={`${color.primary} h-16 grid grid-cols-2`}
           ></div>
           {/* ************* TITLE *****************/}
           <div className="h-96 bg-[#000000a9]">
             <div
-              className={`p-2 ${color.text02} h-full flex flex-col items-center justify-center`}
+              className={`p-2 ${color.text01} h-full flex flex-col items-center justify-center`}
             >
               {" "}
               <h1
@@ -142,15 +237,15 @@ const BasicHome02 = () => {
               <div
                 className={`flex flex-col items-center justify-center h-3/4 w-3/4 border-2 border-[#909090] rounded-xl  bg-[#922c29] shadow-md px-5`}
               >
-                <h1 className={`pb-3 uppercase font-bold ${color.text02}`}>
+                <h1 className={`pb-3 uppercase font-bold ${color.text01}`}>
                   Introduce your idea
                 </h1>
-                <p className={`pb-5 ${color.text03}`}>
+                <p className={`pb-5 ${color.text02}`}>
                   Use this space to elaborate on your headline and connect with
                   your visitors.
                 </p>
                 <button
-                  className={`${color.primary} ${color.text02} rounded-md px-5 py-2`}
+                  className={`${color.primary} ${color.text01} rounded-md px-5 py-2`}
                 >
                   Action
                 </button>
@@ -172,15 +267,15 @@ const BasicHome02 = () => {
               <div
                 className={`flex flex-col items-center justify-center h-3/4 w-3/4 border-2 border-[#909090] rounded-xl bg-[#922c29] shadow-md px-5`}
               >
-                <h1 className={`pb-3 uppercase font-bold ${color.text02}`}>
+                <h1 className={`pb-3 uppercase font-bold ${color.text01}`}>
                   Introduce your idea
                 </h1>
-                <p className={`pb-5 ${color.text03}`}>
+                <p className={`pb-5 ${color.text02}`}>
                   Use this space to elaborate on your headline and connect with
                   your visitors.
                 </p>
                 <button
-                  className={`${color.primary} ${color.text02} rounded-md px-5 py-2`}
+                  className={`${color.primary} ${color.text01} rounded-md px-5 py-2`}
                 >
                   Action
                 </button>
