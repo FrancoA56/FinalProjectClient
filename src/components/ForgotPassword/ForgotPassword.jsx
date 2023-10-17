@@ -6,9 +6,10 @@ import loading from "../../utils/img/loading.png"
 const ForgotPassword = async () => {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
+  const  URL  = process.env.REACT_APP_API;
 
   // const handleForgot = async (e) => {
-    e.preventDefault();
+    
    
     setIsLoading (true);
     try {
