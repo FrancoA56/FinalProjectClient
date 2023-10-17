@@ -27,7 +27,6 @@ const initialState = {
   models: [],
   allModels: [],
   cart: [],
-  cartRemoved: [],
   user: [],
   presets: 1,
   deployment: false,

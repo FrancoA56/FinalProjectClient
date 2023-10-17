@@ -110,8 +110,8 @@ export const addModelToCart = (id) => {
           email: state.user.email,
           products: [id],
         };
-        const { data } = await axios.post(`${URL}/api/shop/order`, userAndIds);
-        if (data) {
+        const response = await axios.post(`${URL}/api/shop/order`, userAndIds);
+        if (response.statusText === "Created") {
           dispatch({
             type: ADD_MODEL_CART,
             payload: preset,
@@ -140,12 +140,9 @@ export const removeModelFromCart = (id) => {
 
       //si esta logeado el usuario se guarda en su base de datos el carrito relacionado al usuario
       if (state.login) {
-        const userAndIds = {
-          email: state.user.email,
-          products: id,
-        };
-        const { data } = await axios.post(`${URL}/api/shop/order`, userAndIds);
-
+        const {data} = await axios.delete(
+          `${URL}/api/shop/order?id=${id}&email=${state.user.email}`
+        );
         if (data.isSuccess) {
           dispatch({
             type: REMOVE_MODEL_CART,
@@ -269,60 +266,69 @@ export const logInUser = (payload) => {
           email: payload.email,
           products: idsCartLocalStorage,
         };
-        const { dataPost } = await axios.post(
+        const responsePostLocalStorage = await axios.post(
           `${URL}/api/shop/order`,
           userAndIds
         );
-        if (dataPost) {
+        const responsePostLocalStorageData = responsePostLocalStorage.data.data;
+        if (responsePostLocalStorageData.length) {
           localStorage.removeItem("cart");
-          const { dataGetAllIds } = await axios.get(
+          const responseGetBDD = await axios.get(
             `${URL}/api/shop/order?email=${payload.email}`
           );
           // si hay algo anterior en la bdd nos traemos toda la info y la sobreescribimos
-          if (dataGetAllIds.length > idsCartLocalStorage.length) {
-            const { dataGetPresets } = await axios.get(
-              `${URL}/api/preset?${dataGetAllIds}`
+          if (responseGetBDD.data.length > idsCartLocalStorage.length) {
+            const responseGetAllBDD = await axios.get(
+              `${URL}/api/preset?ids=${responseGetBDD.data}`
             );
             dispatch({
               type: ADD_ALL_MODEL_CART,
-              payload: dataGetPresets,
+              payload: responseGetAllBDD.data,
             });
             return Swal.fire({
-              text: "Your cart has been actualized and merge with your account cart",
-              title: "Warning",
-              icon: "warning",
+              text: "Your cart has been updated and merged with your account's items.",
+              title: "Login",
+              icon: "info",
               confirmButtonColor: "rgb(94 195 191)",
             });
             // si no hay nada que actualizar la bdd esta actualizada y le informamos al usuario q se logeo correctamente
           } else {
             return Swal.fire({
               text: "You have successfully logged in",
-              title: "Warning",
-              icon: "warning",
+              title: "Login",
+              icon: "success",
               confirmButtonColor: "rgb(94 195 191)",
             });
           }
         }
       }
       // si no habia carrito se busca si el usuario tiene carrito en la bdd y si es correcto se guarda en redux
-      const { dataGetPesets } = await axios.get(`${URL}/api/shop/order?email=${payload.email}`);
-      if (dataGetPesets.length) {
-        const { allInfoOfPresetsFromBDD } = await axios.get(`${URL}/api/preset?${dataGetPesets}`);
+      const responseGetAllDataBase = await axios.get(
+        `${URL}/api/shop/order?email=${payload.email}`
+      );
+      console.log("responseGetAllDataBase", responseGetAllDataBase.data)
+
+      if (responseGetAllDataBase.data.length) {
+        const responseGetAllInfoPresets = await axios.get(
+          `${URL}/api/preset?ids=${responseGetAllDataBase.data}`
+        );
+        console.log("responseGetAllInfoPresets", responseGetAllInfoPresets.data)
+
         dispatch({
           type: ADD_ALL_MODEL_CART,
-          payload: allInfoOfPresetsFromBDD,
+          payload: responseGetAllInfoPresets.data,
         });
         return Swal.fire({
-          text: "Your cart has been actualized with your account cart",
-          title: "Warning",
-          icon: "warning",
+          text: "Your cart has been updated with your account's items.",
+          title: "Login",
+          icon: "info",
           confirmButtonColor: "rgb(94 195 191)",
         });
       }
       return Swal.fire({
         text: "You have successfully logged in",
-        title: "Warning",
-        icon: "warning",
+        title: "Login",
+        icon: "success",
         confirmButtonColor: "rgb(94 195 191)",
       });
     } catch (error) {
@@ -339,6 +345,11 @@ export const logOutUser = () => {
     dispatch({
       type: LOGOUT_USER,
     });
+
+    dispatch({
+      type: ADD_ALL_MODEL_CART,
+      payload: [],
+    })
     // -----------------------------------------------------------------
     // return {
     //   type: LOGOUT_USER,
