@@ -20,10 +20,10 @@ const AboutPageComponent = () => {
               At CodeCraft, our success is based on the commitment and
               experience of our talented team of developers. Each member of our
               team brings a passion for technology, exceptional skill, and a
-              shared vision to creating innovative and engaging web solutions.
+              shared vision to create innovate and engage web solutions.
               <br />
               <br />
-              Meet our talented team of developers, who are dedicated to driving
+              Meet our talented team of developers, who are dedicated to drive
               innovation and excellence in every project. We are here to provide
               you with the technological solutions you need to succeed in the
               digital world.
