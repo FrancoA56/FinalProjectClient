@@ -9,7 +9,7 @@ const people = [
   },
   {
     name: "Jimena Mateo",
-    role: "Front-end developer",
+    role: "Full-stack developer",
     imageUrl:
       "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_198,h_198,ar_1:1,g_auto/v1697385470/Team/Jime_mxnoxv.png",
     linkedin: "https://www.linkedin.com/in/jimena-mateo",
@@ -17,16 +17,16 @@ const people = [
   },
   {
     name: "Claudio Carruz",
-    role: "Front-end developer",
+    role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_188,h_188,ar_1:1/v1697385470/Team/Claudio_ona7gy.png",
+      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_600,h_600,ar_1:1,g_auto/v1697508330/Team/WhatsApp_Image_2023-10-16_at_22.53.29_enw6hq.jpg",
     linkedin:
       "https://www.linkedin.com/in/claudio-carruz-24961256?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
     github: "https://github.com/Corto07",
   },
   {
     name: "Nahuel Santini",
-    role: "Front-end developer",
+    role: "Full-stack developer",
     imageUrl:
       "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_186,h_186,ar_1:1,g_auto/v1697385470/Team/Nahue_ykk9tk.png",
     linkedin: "http://www.linkedin.com/in/nahuesantini",
@@ -34,7 +34,7 @@ const people = [
   },
   {
     name: "Tomas Iglesias",
-    role: "Back-end developer",
+    role: "Full-stack developer",
     imageUrl:
       "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_198,h_198,ar_1:1,g_auto/v1697385470/Team/Tomas_f2w6at.png",
     linkedin: "https://www.linkedin.com/in/tomiglesias/",
@@ -42,25 +42,25 @@ const people = [
   },
   {
     name: "Rafael Prieto",
-    role: "Back-end developer",
+    role: "Full-stack developer",
     imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_444,h_444,ar_1:1/v1697508329/Team/WhatsApp_Image_2023-10-16_at_22.53.20_g6vgas.jpg",
     linkedin: "https:/",
-    github: "https:/",
+    github: "https://github.com/RaPriG",
   },
   {
     name: "Franco Adamoli",
-    role: "Front-end developer",
+    role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_198,h_198,ar_1:1,g_auto/v1697385470/Team/Franco_umr1vq.png",
-    linkedin: "https:/",
-    github: "https:/",
+      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_pad,b_gen_fill,w_645,h_645/v1697508329/Team/WhatsApp_Image_2023-10-16_at_22.53.35_z4xlan.jpg",
+    linkedin: "https://https://www.linkedin.com/in/franco-adamoli/",
+    github: "https://github.com/FrancoA56",
   },
   {
     name: "Ulises Bergesio",
-    role: "Front-end developer",
+    role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_198,h_198,ar_1:1,g_auto/v1697385470/Team/Ulises_eg5qun.png",
+      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_999,h_999,ar_1:1,g_auto/v1697508329/Team/WhatsApp_Image_2023-10-16_at_22.54.46_nxnwcc.jpg",
     linkedin: "https://www.linkedin.com/in/ulises-bergesio",
     github: "https://github.com/UBergesio",
   },
