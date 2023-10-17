@@ -122,25 +122,7 @@ const LoginComponents = () => {
       text: error,
     });
   };
-  // ------------------------------------------------------------------------------------------------------
-  // --------------------------------------Password validity requirements----------------------------------
-  const validatePassword = (e) => {
-    const uppercaseRegex = /[A-Z]/;
-    const lowercaseRegex = /[a-z]/;
-    const numberRegex = /[0-9]/;
-    const specialCharRegex = /[\W_]/;
 
-    setValidations({
-      hasUppercase: uppercaseRegex.test(e),
-      hasLowercase: lowercaseRegex.test(e),
-      hasNumber: numberRegex.test(e),
-      hasSpecialChar: specialCharRegex.test(e),
-      isBetween8And30: e.length >= 8 && e.length <= 30,
-    });
-    setPassword(e);
-  };
-  // --------------------------------------------------------------------------------------------------------
-  // -------------------------------------------------------------------------- Ojito Password Login---------
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -332,7 +314,10 @@ const LoginComponents = () => {
                   // onClick={(ForgotPassword)}
                   // value="Send"
                   type="submit"
-                  onClick={() => { setPopupForgot(false),forgotPassword() }}
+                  onClick={() => {
+                    setPopupForgot(false);
+                    forgotPassword();
+                  }}                  
                   className="mt-1 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   data-te-ripple-init
                   data-te-ripple-color="light"
