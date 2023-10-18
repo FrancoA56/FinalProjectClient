@@ -78,12 +78,12 @@ function Footer() {
   return (
     <footer
   
-      className="bg-gray-300 text-center text-neutral-600 dark:bg-gray-700 dark:text-white lg:text-left"
+      className="bg-gray-300 text-center text-neutral-600 dark:bg-[#303030] dark:text-[#707070] text-sm lg:text-left"
     >
       {/* Main content container */}
-      <div className="mx-6 py-5 text-center md:text-left">
+      <div className="mx-6 py-3 text-center md:text-left">
         <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-3">
-          <div className="">
+          <div className="flex flex-col items-center">
             <h6 className="mb-4 flex items-center justify-center font-semibold uppercase ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ function Footer() {
               </svg>
               ABOUT US
             </h6>
-            <p className="text-center font text-s leading-tight">
+            <p className="text-left pl-3">
               This is a company dedicated to the development of templates for
               websites. You can choose from the options we offer or contact us
               to make modifications that suit your needs!
@@ -109,7 +109,7 @@ function Footer() {
             </h6>
 
             {/* Instagram section */}
-            <p className="mr-2 mt-4 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-2 mt-4 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
               <a
                 href="https://www.instagram.com/code_crafted_templates/"
                 target="_blank"
@@ -130,7 +130,7 @@ function Footer() {
             </p>
 
             {/* Twitter section */}
-            <p className="mr-8 mt-2 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-8 mt-2 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
               <a
                 href="https://twitter.com/CodeCraftedTemp"
                 target="_blank"
@@ -151,7 +151,7 @@ function Footer() {
             </p>
 
             {/* LinkedIn section */}
-            <p className="mr-6 mt-1.5 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-6 mt-1.5 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
               <a
                 href="http://www.linkedin.com/in/code-crafted-templates"
                 target="_blank"
@@ -205,7 +205,7 @@ function Footer() {
             <div className="rounded cursor-pointer">
               <div className="flex items-center justify-center">
                 <h2
-                  className="mt-6 text-white text-center text-sm font-medium uppercase leading-normal bg-logo hover:bg-[#303030] py-2 px-4 rounded inline-block"
+                  className="mt-6 text-white text-center text-sm font-medium uppercase leading-normal bg-logo hover:bg-[#3a8a87] dark:bg-[#3a8a87] dark:hover:bg-logo py-2 px-4 rounded-md inline-block"
                   onClick={() => setPopupOpen(true)}
                 >
                   Talk to us
@@ -236,10 +236,10 @@ function Footer() {
                           ></div>
                         </div>
                         <div className="mx-auto max-w-2xl text-center">
-                          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-sm font-medium uppercase leading-normal">
+                          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl   uppercase leading-normal">
                             Talk to Us
                           </h2>
-                          <p className="mt-2 text-sm font-medium uppercase leading-normal leading-8 text-gray-600">
+                          <p className="mt-2 text-sm font-medium uppercase leading-normal  text-gray-600">
                             You can send us your opinion or suggestion, It helps
                             us to improve:
                           </p>
@@ -374,10 +374,10 @@ function Footer() {
       </div>
 
       {/* Copyright section */}
-      <div className="bg-logo opacity-50 p-3 mb- text-center dark:bg-logo opacity-70 ">
-        <span className="text-black">© 2023 Copyright: </span>
+      <div className="bg-[#303030] opacity-50 p-3 mb- text-center dark:bg-[#202020] ">
+        <span className="text-[#909090] dark:text-white">© 2023 Copyright: </span>
         <a
-          className="font text-black dark: text-white"
+          className="font text-[#909090] dark:text-white"
           href="https://tailwind-elements.com/"
         >
           CodeCrafted Templates
