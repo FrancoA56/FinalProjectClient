@@ -3,6 +3,7 @@ import {
   ADD_MODELS,
   ADD_MODEL_CART,
   ADD_ALL_MODEL_CART,
+  ADD_COLOR,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
@@ -49,6 +50,21 @@ export const addModel = (model) => {
     }
   };
 };
+////////////////////////////////////////////////
+export const addColors = (color) => {
+  console.log('action--->', color);
+  return function (dispatch) {
+    try {
+      return dispatch({
+        type: ADD_COLOR,
+        payload: color,
+      });
+    } catch (error) {
+      showErrorAlert(error.message);
+    }
+  };
+};
+////////////////////////////////////////////////
 
 export const addAllModels = (id) => {
   return function (dispatch) {
