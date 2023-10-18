@@ -2,28 +2,30 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import ColorPanel from "../../../../utils/ColorPanel";
 
+
 const BasicHome02 = () => {
   const user = useSelector((state) => state.user);
+  const color = useSelector((state) => state.colores)
   // console.log(user);
-  const [color, setColor] = useState({
-    primary: "bg-[#101010]",
-    secondary: "bg-[#505050]",
-    text01: "text-[#cacaca]",
-    text02: "text-[#303030]",
-  });
+  // const [color, setColor] = useState({
+  //   primary: "bg-[#101010]",
+  //   secondary: "bg-[#505050]",
+  //   text01: "text-[#cacaca]",
+  //   text02: "text-[#303030]",
+  // });
 
-  const handlerPrimaryClick = (value) => {
-    setColor({ ...color, primary: value });
-  };
-  const handlerSecondaryClick = (value) => {
-    setColor({ ...color, secondary: value });
-  };
-  const handlerText01Click = (value) => {
-    setColor({ ...color, text01: value });
-  };
-  const handlerText02Click = (value) => {
-    setColor({ ...color, text02: value });
-  };
+  // const handlerPrimaryClick = (value) => {
+  //   setColor({ ...color, primary: value });
+  // };
+  // const handlerSecondaryClick = (value) => {
+  //   setColor({ ...color, secondary: value });
+  // };
+  // const handlerText01Click = (value) => {
+  //   setColor({ ...color, text01: value });
+  // };
+  // const handlerText02Click = (value) => {
+  //   setColor({ ...color, text02: value });
+  // };
 
   const bgColors = [
     "bg-white",
@@ -98,6 +100,7 @@ const BasicHome02 = () => {
         backgroundSize: "cover",
       }}
     >
+      <ColorPanel/>
              
       {/* ********************* NAVBAR ************************* */}
       <div
@@ -145,9 +148,9 @@ const BasicHome02 = () => {
       {/* ********************************************** */}
 
            {/* ********************  COLOR PANEL ****************** */}
-      <div className={`bg-[#303030] w-full pt-16 flex flex-col items-center justify-center`}>
+      {/* <div className={`bg-[#303030] w-full pt-16 flex flex-col items-center justify-center`}> */}
         {/* ******************** SET COLOR PRIMARY ****************** */}
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row">
           {bgColors.map((color) => {
             return (
               <div>
@@ -158,9 +161,9 @@ const BasicHome02 = () => {
               </div>
             );
           })}
-        </div>
+        </div> */}
         {/* ******************** SET COLOR SECONDARY ****************** */}
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row">
           {bgColors.map((color) => {
             return (
               <div>
@@ -171,9 +174,9 @@ const BasicHome02 = () => {
               </div>
             );
           })}
-        </div>
+        </div> */}
         {/* ******************** SET COLOR TEXT01 ****************** */}
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row">
           {colors.map((color) => {
             return (
               <div>
@@ -184,9 +187,9 @@ const BasicHome02 = () => {
               </div>
             );
           })}
-        </div>
+        </div> */}
         {/* ******************** SET COLOR TEXT02 ****************** */}
-        <div className="flex flex-row">
+        {/* <div className="flex flex-row">
           {colors.map((color) => {
             return (
               <div>
@@ -198,7 +201,7 @@ const BasicHome02 = () => {
             );
           })}
         </div>
-      </div>
+      </div> */}
       <div className={`grid grid-flow-col`}>
         <div className={`col-span-2 ${color.primary} w-16`}></div>
         <div className={`col-span-7`}>
