@@ -45,29 +45,29 @@ const LoginComponents = () => {
     setInputForgot({
       ...inputForgot,
       [e.target.name]: e.target.value,
-    })
-    
+    });
   }
 
-  async function forgotPassword (){
+  async function forgotPassword() {
     try {
       const user = {
-        email: inputForgot.email}
-      console.log(user)
-      await axios.post(`${URL}/api/user/forgot`,user)
+        email: inputForgot.email,
+      };
+      console.log(user);
+      await axios.post(`${URL}/api/user/forgot`, user);
       Swal.fire({
         showConfirmButton: true,
         confirmButtonColor: "rgb(94 195 191)",
-        icon: 'success',
-        text: 'Check your email, you have been sent a link to create a new password'
-      })
+        icon: "success",
+        text: "Check your email, you have been sent a link to create a new password",
+      });
     } catch (error) {
       Swal.fire({
         showConfirmButton: true,
         confirmButtonColor: "rgb(94 195 191)",
-        icon: 'error',
-        text: error
-      })
+        icon: "error",
+        text: error,
+      });
     }
   }
   useEffect(() => {
@@ -130,18 +130,21 @@ const LoginComponents = () => {
   // --------------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------- Ojito Password Reset---------
   // --------------------------------------------------------------------------------------------------------
-console.log(localStorage.theme)
+  console.log(localStorage.theme);
   return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen ">
       {/* Columna izq */}
       <div
         //className="grid-span-2 flex justify-center items-center py-3"
-        className="grid-span-2 flex justify-center items-center py-3 dark:bg-[#303030]"
-        
-        style={localStorage.theme === 'dark' ? {background:"rgb(50,50,50)"}: {
-          background:
-            "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-        }}
+        className="grid-span-2 flex justify-center items-center py-3 "
+        style={
+          localStorage.theme === "dark"
+            ? { background: "rgb(50,50,50)" }
+            : {
+                background:
+                  "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
+              }
+        }
       >
         <div className="md:w-8/12 lg:w-8/12">
           <form onSubmit={handleSubmit}>
@@ -155,7 +158,11 @@ console.log(localStorage.theme)
                 onChange={handleChange}
                 required
                 placeholder="Enter email"
-                className={localStorage.theme === 'dark' ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]" :"shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"}
+                className={
+                  localStorage.theme === "dark"
+                    ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                    : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                }
               />
             </div>
 
@@ -170,7 +177,11 @@ console.log(localStorage.theme)
                 onChange={handleChange}
                 required
                 placeholder="Enter password"
-                className={localStorage.theme === 'dark' ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]" :"shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"}
+                className={
+                  localStorage.theme === "dark"
+                    ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                    : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                }
               />
               <span // Boton de ojito de contraseña
                 type="button"
@@ -198,15 +209,16 @@ console.log(localStorage.theme)
             <div className="grid grid-cols-2 text-[#606060] text-sm">
               <div className="cols-span-1 text-sm flex pt-2 pl-2">
                 <p> Not a member? </p>
-                <NavLink to="/register" className="text-[#3a8a87] hover:text-logo ml-1">
+                <NavLink
+                  to="/register"
+                  className="text-[#3a8a87] hover:text-logo ml-1"
+                >
                   <strong> Register </strong>
                 </NavLink>
               </div>
 
               <div className="flex justify-end items-end text-sm pt-2 pr-2">
-                <div className="text-[#606060] ">
-                  Back to Home
-                </div>
+                <div className="text-[#606060] ">Back to Home</div>
                 <NavLink to="/" className="flex items-center ml-2 mb-1">
                   <i className="text-[#3a8a87] hover:text-logo fa-solid fa-house"></i>
                 </NavLink>
@@ -216,8 +228,11 @@ console.log(localStorage.theme)
             {/* <!-- Submit button --> */}
             <button
               type="submit"
-              className={localStorage.theme === 'dark' ? "mt-10 inline-block bg-[#3a8a87] w-full rounded-md  px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]" : "mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"}
-      
+              className={
+                localStorage.theme === "dark"
+                  ? "mt-10 inline-block bg-[#3a8a87] w-full rounded-md  px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  : "mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              }
             >
               Sign in
             </button>
@@ -315,7 +330,7 @@ console.log(localStorage.theme)
                   onClick={() => {
                     setPopupForgot(false);
                     forgotPassword();
-                  }}                  
+                  }}
                   className="mt-1 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   data-te-ripple-init
                   data-te-ripple-color="light"
@@ -340,7 +355,6 @@ console.log(localStorage.theme)
           </div>
         </div>
       )}
-
     </div>
   );
 };
