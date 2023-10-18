@@ -1,22 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logInUser, logInSet } from "../../Redux/actions";
 import { useState } from "react";
-import { useNavigate, Link, NavLink } from "react-router-dom";
-// import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate, NavLink } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import axios from "axios";
 import Swal from "sweetalert2";
-import styles from "../loginComponents/login.module.css";
 import decodeToken from "./decodeToken";
 import { useAuth0 } from "@auth0/auth0-react";
 import Banner from "../../components/Banner/Banner";
-import { validation } from "../validation";
-
-/* Requirements to validate the login
------------------------------------------------------------------
- Para las validaciones del login comprobar que el mail existe y 
-comparar la contraseña ingresada con la cargada por el usuario */
 
 const LoginComponents = () => {
   const navigate = useNavigate();
@@ -46,30 +38,42 @@ const LoginComponents = () => {
       ...inputForgot,
       [e.target.name]: e.target.value,
     })
-    
   }
 
-  async function forgotPassword (){
+  async function forgotPassword() {
     try {
-      const user = {
-        email: inputForgot.email}
-      console.log(user)
-      await axios.post(`${URL}/api/user/forgot`,user)
-      Swal.fire({
-        showConfirmButton: true,
-        confirmButtonColor: "rgb(94 195 191)",
-        icon: 'success',
-        text: 'Check your email, you have been sent a link to create a new password'
-      })
+      if (inputForgot.email) {
+        const user = {
+          email: inputForgot.email,
+        };
+        console.log(user);
+        await axios.post(`${URL}/api/user/forgot`, user);
+        Swal.fire({
+          showConfirmButton: true,
+          confirmButtonColor: "rgb(94 195 191)",
+          icon: "success",
+          text: "Check your email, you have been sent a link to create a new password",
+        });
+      } else {
+        setPopupForgot(true);
+        return Swal.fire({
+          showConfirmButton: true,
+          confirmButtonColor: "rgb(94 195 191)",
+          icon: "warning",
+          text: "You need to enter your email address",
+        });
+      }
     } catch (error) {
+      setPopupForgot(true);
       Swal.fire({
         showConfirmButton: true,
         confirmButtonColor: "rgb(94 195 191)",
-        icon: 'error',
-        text: error
-      })
+        icon: "error",
+        text: "There was an error trying to send the data, check the email entered or try again later",
+      });
     }
   }
+   
   useEffect(() => {
     if (isAuthenticated) {
       const auth = async () => {
@@ -86,7 +90,7 @@ const LoginComponents = () => {
           dispatch(logInSet(true));
           navigate("/"); // Va pal home
         } catch (error) {
-          showErrorAlert(error.message);
+          showErrorAlert(error.response.data.error);
         }
       };
       auth();
@@ -100,10 +104,10 @@ const LoginComponents = () => {
         const { data } = await axios.get(
           `${URL}/api/user?email=${input.email}&password=${input.password}`
         );
-        console.log("data", data);
+        
         localStorage.setItem("token", data);
         const user = decodeToken(data);
-        console.log("user", user);
+        
         dispatch(logInUser(user));
         dispatch(logInSet(true));
         navigate("/");
@@ -129,9 +133,9 @@ const LoginComponents = () => {
     setShowPassword(!showPassword);
   };
 // --------------------------------------------------------------------------------------------------------
-
-  return (
-    <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen ">
+  
+  return ( 
+    <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen ">  
       {/* Columna izq */}
       <div
         //className="grid-span-2 flex justify-center items-center py-3"
@@ -212,12 +216,13 @@ const LoginComponents = () => {
             </div>
 
             {/* <!-- Submit button --> */}
+            
             <button
               type="submit"
               className="mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               data-te-ripple-init
               data-te-ripple-color="light"
-              // onClick={handleSubmit}
+              
             >
               Sign in
             </button>
@@ -307,24 +312,28 @@ const LoginComponents = () => {
                 required
                 autoComplete="given-email"
               />
-
+             
               <div>
                 <button
                   type="submit"
-                  onClick={() => { setPopupForgot(false),forgotPassword() }}
+                  onClick={() => {
+                    setPopupForgot(false);
+                    forgotPassword();
+                  }}
                   className="mt-1 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
                   Request Password Reset
                 </button>
-
+                 
                 <p
                   onClick={() => setPopupForgot(false)}
                   className="text-[#3a8a87] cursor-pointer mt-6"
                 >
                   <strong>Back to login</strong>
                 </p>
+
               </div>
 
               <div className="bg-logo opacity-50 p-2 mt-4 text-center dark:bg-neutral-700 absolute bottom-0 left-0 w-full">
@@ -332,11 +341,11 @@ const LoginComponents = () => {
                   © 2023 Copyright: CodeCrafted Templates
                 </span>
               </div>
+
             </form>
           </div>
         </div>
-      )}
-
+      )}  
     </div>
   );
 };

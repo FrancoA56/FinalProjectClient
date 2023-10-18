@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import styles from "../loginComponents/login.module.css";
 import Banner from "../../components/Banner/Banner";
@@ -18,8 +18,7 @@ const PasswordReset = () => {
     setShowPasswordReset(!showPasswordReset);
   };
 
-  // --------------------------------------------------------------------------------⛔------------
-
+// --------------------------------------------------------------------------------⛔------------
   const [validations, setValidations] = useState({
     hasUppercase: false,
     hasLowercase: false,
@@ -31,9 +30,9 @@ const PasswordReset = () => {
     password: "",
     confirmPassword: "",
   });
+// ------------------------------------------------------------------------------------------------------
 
-  // ------------------------------------------------------------------------------------------------------
-  // --------------------------------------Password validity requirements----------------------------------
+// --------------------------------------Password validity requirements----------------------------------
   const validatePassword = (e) => {
     const uppercaseRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
@@ -49,6 +48,7 @@ const PasswordReset = () => {
     });
     setPassword(e);
   };
+// --------------------------------------------------------------------------------------------------------
 
   function handleChange(e) {
     setInputReset({
@@ -69,7 +69,7 @@ const PasswordReset = () => {
       const { password } = inputReset;
       await axios.put(`${URL}/api/user/reset/${token}`, { password });
       showSuccessAlert("Password successfully updated.");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       showErrorAlert(error.response.data.error);
     }
@@ -114,7 +114,7 @@ const PasswordReset = () => {
               Enter your password
             </label>
 
-            {/* --------------------------------------------------------------------------------------------------------- */}
+{/* --------------------------------------------------------------------------------------------------------- */}
             <div className="mt-3 flex items-center justify-end">
               <input
                 type={showPasswordReset ? "text" : "password"}
@@ -141,8 +141,9 @@ const PasswordReset = () => {
                 )}
               </span>
             </div>
-            {/* --------------------------------------------------------------------------------------------------------- */}
-            {/* ------------------Validacion del password---------------------------------------------------------------- */}
+{/* --------------------------------------------------------------------------------------------------------- */}
+
+{/* ------------------Validacion del password---------------------------------------------------------------- */}
             <div className="static mt-1 mb-2">
               <p className="static mt-2 text-sm text-[#606060]">
                 <strong> Password must have:</strong>
@@ -195,7 +196,7 @@ const PasswordReset = () => {
                 </div>
               </ul>
             </div>
-            {/* -------------------------------------------------------------------------------------------------------- */}
+{/* -------------------------------------------------------------------------------------------------------- */}
 
             <div className="flex items-center justify-end mb-2">
               <input
@@ -219,13 +220,12 @@ const PasswordReset = () => {
                 <span className={styles.bubble}>{errors.confirmPassword}</span>
               </span>
             </div>
-            {/* ------------------------------------------------------------------------------------------------------- */}
+{/* ------------------------------------------------------------------------------------------------------- */}
             <div>
               <button
                 onClick={(e) => {
                   handleSubmit(e);
                 }}
-                // value="Send"
                 type="submit"
                 className="mt-2 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                 data-te-ripple-init
@@ -235,7 +235,9 @@ const PasswordReset = () => {
               </button>
 
               <p className="text-[#3a8a87] cursor-pointer mt-6">
+                <Link to="/login">
                 <strong>Back to login</strong>
+                </Link>
               </p>
             </div>
 
@@ -249,9 +251,6 @@ const PasswordReset = () => {
       </div>
     </div>
   );
-  {
-    /* --------------------------------------------------------------------------------------------------------- */
-  }
 };
 
 export default PasswordReset;
