@@ -45,39 +45,29 @@ const LoginComponents = () => {
     setInputForgot({
       ...inputForgot,
       [e.target.name]: e.target.value,
-    });
+    })
+    
   }
 
-  async function forgotPassword() {
+  async function forgotPassword (){
     try {
-      if (inputForgot.email) {
-        const user = {
-          email: inputForgot.email,
-        };
-        console.log(user);
-        await axios.post(`${URL}/api/user/forgot`, user);
-        Swal.fire({
-          showConfirmButton: true,
-          confirmButtonColor: "rgb(94 195 191)",
-          icon: "success",
-          text: "Check your email, you have been sent a link to create a new password",
-        });
-      } else {
-        setPopupForgot(true);
-        return Swal.fire({
-          showConfirmButton: true,
-          confirmButtonColor: "rgb(94 195 191)",
-          icon: "warning",
-          text: "You need to enter your email address",
-        });
-      }
+      const user = {
+        email: inputForgot.email}
+      console.log(user)
+      await axios.post(`${URL}/api/user/forgot`,user)
+      Swal.fire({
+        showConfirmButton: true,
+        confirmButtonColor: "rgb(94 195 191)",
+        icon: 'success',
+        text: 'Check your email, you have been sent a link to create a new password'
+      })
     } catch (error) {
       Swal.fire({
         showConfirmButton: true,
         confirmButtonColor: "rgb(94 195 191)",
-        icon: "error",
-        text: error,
-      });
+        icon: 'error',
+        text: error
+      })
     }
   }
   useEffect(() => {
@@ -327,7 +317,7 @@ const LoginComponents = () => {
                   onClick={() => {
                     setPopupForgot(false);
                     forgotPassword();
-                  }}
+                  }}                  
                   className="mt-1 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   data-te-ripple-init
                   data-te-ripple-color="light"
@@ -352,6 +342,7 @@ const LoginComponents = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };
