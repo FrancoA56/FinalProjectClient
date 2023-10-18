@@ -46,7 +46,7 @@ const PayComponent = () => {
       showSuccessAlert("Your data has been updated, wait to redirect");
     } catch (error) {
       console.log(error.message);
-      showErrorAlert("Error");
+      showErrorAlert(error.message);
     }
   };
   // funcion edita la base de datos USER
@@ -56,9 +56,6 @@ const PayComponent = () => {
         `${URL}/api/shop/pay_order`,
         order
       );
-      // Aca tengo data pero todavia no hace nada (x ahora devuelve "{isSucces:True}")
-      // console.log(data)
-      // Aca me manda a paypal
       data.href ? window.location.href = data.href : console.log('error');
       
     } catch (error) {
@@ -102,27 +99,31 @@ const PayComponent = () => {
   const productsCart = cart.map((product) => {
     return { id: product.id, price: product.price, name: product.nmae};
   });
-  // Estado local para mandarle a shop_pay_order
-  const [payOrder, setPayOrder] = useState({
+  // Objeto para mandarle a shop_pay_order
+  const payPaypal = {
     email: user.email,
     name: formData.name,
     products: productsCart,
     totalAmount: deploymentCost + subTotal,
     paymentMethod: "paypal",
-  });
+  }
+  const payBank = {
+    email: user.email,
+    name: formData.name,
+    products: productsCart,
+    totalAmount: deploymentCost + subTotal,
+    paymentMethod: "bank_transfer",
+  }
   // Hay que cambiar el link de navigate para paypal
   const handlePaypalSubmit = (e) => {
     e.preventDefault();
-    // setPayOrder({ ...payOrder, paymentMethod: "paypal" });
-    editUser(formData) && payOrderPost(payOrder)
-    // navigate("/cart");
+    editUser(formData) && payOrderPost(payPaypal)
   };
   // Hay que cambiar el link de navigate para algun lado
   const handleTransferSubmit = (e) => {
     e.preventDefault();
-    // setPayOrder({ ...payOrder, paymentMethod: "bank_transfer" });
-    // editUser(formData) && payOrderPost(payOrder)
-    //navigate("/shop");
+    editUser(formData) && payOrderPost(payBank)
+    navigate("/shop");
   };
 
   return (
