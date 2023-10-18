@@ -28,7 +28,6 @@ const initialState = {
   models: [],
   allModels: [],
   cart: [],
-  cartRemoved: [],
   user: [],
   presets: 1,
   deployment: false,
@@ -62,7 +61,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case ADD_MODEL_CART:
       return {
         ...state,
-        cart: payload,
+        cart: [...state.cart, payload],
       };
 
     case ADD_ALL_MODEL_CART:
@@ -74,7 +73,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case REMOVE_MODEL_CART:
       return {
         ...state,
-        cart: state.cart.filter((model) => model.id !== payload),
+        cart: payload,
       };
 
     case REMOVE_MODEL_DISABLE:
@@ -189,6 +188,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: {},
+        login: false,
       };
 
     case CREATE_PRESETS:
