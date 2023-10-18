@@ -130,14 +130,15 @@ const LoginComponents = () => {
   // --------------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------- Ojito Password Reset---------
   // --------------------------------------------------------------------------------------------------------
-
+console.log(localStorage.theme)
   return (
     <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen ">
       {/* Columna izq */}
       <div
         //className="grid-span-2 flex justify-center items-center py-3"
-        className="grid-span-2 flex justify-center items-center py-3 bg-gray-300 dark:bg-gray-700"
-        style={{
+        className="grid-span-2 flex justify-center items-center py-3 dark:bg-[#303030]"
+        
+        style={localStorage.theme === 'dark' ? {background:"rgb(50,50,50)"}: {
           background:
             "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
         }}
@@ -154,7 +155,7 @@ const LoginComponents = () => {
                 onChange={handleChange}
                 required
                 placeholder="Enter email"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={localStorage.theme === 'dark' ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]" :"shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"}
               />
             </div>
 
@@ -169,7 +170,7 @@ const LoginComponents = () => {
                 onChange={handleChange}
                 required
                 placeholder="Enter password"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={localStorage.theme === 'dark' ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]" :"shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"}
               />
               <span // Boton de ojito de contraseña
                 type="button"
@@ -187,7 +188,7 @@ const LoginComponents = () => {
               <div className="text-sm text-[#606060]">
                 <p
                   onClick={() => setPopupForgot(true)}
-                  className="text-[#3a8a87] ml-1 cursor-pointer"
+                  className="text-[#3a8a87] hover:text-logo ml-1 cursor-pointer"
                 >
                   <strong> Forgot password?</strong>
                 </p>
@@ -197,17 +198,17 @@ const LoginComponents = () => {
             <div className="grid grid-cols-2 text-[#606060] text-sm">
               <div className="cols-span-1 text-sm flex pt-2 pl-2">
                 <p> Not a member? </p>
-                <NavLink to="/register" className="text-[#3a8a87] ml-1">
+                <NavLink to="/register" className="text-[#3a8a87] hover:text-logo ml-1">
                   <strong> Register </strong>
                 </NavLink>
               </div>
 
               <div className="flex justify-end items-end text-sm pt-2 pr-2">
-                <div className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
+                <div className="text-[#606060] ">
                   Back to Home
                 </div>
                 <NavLink to="/" className="flex items-center ml-2 mb-1">
-                  <i className="text-[#3a8a87] fa-solid fa-house"></i>
+                  <i className="text-[#3a8a87] hover:text-logo fa-solid fa-house"></i>
                 </NavLink>
               </div>
             </div>
@@ -215,16 +216,14 @@ const LoginComponents = () => {
             {/* <!-- Submit button --> */}
             <button
               type="submit"
-              className="mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-              data-te-ripple-init
-              data-te-ripple-color="light"
-              // onClick={handleSubmit}
+              className={localStorage.theme === 'dark' ? "mt-10 inline-block bg-[#3a8a87] w-full rounded-md  px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]" : "mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"}
+      
             >
               Sign in
             </button>
 
             {/* <!-- Divider --> */}
-            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-[#707070] after:mt-0.5 after:flex-1 after:border-t after:border-[#707070]">
               <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                 OR
               </p>
@@ -233,9 +232,8 @@ const LoginComponents = () => {
             {/* <!-- Social login buttons --> */}
             {/*  Auth0 */}
             <a
-              style={{ backgroundColor: "#303030" }}
               onClick={() => loginWithPopup()}
-              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded-md px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               href="#!"
               role="button"
               data-te-ripple-init
@@ -268,7 +266,7 @@ const LoginComponents = () => {
       >
         <div className="mb-12 md:mb-0 md:w-10/12 lg:w-full flex items-center justify-center">
           <img
-            src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
+            src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045487/codeCraft/grid_landscape_na3qob.png"
             alt="CodecraftedLogo_image"
           />
         </div>
