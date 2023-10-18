@@ -12,7 +12,6 @@ const ColorPanel = () => {
     text01: "",
     text02: "",
   });
-  console.log(color);
 
   const handlerPrimaryClick = (value) => {
     const updateColor = { ...color, primary: value };
@@ -102,60 +101,119 @@ const ColorPanel = () => {
     "text-black",
   ];
   return (
-    <div
-      className={`bg-[#303030] w-full pt-16 flex flex-col items-center justify-center`}
-    >
+    <div className={`w-full flex flex-col items-center justify-center`}>
       {/* ******************** SET COLOR PRIMARY ****************** */}
-      <div className="flex flex-row">
-        {bgColors.map((color) => {
-          return (
-            <div>
-              <button
-                onClick={() => handlerPrimaryClick(`${color}`)}
-                className={`w-8 h-4 ${color} border border-transparent focus:border-double focus:border-logo`}
-              />
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-8">
+        <div className="flex justify-end mr-2">
+          <h2
+            className={`font-semibold text-sm capitalize ${
+              color.primary === "bg-black" || color.primary === "bg-stone-900"
+                ? "text-[#909090]"
+                : "text-[#101010]"
+            }`}
+          >
+            BackGround 01
+          </h2>
+        </div>
+        <div className="col-span-7 flex flex-row">
+          {bgColors.map((color) => {
+            return (
+              <div>
+                <button
+                  onClick={() => handlerPrimaryClick(`${color}`)}
+                  className={`w-8 h-4 ${color} border-t border-b border-[#505050] focus:border-double focus:border-logo`}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
       {/* ******************** SET COLOR SECONDARY ****************** */}
-      <div className="flex flex-row">
-        {bgColors.map((color) => {
-          return (
-            <div>
-              <button
-                onClick={() => handlerSecondaryClick(`${color}`)}
-                className={`w-8 h-4 ${color} border border-transparent focus:border-double focus:border-logo `}
-              />
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-8">
+        <div className="flex justify-end mr-2">
+          <h2
+            className={`font-semibold text-sm capitalize ${
+              color.primary === "bg-black" || color.primary === "bg-stone-900"
+                ? "text-[#909090]"
+                : "text-[#101010]"
+            }`}
+          >
+            BackGround 02
+          </h2>
+        </div>
+        <div className="col-span-7 flex flex-row">
+          {/* <h2>BackG Color 02</h2> */}
+          {bgColors.map((color) => {
+            return (
+              <div>
+                <button
+                  onClick={() => handlerSecondaryClick(`${color}`)}
+                  className={`w-8 h-4 ${color} border-t border-b border-[#505050] focus:border-double focus:border-logo`}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
       {/* ******************** SET COLOR TEXT01 ****************** */}
-      <div className="flex flex-row">
-        {colors.map((color) => {
-          return (
-            <div>
-              <button
-                onClick={() => handlerText01Click(`${color}`)}
-                className={`w-8 h-4 bg-${color.split('text-').at(-1)} border border-transparent focus:border-double focus:border-logo`}
-              />
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-8">
+        <div className="flex justify-end mr-2">
+          <h2
+            className={`font-semibold text-sm capitalize ${
+              color.primary === "bg-black" || color.primary === "bg-stone-900"
+                ? "text-[#909090]"
+                : "text-[#101010]"
+            }`}
+          >
+            Text 01
+          </h2>
+        </div>
+        <div className="col-span-7 flex flex-row">
+          {colors.map((color) => {
+            return (
+              <div>
+                <button
+                  onClick={() => handlerText01Click(`${color}`)}
+                  className={`w-8 h-4 bg-${color
+                    .split("text-")
+                    .at(
+                      -1
+                    )}  border-t border-b border-[#505050] focus:border-double focus:border-logo`}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
       {/* ******************** SET COLOR TEXT02 ****************** */}
-      <div className="flex flex-row">
-        {colors.map((color) => {
-          return (
-            <div>
-              <button
-                onClick={() => handlerText02Click(`${color}`)}
-                className={`w-8 h-4 bg-${color.split('text-').at(-1)} border border-transparent focus:border-double focus:border-logo `}
-              />
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-8">
+        <div className="flex justify-end mr-2">
+          <h2
+            className={`font-semibold text-sm capitalize ${
+              color.primary === "bg-black" || color.primary === "bg-stone-900"
+                ? "text-[#909090]"
+                : "text-[#101010]"
+            }`}
+          >
+            Text 02
+          </h2>
+        </div>
+        <div className="col-span-7 flex flex-row">
+          {colors.map((color) => {
+            return (
+              <div>
+                <button
+                  onClick={() => handlerText02Click(`${color}`)}
+                  className={`w-8 h-4 bg-${color
+                    .split("text-")
+                    .at(
+                      -1
+                    )}  border-t border-b border-[#505050] focus:border-double focus:border-logo`}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
