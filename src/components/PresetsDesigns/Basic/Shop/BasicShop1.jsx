@@ -2,7 +2,7 @@ const BasicShop1 = () => {
   return (
     <div className="bg-[#d9d9d9] ">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight  text-white not-italic text-xs font-medium leading-tight row-span-1 border  bg-gradient-to-r from-[#2f4c54] to-[#196e5a] border-none ">
+        <h2 className="text-2xl font-bold tracking-tight  text-white not-italic text-xs font-medium leading-tight row-span-1 border  bg-gradient-to-r from-[#2f4c54] to-[#196e5a] border-none " style={{ fontSize: "1.5rem" }}>
           Minimalist Furniture
         </h2>
 

@@ -273,6 +273,7 @@ const MediumHome1 = () => {
           {" "}
           {/* si ponemos contenido aca, te tira lo demas para abajo */}
           {/* a cada uno de estos lo podemos declarar como flex para ordenarlo */}
+          
           <div className="col-span-1 bg-gray-200 flex items-center justify-center"></div>
           <div className="col-span-3 bg-gray-200">
             {" "}
@@ -313,7 +314,7 @@ const MediumHome1 = () => {
               </div>
 
               {/*Carousel items */}
-              <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+              <div class="relative w-full  after:clear-both after:block after:content-['']">
                 {/*First item */}
                 <div
                   class="w-full transition-transform duration-[200ms] ease-in-out motion-reduce:transition-none"
@@ -408,6 +409,7 @@ const MediumHome1 = () => {
               </button>
             </div>
           </div>
+
           <div className="col-span-1 bg-gray-200 "></div>
         </div>
       </div>
