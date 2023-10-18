@@ -106,8 +106,7 @@ const PasswordReset = () => {
               <h2 className="text-xl font-bold">Reset Your Password</h2>
             </div>
             <p className="text-black p-2 mb-2">
-              Enter a new password to reset the password on your account. We'll
-              ask for this password wherever you login
+              Please enter your new password below. Remember that this will permanently replace the previous one.
             </p>
 
             <label className="block text-sm font-semibold text-left mb-2 ml-2">

@@ -52,7 +52,7 @@ const LoginComponents = () => {
           showConfirmButton: true,
           confirmButtonColor: "rgb(94 195 191)",
           icon: "success",
-          text: "Check your email, you have been sent a link to create a new password",
+          text: "Check your email. You will receive a link to create a new password",
         });
       } else {
         setPopupForgot(true);
@@ -293,8 +293,7 @@ const LoginComponents = () => {
                 <h2 className="text-xl font-bold">Forgot Password</h2>
               </div>
               <p className="text-black p-2 mt-2 mb-6">
-                Please enter the email address you'd like your password reset
-                information sent to
+                Please enter the email you used during registration to recover your password
               </p>
 
               <label className="block text-sm font-semibold text-left mb-2 ml-2">
