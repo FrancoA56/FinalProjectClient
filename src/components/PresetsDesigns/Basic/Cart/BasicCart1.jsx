@@ -178,7 +178,7 @@ const BasicCart1 = () => {
                         type="button"
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
-                        Continue Shopping
+                         Continue Shopping
                         <span aria-hidden="true"> &rarr;</span>
                       </button>
                     </p>
