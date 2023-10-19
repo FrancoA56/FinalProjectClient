@@ -66,7 +66,7 @@ function Nav() {
   return (
     <nav
    
-      className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-gray-700 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
+      className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
     >
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <button
@@ -106,7 +106,7 @@ function Nav() {
             href="#!"
           >
             <img
-              src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/iso_wfaz4p.png"
+              src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045466/codeCraft/grid_landscape_csxysv.png"
               style={{ height: "25px", width: "25px" }}
               alt="Logo"
               loading="lazy"
@@ -124,6 +124,7 @@ function Nav() {
                   data-te-nav-link-ref
                 >
                   Home
+                  {/* <i class="fa-solid fa-house"></i> */}
                 </NavLink>
               </li>
             )}
@@ -139,6 +140,7 @@ function Nav() {
                   data-te-nav-link-ref
                 >
                   Shop
+                  {/* <i class="fa-solid fa-shop"></i> */}
                 </NavLink>
               </li>
             )}
@@ -153,7 +155,10 @@ function Nav() {
                 href="#"
                 data-te-nav-link-ref
               >
-                <Link to={`/about`}>Team</Link>
+                <Link to={`/about`}>
+                  Team
+                  {/* <i class="fa-solid fa-users"></i> */}
+                  </Link>
               </a>
             </li>
           </ul>
@@ -171,6 +176,7 @@ function Nav() {
             dark:[&.active]:text-neutral-400"
             //href="/cart"
           >
+            {/* <i class="fa-solid fa-cart-shopping"></i> */}
             <span className="[&>svg]:w-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +188,7 @@ function Nav() {
               </svg>
             </span>
             {cartItemCount > 0 && (
-              <div className="absolute bottom-3 left-3">{cartItemCount}</div>
+             <span className="absolute bottom-3 left-3.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">{cartItemCount}</span>
             )}
           </NavLink>
 
@@ -217,7 +223,7 @@ function Nav() {
                 </svg>
               </span>
               {/* Notification counter */}
-              <span className="absolute -mt-4 ml-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white">
+              <span className="absolute -mt-4 ml-2.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">
                 0
               </span>
             </a>
@@ -285,7 +291,7 @@ function Nav() {
                   onClick={toggleDropdown}
                 >
                   {/* User avatar */}
-                  <i class="fa-solid fa-user h-5 w-5 text-neutral-600 dark:text-white"></i>
+                  <i class="fa-solid fa-user h-5 w-5 text-neutral-600 hover:text-neutral-700 dark:text-white"></i>
                 </div>
               </>
             )}

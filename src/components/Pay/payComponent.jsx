@@ -127,14 +127,13 @@ const PayComponent = () => {
   };
 
   return (
-    <div className="bg-gray-100 dark:bg-[#505050] ">
+    <div className="bg-gray-100 dark:bg-[#505050] h-screen overflow-auto">
       <Banner />
       <Nav />
       <div>
         <div className="container mx-auto p-1 mt-2 mb-2">
           <h2
-            className="inline-block mb-2 mt-2 w-full p-1 bg-[#303030]  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-          text-white dark:text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-gray-300 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+            className="inline-block mb-2 mt-2 w-full p-1 bg-[#303030]  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white dark:text-white shadow-[0_4px_9px_-4px_#000000] "
           >
             Checkout
           </h2>
@@ -155,7 +154,7 @@ const PayComponent = () => {
         </div>
       </div>
       <div
-        className="flex flex-col justify-center items-center container mx-auto p-2 mt-2 rounded 5ec3bf w-full mb-4"
+        className="flex flex-col justify-center items-center container mx-auto p-2 mt-2 rounded w-full mb-4"
         style={{
           background:
             "radial-gradient(20rem circle at bottom, rgb(0, 0, 0), rgb(50, 50, 50)",
@@ -193,7 +192,7 @@ const PayComponent = () => {
         <div className="flex justify-between gap-12 my-10">
           <button
             onClick={() => setPopupOpen(true)}
-            className="h-10 w-64 mt-2 bg-logo rounded-md md:px-2 md:w-64 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+            className="h-10 w-64 mt-2 bg-logo dark:bg-[#3a8a87] rounded-md md:px-2 md:w-64 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
             // className="bg-logo text-white text-sm font-medium uppercase leading-normal p-2 rounded-md w-64"
           >
             Pay
@@ -381,7 +380,7 @@ const PayComponent = () => {
                         </button>
                         <button
                           onClick={handleTransferSubmit}
-                          className="h-10 w-11/12 mt-2 bg-logo rounded-md md:px-2 md:w-1/2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                          className="h-10 w-11/12 mt-2 bg-logo dark:bg-[#3a8a87] rounded-md md:px-2 md:w-1/2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         >
                           pay by bank transfer
                         </button>

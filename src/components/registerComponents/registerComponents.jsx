@@ -170,7 +170,7 @@ function RegisterComponents() {
       >
         <div className="md:w-full lg:w-full flex justify-center items-center">
           <img
-            src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
+            src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045487/codeCraft/grid_landscape_na3qob.png"
             alt="CodecraftedLogo_image"
           />
         </div>
@@ -179,10 +179,14 @@ function RegisterComponents() {
       <div
         className="grid-span-2 flex justify-center 
         items-center py-3"
-        style={{
-          background:
-            "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-        }}
+        style={
+          localStorage.theme === "dark"
+            ? { background: "rgb(50,50,50)" }
+            : {
+                background:
+                  "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
+              }
+        }
       >
         <div className="md:w-8/12 lg:w-8/12 ">
           <form onSubmit={(e) => handleSubmit(e)}>
@@ -196,13 +200,17 @@ function RegisterComponents() {
                   placeholder="Company name"
                   value={input.name}
                   onChange={(e) => handleChange(e)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={
+                    localStorage.theme === "dark"
+                      ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                      : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  }
                   required
                 />
                 <span className={styles.warning}>
                   {/* <span className="absolute mr-2" title={errors.name}> */}{" "}
                   {errors.name && (
-                    <i className="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800" />
+                    <i className="fa-solid fa-circle-exclamation text-red-800 hover:text-red-700" />
                   )}
                   <span className={styles.bubble}>{errors.name}</span>
                 </span>
@@ -222,13 +230,17 @@ function RegisterComponents() {
                   placeholder="Enter email"
                   value={input.email}
                   onChange={(e) => handleChange(e)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={
+                    localStorage.theme === "dark"
+                      ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                      : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  }
                   required
                 />
                 <span className={styles.warning}>
                   {/* <span className="absolute mr-2" title={errors.email}> */}{" "}
                   {errors.email && (
-                    <i className="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800" />
+                    <i className="fa-solid fa-circle-exclamation text-red-800 hover:text-red-700" />
                   )}
                   <span className={styles.bubble}>{errors.email}</span>
                 </span>
@@ -253,7 +265,11 @@ function RegisterComponents() {
                     validatePassword(e.target.value);
                     handleChange(e);
                   }}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={
+                    localStorage.theme === "dark"
+                      ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                      : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  }
                   required
                 />
                 {/* -------------------------------------------------------------------------------------------- */}
@@ -287,7 +303,7 @@ function RegisterComponents() {
                       {validations.hasUppercase ? (
                         <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i className="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-800" />
                       )}{" "}
                       An uppercase character
                     </li>
@@ -295,7 +311,7 @@ function RegisterComponents() {
                       {validations.hasLowercase ? (
                         <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i className="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-800" />
                       )}{" "}
                       An lowercase character
                     </li>
@@ -303,7 +319,7 @@ function RegisterComponents() {
                       {validations.isBetween8And30 ? (
                         <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i className="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-800" />
                       )}{" "}
                       A between 8 and 30 char...
                     </li>
@@ -313,7 +329,7 @@ function RegisterComponents() {
                       {validations.hasNumber ? (
                         <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i className="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-800" />
                       )}{" "}
                       A number
                     </li>
@@ -321,7 +337,7 @@ function RegisterComponents() {
                       {validations.hasSpecialChar ? (
                         <i className="fa-solid fa-check text-green-600" />
                       ) : (
-                        <i className="fa-solid fa-xmark text-red-600" />
+                        <i className="fa-solid fa-xmark text-red-800" />
                       )}{" "}
                       A special character
                     </li>
@@ -339,7 +355,11 @@ function RegisterComponents() {
                     placeholder="Confirm password"
                     value={input.confirmPassword}
                     onChange={(e) => handleChange(e)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className={
+                      localStorage.theme === "dark"
+                        ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                        : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    }
                     required
                   />
                   <span className={styles.warning}>
@@ -347,7 +367,7 @@ function RegisterComponents() {
                     {errors.confirmPassword && (
                       <i
                         className={styles.icon}
-                        class="fa-solid fa-circle-exclamation  text-red-600 hover:text-red-800 "
+                        class="fa-solid fa-circle-exclamation  text-red-800 hover:text-red-700"
                       />
                     )}
                     <span className={styles.bubble}>
@@ -371,18 +391,19 @@ function RegisterComponents() {
             <div className="grid grid-cols-2 text-[#606060] text-sm">
               <div className="cols-span-1 text-sm flex pt-2 pl-2">
                 <p> Are you already a member? </p>
-                <NavLink to="/login" className="text-[#3a8a87] ml-1">
+                <NavLink
+                  to="/login"
+                  className="text-[#3a8a87] hover:text-logo ml-1"
+                >
                   <strong> Login </strong>
                 </NavLink>
               </div>
 
               <div className="flex justify-end items-end text-sm pt-2 pr-2">
                 {/* Agregar enlace de Home */}
-                <div className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
-                  Back to Home
-                </div>
+                <div className="text-[#606060] ">Back to Home</div>
                 <NavLink to="/" className="flex items-center ml-2 mb-1">
-                  <i className="text-[#3a8a87] fa-solid fa-house"></i>
+                  <i className="text-[#3a8a87] hover:text-logo fa-solid fa-house"></i>
                 </NavLink>
               </div>
             </div>
@@ -390,15 +411,17 @@ function RegisterComponents() {
             {/* <!-- Submit button --> */}
             <button
               type="submit"
-              className="inline-block mt-10 bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-              data-te-ripple-init
-              data-te-ripple-color="light"
+              className={
+                localStorage.theme === "dark"
+                  ? "mt-10 inline-block bg-[#3a8a87] w-full rounded-md  px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  : "mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              }
             >
               Register
             </button>
 
             {/* <!-- Divider --> */}
-            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-[#707070] after:mt-0.5 after:flex-1 after:border-t after:border-[#707070]">
               <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                 OR
               </p>
@@ -408,7 +431,7 @@ function RegisterComponents() {
             {/*  Google */}
             <a
               onClick={() => loginWithPopup()}
-              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded-md px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               href="#!"
               role="button"
               data-te-ripple-init
