@@ -85,7 +85,7 @@ const Plantillas = ({
 
   return (
     /* contenedor */
-    <div className="flex flex-wrap w-full items-start my-6 justify-center">
+    <div className="flex flex-wrap w-full items-start my-6 justify-center font-custom">
       {templates.map(
         (img, index) =>
           /* Contenedor cards */
@@ -121,7 +121,7 @@ const Plantillas = ({
                 </div>
 
                 {img.isBought ? (
-                  <p>Bought</p>
+                  <p className="text-white">Bought</p>
                 ) : cart.some((item) => item.id === img.id) ? (
                   <button
                     className={`inline-block bg-[#202020] w-29 rounded px-2 pb-1.5 pt-2 text-xs font-medium uppercase leading-normal text-white text-opacity-60 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)"]`}
