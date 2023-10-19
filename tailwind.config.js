@@ -18,7 +18,8 @@ module.exports = {
         titulo: "2rem",
       },
       fontFamily: {
-        custom: ["CustomFont", "sans"],
+        // custom: ['Heebo'],
+        custom: ['Mulish'],
       },
     },
   },
