@@ -14,7 +14,7 @@ const Banner = () => {
         
         {/* Imagen logo */}
         <img
-          src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/iso_wfaz4p.png"
+          src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045466/codeCraft/grid_landscape_csxysv.png"
           alt="Logo"
           width={"30px"}
         />  
