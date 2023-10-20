@@ -15,7 +15,6 @@ const Plantillas = ({
   const URL = process.env.REACT_APP_API;
   const [templates, setTemplates] = useState([]);
   const dispatch = useDispatch();
-  console.log(templates);
 
   // ? CAMBIO DE BOTON SI SE AGREGA AL CARRITO
   const cart = useSelector((state) => state.cart);
@@ -38,7 +37,6 @@ const Plantillas = ({
       });
       const { data } = response;
       setTemplates(data);
-      console.log(data);
     } catch (error) {
       console.error("Error al obtener datos:", error);
     }
