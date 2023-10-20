@@ -47,17 +47,15 @@ const PayComponent = () => {
     } catch (error) {
       console.log(error.message);
       showErrorAlert(error.message);
+      return 
     }
+    return "ok"
   };
   // funcion edita la base de datos USER
   const payOrderPost = async (order) => {
     try {
-      const {data} = await axios.post(
-        `${URL}/api/shop/pay_order`,
-        order
-      );
-      data.href ? window.location.href = data.href : console.log('error');
-      
+      const { data } = await axios.post(`${URL}/api/shop/pay_order`, order);
+      data.href ? (window.location.href = data.href) : console.log("error");
     } catch (error) {
       showErrorAlert(error.message);
     }
@@ -95,10 +93,11 @@ const PayComponent = () => {
     return deploymentCost + subTotal;
   };
 
-  // Nuevo array para pasarle solo id|price al back
+  // Nuevo array para pasarle solo id|price|name al back
   const productsCart = cart.map((product) => {
-    return { id: product.id, price: product.price, name: product.nmae};
+    return { id: product.id, price: product.price, name: product.nmae };
   });
+
   // Objeto para mandarle a shop_pay_order
   const payPaypal = {
     email: user.email,
@@ -106,24 +105,28 @@ const PayComponent = () => {
     products: productsCart,
     totalAmount: deploymentCost + subTotal,
     paymentMethod: "paypal",
-  }
+  };
   const payBank = {
     email: user.email,
     name: formData.name,
     products: productsCart,
     totalAmount: deploymentCost + subTotal,
     paymentMethod: "bank_transfer",
-  }
+  };
   // Hay que cambiar el link de navigate para paypal
-  const handlePaypalSubmit = (e) => {
+  const handlePaypalSubmit = async (e) => {
     e.preventDefault();
-    editUser(formData) && payOrderPost(payPaypal)
+    const userEdit = await editUser(formData)
+    console.log(userEdit);
+    userEdit && payOrderPost(payPaypal);
   };
   // Hay que cambiar el link de navigate para algun lado
-  const handleTransferSubmit = (e) => {
+  const handleTransferSubmit = async (e) => {
     e.preventDefault();
-    editUser(formData) && payOrderPost(payBank)
-    navigate("/shop");
+    const userEdit = await editUser(formData)
+    console.log('NOB', userEdit);
+    userEdit && payOrderPost(payBank);
+    // navigate("/shop");
   };
 
   return (
@@ -132,9 +135,7 @@ const PayComponent = () => {
       <Nav />
       <div>
         <div className="container mx-auto p-1 mt-2 mb-2">
-          <h2
-            className="inline-block mb-2 mt-2 w-full p-1 bg-[#303030]  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white dark:text-white shadow-[0_4px_9px_-4px_#000000] "
-          >
+          <h2 className="inline-block mb-2 mt-2 w-full p-1 bg-[#303030]  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white dark:text-white shadow-[0_4px_9px_-4px_#000000] ">
             Checkout
           </h2>
         </div>
@@ -173,18 +174,18 @@ const PayComponent = () => {
               }}
             >
               <img
-                src="https://res.cloudinary.com/dp6ojzhsc/image/upload/v1697121058/Sellos/sello_premium-fotor-bg-remover-20231012112737_b5obv0.png"
-                alt=""
+                src={template.image}
+                alt={template.name}
                 className="w-full h-36 object-cover py-2 px-2"
               />
-              <div className="px-6 py-4">
+              {/* <div className="px-6 py-4">
                 <div className="font-medium uppercase leading-normal  text-white">
                   {template.name}
                 </div>
               </div>
               <div className="text-white text-lg mb-2">
                 <strong>${template.price}</strong>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>

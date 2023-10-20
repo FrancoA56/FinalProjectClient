@@ -61,12 +61,12 @@ const CartComponent = () => {
                     key={model.id}
                   >
                     {/* imagen */}
-                    <div className="col-span-3 flex items-center justify-center m-1 overflow-hidden rounded-md">
+                    <div className="col-span-3 flex items-center p-2 justify-center overflow-hidden">
                       <NavLink to={`/detail/${model.id}`}>
                         <img
-                          src={plantilla}
+                          src={model.image}
                           alt={model.name}
-                          className="object-cover"
+                          className="object-cover rounded-md hover:scale-105 ease-in duration-200"
                         />
                       </NavLink>
                     </div>
@@ -87,7 +87,7 @@ const CartComponent = () => {
                       <div className="px-12">
                         {" "}
                         <NavLink to={`/detail/${model.id}`}>
-                          <h1 className="text-2xl font-bold uppercase text-[#cecece] border-b border-[#cecece]">
+                          <h1 className="text-2xl font-bold uppercase text-[#cecece] border-b border-[#cecece] hover:scale-105 ease-in duration-200">
                             {model.name}
                           </h1>
                         </NavLink>

@@ -52,7 +52,7 @@ export const addModel = (model) => {
 };
 ////////////////////////////////////////////////
 export const addColors = (color) => {
-  console.log('action--->', color);
+  console.log("action--->", color);
   return function (dispatch) {
     try {
       return dispatch({
@@ -116,6 +116,9 @@ export const addModelToCart = (id) => {
         type: data.type,
         rating: data.ratingAverage,
         released: data.released,
+        image: data.image,
+        url: data.url,
+        releasedAt: data.releasedAt,
       };
 
       // Actualizar el estado con el nuevo carrito
@@ -156,7 +159,7 @@ export const removeModelFromCart = (id) => {
 
       //si esta logeado el usuario se guarda en su base de datos el carrito relacionado al usuario
       if (state.login) {
-        const {data} = await axios.delete(
+        const { data } = await axios.delete(
           `${URL}/api/shop/order?id=${id}&email=${state.user.email}`
         );
         if (data.isSuccess) {
@@ -322,13 +325,16 @@ export const logInUser = (payload) => {
       const responseGetAllDataBase = await axios.get(
         `${URL}/api/shop/order?email=${payload.email}`
       );
-      console.log("responseGetAllDataBase", responseGetAllDataBase.data)
+      console.log("responseGetAllDataBase", responseGetAllDataBase.data);
 
       if (responseGetAllDataBase.data.length) {
         const responseGetAllInfoPresets = await axios.get(
           `${URL}/api/preset?ids=${responseGetAllDataBase.data}`
         );
-        console.log("responseGetAllInfoPresets", responseGetAllInfoPresets.data)
+        console.log(
+          "responseGetAllInfoPresets",
+          responseGetAllInfoPresets.data
+        );
 
         dispatch({
           type: ADD_ALL_MODEL_CART,
@@ -365,7 +371,7 @@ export const logOutUser = () => {
     dispatch({
       type: ADD_ALL_MODEL_CART,
       payload: [],
-    })
+    });
     // -----------------------------------------------------------------
     // return {
     //   type: LOGOUT_USER,
