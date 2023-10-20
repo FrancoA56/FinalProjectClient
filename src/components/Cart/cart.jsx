@@ -49,7 +49,6 @@ const CartComponent = () => {
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
               }}
             >
-              {console.log(models)}
               {models && models.length > 0 ? (
                 models.map((model) => (
                   <div
