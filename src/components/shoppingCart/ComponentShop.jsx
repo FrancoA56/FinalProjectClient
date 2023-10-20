@@ -226,6 +226,12 @@ const ComponentShop = () => {
                 >
                   Clear filter
                 </button>
+                EN COMPONENT SHOOP
+{/*                 <button
+                  className="mt-5 mb-4 w-3/4 inline-block bg-logo rounded 5ec3bf px-4 pb-2 pt-2 text-xs font-xs leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  onClick={() => handleClearFilter()}
+                >
+                  CLEAR FILTER */}
               </div>
             </div>
             {/* Columna derecha */}
