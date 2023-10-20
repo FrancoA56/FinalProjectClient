@@ -49,6 +49,7 @@ const CartComponent = () => {
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
               }}
             >
+              {console.log(models)}
               {models && models.length > 0 ? (
                 models.map((model) => (
                   <div
@@ -64,7 +65,7 @@ const CartComponent = () => {
                     <div className="col-span-3 flex items-center p-2 justify-center overflow-hidden">
                       <NavLink to={`/detail/${model.id}`}>
                         <img
-                          src={model.image}
+                          src={model.images[0]}
                           alt={model.name}
                           className="object-cover rounded-md hover:scale-105 ease-in duration-200"
                         />

@@ -72,7 +72,7 @@ const HomeComponent = () => {
                   <img
                     className={style.img}
                     src={
-                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582620/Presets/Medium/MediumDetail01_znwhmd.png"
+                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833512/Presets/Basic/BasicHome02_parte1_vpaxxp.png"
                     } /* src={bestRanked[1].url} */
                     alt={`plantilla.name`} /* alt={bestRanked[1].name} */
                   />
@@ -92,7 +92,7 @@ const HomeComponent = () => {
                   <img
                     className={style.img}
                     src={
-                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582620/Presets/Medium/MediumHome01_cchede.png"
+                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833592/Presets/Premium/PremiumDetail01_parte_1_oyzhpq.png"
                     } /* src={bestRanked[0].url} */
                     alt={"plantillas[1].name"} /* alt={bestRanked[0].name} */
                   />
@@ -110,7 +110,7 @@ const HomeComponent = () => {
                   <img
                     className={style.img}
                     src={
-                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582557/Presets/Basic/BasicHome01_parte1_cpyufr.png"
+                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833514/Presets/Basic/BasicShop01_parte_1_icdesy.png"
                     } /* src={bestRanked[2].url} */
                     alt={`plantillas.name`} /* alt={bestRanked[2].name} */
                   />
