@@ -174,7 +174,7 @@ const PayComponent = () => {
               }}
             >
               <img
-                src={template.image}
+                src={template.images[0]}
                 alt={template.name}
                 className="w-full h-36 object-cover py-2 px-2"
               />

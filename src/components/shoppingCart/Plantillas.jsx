@@ -15,7 +15,6 @@ const Plantillas = ({
   const URL = process.env.REACT_APP_API;
   const [templates, setTemplates] = useState([]);
   const dispatch = useDispatch();
-  console.log(templates);
 
   // ? CAMBIO DE BOTON SI SE AGREGA AL CARRITO
   const cart = useSelector((state) => state.cart);
@@ -57,15 +56,15 @@ const Plantillas = ({
     const orderPriority = orderValue;
 
     if (selectedCategory.length > 0) {
-      filters.category = category;
+      filters.categories = category;
     }
 
     if (selectedFilterColor.length > 0) {
-      filters.defaultColor = defaultColor;
+      filters.defaultColors = defaultColor;
     }
 
     if (selectedTypes.length > 0) {
-      filters.type = type;
+      filters.types = type;
     }
 
     fetchTemplates(filters, orderType, orderPriority);
@@ -104,7 +103,7 @@ const Plantillas = ({
             >
               <Link to={`/detail/${img.id}`}>
                 <img
-                  src={img.image}
+                  src={img.images[0]}
                   alt={img.name}
                   className="w-full h-56 object-cover"
                 />
@@ -193,7 +192,9 @@ const Plantillas = ({
           (img.category === "basic" && (
             <div
               key={index}
-              className={`${img.isBought && `grayscale`} border-2 shadow-[0_4px_9px_2px_#ff99003d] border-orange-900 rounded-md overflow-hidden m-4 w-2/5 hover:scale-105 ease-in duration-200`}
+              className={`${
+                img.isBought && `grayscale`
+              } border-2 shadow-[0_4px_9px_2px_#ff99003d] border-orange-900 rounded-md overflow-hidden m-4 w-2/5 hover:scale-105 ease-in duration-200`}
               style={{
                 background:
                   "radial-gradient(20rem circle at bottom, rgb(10, 10, 10), rgb(50, 50, 50)",

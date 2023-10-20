@@ -116,7 +116,7 @@ export const addModelToCart = (id) => {
         type: data.type,
         rating: data.ratingAverage,
         released: data.released,
-        image: data.image,
+        images: data.images,
         url: data.url,
         releasedAt: data.releasedAt,
       };
