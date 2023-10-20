@@ -102,7 +102,6 @@ const Plantillas = ({
               }}
             >
               <Link to={`/detail/${img.id}`}>
-                {console.log(img)}
                 <img
                   src={img.images[0]}
                   alt={img.name}
