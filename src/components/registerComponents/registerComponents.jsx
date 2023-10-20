@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, NavLink } from "react-router-dom";
-// import styles from "../registerComponents/register.module.css";
+import React, { useEffect, useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
+import styles from "../registerComponents/register.module.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { validation } from "../validation";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+// import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
+import { logInSet, logInUser } from "../../Redux/actions";
+import decodeToken from "../loginComponents/decodeToken";
 
 /* Email validity requirements
 ----------------------------------------
@@ -62,6 +66,36 @@ function RegisterComponents() {
   };
   // --------------------------------------------------------------------------------------------------------
 
+  //---------------------Auth terceros --------------------------------------
+  const dispatch = useDispatch();
+
+  const { user, isAuthenticated, loginWithPopup } = useAuth0();
+  useEffect(() => {
+    // const storedToken = localStorage.getItem("token");
+    if (isAuthenticated) {
+      const auth = async () => {
+        try {
+          const userAuth = {
+            name: user.nickname,
+            email: user.email, // Se obtienen los datos del usuario
+          };
+          const { data } = await axios.post(`${URL}/api/user/login0`, userAuth); // Guarda al usuario en la base de datos y obtiene el token
+
+          localStorage.setItem("token", data); // Guarda el token en el localStorage
+          const userDecoded = decodeToken(data);
+          dispatch(logInUser(userDecoded)); // Guarda los datos del usuario en el estado global
+          dispatch(logInSet(true));
+          navigate("/"); // Va pal home
+        } catch (error) {
+          showErrorAlert(error.message);
+        }
+      };
+      auth();
+    }
+  });
+
+  //---------------------------------Auth terceros------------------------------
+
   const handleChange = (e) => {
     setInput({
       ...input,
@@ -102,6 +136,7 @@ function RegisterComponents() {
     Swal.fire({
       icon: "success",
       title: "Success",
+      confirmButtonColor: "rgb(94 195 191)",
       text: `${message}`,
     });
   };
@@ -110,6 +145,7 @@ function RegisterComponents() {
     Swal.fire({
       icon: "error",
       title: "Error",
+      confirmButtonColor: "rgb(94 195 191)",
       text: `${message}`,
     });
   };
@@ -123,32 +159,36 @@ function RegisterComponents() {
   // -----------------------------------------------------------------------------------------------
 
   return (
-    <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
+    <div className="grid lg:grid-cols-2 md:grid-cols-1 h-screen">
       {/* Columna izq */}
       <div
-        class="grid-span-1 flex justify-center items-center"
+        className="grid-span-1 flex justify-center items-center"
         style={{
           background:
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div class="md:w-full lg:w-full flex justify-center items-center">
+        <div className="md:w-full lg:w-full flex justify-center items-center">
           <img
-            src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/isologo_htzuyd.png"
+            src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045487/codeCraft/grid_landscape_na3qob.png"
             alt="CodecraftedLogo_image"
           />
         </div>
       </div>
       {/* Columna der */}
       <div
-        class="grid-span-2 flex justify-center 
+        className="grid-span-2 flex justify-center 
         items-center py-3"
-        style={{
-          background:
-            "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-        }}
+        style={
+          localStorage.theme === "dark"
+            ? { background: "rgb(50,50,50)" }
+            : {
+                background:
+                  "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
+              }
+        }
       >
-        <div class="md:w-8/12 lg:w-8/12 ">
+        <div className="md:w-8/12 lg:w-8/12 ">
           <form onSubmit={(e) => handleSubmit(e)}>
             {/* Name input */}
             <div className="">
@@ -160,14 +200,19 @@ function RegisterComponents() {
                   placeholder="Company name"
                   value={input.name}
                   onChange={(e) => handleChange(e)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={
+                    localStorage.theme === "dark"
+                      ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                      : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  }
                   required
                 />
-                <span className="absolute mr-2" title={errors.name}>
-                  {" "}
+                <span className={styles.warning}>
+                  {/* <span className="absolute mr-2" title={errors.name}> */}{" "}
                   {errors.name && (
-                    <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                    <i className="fa-solid fa-circle-exclamation text-red-800 hover:text-red-700" />
                   )}
+                  <span className={styles.bubble}>{errors.name}</span>
                 </span>
               </div>
             </div>
@@ -185,14 +230,19 @@ function RegisterComponents() {
                   placeholder="Enter email"
                   value={input.email}
                   onChange={(e) => handleChange(e)}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={
+                    localStorage.theme === "dark"
+                      ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                      : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  }
                   required
                 />
-                <span className="absolute mr-2" title={errors.email}>
-                  {" "}
+                <span className={styles.warning}>
+                  {/* <span className="absolute mr-2" title={errors.email}> */}{" "}
                   {errors.email && (
-                    <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                    <i className="fa-solid fa-circle-exclamation text-red-800 hover:text-red-700" />
                   )}
+                  <span className={styles.bubble}>{errors.email}</span>
                 </span>
               </div>
               {/* <p className="text-txcval text-xs absolute indent-3 mt-1">
@@ -215,7 +265,11 @@ function RegisterComponents() {
                     validatePassword(e.target.value);
                     handleChange(e);
                   }}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className={
+                    localStorage.theme === "dark"
+                      ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                      : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  }
                   required
                 />
                 {/* -------------------------------------------------------------------------------------------- */}
@@ -226,9 +280,9 @@ function RegisterComponents() {
                 >
                   {
                     showPassword ? (
-                      <i class="fa-solid fa-eye-slash" />
+                      <i className="fa-solid fa-eye" />
                     ) : (
-                      <i class="fa-solid fa-eye" />
+                      <i className="fa-solid fa-eye-slash" />
                     ) /* (
                         <FaEye style={{ color: "gray" }} />
                         ) : (
@@ -238,6 +292,59 @@ function RegisterComponents() {
                 </span>
                 {/* ---------------------------------------------------------------------------------------------- */}
               </div>
+
+              <div>
+                <p className="mt-3 text-sm text-[#606060]">
+                  <strong> Password must have:</strong>
+                </p>
+                <ul className="grid grid-cols-2 text-sm text-[#606060]">
+                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
+                    <li>
+                      {validations.hasUppercase ? (
+                        <i className="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i className="fa-solid fa-xmark text-red-800" />
+                      )}{" "}
+                      An uppercase character
+                    </li>
+                    <li>
+                      {validations.hasLowercase ? (
+                        <i className="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i className="fa-solid fa-xmark text-red-800" />
+                      )}{" "}
+                      An lowercase character
+                    </li>
+                    <li className="line-clamp-1">
+                      {validations.isBetween8And30 ? (
+                        <i className="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i className="fa-solid fa-xmark text-red-800" />
+                      )}{" "}
+                      A between 8 and 30 char...
+                    </li>
+                  </div>
+                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
+                    <li>
+                      {validations.hasNumber ? (
+                        <i className="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i className="fa-solid fa-xmark text-red-800" />
+                      )}{" "}
+                      A number
+                    </li>
+                    <li>
+                      {validations.hasSpecialChar ? (
+                        <i className="fa-solid fa-check text-green-600" />
+                      ) : (
+                        <i className="fa-solid fa-xmark text-red-800" />
+                      )}{" "}
+                      A special character
+                    </li>
+                  </div>
+                </ul>
+              </div>
+
               <div className="mt-3">
                 <div className="flex items-center justify-end">
                   <input
@@ -248,17 +355,24 @@ function RegisterComponents() {
                     placeholder="Confirm password"
                     value={input.confirmPassword}
                     onChange={(e) => handleChange(e)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    className={
+                      localStorage.theme === "dark"
+                        ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
+                        : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    }
                     required
                   />
-                  <span
-                    className="absolute mr-2"
-                    title={errors.confirmPassword}
-                  >
+                  <span className={styles.warning}>
                     {" "}
                     {errors.confirmPassword && (
-                      <i class="fa-solid fa-circle-exclamation text-[#909090] hover:text-[#303030]" />
+                      <i
+                        className={styles.icon}
+                        class="fa-solid fa-circle-exclamation  text-red-800 hover:text-red-700"
+                      />
                     )}
+                    <span className={styles.bubble}>
+                      {errors.confirmPassword}
+                    </span>
                   </span>
                 </div>
                 {/* <p className="text-txcval text-xs absolute indent-3 mt-1">
@@ -269,55 +383,6 @@ function RegisterComponents() {
                 {errors.password}
               </p> */}
               {/* <div className={(validations.hasLowercase || validations.hasUppercase || validations.hasNumber || validations.hasSpecialChar || validations.isBetween8And30) ? "visible" : "invisible"}> */}
-              <p className="mt-3 text-sm text-[#606060]">
-                <strong> Password must have:</strong>
-              </p>
-              <ul className="grid grid-cols-2 text-sm text-[#606060]">
-                <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                  <li>
-                    {validations.hasUppercase ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    An uppercase character
-                  </li>
-                  <li>
-                    {validations.hasLowercase ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    An lowercase character
-                  </li>
-                  <li className="line-clamp-1">
-                    {validations.isBetween8And30 ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    A between 8 and 30 char...
-                  </li>
-                </div>
-                <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                  <li>
-                    {validations.hasNumber ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    A number
-                  </li>
-                  <li>
-                    {validations.hasSpecialChar ? (
-                      <i class="fa-solid fa-check text-green-600" />
-                    ) : (
-                      <i class="fa-solid fa-xmark text-red-600" />
-                    )}{" "}
-                    A special character
-                  </li>
-                </div>
-              </ul>
             </div>
             {/* </div> */}
             <hr className="mt-2 border border-[#909090] rounded-sm" />
@@ -326,37 +391,38 @@ function RegisterComponents() {
             <div className="grid grid-cols-2 text-[#606060] text-sm">
               <div className="cols-span-1 text-sm flex pt-2 pl-2">
                 <p> Are you already a member? </p>
-                <NavLink to="/login">
-                  <a class="text-[#3a8a87] ml-1">
-                    <strong> Login </strong>
-                  </a>
+                <NavLink
+                  to="/login"
+                  className="text-[#3a8a87] hover:text-logo ml-1"
+                >
+                  <strong> Login </strong>
                 </NavLink>
               </div>
 
-              <div class="flex justify-end items-end text-sm pt-2 pr-2">
+              <div className="flex justify-end items-end text-sm pt-2 pr-2">
                 {/* Agregar enlace de Home */}
-                <a className="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600 ml-8">
-                  Back to Home
-                </a>
-                <Link to="/" className="flex items-center ml-2 mb-1">
-                  <i className="text-[#3a8a87] fa-solid fa-house"></i>
-                </Link>
+                <div className="text-[#606060] ">Back to Home</div>
+                <NavLink to="/" className="flex items-center ml-2 mb-1">
+                  <i className="text-[#3a8a87] hover:text-logo fa-solid fa-house"></i>
+                </NavLink>
               </div>
             </div>
 
             {/* <!-- Submit button --> */}
             <button
               type="submit"
-              class="inline-block mt-10 bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-              data-te-ripple-init
-              data-te-ripple-color="light"
+              className={
+                localStorage.theme === "dark"
+                  ? "mt-10 inline-block bg-[#3a8a87] w-full rounded-md  px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  : "mt-10 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              }
             >
               Register
             </button>
 
             {/* <!-- Divider --> */}
-            <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-              <p class="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-[#707070] after:mt-0.5 after:flex-1 after:border-t after:border-[#707070]">
+              <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
                 OR
               </p>
             </div>
@@ -364,7 +430,8 @@ function RegisterComponents() {
             {/* <!-- Social login buttons --> */}
             {/*  Google */}
             <a
-              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              onClick={() => loginWithPopup()}
+              class="mt-1 bg-[#505050] flex w-full items-center justify-center rounded-md px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               href="#!"
               role="button"
               data-te-ripple-init
@@ -376,18 +443,18 @@ function RegisterComponents() {
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path
+                {/* <path
                   d="M7 11v2.4h3.97c-.16 1.029-1.2 3.02-3.97 3.02-2.39 0-4.34-1.979-4.34-4.42 0-2.44 1.95-4.42 4.34-4.42 1.36 0 2.27.58 2.79 1.08l1.9-1.83c-1.22-1.14-2.8-1.83-4.69-1.83-3.87 0-7 3.13-7 7s3.13 7 7 7c4.04 0 6.721-2.84 6.721-6.84 0-.46-.051-.81-.111-1.16h-6.61zm0 0 17 2h-3v3h-2v-3h-3v-2h3v-3h2v3h3v2z"
                   fill-rule="evenodd"
                   clip-rule="evenodd"
-                />
+                /> */}
               </svg>
-              Continue with Google
+              Sing in with...
             </a>
             {/* <!-- Twitter --> */}
 
             {/* <a
-              class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+              className="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#00000] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
               style={{ "background-color": "#505050" }}
               href="#!"
               role="button"
@@ -396,7 +463,7 @@ function RegisterComponents() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="mr-2 h-3.5 w-3.5"
+                className="mr-2 h-3.5 w-3.5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -413,48 +480,48 @@ function RegisterComponents() {
 
 export default RegisterComponents;
 
-{
-  /*  LO QUE QUIRE TOM PARA LOS ERRORES*/
-}
-{
-  /* {errors.password?.length ? (
-                <span
-                  styles={{
-                    display: "flex",
-                    height: "40px",
-                    color: "red",
-                    width: "40px",
-                  }}
-                >
-                  <i className="fa-solid fa-circle-exclamation" />
-                  <span style={{ opacity: 0 }}>{errors.password}</span>
-                  <span style={{ opacity: 0 }} />
-                </span>
-              ) : (
-                <></>
-              )} */
-}
-{
-  /*  LO QUE QUIRE TOM PARA LOS ERRORES*/
-}
-
-{
-  /*  Twitter  
-
-//       toast.success(`${result.msg}`, {
-//         position: toast.POSITION.BOTTOM_RIGHT
-//     });
-//       navigate("/home",{replace:true})
-//     }else {
-//       toast.error(`${result.msg}`, {
-//         position: toast.POSITION.BOTTOM_RIGHT
-//     });
-//     }
-//   }
-//   } catch (error) {
-//     console.log(error)
-//   }
+// {
+//   /*  LO QUE QUIRE TOM PARA LOS ERRORES*/
 // }
-// };
-*/
-}
+// {
+//   /* {errors.password?.length ? (
+//                 <span
+//                   styles={{
+//                     display: "flex",
+//                     height: "40px",
+//                     color: "red",
+//                     width: "40px",
+//                   }}
+//                 >
+//                   <i className="fa-solid fa-circle-exclamation" />
+//                   <span style={{ opacity: 0 }}>{errors.password}</span>
+//                   <span style={{ opacity: 0 }} />
+//                 </span>
+//               ) : (
+//                 <></>
+//               )} */
+// }
+// {
+//   /*  LO QUE QUIRE TOM PARA LOS ERRORES*/
+// }
+
+// {
+//   /*  Twitter
+
+// //       toast.success(`${result.msg}`, {
+// //         position: toast.POSITION.BOTTOM_RIGHT
+// //     });
+// //       navigate("/home",{replace:true})
+// //     }else {
+// //       toast.error(`${result.msg}`, {
+// //         position: toast.POSITION.BOTTOM_RIGHT
+// //     });
+// //     }
+// //   }
+// //   } catch (error) {
+// //     console.log(error)
+// //   }
+// // }
+// // };
+// */
+// }

@@ -1,22 +1,90 @@
 import "tailwindcss/tailwind.css";
-import React from "react";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 // Footer container
 function Footer() {
+  // ? FUNCIONES PARA USAR EMAIL JS
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    if (formData.user_email && formData.message) {
+      emailjs
+        .sendForm(
+          "service_rjik02h",
+          "template_w2je5xe",
+          form.current,
+          "ncTuTVkphxHhuJbUE"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
+  };
+
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
+
+  //Función para manejar el cambio en los inputs del form
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  //Función para manejar el envío del form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.user_email && formData.message) {
+      console.log("Form Data:", formData);
+      showSuccessAlert("Your form was submitted successfully!");
+    } else {
+      showErrorAlert(
+        "You must fill in at least the email and a message to submit the form"
+      );
+    }
+    setPopupOpen(false);
+  };
+  const showSuccessAlert = (message) => {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      confirmButtonColor: "rgb(94 195 191)",
+      text: `${message}`,
+    });
+  };
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: `${message}`,
+    });
+  };
+
   return (
     <footer
-      style={{
-        background:
-          "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-      }}
-      className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left"
+  
+      className="bg-gray-300 text-center text-neutral-600 dark:bg-[#303030] dark:text-[#707070] text-sm lg:text-left"
     >
       {/* Main content container */}
-      <div className="mx-6 py-5 text-center md:text-left">
-        <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-4">
-          {/* Tailwind Elements section */}
-          <div className="">
-            <h6 className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
+      <div className="mx-6 py-3 text-center md:text-left">
+        <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-3">
+          <div className="flex flex-col items-center">
+            <h6 className="mb-4 flex items-center justify-center font-semibold uppercase ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -27,7 +95,7 @@ function Footer() {
               </svg>
               ABOUT US
             </h6>
-            <p>
+            <p className="text-left pl-3">
               This is a company dedicated to the development of templates for
               websites. You can choose from the options we offer or contact us
               to make modifications that suit your needs!
@@ -36,19 +104,21 @@ function Footer() {
 
           {/* Social section */}
           <div className="flex justify-center flex-col">
-            <h6 className="mb-0.3 flex justify-center font-semibold uppercase md:justify-center">
+            <h6 className="mb-0.3 flex jitems-center justify-center font-semibold uppercase">
               Social Media
             </h6>
 
             {/* Instagram section */}
-            <p className="mr-2 mt-4 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-2 mt-4 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
               <a
                 href="https://www.instagram.com/code_crafted_templates/"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 mr-2"
+                  className="h-4 w-4 mr-2"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -60,14 +130,16 @@ function Footer() {
             </p>
 
             {/* Twitter section */}
-            <p className="mr-8 mt-2 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-8 mt-2 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
               <a
                 href="https://twitter.com/CodeCraftedTemp"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 mr-2"
+                  className="h-4 w-4 mr-2"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -79,14 +151,16 @@ function Footer() {
             </p>
 
             {/* LinkedIn section */}
-            <p className="mr-6 mt-1.5 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-6 mt-1.5 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
               <a
-                href="www.linkedin.com/in/code-crafted-templates"
+                href="http://www.linkedin.com/in/code-crafted-templates"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-3 flex items-center justify-center md:justify-center"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 mr-2 mb-1"
+                  className="h-4 w-4 mr-2 mb-1"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -96,40 +170,14 @@ function Footer() {
                 LinkedIn
               </a>
             </p>
-            {/* Add other product links similarly */}
-          </div>
-
-          {/* Email us */}
-          <div className="flex flex-col">
-            <input
-              className="indent-2 border rounded ml-2 mr-40"
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-            ></input>
-            <input
-              className="indent-2 border rounded ml-2 mt-2 mr-20"
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Email"
-            ></input>
-            <input
-              className="indent-2 border rounded m-2 h-28"
-              type="text"
-              name="text"
-              id="text"
-              placeholder="Talk to us!"
-            ></input>
           </div>
 
           {/* Contact section */}
           <div>
-            <h6 className="mb-2 flex justify-center font-semibold uppercase md:justify-center">
+            <h6 className=" flex items-center justify-center font-semibold uppercase">
               Contact
             </h6>
-            <p className="mb-4 flex items-center justify-center md:justify-start">
+            <p className=" text-center font text-s leading-tight">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -140,7 +188,7 @@ function Footer() {
               </svg>
               Email: codeCraftedTemplates@gmail.com
             </p>
-            <p className="mb-4 flex items-center justify-center md:justify-start">
+            <p className="text-center font text-s leading-tight">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -151,16 +199,185 @@ function Footer() {
               </svg>
               Phone: +54 xxxx xxxxxxx
             </p>
-            {/* Add other contact information similarly */}
+
+            {/* pop up form --> talk to us */}
+
+            <div className="rounded cursor-pointer">
+              <div className="flex items-center justify-center">
+                <h2
+                  className="mt-6 text-white text-center text-sm font-medium uppercase leading-normal bg-logo hover:bg-[#3a8a87] dark:bg-[#3a8a87] dark:hover:bg-logo py-2 px-4 rounded-md inline-block"
+                  onClick={() => setPopupOpen(true)}
+                >
+                  Talk to us
+                </h2>
+              </div>
+              {isPopupOpen && (
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
+                  <div className="p-1 rounded-md">
+                    <form
+                      ref={form}
+                      onSubmit={(e) => {
+                        handleSubmit(e);
+                        sendEmail(e);
+                      }}
+                    >
+                      {/* ... Tu formulario aquí */}
+                      <div className="isolate w-80 h-90 bg-gray-300 px-6 py-24 sm:py-3 lg:px-3">
+                        <div
+                          className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+                          aria-hidden="true"
+                        >
+                          <div
+                            className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w- -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-grey to-white opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+                            style={{
+                              "clip-path":
+                                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+                            }}
+                          ></div>
+                        </div>
+                        <div className="mx-auto max-w-2xl text-center">
+                          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl   uppercase leading-normal">
+                            Talk to Us
+                          </h2>
+                          <p className="mt-2 text-sm font-medium uppercase leading-normal  text-gray-600">
+                            You can send us your opinion or suggestion, It helps
+                            us to improve:
+                          </p>
+                        </div>
+                        <div
+                          action="#"
+                          method="POST"
+                          className="mx-auto mt-16 max-w-xl sm:mt-20"
+                        >
+                          <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                            <div>
+                              <label
+                                for="first-name"
+                                className="block text-sm font-semibold leading-6 text-gray-900"
+                              >
+                                First name
+                              </label>
+                              <div className="mt-2.5">
+                                <input
+                                  type="text"
+                                  name="user_name"
+                                  id="name"
+                                  autocomplete="given-name"
+                                  onChange={handleChange}
+                                  value={formData.user_name}
+                                  class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <label
+                                for="last-name"
+                                className="block text-sm font-semibold leading-6 text-gray-900"
+                              >
+                                Last name
+                              </label>
+                              <div className="mt-2.5">
+                                <input
+                                  type="text"
+                                  name="last-name"
+                                  id="last-name"
+                                  autocomplete="family-name"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              </div>
+                            </div>
+                            <div className="sm:col-span-2">
+                              <label
+                                for="company"
+                                className="block text-sm font-semibold leading-6 text-gray-900"
+                              >
+                                Company
+                              </label>
+                              <div className="mt-2.5">
+                                <input
+                                  type="text"
+                                  name="company"
+                                  id="company"
+                                  autocomplete="organization"
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              </div>
+                            </div>
+                            <div className="sm:col-span-2">
+                              <label
+                                for="email"
+                                className="block text-sm font-semibold leading-6 text-gray-900"
+                              >
+                                Email
+                              </label>
+                              <div className="mt-2.5">
+                                <input
+                                  type="email"
+                                  name="user_email"
+                                  id="email"
+                                  autocomplete="email"
+                                  onChange={handleChange}
+                                  value={formData.user_email}
+                                  class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                              </div>
+                            </div>
+
+                            <div className="sm:col-span-2">
+                              <label
+                                for="message"
+                                className="block text-sm font-semibold leading-6 text-gray-900"
+                              >
+                                Message
+                              </label>
+                              <div className="mt-2.5">
+                                <textarea
+                                  name="message"
+                                  id="message"
+                                  rows="4"
+                                  onChange={handleChange}
+                                  value={formData.message}
+                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                ></textarea>
+                              </div>
+                            </div>
+                            <div className="flex gap-x-4 sm:col-span-2">
+                              <div className="flex h-6 items-center"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex justify-end">
+                        <button
+                          type="button"
+                          className="bg-gray-400 text-white text-sm font-medium uppercase leading-normal px-4 py-2 rounded"
+                          onClick={() => setPopupOpen(false)}
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="submit"
+                          name="submit"
+                          className="bg-logo text-white text-sm font-medium uppercase leading-normal px-4 py-2 ml-2 rounded"
+                          value="Send"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Copyright section */}
-      <div className="bg-logo opacity-50 p-3 mb- text-center dark:bg-neutral-700">
-        <span className="text-black">© 2023 Copyright: </span>
+      <div className="bg-[#303030] opacity-50 p-3 mb- text-center dark:bg-[#202020] ">
+        <span className="text-[#909090] dark:text-white">© 2023 Copyright: </span>
         <a
-          className="font-semibold text-black dark:text-neutral-400"
+          className="font text-[#909090] dark:text-white"
           href="https://tailwind-elements.com/"
         >
           CodeCrafted Templates

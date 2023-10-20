@@ -1,9 +1,8 @@
 import {
   ADD_MODEL,
   ADD_MODELS,
-  ADD_MODEL_CART,
   ADD_ALL_MODEL_CART,
-  REMOVE_MODEL,
+  ADD_MODEL_CART,
   REMOVE_MODEL_DISABLE,
   REMOVE_MODEL_CART,
   ORDER_MODELS_NAME_ASCENDANT,
@@ -20,19 +19,21 @@ import {
   CREATE_PRESETS,
   EDIT_USER,
   WITH_DEPLOYMENT,
-  WITHOUT_DEPLOYMENT,
   LOGIN_TRUE,
+  DEPLOYMENT_COST,
+  ADD_COLOR,
 } from "./types";
 
 const initialState = {
   models: [],
   allModels: [],
   cart: [],
-  cartRemoved: [],
   user: [],
   presets: 1,
   deployment: false,
+  deploymentCost: 0,
   login: false,
+  colores: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -41,6 +42,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         models: [...state.models, ...payload],
+      };
+
+    case ADD_COLOR:
+      console.log('payloda--->', payload);
+      return {
+        ...state,
+        colores: payload
       };
 
     case ADD_MODELS:
@@ -53,7 +61,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case ADD_MODEL_CART:
       return {
         ...state,
-        cart: payload,
+        cart: [...state.cart, payload],
       };
 
     case ADD_ALL_MODEL_CART:
@@ -63,19 +71,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case REMOVE_MODEL_CART:
-      localStorage.setItem(
-        "cart",
-        JSON.stringify(state.cart.filter((model) => model.id !== payload))
-      );
       return {
         ...state,
-        cart: state.cart.filter((model) => model.id !== payload),
-      };
-
-    case REMOVE_MODEL:
-      return {
-        ...state,
-        models: state.models.filter((model) => model.id !== payload),
+        cart: payload,
       };
 
     case REMOVE_MODEL_DISABLE:
@@ -190,6 +188,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: {},
+        login: false,
       };
 
     case CREATE_PRESETS:
@@ -201,13 +200,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case WITH_DEPLOYMENT:
       return {
         ...state,
-        deployment: true,
+        deployment: payload,
       };
 
-    case WITHOUT_DEPLOYMENT:
+    case DEPLOYMENT_COST:
       return {
         ...state,
-        deployment: false,
+        deploymentCost: payload,
       };
 
     default:

@@ -17,7 +17,7 @@
   align-items: flex-start;
   justify-content: center;
   width: 50%;
-  height: 15rem;
+  height: 10rem;
   overflow: hidden;
   border-radius: 1rem;
   z-index: 0;
@@ -48,7 +48,7 @@
   max-height: 20rem;
   display: flex;
   border-radius: 1rem;
-  align-items: start;
+  /* align-items: start; */
   justify-content: center;
   overflow: hidden;
   z-index: 1;

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, NavLink, useNavigate } from "react-router-dom";
+import { useLocation, NavLink, useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
 import { logOutUser, addAllModelsToCart } from "../../Redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
+import DarkMode from "../DarkMode/darkmode";
+
 
 function Nav() {
   // Traemos el estado Global "user"
@@ -24,6 +27,8 @@ function Nav() {
   // Hook para ir al home
   const navigate = useNavigate();
 
+  const { logout, isAuthenticated } = useAuth0();
+
   // useEffect para cargar el cart del localStorage
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -40,10 +45,11 @@ function Nav() {
       text: "You are about to log out",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#5ec3bf",
+      confirmButtonColor: "rgb(94 195 191)",
       cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {
+      if (isAuthenticated) logout();
       if (result.isConfirmed) {
         dispatch(logOutUser(user.name));
         navigate("/");
@@ -59,11 +65,8 @@ function Nav() {
 
   return (
     <nav
-      style={{
-        background:
-          "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-      }}
-      className="flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
+   
+      className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
     >
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <button
@@ -100,10 +103,10 @@ function Nav() {
             className="mb-4 ml-2 mr-5  flex items-center text-neutral-900 hover:text-neutral-900
             focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 
             lg:mb-0 lg:"
-            href=""
+            href="#!"
           >
             <img
-              src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/iso_wfaz4p.png"
+              src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045466/codeCraft/grid_landscape_csxysv.png"
               style={{ height: "25px", width: "25px" }}
               alt="Logo"
               loading="lazy"
@@ -121,6 +124,7 @@ function Nav() {
                   data-te-nav-link-ref
                 >
                   Home
+                  {/* <i class="fa-solid fa-house"></i> */}
                 </NavLink>
               </li>
             )}
@@ -136,12 +140,13 @@ function Nav() {
                   data-te-nav-link-ref
                 >
                   Shop
+                  {/* <i class="fa-solid fa-shop"></i> */}
                 </NavLink>
               </li>
             )}
 
             {/* Projects link */}
-            {/*             <li className="mb-3  lg:mb-1 lg:pr-2" data-te-nav-item-ref>
+            <li className="mb-3  lg:mb-1 lg:pr-2" data-te-nav-item-ref>
               <a
                 className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
@@ -150,22 +155,28 @@ function Nav() {
                 href="#"
                 data-te-nav-link-ref
               >
-                Otra Ruta
+                <Link to={`/about`}>
+                  Team
+                  {/* <i class="fa-solid fa-users"></i> */}
+                  </Link>
               </a>
-            </li> */}
+            </li>
           </ul>
         </div>
 
+          <DarkMode/>
         {/* Right elements */}
         <div className="relative flex items-center justify-around ">
           {/* Cart Icon */}
-          <a
+          <NavLink
+            to="/cart"
             className="mr-12 text-neutral-600 transition duration-2.0 hover:text-neutral-700 hover:ease-in-out 
             focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 
             dark:hover:text-neutral-30 dark:focus:text-neutral-300 [&.active]:text-black/90 
             dark:[&.active]:text-neutral-400"
-            href="/cart"
+            //href="/cart"
           >
+            {/* <i class="fa-solid fa-cart-shopping"></i> */}
             <span className="[&>svg]:w-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -177,9 +188,9 @@ function Nav() {
               </svg>
             </span>
             {cartItemCount > 0 && (
-              <div className="absolute bottom-3 left-3">{cartItemCount}</div>
+             <span className="absolute bottom-3 left-3.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">{cartItemCount}</span>
             )}
-          </a>
+          </NavLink>
 
           {/* Container with two dropdown menus */}
           <div
@@ -212,8 +223,8 @@ function Nav() {
                 </svg>
               </span>
               {/* Notification counter */}
-              <span className="absolute -mt-4 ml-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white">
-                1
+              <span className="absolute -mt-4 ml-2.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">
+                0
               </span>
             </a>
 
@@ -256,7 +267,7 @@ function Nav() {
             {user.name ? (
               <>
                 {" "}
-                <a
+                <div
                   className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
                   href="#"
                   id="dropdownMenuButton2"
@@ -266,13 +277,13 @@ function Nav() {
                 >
                   {" "}
                   {user.name}{" "}
-                </a>
+                </div>
               </>
             ) : (
               <>
                 {" "}
-                <a
-                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                <div
+                  className="hidden-arrow mr-12 flex  items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
                   href="#"
                   id="dropdownMenuButton2"
                   role="button"
@@ -280,8 +291,8 @@ function Nav() {
                   onClick={toggleDropdown}
                 >
                   {/* User avatar */}
-                  <i class="fa-solid fa-bars"></i>
-                </a>
+                  <i class="fa-solid fa-user h-5 w-5 text-neutral-600 hover:text-neutral-700 dark:text-white"></i>
+                </div>
               </>
             )}
 
@@ -293,7 +304,7 @@ function Nav() {
               aria-labelledby="dropdownMenuButton1"
             >
               {/* Second dropdown menu items */}
-              {user.name ? (
+              {user.name || isAuthenticated ? (
                 <>
                   <li>
                     <NavLink
@@ -329,7 +340,7 @@ function Nav() {
                       href="/register"
                       data-te-dropdown-item-ref
                     >
-                      Sing In
+                      Register
                     </a>
                   </li>
                 </>
