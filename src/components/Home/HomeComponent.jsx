@@ -72,7 +72,7 @@ const HomeComponent = () => {
                   <img
                     className={style.img}
                     src={
-                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833512/Presets/Basic/BasicHome02_parte1_vpaxxp.png"
+                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697852425/Presets/Basic/BasicHome02_parte1_u5kc4e.png"
                     } /* src={bestRanked[1].url} */
                     alt={`plantilla.name`} /* alt={bestRanked[1].name} */
                   />
