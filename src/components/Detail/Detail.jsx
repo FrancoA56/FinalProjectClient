@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "tailwindcss/tailwind.css";
-import { format } from "date-fns";
+/* import { format } from "date-fns"; */
 import Swal from "sweetalert2";
 
 // COMPONENTES
@@ -54,14 +54,18 @@ const PresetsDetail = () => {
             "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
         }}
       >
-        <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8"
-        >
+        <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
           <div>
             <h2 className="text-3xl text-gray-500 font-medium uppercase leading-normal tracking-tight sm:text-4xl">
               Preset Specifications
             </h2>
             <p className="mt-4 text-gray-500 font-medium uppercase leading-normal">
-              Brief text explaining the preset
+              {(presets.category === "premium" &&
+                "Brief text explaining the preset") ||
+                (presets.category === "medium" &&
+                  "Este es medium") ||
+                (presets.category === "basic" && 
+                "Este es basic")}
             </p>
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
               <div>

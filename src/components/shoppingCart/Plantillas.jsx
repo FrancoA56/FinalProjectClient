@@ -1,7 +1,6 @@
 // LIBRERIAS
 import axios from "axios";
 import { useEffect, useState } from "react";
-import imagen from "../../utils/img/plantilla.png";
 import { addModelToCart, removeModelFromCart } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -19,15 +18,10 @@ const Plantillas = ({
   // ? CAMBIO DE BOTON SI SE AGREGA AL CARRITO
   const cart = useSelector((state) => state.cart);
 
-  // ? SELLOS
-  // const Premium =
-  //   "https://res.cloudinary.com/dp6ojzhsc/image/upload/v1697121058/Sellos/sello_premium-fotor-bg-remover-20231012112737_b5obv0.png";
-  // const Medium =
-  //   "https://res.cloudinary.com/dp6ojzhsc/image/upload/v1697121057/Sellos/sello_medium-fotor-bg-remover-20231012112932_pupkib.png";
-
   // ? PETICIONES DE FILTROS Y ORDENES
   const fetchTemplates = async (filters, orderType, orderPriority) => {
     try {
+console.log(filters);
       const response = await axios.get(`${URL}/api/preset`, {
         params: {
           filters: JSON.stringify(filters),
@@ -35,6 +29,7 @@ const Plantillas = ({
           orderPriority,
         },
       });
+      
       const { data } = response;
       setTemplates(data);
     } catch (error) {
@@ -45,8 +40,8 @@ const Plantillas = ({
   // ? ASIGNACIONES DE FILTROS Y ORDENES
   useEffect(() => {
     const category = selectedCategory.join(" ");
-    const defaultColor = selectedFilterColor.join(" ");
-    const type = selectedTypes.join(" ");
+    const defaultColor = selectedFilterColor;
+    const type = selectedTypes;
     const order = selectedOrder.split(" ");
     const orderName = order[0];
     const orderValue = order[1];
