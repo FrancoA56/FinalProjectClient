@@ -1,73 +1,73 @@
 [
   {
-    "name": "Shop Basic",
+    "name": "Basic Home 02",
     "price": 10,
-    "defaultColor": "green",
-    "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582558/Presets/Basic/BasicShop01_parte_1_y89evq.png"],
+    "defaultColor": "red",
+    "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697852425/Presets/Basic/BasicHome02_parte1_u5kc4e.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697852425/Presets/Basic/BasicHome02_parte2_jud39o.png"],
+    "type": "home",
+    "category": "basic"
+  },
+  {
+    "name": "Basic shop 01",
+    "price": 2,
+    "defaultColor": "white",
+    "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833514/Presets/Basic/BasicShop01_parte_1_icdesy.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833513/Presets/Basic/BasicShop01_parte_2_jm2ykn.png"],
     "type": "shop",
     "category": "basic"
   },
   {
-    "name": "Basic about",
-    "price": 2,
+    "name": "Basic about 01",
+    "price": 28,
     "defaultColor": "yellow",
-    "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582558/Presets/Basic/BasicAbout01_nhk5si.png"],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833511/Presets/Basic/BasicAbout01_parte_1_rcmo7a.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833511/Presets/Basic/BasicAbout01_parte_2_vrmuip.png"],
     "type": "about",
     "category": "basic"
   },
   {
-    "name": "Basic home",
-    "price": 28,
+    "name": "Basic home 01",
+    "price": 5,
     "defaultColor": "blue",
-    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582557/Presets/Basic/BasicHome01_ztcuyq.png"],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833511/Presets/Basic/BasicHome01_ile7su.png"],
     "type": "home",
     "category": "basic"
   },
   {
-    "name": "Basic cart",
-    "price": 5,
+    "name": "Basic cart 01",
+    "price": 22,
     "defaultColor": "white",
-    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582557/Presets/Basic/BasicCart01_oveto6.png"],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833510/Presets/Basic/BasicCart01_b4nua6.png"],
     "type": "cart",
     "category": "basic"
   },
   {
-    "name": "Basic home 2",
-    "price": 22,
-    "defaultColor": "black",
-    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582557/Presets/Basic/BasicHome01_parte1_cpyufr.png"],
-    "type": "home",
-    "category": "basic"
-  },
-  {
-    "name": "Medium home",
+    "name": "Medium home 01",
     "price": 33,
     "defaultColor": "green",
-    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582620/Presets/Medium/MediumHome01_cchede.png"],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833553/Presets/Medium/MediumHome01_mci9gh.png"],
     "type": "home",
     "category": "medium"
   },
   {
     "name": "Medium detail",
-    "price": 33,
+    "price": 38,
     "defaultColor": "brown",
-    "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582620/Presets/Medium/MediumDetail01_znwhmd.png"],
+    "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833552/Presets/Medium/MediumDetail01_parte_1_pw3sho.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833552/Presets/Medium/MediumDetail01_parte_2_mqg8dm.png"],
     "type": "detail",
     "category": "medium"
   },
   {
     "name": "Premium shop",
-    "price": 33,
+    "price": 74,
     "defaultColor": "blue",
-    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582963/Presets/Premium/PremiumShop01_parte_1_unqvl6.png"],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833589/Presets/Premium/PremiumShop01_parte_1_pmp3k3.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833588/Presets/Premium/PremiumShop01_parte_2_bibkhu.png"],
     "type": "shop",
     "category": "premium"
   },
   {
     "name": "Premium detail",
-    "price": 33,
+    "price": 52,
     "defaultColor": "white",
-    "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697582646/Presets/Premium/PremiumDetail01_parte_1_bgrxcb.png"],
+    "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833592/Presets/Premium/PremiumDetail01_parte_1_oyzhpq.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833589/Presets/Premium/PremiumDetail01_parte_2_mbshnt.png"],
     "type": "detail",
     "category": "premium"
   }

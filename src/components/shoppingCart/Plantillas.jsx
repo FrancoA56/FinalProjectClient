@@ -14,6 +14,7 @@ const Plantillas = ({
   const URL = process.env.REACT_APP_API;
   const [templates, setTemplates] = useState([]);
   const dispatch = useDispatch();
+  const hideDisabled = true;
 
   // ? CAMBIO DE BOTON SI SE AGREGA AL CARRITO
   const cart = useSelector((state) => state.cart);
@@ -21,15 +22,15 @@ const Plantillas = ({
   // ? PETICIONES DE FILTROS Y ORDENES
   const fetchTemplates = async (filters, orderType, orderPriority) => {
     try {
-console.log(filters);
       const response = await axios.get(`${URL}/api/preset`, {
         params: {
           filters: JSON.stringify(filters),
           orderType,
           orderPriority,
+          hideDisabled,
         },
       });
-      
+
       const { data } = response;
       setTemplates(data);
     } catch (error) {
