@@ -43,13 +43,13 @@ const PayComponent = () => {
 
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
 
-      showSuccessAlert("Your data has been updated, wait to redirect");
+      // showSuccessAlert("Your data has been updated, wait to redirect");
     } catch (error) {
       console.log(error.message);
       showErrorAlert(error.message);
-      return 
+      return;
     }
-    return "ok"
+    return "ok";
   };
   // funcion edita la base de datos USER
   const payOrderPost = async (order) => {
@@ -84,6 +84,30 @@ const PayComponent = () => {
       text: `${message}`,
     });
   };
+  const showWaitAlert = (message) => {
+    Swal.fire({
+      icon: "info", // Icono de información
+      title: "Wait to redirect you",
+      text: `${message}`, // Puedes personalizar este texto
+      showConfirmButton: false, // No mostrar el botón de confirmación
+      timer: 5000, // tiempo de 5 segundos
+      timerProgressBar: true, //es una barra progress abajo
+    });
+    // Swal.fire({
+    //   icon: "info", //hay vario icons como: question, info... etc
+    //   title: "Wait to redirect",
+    //   text: "Please, wait a few moments while we redirect you..!",
+    //   showLoaderOnConfirm: true,
+    //   confirmButtonColor: "transparent",
+    //   timer: 15000, // tiempo de 5 segundos
+    //   timerProgressBar: true, //es una barra progress abajo
+    //   position: "center", //la podes posionar donde quieras bottom, bottom-end, top-end, top, etc
+    //   toast: true, //te hace la ventana mas chiquita, sino la sacas
+    //   allowOutsideClick: false, // hace que no salga el alert por mas que el usuario haga click
+    //   allowEscapeKey: false, // hace que no pueda salir apretando escape
+    //   allowEnterKey: false, //hace que no pueda salir apretando enter
+    // })
+  };
 
   const subTotal = cart.reduce(
     (accumulator, preset) => accumulator + preset.price,
@@ -116,17 +140,18 @@ const PayComponent = () => {
   // Hay que cambiar el link de navigate para paypal
   const handlePaypalSubmit = async (e) => {
     e.preventDefault();
-    const userEdit = await editUser(formData)
-    console.log(userEdit);
+    const userEdit = await editUser(formData);
     userEdit && payOrderPost(payPaypal);
+    showWaitAlert("Please, wait a few moments while we redirect you..!");
   };
   // Hay que cambiar el link de navigate para algun lado
   const handleTransferSubmit = async (e) => {
     e.preventDefault();
-    const userEdit = await editUser(formData)
-    console.log('NOB', userEdit);
+    const userEdit = await editUser(formData);
     userEdit && payOrderPost(payBank);
-    // navigate("/shop");
+    showSuccessAlert(
+      "You will receive an email with the bank account details"
+    ) && navigate("/");
   };
 
   return (
