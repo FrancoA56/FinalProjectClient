@@ -19,6 +19,7 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import plantillas from "./utils/img/ulisesPresets.json";
 import jwt from "jwt-decode";
+import Purchases from "./components/Purchases/purchases";
 
 function App() {
   const URL = process.env.REACT_APP_API;
@@ -84,6 +85,7 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/profile" element={<ProfileView />} />
         <Route path="/about" element={<AboutPage/>}/>
+        <Route path="/purchases" element={<Purchases/>}/>
       </Routes>
     </div>
   );
