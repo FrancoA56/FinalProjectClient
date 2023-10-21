@@ -153,7 +153,7 @@ const Plantillas = ({
             >
               <Link to={`/detail/${img.id}`}>
                 <img
-                  src={img.image}
+                  src={img.images[0]}
                   alt={img.name}
                   className="w-full h-56 object-cover"
                 />
@@ -202,7 +202,7 @@ const Plantillas = ({
             >
               <Link to={`/detail/${img.id}`}>
                 <img
-                  src={img.image}
+                  src={img.images[0]}
                   alt={img.name}
                   className="w-full h-56 object-cover"
                 />
