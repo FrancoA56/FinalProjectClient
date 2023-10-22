@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
 import Swal from "sweetalert2";
@@ -43,9 +43,7 @@ const PayComponent = () => {
 
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
 
-      // showSuccessAlert("Your data has been updated, wait to redirect");
     } catch (error) {
-      console.log(error.message);
       showErrorAlert(error.message);
       return;
     }
@@ -55,7 +53,7 @@ const PayComponent = () => {
   const payOrderPost = async (order) => {
     try {
       const { data } = await axios.post(`${URL}/api/shop/pay_order`, order);
-      data.href ? (window.location.href = data.href) : console.log("error");
+      data.href ? (window.location.href = data.href) : showErrorAlert("Paypal error");
     } catch (error) {
       showErrorAlert(error.message);
     }
@@ -76,11 +74,12 @@ const PayComponent = () => {
       text: `${message}`,
     });
   };
-
+  
   const showErrorAlert = (message) => {
     Swal.fire({
       icon: "error",
       title: "Error",
+      confirmButtonColor: "rgb(94 195 191)",
       text: `${message}`,
     });
   };
@@ -93,20 +92,6 @@ const PayComponent = () => {
       timer: 5000, // tiempo de 5 segundos
       timerProgressBar: true, //es una barra progress abajo
     });
-    // Swal.fire({
-    //   icon: "info", //hay vario icons como: question, info... etc
-    //   title: "Wait to redirect",
-    //   text: "Please, wait a few moments while we redirect you..!",
-    //   showLoaderOnConfirm: true,
-    //   confirmButtonColor: "transparent",
-    //   timer: 15000, // tiempo de 5 segundos
-    //   timerProgressBar: true, //es una barra progress abajo
-    //   position: "center", //la podes posionar donde quieras bottom, bottom-end, top-end, top, etc
-    //   toast: true, //te hace la ventana mas chiquita, sino la sacas
-    //   allowOutsideClick: false, // hace que no salga el alert por mas que el usuario haga click
-    //   allowEscapeKey: false, // hace que no pueda salir apretando escape
-    //   allowEnterKey: false, //hace que no pueda salir apretando enter
-    // })
   };
 
   const subTotal = cart.reduce(
@@ -137,21 +122,21 @@ const PayComponent = () => {
     totalAmount: deploymentCost + subTotal,
     paymentMethod: "bank_transfer",
   };
-  // Hay que cambiar el link de navigate para paypal
+  // Hndle a paypal
   const handlePaypalSubmit = async (e) => {
     e.preventDefault();
     const userEdit = await editUser(formData);
     userEdit && payOrderPost(payPaypal);
     showWaitAlert("Please, wait a few moments while we redirect you..!");
   };
-  // Hay que cambiar el link de navigate para algun lado
+  // Hndle a bank_transfer
   const handleTransferSubmit = async (e) => {
     e.preventDefault();
     const userEdit = await editUser(formData);
     userEdit && payOrderPost(payBank);
     showSuccessAlert(
       "You will receive an email with the bank account details"
-    ) && navigate("/");
+    ) && navigate("/purchases");
   };
 
   return (
@@ -203,14 +188,6 @@ const PayComponent = () => {
                 alt={template.name}
                 className="w-full h-36 object-cover py-2 px-2"
               />
-              {/* <div className="px-6 py-4">
-                <div className="font-medium uppercase leading-normal  text-white">
-                  {template.name}
-                </div>
-              </div>
-              <div className="text-white text-lg mb-2">
-                <strong>${template.price}</strong>
-              </div> */}
             </div>
           ))}
         </div>
@@ -257,8 +234,8 @@ const PayComponent = () => {
                       Insert your data
                     </h2>
                     <p className="mt-2 text-sm font-medium text-[#505050] dark:text-[#707070] pb-3">
-                      Please compleate the following information. Once the
-                      purchase is finish, you will receive the invoice by mail.
+                      Please complete the following information. Once the
+                      purchase is finished, you will receive the invoice via email.
                     </p>
                   </div>
                   {/* Formulario */}
@@ -272,7 +249,7 @@ const PayComponent = () => {
                       {/* Nombre y apellido */}
                       <div className="grid md:grid-cols-2 grid-cols-1">
                         {/* Nombre */}
-                        <div className=" flex flex-col items-start px-5">
+                        <div className=" flex flex-col items-start pl-5 pr-1">
                           <label
                             for="firstname"
                             className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
@@ -292,7 +269,7 @@ const PayComponent = () => {
                           />
                         </div>
                         {/* Apellido */}
-                        <div className="flex flex-col items-start px-5">
+                        <div className="flex flex-col items-start pl-1 pr-5">
                           <label
                             for="last-name"
                             className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
@@ -312,7 +289,7 @@ const PayComponent = () => {
                           />
                         </div>
                       </div>
-                      {/* name */}
+                      {/* name (company name)*/}
                       <div className=" flex flex-col items-start px-5">
                         <label
                           for="name"
@@ -336,7 +313,7 @@ const PayComponent = () => {
                       {/* City y zipcode */}
                       <div className="grid md:grid-cols-2 grid-cols-1">
                         {/* city */}
-                        <div className=" flex flex-col items-start px-5">
+                        <div className=" flex flex-col items-start pl-5 pr-1">
                           <label
                             for="city"
                             className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
@@ -356,7 +333,7 @@ const PayComponent = () => {
                           />
                         </div>
                         {/* zipcode */}
-                        <div className=" flex flex-col items-start px-5">
+                        <div className=" flex flex-col items-start pl-1 pr-5">
                           <label
                             for="zipcode"
                             className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
@@ -376,7 +353,7 @@ const PayComponent = () => {
                           />
                         </div>
                       </div>
-                      {/* email */}
+                      {/* country */}
                       <div className=" flex flex-col items-start px-5">
                         <label
                           for="country"
@@ -397,16 +374,18 @@ const PayComponent = () => {
                       </div>
 
                       {/* Botones */}
-                      <div className="flex flex-col justify-center items-center mt-5 md:mr-6 md:flex-row md:justify-end">
+                      <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
                         <button
-                          className="mt-2 h-10 w-11/12 md:mr-2 inline-block bg-[#505050] md:w-1/4 rounded-md md:px-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                          className="mt-2 h-10 w-11/12 md:mr-2 inline-block bg-logo dark:bg-[#3a8a87] 
+                          hover:bg-[#3a8a87] dark:hover:bg-logo hover md:w-2/3 rounded-md md:px-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                           onClick={handlePaypalSubmit}
                         >
                           Pay by PayPal
                         </button>
                         <button
                           onClick={handleTransferSubmit}
-                          className="h-10 w-11/12 mt-2 bg-logo dark:bg-[#3a8a87] rounded-md md:px-2 md:w-1/2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                          className="h-10 w-11/12 
+                          mt-2 bg-[#505050] rounded-md md:px-2 md:w-2/3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         >
                           pay by bank transfer
                         </button>
