@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import plantilla from "../../utils/img/plantilla.png";
 import {
@@ -40,12 +40,7 @@ const CartComponent = () => {
       title: "Login",
       confirmButtonColor: "rgb(94, 195, 191)",
       text: "You must login to continue",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Redirige al usuario a la página de inicio de sesión
-        navigate("/login");
-      }
-    });
+    })
   };
 
   return (
@@ -243,13 +238,14 @@ const CartComponent = () => {
               {/* Botones */}
               <div className="row-span-1 flex flex-col items-center relative">
                 {!login ? (
-                  <NavLink
-                    to="#"
+                  <Link
+                    to="/login"
+                    state={{ to: "/pay" }}
                     onClick={redirectToPayment}
                     className="mt-7 inline-block w-3/4 bg-red-900 dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   >
                     Continue to Payment
-                  </NavLink>
+                  </Link>
                 ) : (
                   <NavLink
                     to="/pay"

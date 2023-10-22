@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser, logInSet } from "../../Redux/actions";
 import { useState } from "react";
-import { useNavigate, Link, NavLink } from "react-router-dom";
+import { useNavigate, Link, NavLink, useLocation } from "react-router-dom";
 // import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 import axios from "axios";
@@ -20,6 +20,7 @@ comparar la contraseña ingresada con la cargada por el usuario */
 
 const LoginComponents = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
   const { loginWithPopup, user, isAuthenticated } = useAuth0();
@@ -84,8 +85,6 @@ const LoginComponents = () => {
           const userDecoded = decodeToken(data); //Decodifica el token para obener los datos del usuario
           dispatch(logInUser(userDecoded)); // Guarda los datos del usuario en el estado global
           dispatch(logInSet(true));
-          const navigateCart = navigate(-1);
-          console.log(navigateCart);
           navigate("/"); // Va pal home
         } catch (error) {
           showErrorAlert(error.message);
@@ -105,10 +104,16 @@ const LoginComponents = () => {
         console.log("data", data);
         localStorage.setItem("token", data);
         const user = decodeToken(data);
-        console.log("user", user);
         dispatch(logInUser(user));
         dispatch(logInSet(true));
-        navigate("/");
+
+        // Determine a dónde redirigir según la ubicación anterior
+        // state.to esta configurado en el componente cart
+        if (location.state && location.state.to) {
+          navigate(location.state.to);
+        } else {
+          navigate("/home"); // Si no se especifica una ubicación anterior, vuelve atrás.
+        }
       }
     } catch (error) {
       showErrorAlert(error.response.data.error);
