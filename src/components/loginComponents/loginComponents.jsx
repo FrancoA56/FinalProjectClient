@@ -84,6 +84,8 @@ const LoginComponents = () => {
           const userDecoded = decodeToken(data); //Decodifica el token para obener los datos del usuario
           dispatch(logInUser(userDecoded)); // Guarda los datos del usuario en el estado global
           dispatch(logInSet(true));
+          const navigateCart = navigate(-1);
+          console.log(navigateCart);
           navigate("/"); // Va pal home
         } catch (error) {
           showErrorAlert(error.message);
