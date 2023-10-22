@@ -76,10 +76,7 @@ function Footer() {
   };
 
   return (
-    <footer
-  
-      className="bg-gray-300 text-center text-neutral-600 dark:bg-[#303030] dark:text-[#707070] text-sm lg:text-left"
-    >
+    <footer className="bg-gray-300 text-center text-neutral-600 dark:bg-[#303030] dark:text-[#707070] text-sm lg:text-left">
       {/* Main content container */}
       <div className="mx-6 py-3 text-center md:text-left">
         <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-3">
@@ -213,159 +210,161 @@ function Footer() {
               </div>
               {isPopupOpen && (
                 <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
-                  <div className="p-1 rounded-md">
-                    <form
-                      ref={form}
-                      onSubmit={(e) => {
-                        handleSubmit(e);
-                        sendEmail(e);
-                      }}
-                    >
-                      {/* ... Tu formulario aquí */}
-                      <div className="isolate w-80 h-90 bg-gray-300 px-6 py-24 sm:py-3 lg:px-3">
-                        <div
-                          className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
-                          aria-hidden="true"
-                        >
-                          <div
-                            className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w- -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-grey to-white opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
-                            style={{
-                              "clip-path":
-                                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                            }}
-                          ></div>
-                        </div>
-                        <div className="mx-auto max-w-2xl text-center">
-                          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl   uppercase leading-normal">
-                            Talk to Us
-                          </h2>
-                          <p className="mt-2 text-sm font-medium uppercase leading-normal  text-gray-600">
-                            You can send us your opinion or suggestion, It helps
-                            us to improve:
-                          </p>
-                        </div>
-                        <div
-                          action="#"
-                          method="POST"
-                          className="mx-auto mt-16 max-w-xl sm:mt-20"
-                        >
-                          <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-                            <div>
-                              <label
-                                for="first-name"
-                                className="block text-sm font-semibold leading-6 text-gray-900"
-                              >
-                                First name
-                              </label>
-                              <div className="mt-2.5">
-                                <input
-                                  type="text"
-                                  name="user_name"
-                                  id="name"
-                                  autocomplete="given-name"
-                                  onChange={handleChange}
-                                  value={formData.user_name}
-                                  class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <label
-                                for="last-name"
-                                className="block text-sm font-semibold leading-6 text-gray-900"
-                              >
-                                Last name
-                              </label>
-                              <div className="mt-2.5">
-                                <input
-                                  type="text"
-                                  name="last-name"
-                                  id="last-name"
-                                  autocomplete="family-name"
-                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-                            <div className="sm:col-span-2">
-                              <label
-                                for="company"
-                                className="block text-sm font-semibold leading-6 text-gray-900"
-                              >
-                                Company
-                              </label>
-                              <div className="mt-2.5">
-                                <input
-                                  type="text"
-                                  name="company"
-                                  id="company"
-                                  autocomplete="organization"
-                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-                            <div className="sm:col-span-2">
-                              <label
-                                for="email"
-                                className="block text-sm font-semibold leading-6 text-gray-900"
-                              >
-                                Email
-                              </label>
-                              <div className="mt-2.5">
-                                <input
-                                  type="email"
-                                  name="user_email"
-                                  id="email"
-                                  autocomplete="email"
-                                  onChange={handleChange}
-                                  value={formData.user_email}
-                                  class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="sm:col-span-2">
-                              <label
-                                for="message"
-                                className="block text-sm font-semibold leading-6 text-gray-900"
-                              >
-                                Message
-                              </label>
-                              <div className="mt-2.5">
-                                <textarea
-                                  name="message"
-                                  id="message"
-                                  rows="4"
-                                  onChange={handleChange}
-                                  value={formData.message}
-                                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                ></textarea>
-                              </div>
-                            </div>
-                            <div className="flex gap-x-4 sm:col-span-2">
-                              <div className="flex h-6 items-center"></div>
-                            </div>
+                  <form
+                    className="mt-1"
+                    ref={form}
+                    onSubmit={(e) => {
+                      handleSubmit(e);
+                      sendEmail(e);
+                    }}
+                  >
+                    {/* ... Tu formulario aquí */}
+                    <div className="isolate w-full h-2/3 bg-gray-300 dark:bg-[#303030] rounded-md px-6 sm:py-3 lg:px-3">
+                      {/* Creo q le da animacion y el tamaño */}
+                      <div
+                        className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+                        aria-hidden="true"
+                      ></div>
+                      {/* Encabezado */}
+                      <div className="mx-auto flex flex-col items-center justify-center min-w-xl max-w-xl border-b border-[#303030] dark:border-[#909090]">
+                        <h2 className="text-3xl font-bold tracking-tight text-[#303030] dark:text-[#909090] sm:text-4xl  uppercase leading-normal">
+                          Contact us
+                        </h2>
+                        <p className="mt-2 text-sm font-medium text-[#505050] dark:text-[#707070] pb-3">
+                          Send us your opinion or suggestion, it helps us
+                          improve
+                        </p>
+                      </div>
+                      {/* Formulario */}
+                      <div
+                        action="#"
+                        method="POST"
+                        className="mx-auto max-w-xl mt-5"
+                      >
+                        {/* Formulario container */}
+                        <div className="grid md:grid-rows-5"></div>
+                        {/* Nombre y apellido */}
+                        <div className="grid md:grid-cols-2 grid-cols-1">
+                          {/* Nombre */}
+                          <div className=" flex flex-col items-start pl-5 pr-1 py-0.5">
+                            <label
+                              for="first-name"
+                              className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                            >
+                              {" "}
+                              First Name
+                            </label>
+                            <input
+                              name="user_name"
+                              id="name"
+                              autocomplete="given-name"
+                              type="text"
+                              onChange={handleChange}
+                              value={formData.user_name}
+                              required
+                              className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                            />
+                          </div>
+                          {/* Apellido */}
+                          <div className="flex flex-col items-start pr-5 pl-1 py-0.5">
+                            <label
+                              for="last-name"
+                              className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                            >
+                              {" "}
+                              Last Name
+                            </label>
+                            <input
+                              type="text"
+                              name="lastname"
+                              id="lastname"
+                              autocomplete="family-name"
+                              onChange={handleChange}
+                              required
+                              // value={formData.lastname}
+                              className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                            />
                           </div>
                         </div>
+                        {/* name (company name)*/}
+                        <div className=" flex flex-col items-start px-5 py-0.5">
+                          <label
+                            for="name"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                          >
+                            {" "}
+                            Company
+                          </label>
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            autocomplete="organization"
+                            onChange={handleChange}
+                            required
+                            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                          />
+                        </div>
+                        {/* email */}
+                        <div className=" flex flex-col items-start px-5 py-0.5">
+                          <label
+                            for="email"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                          >
+                            {" "}
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            name="user_email"
+                            id="email"
+                            autocomplete="email"
+                            onChange={handleChange}
+                            required
+                            value={formData.user_email}
+                            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                          />
+                        </div>
+                        {/* message */}
+                        <div className=" flex flex-col items-start px-5 py-0.5">
+                          <label
+                            for="message"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                          >
+                            {" "}
+                            Message
+                          </label>
+                          <textarea
+                            name="message"
+                            id="message"
+                            rows="4"
+                            onChange={handleChange}
+                            required
+                            value={formData.message}
+                            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                          />
+                        </div>
+                        {/* Botones */}
+                        <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
+
+                          <button
+                            type="submit"
+                            name="submit"
+                            value="Send"
+                            className="h-10 w-11/12 mt-2 mb-2 bg-logo dark:bg-[#3a8a87] rounded-md md:px-2 md:w-2/3 md:m-1 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                          >
+                            Send
+                          </button>
+                          <button
+                            onClick={() => setPopupOpen(false)}
+                            className="mt-2 mb-2 h-10 w-11/12 inline-block bg-[#505050] md:w-2/3 rounded-md md:px-2 md:m-1 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                          >
+                            close
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex justify-end">
-                        <button
-                          type="button"
-                          className="bg-gray-400 text-white text-sm font-medium uppercase leading-normal px-4 py-2 rounded"
-                          onClick={() => setPopupOpen(false)}
-                        >
-                          Close
-                        </button>
-                        <button
-                          type="submit"
-                          name="submit"
-                          className="bg-logo text-white text-sm font-medium uppercase leading-normal px-4 py-2 ml-2 rounded"
-                          value="Send"
-                        >
-                          Submit
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
+                  </form>
                 </div>
               )}
             </div>
@@ -375,7 +374,9 @@ function Footer() {
 
       {/* Copyright section */}
       <div className="bg-[#303030] opacity-50 p-3 mb- text-center dark:bg-[#202020] ">
-        <span className="text-[#909090] dark:text-white">© 2023 Copyright: </span>
+        <span className="text-[#909090] dark:text-white">
+          © 2023 Copyright:{" "}
+        </span>
         <a
           className="font text-[#909090] dark:text-white"
           href="https://tailwind-elements.com/"

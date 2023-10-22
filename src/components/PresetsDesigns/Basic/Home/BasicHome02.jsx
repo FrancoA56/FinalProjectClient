@@ -10,8 +10,8 @@ const BasicHome02 = () => {
 
   const handlerDropDown = (e) => {
     e.preventDefault();
-    !dropDown && setDropDown(true);
     dropDown && setDropDown(false);
+    !dropDown && setDropDown(true);
   };
   return (
     <div
@@ -24,7 +24,7 @@ const BasicHome02 = () => {
     >
       {/* ********************* NAVBAR ************************* */}
       <div
-        className={`${color.secondary} fixed h-16 max-h-16 w-screen z-50 overflow-hidden grid grid-cols-6 items-center shadow-md pr-5`}
+        className={`${color.secondary ? color.secondary : 'bg-[#501010]'} fixed h-16 max-h-16 w-screen z-50 overflow-hidden grid grid-cols-6 items-center shadow-md pr-5`}
       >
         <div className={`h-16 flex items-center justify-center py-1`}>
           <img
@@ -39,54 +39,55 @@ const BasicHome02 = () => {
         </div>
         <div className={`flex`}>
           <h1
-            className={`pl-2 font-semibold text-title uppercase ${color.text01}`}
+            className={`pl-2 font-semibold text-title uppercase ${color.text01 ? color.text01 : 'text-[#909090]'}`}
           >
             {user.name ? user.name : "your company name"}
           </h1>
         </div>
-        <div className={`${color.text01}`}>
+        <div className={`${color.text01 ? color.text01 : 'text-[#909090]'}`}>
           <a href="#home">
             <i class="fa-solid fa-house" />
+
           </a>
         </div>
-        <div className={`${color.text01}`}>
+        <div className={`${color.text01 ? color.text01 : 'text-[#909090]'}`}>
           <a href="#elaboration">
             <i class="fa-solid fa-store" />
           </a>
         </div>
-        <div className={`${color.text01}`}>
+        <div className={`${color.text01 ? color.text01 : 'text-[#909090]'}`}>
           <a href="#about">
             <i class="fa-solid fa-users" />
           </a>
         </div>
-        <div className={`${color.text01}`}>
-          <a href="#contact">
+        <div className={`${color.text01 ? color.text01 : 'text-[#909090]'}`}>
+          <a href="">
             <i onClick={handlerDropDown} class="fa-solid fa-palette"></i>
           </a>
         </div>
       </div>
       {dropDown ? (
         <div
-          className={`absolute opacity-0 -translate-y-8 ease-in-out duration-300 w-full`}
-        >
-          <ColorPanel />
-        </div>
-      ) : (
-        <div
-          className={`fixed w-full ease-in-out duration-300 translate-y-16 ${color.primary}`}
+          className={`fixed w-full ease-in-out duration-300 translate-y-16 ${color.primary ? color.primary : 'bg-[#101010]'}`}
         >
           {" "}
           <ColorPanel />{" "}
         </div>
-      )}
+      ) : (
+        <div
+          className={`absolute opacity-0 -translate-y-8 ease-in-out duration-300 w-full`}
+        >
+          <ColorPanel />
+        </div>
+      ) }
       {/* ********************************************** */}
 
       <div className={`grid grid-flow-col`}>
-        <div className={`col-span-2 ${color.primary} w-16`}></div>
+        <div className={`col-span-2 ${color.primary ? color.primary : 'bg-[#101010]'} w-16`}></div>
         <div className={`col-span-7`}>
           <div
             id="home"
-            className={`${color.primary} mt-16 h-16 grid grid-cols-2`}
+            className={`${color.primary ? color.primary : 'bg-[#101010]'} mt-16 h-16 grid grid-cols-2`}
           ></div>
           {/* ************* TITLE *****************/}
           <div className="h-96 bg-[#000000a9]">
@@ -96,12 +97,12 @@ const BasicHome02 = () => {
               {" "}
               <h1
                 className={`font-semibold ${
-                  color.text01
+                  color.text01 ? color.text01 : 'text-[#909090]'
                 } text-7xl py-5 border-b-2`}
               >
                 Add Your Title
               </h1>
-              <p className={`w-1/2 pt-2 ${color.text02}`}>
+              <p className={`w-1/2 pt-2 ${color.text02 ? color.text02 : 'text-[#707070]'}`}>
                 Use this space to elaborate on the ideas introduced in the
                 title. Include the information that makes the most sense for
                 your brand.
@@ -111,27 +112,27 @@ const BasicHome02 = () => {
           {/* ************* ELABORATION *****************/}
           <div
             id="elaboration"
-            className={`${color.primary} h-16 flex items-end justify-center`}
+            className={`${color.primary ? color.primary : 'bg-[#101010]'} h-16 flex items-end justify-center`}
           >
             <hr
               className={`border w-11/12`}
             />
           </div>
-          <div className={`${color.primary} h-96 grid grid-cols-4 pt-10`}>
+          <div className={`${color.primary ? color.primary : 'bg-[#101010]'} h-96 grid grid-cols-4 pt-10`}>
             {/* Primer columna */}
             <div className={`flex flex-col justify-center items-center`}>
               <div
-                className={`flex flex-col items-center justify-center h-3/4 w-3/4 border-2 rounded-xl ${color.secondary} shadow-md px-5`}
+                className={`flex flex-col items-center justify-center h-3/4 w-3/4 border-2 rounded-xl ${color.secondary ? color.secondary : 'bg-[#501010]'} shadow-md px-5`}
               >
-                <h1 className={`pb-3 uppercase font-bold ${color.text01}`}>
+                <h1 className={`pb-3 uppercase font-bold ${color.text01 ? color.text01 : 'text-[#909090]'}`}>
                   Introduce your idea
                 </h1>
-                <p className={`pb-5 ${color.text02}`}>
+                <p className={`pb-5 ${color.text02 ? color.text02 : 'text-[#707070]'}`}>
                   Use this space to elaborate on your headline and connect with
                   your visitors.
                 </p>
                 <button
-                  className={`${color.primary} ${color.text01} rounded-md px-5 py-2`}
+                  className={`${color.primary ? color.primary : 'bg-[#101010]'} ${color.text01 ? color.text01 : 'text-[#909090]'} rounded-md px-5 py-2`}
                 >
                   Action
                 </button>
@@ -140,7 +141,7 @@ const BasicHome02 = () => {
             </div>
             <div className={`flex flex-col justify-center items-center`}>
               <div
-                className={`flex flex-col items-center justify-center h-3/4 w-3/4 border- rounded-xl ${color.secondary} shadow-md overflow-hidden`}
+                className={`flex flex-col items-center justify-center h-3/4 w-3/4 border- rounded-xl ${color.secondary ? color.secondary : 'bg-[#501010]'} shadow-md overflow-hidden`}
               >
                 
                 <img
@@ -152,18 +153,18 @@ const BasicHome02 = () => {
             {/* Tercer columna */}
             <div className={`flex flex-col justify-center items-center`}>
               <div
-                 className={`flex flex-col items-center justify-center h-3/4 w-3/4 border-2 rounded-xl ${color.secondary} shadow-md px-5`}
+                 className={`flex flex-col items-center justify-center h-3/4 w-3/4 border-2 rounded-xl ${color.secondary ? color.secondary : 'bg-[#501010]'} shadow-md px-5`}
               >
                 
-                <h1 className={`pb-3 uppercase font-bold ${color.text01}`}>
+                <h1 className={`pb-3 uppercase font-bold ${color.text01 ? color.text01 : 'text-[#909090]'}`}>
                   Introduce your idea
                 </h1>
-                <p className={`pb-5 ${color.text02}`}>
+                <p className={`pb-5 ${color.text02 ? color.text02 : 'text-[#707070]'}`}>
                   Use this space to elaborate on your headline and connect with
                   your visitors.
                 </p>
                 <button
-                  className={`${color.primary} ${color.text01} rounded-md px-5 py-2`}
+                  className={`${color.primary ? color.primary : 'bg-[#101010]'} ${color.text01 ? color.text01 : 'text-[#909090]'} rounded-md px-5 py-2`}
                 >
                   Action
                 </button>
@@ -172,7 +173,7 @@ const BasicHome02 = () => {
             {/* Cuarta columna */}
             <div className={`flex flex-col justify-center items-center`}>
               <div
-               className={`flex flex-col items-center justify-center h-3/4 w-3/4 border- rounded-xl ${color.secondary} shadow-md overflow-hidden`}
+               className={`flex flex-col items-center justify-center h-3/4 w-3/4 border- rounded-xl ${color.secondary ? color.secondary : 'bg-[#501010]'} shadow-md overflow-hidden`}
               >
                 <img
                   src="https://img.freepik.com/foto-gratis/hamburguesas-ternera-cruda-hierbas-especias_114579-8674.jpg?size=626&ext=jpg"
@@ -182,7 +183,7 @@ const BasicHome02 = () => {
             </div>
           </div>
         </div>
-        <div className={`col-span-2 ${color.primary} w-16`}></div>
+        <div className={`col-span-2 ${color.primary ? color.primary : 'bg-[#101010]'} w-16`}></div>
       </div>
     </div>
   );
