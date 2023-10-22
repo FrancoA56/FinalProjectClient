@@ -4,7 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "tailwindcss/tailwind.css";
-/* import { format } from "date-fns"; */
+import { format } from "date-fns";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 

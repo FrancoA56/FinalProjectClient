@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import plantilla from "../../utils/img/plantilla.png";
 import {
@@ -10,13 +10,16 @@ import {
 } from "../../Redux/actions";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
+import Swal from "sweetalert2";
 //import Footer from "../Footer/Footer";
 
 const CartComponent = () => {
   const models = useSelector((state) => state.cart);
   const deployService = useSelector((state) => state.deployment);
   const deployCost = useSelector((state) => state.deploymentCost);
+  const login = useSelector((state) => state.login);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const deploymentThing = (e) => {
     dispatch(withDeployment(e.target.value));
@@ -29,6 +32,15 @@ const CartComponent = () => {
       0
     );
     return total;
+  };
+
+  const redirectToPayment = () => {
+    Swal.fire({
+      icon: "warning",
+      title: "Login",
+      confirmButtonColor: "rgb(94, 195, 191)",
+      text: "You must login to continue",
+    })
   };
 
   return (
@@ -53,7 +65,6 @@ const CartComponent = () => {
                 models.map((model) => (
                   <div
                     className="m-2 grid grid-cols-7 h-48 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-       
                     style={{
                       background:
                         "linear-gradient(to left, rgb(50, 50, 50), rgb(40,40,40))",
@@ -142,9 +153,7 @@ const CartComponent = () => {
             </div>
 
             {/* Columna derecha para el contenido del carrito */}
-            <div
-              className="col-span-12 md:col-span-4 rounded-md h-screen grid grid-rows-6 bg-gray-300 dark:bg-[#303030]"
-            >
+            <div className="col-span-12 md:col-span-4 rounded-md h-screen grid grid-rows-6 bg-gray-300 dark:bg-[#303030]">
               {/* Encabezado */}
               <div className="flex flex-col items-center justify-center row-span-1">
                 <label className="block m-3 text-sm uppercase font-semibold dark:text-[#707070]">
@@ -228,12 +237,23 @@ const CartComponent = () => {
 
               {/* Botones */}
               <div className="row-span-1 flex flex-col items-center relative">
-                <NavLink
-                  to="/pay"
-                  className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                >
-                  Continue to Payment
-                </NavLink>
+                {!login ? (
+                  <Link
+                    to="/login"
+                    state={{ to: "/pay" }}
+                    onClick={redirectToPayment}
+                    className="mt-7 inline-block w-3/4 bg-red-900 dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  >
+                    Continue to Payment
+                  </Link>
+                ) : (
+                  <NavLink
+                    to="/pay"
+                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  >
+                    Continue to Payment
+                  </NavLink>
+                )}
               </div>
             </div>
           </div>
