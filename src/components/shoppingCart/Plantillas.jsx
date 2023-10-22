@@ -64,7 +64,6 @@ const Plantillas = ({
     }
 
     fetchTemplates(filters, orderType, orderPriority);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFilterColor, selectedCategory, selectedOrder, selectedTypes]);
 
   const buyPreset = (id) => {
