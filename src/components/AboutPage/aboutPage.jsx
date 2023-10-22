@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-redundant-roles */
 import people from "./people";
 import Banner from "../../components/Banner/Banner";
 import Nav from "../../components/Nav/Nav";
