@@ -1,22 +1,13 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logInUser, logInSet } from "../../Redux/actions";
 import { useState } from "react";
 import { useNavigate, Link, NavLink, useLocation } from "react-router-dom";
-// import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 import axios from "axios";
 import Swal from "sweetalert2";
-import styles from "../loginComponents/login.module.css";
 import decodeToken from "./decodeToken";
 import { useAuth0 } from "@auth0/auth0-react";
-import Banner from "../../components/Banner/Banner";
-import { validation } from "../validation";
-
-/* Requirements to validate the login
------------------------------------------------------------------
- Para las validaciones del login comprobar que el mail existe y 
-comparar la contraseña ingresada con la cargada por el usuario */
 
 const LoginComponents = () => {
   const navigate = useNavigate();
@@ -51,26 +42,38 @@ const LoginComponents = () => {
 
   async function forgotPassword() {
     try {
-      const user = {
-        email: inputForgot.email,
-      };
-      console.log(user);
-      await axios.post(`${URL}/api/user/forgot`, user);
-      Swal.fire({
-        showConfirmButton: true,
-        confirmButtonColor: "rgb(94 195 191)",
-        icon: "success",
-        text: "Check your email, you have been sent a link to create a new password",
-      });
+      if (inputForgot.email) {
+        const user = {
+          email: inputForgot.email,
+        };
+        console.log(user);
+        await axios.post(`${URL}/api/user/forgot`, user);
+        Swal.fire({
+          showConfirmButton: true,
+          confirmButtonColor: "rgb(94 195 191)",
+          icon: "success",
+          text: "Check your email. You will receive a link to create a new password",
+        });
+      } else {
+        setPopupForgot(true);
+        return Swal.fire({
+          showConfirmButton: true,
+          confirmButtonColor: "rgb(94 195 191)",
+          icon: "warning",
+          text: "You need to enter your email address",
+        });
+      }
     } catch (error) {
+      setPopupForgot(true);
       Swal.fire({
         showConfirmButton: true,
         confirmButtonColor: "rgb(94 195 191)",
         icon: "error",
-        text: error,
+        text: "There was an error trying to send the data, check the email entered or try again later",
       });
     }
   }
+   
   useEffect(() => {
     if (isAuthenticated) {
       const auth = async () => {
@@ -87,7 +90,7 @@ const LoginComponents = () => {
           dispatch(logInSet(true));
           navigate("/"); // Va pal home
         } catch (error) {
-          showErrorAlert(error.message);
+          showErrorAlert(error.response.data.error);
         }
       };
       auth();
@@ -101,9 +104,10 @@ const LoginComponents = () => {
         const { data } = await axios.get(
           `${URL}/api/user?email=${input.email}&password=${input.password}`
         );
-        console.log("data", data);
+        
         localStorage.setItem("token", data);
         const user = decodeToken(data);
+        console.log("user", user);
         dispatch(logInUser(user));
         dispatch(logInSet(true));
 
@@ -120,7 +124,7 @@ const LoginComponents = () => {
     }
   }
 
-  // -----------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------
   const showErrorAlert = (error) => {
     Swal.fire({
       icon: "error",
@@ -129,17 +133,16 @@ const LoginComponents = () => {
       text: error,
     });
   };
-
+// --------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------- Ojito Password Login---------
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  // --------------------------------------------------------------------------------------------------------
-  // -------------------------------------------------------------------------- Ojito Password Reset---------
-  // --------------------------------------------------------------------------------------------------------
-  console.log(localStorage.theme);
-  return (
-    <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen ">
+// --------------------------------------------------------------------------------------------------------
+  
+  return ( 
+    <div class="grid lg:grid-cols-2 md:grid-cols-1 h-screen ">  
       {/* Columna izq */}
       <div
         //className="grid-span-2 flex justify-center items-center py-3"
@@ -233,6 +236,7 @@ const LoginComponents = () => {
             </div>
 
             {/* <!-- Submit button --> */}
+            
             <button
               type="submit"
               className={
@@ -294,27 +298,25 @@ const LoginComponents = () => {
         </div>
       </div>
 
-      {/* --------------------------------------------------------------------------------------------------------*/}
+{/* --------------------------------------------------------------------------------------------------------*/}
       {/* PopUp Forgot Pasword */}
 
       {PopupForgot && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center h-screen">
-          <div className="relative bg-gray-300 w-1/3 h-3/4 p-4 text-black">
-            <form>
-              <div className="absolute top-0 left-0 w-full">
-                <Banner />
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
+          <form className="mt-1">
+            <div className="isolate w-full h-2/3 bg-gray-300 dark:bg-[#303030] rounded-md px-6 sm:py-3 lg:px-3">
+              
+              <div className="static text-black p-2 mt-4 mb-2">
+                <h2 className="text-2xl font-bold tracking-tight text-[#303030] dark:text-[#909090] sm:text-3xl  uppercase leading-normal">Forgot Password</h2>
               </div>
-
-              <div className="static text-black p-2 mt-14 mb-2">
-                <h2 className="text-xl font-bold">Forgot Password</h2>
-              </div>
-              <p className="text-black p-2 mt-2 mb-6">
-                Please enter the email address you'd like your password reset
-                information sent to
+              
+              <p className="mb-4 text-m font-medium text-[#505050] dark:text-[#707070] pb-3">
+                Please enter the email you used during registration <br />
+                to recover your password
               </p>
 
-              <label className="block text-sm font-semibold text-left mb-2 ml-2">
-                Enter email address
+              <label className="text-m block text-left mb-2 font-semibold text-[#303030] dark:text-[#909090] px-2">
+                Enter email address:
               </label>
 
               <input
@@ -323,140 +325,40 @@ const LoginComponents = () => {
                 id="email"
                 value={inputForgot.email}
                 onChange={handleForgot}
-                className="block w-full rounded-md border border-gray-400 px-3.5 py-2 mb-4"
+                className="shadow appearance-none mt-1 mb-2 border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
                 placeholder="Enter your email address"
                 required
                 autoComplete="given-email"
               />
-
+             
               <div>
                 <button
-                  // onClick={(ForgotPassword)}
-                  // value="Send"
                   type="submit"
                   onClick={() => {
                     setPopupForgot(false);
                     forgotPassword();
                   }}
-                  className="mt-1 inline-block bg-logo w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  className="w-full mt-4 bg-logo dark:bg-[#3a8a87] rounded-md px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
                   Request Password Reset
                 </button>
-
+                 
                 <p
                   onClick={() => setPopupForgot(false)}
-                  className="text-[#3a8a87] cursor-pointer mt-6"
+                  className="text-[#3a8a87] cursor-pointer mt-8 mb-4"
                 >
                   <strong>Back to login</strong>
                 </p>
-              </div>
 
-              <div className="bg-logo opacity-50 p-2 mt-4 text-center dark:bg-neutral-700 absolute bottom-0 left-0 w-full">
-                <span className="text-black">
-                  © 2023 Copyright: CodeCrafted Templates
-                </span>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
-      )}
+      )}  
     </div>
   );
 };
 
 export default LoginComponents;
-
-{
-  /* <form
-
-ref={form}
-onSubmit={(e) => {
-  handleSubmit(e);
-  sendEmail(e);
-}}
->
-
-... Tu formulario aquí
-
-<div className="isolate w-200 h-190 bg-gray-300 px-6 py-24 sm:py-3 lg:px-3">
-  
-  <div
-    className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
-    aria-hidden="true"
-  >
-    
-    <div
-      className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w- -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-grey to-white opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
-      style={{
-        "clip-path":
-          "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-      }}
-    ></div>
-
-  </div>
------------------------------------------
-    <div className="mx-auto max-w-2xl text-center">
-      <h2 className="border-black bg-red text-1xl font-bold tracking-tight text-gray-900 sm:text-2xl text-sm font-medium uppercase leading-normal">
-        Forgot Password
-      </h2>
-        <p className="bg-blue mt-2 text-sm font-medium uppercase leading-normal leading-8 text-gray-600">
-          Enter your email address:
-        </p>
-    </div>
-------------------------------------------      
-  <div
-    action="#"
-    method="POST"
-    className="mx-auto mt-16 max-w-xl sm:mt-5"
-  >
-    <div className="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2">
-      
-      <div>
-        <label
-          for="first-name"
-          className="block text-sm font-semibold leading-6 text-gray-900"
-        >
-          Email
-        </label>
-      </div>
-
-        <div className="mt-2.5 mx-auto w-full">
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email address"
-            required
-            autocomplete="given-email"
-            // value={email}
-            // onChange={(e) => setEmail(e.target.value)}
-            // onChange={handleChange}
-            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-        </div>
-  </div>
--------------------------------------------------   
-  <div className="flex justify-center">
-    <button
-      type="button"
-      className="bg-gray-400 text-white text-sm font-medium uppercase leading-normal px-4 py-2 rounded"
-      onClick={() => setPopupForgot(false)}
-    >
-      Close
-    </button>
-    
-    <button
-      type="submit"
-      name="submit"
-      className="bg-logo text-white text-sm font-medium uppercase leading-normal px-4 py-2 ml-2 rounded"
-      value="Send"
-    >
-      Submit
-    </button>
-  </div>
----------------------------------------------------
-</div>
-
-</form> */
-}

@@ -11,26 +11,13 @@ import { useDispatch } from "react-redux";
 import { logInSet, logInUser } from "../../Redux/actions";
 import decodeToken from "../loginComponents/decodeToken";
 
-/* Email validity requirements
-----------------------------------------
-Correct email format
-Must be less than 35 characters
-*/
-
-/* Password validity requirements 
-----------------------------------------
-Minimum eight and maximum 10 characters, 
-at least one uppercase letter, 
-one lowercase letter, 
-one number and 
-one special character 
-*/
-
 function RegisterComponents() {
   const navigate = useNavigate();
   const URL = process.env.REACT_APP_API;
   const [errors, setErrors] = useState({});
   const [password, setPassword] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+  const [popUpValidation, setPopUpValidation] = useState(false);
 
   const [validations, setValidations] = useState({
     hasUppercase: false,
@@ -55,16 +42,29 @@ function RegisterComponents() {
     const numberRegex = /[0-9]/;
     const specialCharRegex = /[\W_]/;
 
+    
+    const hasUppercase = uppercaseRegex.test(e);
+    const hasLowercase = lowercaseRegex.test(e);
+    const hasNumber = numberRegex.test(e);
+    const hasSpecialChar = specialCharRegex.test(e);
+    const isBetween8And30 = e.length >= 8 && e.length <= 30; 
+   
     setValidations({
-      hasUppercase: uppercaseRegex.test(e),
-      hasLowercase: lowercaseRegex.test(e),
-      hasNumber: numberRegex.test(e),
-      hasSpecialChar: specialCharRegex.test(e),
-      isBetween8And30: e.length >= 8 && e.length <= 30,
-    });
+      hasUppercase,
+      hasLowercase,
+      hasNumber,
+      hasSpecialChar,
+      isBetween8And30,
+    });   
+    
     setPassword(e);
+   
+    setIsVisible (
+      input.password || hasUppercase || hasLowercase || hasNumber || hasSpecialChar || isBetween8And30
+      );
+    
   };
-  // --------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
 
   //---------------------Auth terceros --------------------------------------
   const dispatch = useDispatch();
@@ -264,6 +264,7 @@ function RegisterComponents() {
                   onChange={(e) => {
                     validatePassword(e.target.value);
                     handleChange(e);
+                    setPopUpValidation(true)
                   }}
                   className={
                     localStorage.theme === "dark"
@@ -293,59 +294,65 @@ function RegisterComponents() {
                 {/* ---------------------------------------------------------------------------------------------- */}
               </div>
 
-              <div>
-                <p className="mt-3 text-sm text-[#606060]">
-                  <strong> Password must have:</strong>
-                </p>
-                <ul className="grid grid-cols-2 text-sm text-[#606060]">
-                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                    <li>
-                      {validations.hasUppercase ? (
-                        <i className="fa-solid fa-check text-green-600" />
-                      ) : (
-                        <i className="fa-solid fa-xmark text-red-800" />
-                      )}{" "}
-                      An uppercase character
-                    </li>
-                    <li>
-                      {validations.hasLowercase ? (
-                        <i className="fa-solid fa-check text-green-600" />
-                      ) : (
-                        <i className="fa-solid fa-xmark text-red-800" />
-                      )}{" "}
-                      An lowercase character
-                    </li>
-                    <li className="line-clamp-1">
-                      {validations.isBetween8And30 ? (
-                        <i className="fa-solid fa-check text-green-600" />
-                      ) : (
-                        <i className="fa-solid fa-xmark text-red-800" />
-                      )}{" "}
-                      A between 8 and 30 char...
-                    </li>
-                  </div>
-                  <div className="span-col-1 flex flex-col items-start pt-2 pl-6">
-                    <li>
-                      {validations.hasNumber ? (
-                        <i className="fa-solid fa-check text-green-600" />
-                      ) : (
-                        <i className="fa-solid fa-xmark text-red-800" />
-                      )}{" "}
-                      A number
-                    </li>
-                    <li>
-                      {validations.hasSpecialChar ? (
-                        <i className="fa-solid fa-check text-green-600" />
-                      ) : (
-                        <i className="fa-solid fa-xmark text-red-800" />
-                      )}{" "}
-                      A special character
-                    </li>
-                  </div>
-                </ul>
-              </div>
+{/* ------------------Validacion del password---------------------------------------------------------------- */}
+          {popUpValidation && (
+            <div className={`static mt-3 mb-2 rounded-md bg-white ${isVisible ? 'visible' : 'invisible'}`}>
+              {/* <p className="static mt-2 text-sm text-[#606060]">
+                <strong> Password must have:</strong>
+              </p> */}
+              <ul className="grid grid-cols-2 text-sm text-[#606060]">
+                <div className="span-col-1 flex flex-col items-start pt-2 pl-10">
+                  <li style={{ color: validations.hasUppercase ? 'green' : 'red' }}>
+                    {validations.hasUppercase ? (
+                      <i className="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i className="fa-solid text-red-600" />
+                    )}{" "}
+                    An uppercase character
+                  </li>
+                  <li style={{ color: validations.hasLowercase ? 'green' : 'red' }}>
+                    {validations.hasLowercase ? (
+                      <i className="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i className="fa-solid text-red-600" />
+                    )}{" "}
+                    An lowercase character
+                  </li>
+                  <li style={{ color: validations.isBetween8And30 ? 'green' : 'red' }} className="mb-2 line-clamp-1">
+                    {validations.isBetween8And30 ? (
+                      <i className="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i className="fa-solid text-red-600" />
+                    )}{" "}
+                    A between 8 and 30 char...
+                  </li>
+                </div>
+
+                <div className="span-col-1 flex flex-col items-start pt-2 pl-8">
+                  <li style={{ color: validations.hasNumber ? 'green' : 'red' }}>
+                    {validations.hasNumber ? (
+                      <i className="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i className="fa-solid text-red-600" />
+                    )}{" "}
+                    At least one number
+                  </li>
+                  <li style={{ color: validations.hasSpecialChar ? 'green' : 'red' }} >
+                    {validations.hasSpecialChar ? (
+                      <i className="fa-solid fa-check text-green-600" />
+                    ) : (
+                      <i className="fa-solid text-red-600" />
+                    )}{" "}
+                    A special character
+                  </li>
+                </div>
+              </ul>
+            </div>
+          )}
+{/* -------------------------------------------------------------------------------------------------------- */}
 
               <div className="mt-3">
+                
                 <div className="flex items-center justify-end">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -355,12 +362,20 @@ function RegisterComponents() {
                     placeholder="Confirm password"
                     value={input.confirmPassword}
                     onChange={(e) => handleChange(e)}
+                    onFocus={() => setPopUpValidation(false)}
                     className={
                       localStorage.theme === "dark"
                         ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
                         : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     }
                     required
+                    disabled={
+                      !validations.hasUppercase ||
+                      !validations.hasLowercase ||
+                      !validations.hasNumber ||
+                      !validations.hasSpecialChar ||
+                      !validations.isBetween8And30
+                    }
                   />
                   <span className={styles.warning}>
                     {" "}
