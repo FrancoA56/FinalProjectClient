@@ -268,7 +268,7 @@ function Nav() {
               <>
                 {" "}
                 <div
-                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none dark:text-white"
                   href="#"
                   id="dropdownMenuButton2"
                   role="button"

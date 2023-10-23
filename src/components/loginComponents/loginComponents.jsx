@@ -116,7 +116,7 @@ const LoginComponents = () => {
         if (location.state && location.state.to) {
           navigate(location.state.to);
         } else {
-          navigate("/home"); // Si no se especifica una ubicación anterior, vuelve atrás.
+          navigate("/"); // Si no se especifica una ubicación anterior, vuelve atrás.
         }
       }
     } catch (error) {
