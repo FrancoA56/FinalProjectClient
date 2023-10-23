@@ -318,11 +318,11 @@ function RegisterComponents() {
                     )}{" "}
                     An lowercase character
                   </li>
-                  <li style={{ color: validations.isBetween8And30 ? 'green' : 'red' }} className="mb-2 line-clamp-1">
+                  <li style={{ color: validations.isBetween8And30 ? 'green' : 'red', textAlign: 'left' }} className="mb-2 line-clamp-1">
                     {validations.isBetween8And30 ? (
                       <i className="fa-solid fa-check text-green-600" />
                     ) : (
-                      <i className="fa-solid text-red-600" />
+                      <i className="fa-solid fa text-red-600" />
                     )}{" "}
                     A between 8 and 30 char...
                   </li>
