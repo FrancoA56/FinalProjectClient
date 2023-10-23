@@ -58,25 +58,32 @@ function Nav() {
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <nav
-   
+    <nav  
       className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
-    >
-      <div className="flex w-full flex-wrap items-center justify-between px-3">
+     >
+     
+       <div className="flex w-full flex-wrap items-center justify-between px-3">
+
         <button
-          className="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+          className="lg:hidden"
           type="button"
           data-te-collapse-init
           data-te-target="#navbarSupportedContent1"
           aria-controls="navbarSupportedContent1"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={toggleMenu}
         >
           <span className="[&>svg]:w-7">
             <svg
@@ -94,6 +101,37 @@ function Nav() {
           </span>
         </button>
 
+      {isOpen && (
+             
+      <div className={`absolute z-[1000] top-10 float-left m-0 ${
+        isOpen ? "block" : "hidden"     
+      } min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block`}
+      >
+
+          <a
+            href="/"
+            className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+          >
+            Home
+          </a>
+          <a
+            href="/shop"
+            className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+          >
+            Shop
+          </a>
+          <a
+            href="/about"
+            className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+            
+          >
+            Team
+          </a>
+        </div>
+      )}
+    
+{/* ------------------------------------------------------------------------------------------------------------           */}
+     
         <div
           className="hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
           id="navbarSupportedContent1"
@@ -120,7 +158,10 @@ function Nav() {
               <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
                 <NavLink // Usa NavLink en lugar de <a>
                   to="/" // Especifica la ruta en el atributo "to"
-                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
+                  focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
+                   dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
+                   dark:[&.active]:text-neutral-400"
                   data-te-nav-link-ref
                 >
                   Home
@@ -146,21 +187,21 @@ function Nav() {
             )}
 
             {/* Projects link */}
-            <li className="mb-3  lg:mb-1 lg:pr-2" data-te-nav-item-ref>
-              <a
+            {location.pathname !== "/about" && (
+            <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <NavLink // Usa NavLink en lugar de <a>
+                to="/about" // Especifica la ruta en el atributo "to"
                 className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
                  dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
                  dark:[&.active]:text-neutral-400"
-                href="#"
                 data-te-nav-link-ref
               >
-                <Link to={`/about`}>
-                  Team
+                Team
                   {/* <i class="fa-solid fa-users"></i> */}
-                  </Link>
-              </a>
+                  </NavLink>
             </li>
+            )}
           </ul>
         </div>
 
