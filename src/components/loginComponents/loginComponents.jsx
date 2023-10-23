@@ -46,7 +46,7 @@ const LoginComponents = () => {
         const user = {
           email: inputForgot.email,
         };
-        console.log(user);
+        console.log("user login ", user);
         await axios.post(`${URL}/api/user/forgot`, user);
         Swal.fire({
           showConfirmButton: true,
