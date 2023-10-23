@@ -410,7 +410,7 @@ export const deploymentCost = (value) => {
       if (value) {
         const calculateDeployCost = () => {
           // Lógica para calcular el costo de despliegue
-          return state.models.length * 10 + 30; // Por ejemplo, $10 por cada producto
+          return state.models.length * 15 + 50; // Por ejemplo, $10 por cada producto
         };
         value = calculateDeployCost();
       } else value = 0;

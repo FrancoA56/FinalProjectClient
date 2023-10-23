@@ -156,11 +156,11 @@ const CartComponent = () => {
             <div className="col-span-12 md:col-span-4 rounded-md h-screen grid grid-rows-6 bg-gray-300 dark:bg-[#303030]">
               {/* Encabezado */}
               <div className="flex flex-col items-center justify-center row-span-1">
-                <label className="block m-3 text-sm uppercase font-semibold dark:text-[#707070]">
+                <label className="block m-3 text-sm uppercase font-semibold dark:text-[#ffffff]">
                   Deployment Service
                 </label>
                 <select
-                  className="w-3/4 p-2 border-2 dark:bg-[#505050] dark:text-[#909090] dark:border-[#303030] rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  className="w-3/4 p-2 border-2 dark:bg-[#505050] dark:text-[#ffffff] dark:border-[#303030] rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   onChange={(e) => deploymentThing(e)}
                 >
                   <option
@@ -208,28 +208,28 @@ const CartComponent = () => {
               {/* Detalles del carrito */}
               <div className="row-span-1 flex flex-col items-center justify-end pb-3">
                 <div className="grid grid-cols-2 w-3/4">
-                  <label className="flex ml-2 text-sm font-semibold uppercase leading-normal col-span-1">
+                  <label className="flex ml-2 text-sm font-semibold uppercase leading-normal col-span-1 dark:text-[#bebebe]">
                     Subtotal
                   </label>
-                  <p className="flex justify-end mr-2 text-sm font-semibold uppercase leading-normal">
+                  <p className="flex justify-end mr-2 text-sm font-semibold uppercase leading-normal dark:text-[#bebebe]">
                     ${totalPrice(models)}
                   </p>
                 </div>
                 {deployService && (
                   <div className="grid grid-cols-2 w-3/4">
-                    <label className="text-sm font-semibold uppercase leading-normal col-span-1 flex ml-2">
+                    <label className="text-sm font-semibold uppercase leading-normal col-span-1 flex ml-2 dark:text-[#bebebe]">
                       Deployment Cost
                     </label>
-                    <p className="flex justify-end mr-2 text-sm font-semibold uppercase leading-normal">
+                    <p className="flex justify-end mr-2 text-sm font-semibold uppercase leading-normal dark:text-[#bebebe]">
                       ${deployCost}
                     </p>
                   </div>
                 )}
                 <div className="grid grid-cols-2 w-3/4">
-                  <label className="flex ml-2 text-m font-semibold uppercase leading-normal col-span-1 border-t border-[#505050]">
+                  <label className="flex ml-2 text-m font-semibold uppercase leading-normal col-span-1 border-t border-[#505050] dark:text-[#ffffff]">
                     Total
                   </label>
-                  <p className="flex justify-end mr-2 text-m font-semibold uppercase leading-normal border-t border-[#505050]">
+                  <p className="flex justify-end mr-2 text-m font-semibold uppercase leading-normal border-t border-[#505050] dark:text-[#ffffff]">
                     ${totalPrice(models) + (deployService ? deployCost : 0)}
                   </p>
                 </div>
@@ -242,7 +242,7 @@ const CartComponent = () => {
                     to="/login"
                     state={{ to: "/pay" }}
                     onClick={redirectToPayment}
-                    className="mt-7 inline-block w-3/4 bg-red-900 dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   >
                     Continue to Payment
                   </Link>

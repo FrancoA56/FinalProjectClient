@@ -7,7 +7,6 @@ import { logOutUser, addAllModelsToCart } from "../../Redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 import DarkMode from "../DarkMode/darkmode";
 
-
 function Nav() {
   // Traemos el estado Global "user"
   const user = useSelector((state) => state.user);
@@ -64,10 +63,7 @@ function Nav() {
   };
 
   return (
-    <nav
-   
-      className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
-    >
+    <nav className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <button
           className="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
@@ -158,13 +154,27 @@ function Nav() {
                 <Link to={`/about`}>
                   Team
                   {/* <i class="fa-solid fa-users"></i> */}
-                  </Link>
+                </Link>
               </a>
+            </li>
+            <li>
+              {user.email === "codecraftedtemplates@gmail.com" && (
+                <a
+                  href="https://final-proyect-admin.vercel.app/"
+                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
+              focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
+               dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
+               dark:[&.active]:text-neutral-400"
+                  target="_blank"
+                >
+                  Admin Panel
+                </a>
+              )}
             </li>
           </ul>
         </div>
 
-          <DarkMode/>
+        <DarkMode />
         {/* Right elements */}
         <div className="relative flex items-center justify-around ">
           {/* Cart Icon */}
@@ -188,7 +198,9 @@ function Nav() {
               </svg>
             </span>
             {cartItemCount > 0 && (
-             <span className="absolute bottom-3 left-3.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">{cartItemCount}</span>
+              <span className="absolute bottom-3 left-3.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">
+                {cartItemCount}
+              </span>
             )}
           </NavLink>
 
