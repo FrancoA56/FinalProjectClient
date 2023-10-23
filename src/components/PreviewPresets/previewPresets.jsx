@@ -12,6 +12,7 @@ import BasicShop1 from "../PresetsDesigns/Basic/Shop/BasicShop1"; // ? BASIC SHO
 // MEDIUM
 import MediumDetail1 from "../PresetsDesigns/Medium/Detail/MediumDetail1"; // ? MEDIUM DETAIL 01
 import MediumHome1 from "../PresetsDesigns/Medium/Home/MediumHome1"; // ? MEDIUM HOME 01
+import MediumShop from "../PresetsDesigns/Medium/Shop/MediumShop"; // ? MEDIUM SHOP
 
 // PREMIUM
 import PremiumDetail1 from "../PresetsDesigns/Premium/Detail/PremiumDetail1"; // ? PREMIUM DETAIL 01
@@ -32,6 +33,7 @@ const PreviewPresetsComponent = () => {
         /* *********MEDIUM********* */
         (name === "Medium home 01" && <MediumHome1 />) ||
         (name === "Medium detail" && <MediumDetail1 />) ||
+        (name === "Medium shop" && <MediumShop />) ||
         /* ********* PREMIUM ********* */
         (name === "Premium shop" && <PremiumShop1 />) ||
         (name === "Premium detail" && <PremiumDetail1 />)
