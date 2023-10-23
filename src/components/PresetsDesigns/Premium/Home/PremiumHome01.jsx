@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import ColorPanel from "../../../../utils/ColorPanel";
-import { useLocation } from "react-router-dom";
 
 const PremiumHome01 = () => {
   const user = useSelector((state) => state.user);
@@ -18,27 +17,15 @@ const PremiumHome01 = () => {
     !dropDown && setDropDown(true);
   };
   return (
-    <div className={`grid min-h-screen max-w-screen ${
+    <div
+      className={`grid min-h-screen max-w-screen ${
         color.primary ? color.primary : "bg-zinc-900"
-      }`}>
-      {/* section */}
-      <div className={`flex flex-col`}>
-        <section
-          className={`mt-3 ${
-            color.text01 ? color.text01 : "text-[#909090]"
-          }`}
-        >
-          <span class="material-symbols-outlined px-16">home</span>
-          <span class="material-symbols-outlined px-16">format_color_fill</span>
-          <span class="material-symbols-outlined px-16">shopping_bag</span>
-          <span class="material-symbols-outlined px-16">shopping_cart</span>
-          <span class="material-symbols-outlined px-16">account_circle</span>
-          <span class="material-symbols-outlined px-16">login</span>
-        </section>
-      </div>
-      {/* {dropDown ? (
+      }`}
+    >
+      {/* <ColorPanel/> */}
+      {dropDown ? (
         <div
-          className={`absolute w-full ease-in-out duration-300 ${
+          className={`relative w-full ease-in-out duration-300 ${
             color.primary ? color.primary : "bg-[#101010]"
           }`}
         >
@@ -47,21 +34,49 @@ const PremiumHome01 = () => {
         </div>
       ) : (
         <div
-          className={`absolute opacity-0 -translate-y-8 ease-in-out duration-300 w-full`}
+          className={`absolute opacity-0 -top-24 w-full ease-in-out duration-300`}
         >
           <ColorPanel />
         </div>
-      )} */}
+      )}
+      {/* section */}
+      <div className={`flex flex-col ease-in-out duration-300`}>
+        <section
+          className={`mt-3 z-10 ${
+            color.text01 ? color.text01 : "text-[#909090]"
+          }`}
+        >
+          <a href="" className="hover:text-[#101010]">
+            <span class="material-symbols-outlined px-16">home</span>
+          </a>
+          <a href="">
+            <span
+              onClick={handlerDropDown}
+              class="material-symbols-outlined px-16"
+            >
+              format_color_fill
+            </span>
+          </a>
+          <a href="">
+            <span class="material-symbols-outlined px-16">shopping_bag</span>
+          </a>
+          <a href="">
+            <span class="material-symbols-outlined px-16">shopping_cart</span>
+          </a>
+          <a href="">
+            <span class="material-symbols-outlined px-16">account_circle</span>
+          </a>
+          <a href="">
+            <span class="material-symbols-outlined px-16">login</span>
+          </a>
+        </section>
+      </div>
       {/* MAIN */}
-      <div
-        className={`row-span-6 grid grid-flow-col mt-5`}
-      >
+      <div className={`row-span-6 grid grid-flow-col mt-5`}>
         {/* medio */}
         <div className={`col-span-5 flex flex-col justify-center items-center`}>
           {/* Brand  y Titulo */}
-          <section
-            className={`flex items-end justify-around py-1 my-5 pr-96`}
-          >
+          <section className={`flex items-end justify-around py-1 my-5 pr-96`}>
             <img
               src={
                 user.logo
@@ -78,13 +93,6 @@ const PremiumHome01 = () => {
             >
               {user.name ? user.name : "Your Company"}
             </span>
-            {/* <h1
-              className={`${
-                color.text01 ? color.text01 : "text-[#909090]"
-              } text-3xl pl-40 uppercase`}
-            >
-              Add your Title
-            </h1> */}
           </section>
           {/* Centro */}
           <div className={`flex flex-row justify-center items-center`}>
@@ -102,7 +110,11 @@ const PremiumHome01 = () => {
                     "https://media.istockphoto.com/id/1373017594/es/foto/auriculares-sobre-fondo-de-color-naranja.jpg?s=612x612&w=0&k=20&c=0X3aIl4Nv7SJZS5VdWpwzyFP4Gd07ov7t72E_Kur9Hc="
                   )
                 }
-                className="active:blur-md grayscale focus:grayscale-0 pb-0.5"
+                className={`${
+                  image ===
+                    "https://media.istockphoto.com/id/1373017594/es/foto/auriculares-sobre-fondo-de-color-naranja.jpg?s=612x612&w=0&k=20&c=0X3aIl4Nv7SJZS5VdWpwzyFP4Gd07ov7t72E_Kur9Hc=" &&
+                  "grayscale-0"
+                } active:blur-md grayscale focus:grayscale-0 pb-0.5`}
               >
                 <img
                   src="https://media.istockphoto.com/id/1373017594/es/foto/auriculares-sobre-fondo-de-color-naranja.jpg?s=612x612&w=0&k=20&c=0X3aIl4Nv7SJZS5VdWpwzyFP4Gd07ov7t72E_Kur9Hc="
@@ -166,14 +178,85 @@ const PremiumHome01 = () => {
           </section>
           <button
             className={`pl-16 pr-16 my-5 py-1 rounded ${
-              color.text01 ? color.text01 : "text-[#909090]"
-            } ${color.secondary ? color.secondary : "bg-red-500"}`}
+              color.text01 ? color.text01 : "text-[#101010]"
+            } ${color.secondary ? color.secondary : "bg-[#909090]"}`}
           >
             Action
           </button>
+          {/* Abajo de todo */}
+          {/* Abajo de todo */}
+          {/* Abajo de todo */}
+          {/* Abajo de todo */}
+          {/* Abajo de todo */}
+          {/* Abajo de todo */}
+          <div className={`mt-5`}>
+            <div
+              className={`flex flex-row items-center ${color.secondary ? color.secondary : "bg-[#909090]"} justify-between overflow-hidden rounded`}
+            >
+              <p className={`${color.text02 ? color.text02 : 'text-[#101010]'} text-sm w-96 mr-2 text-right`}>
+                {" "}
+                Use this space to elaborate on your headline and connect with
+                your visitors. You can build on the first idea or add your
+                second point. Now that you've got your visitors' attention, let
+                them know what they can expect, and encourage them to explore
+                your site.{" "}
+              </p>
+              <div className={`h-48 w-48 rounded ml-2`}>
+                <img
+                  src="https://media.istockphoto.com/id/1352181865/es/foto/auriculares-monocrom%C3%A1ticos-de-color-rojo-sobre-la-oreja-en-un-estudio-rojo-vista-frontal.jpg?s=612x612&w=0&k=20&c=ISOJNCeFXZ04fvOdmoc6bPvyVBwFP2XyPWcTaDXFSLo="
+                  alt=""
+                  className={`h-48 w-48 object-cover`}
+                />
+              </div>
+            </div>
+            <div
+              className={`flex flex-row items-center ${color.secondary ? color.secondary : "bg-[#909090]"} justify-between overflow-hidden rounded mt-5 mb-5`}
+            >
+              <div className={`h-48 w-48 rounded mr-2`}>
+                <img
+                  src="https://media.istockphoto.com/id/1352182490/es/foto/auriculares-monocrom%C3%A1ticos-de-color-rojo-sobre-la-oreja-en-un-estudio-rojo-vista-frontal.jpg?s=612x612&w=0&k=20&c=9s4Yfiqr-HqeUG3ob-D9g0jmeAGgPdIlKxFCOSn9h5c="
+                  alt=""
+                  className={`h-48 w-48 object-cover`}
+                />
+              </div>
+              <p className={`${color.text02 ? color.text02 : 'text-[#101010]'} text-sm w-96 ml-2 text-left`}>
+                {" "}
+                Use this space to elaborate on your headline and connect with
+                your visitors. You can build on the first idea or add your
+                second point. Now that you've got your visitors' attention, let
+                them know what they can expect, and encourage them to explore
+                your site.{" "}
+              </p>
+            </div>
+            <div
+              className={`flex flex-row items-center ${color.secondary ? color.secondary : "bg-[#909090]"} justify-between overflow-hidden rounded mb-5`}
+            >
+              <p className={`${color.text02 ? color.text02 : 'text-[#101010]'} text-sm w-96 mr-2 text-right`}>
+                {" "}
+                Use this space to elaborate on your headline and connect with
+                your visitors. You can build on the first idea or add your
+                second point. Now that you've got your visitors' attention, let
+                them know what they can expect, and encourage them to explore
+                your site.{" "}
+              </p>
+              <div className={`h-48 w-48 rounded ml-2`}>
+                <img
+                  src="https://media.istockphoto.com/id/1352182482/es/foto/auriculares-monocrom%C3%A1ticos-de-color-rojo-sobre-la-oreja-en-un-estudio-rojo-vista-frontal.jpg?s=612x612&w=0&k=20&c=NXKYA_BzW6UfDWrSeAo61ia6VK2-UHpoeKMb4MeQICY="
+                  alt=""
+                  className={`h-48 w-48 object-cover`}
+                />
+              </div>
+            </div>
+          </div>
+          {/* Aaaaaaaaaaaaaaaaaaa */}
+          {/* Aaaaaaaaaaaaaaaaaaa */}
+          {/* Aaaaaaaaaaaaaaaaaaa */}
+          {/* Aaaaaaaaaaaaaaaaaaa */}
+          {/* Aaaaaaaaaaaaaaaaaaa */}
+          {/* Aaaaaaaaaaaaaaaaaaa */}
+          {/* Aaaaaaaaaaaaaaaaaaa */}
         </div>
       </div>
-      {/* MAIN Segunda parte */}
     </div>
   );
 };
