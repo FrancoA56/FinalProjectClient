@@ -25,18 +25,18 @@ const PreviewPresetsComponent = () => {
     <div>
       {
         /* *********BASIC********* */
-        (name === "Basic home 01" && <BasicHome1 />) ||
-        (name === "Basic Home 02" && <BasicHome02 />) ||
-        (name === "Basic shop 01" && <BasicShop1 />) ||
-        (name === "Basic about 01" && <Temp01Home />) ||
-        (name === "Basic cart 01" && <BasicCart1 />) ||
-        /* *********MEDIUM********* */
-        (name === "Medium home 01" && <MediumHome1 />) ||
-        (name === "Medium detail" && <MediumDetail1 />) ||
-        (name === "Medium shop" && <MediumShop />) ||
-        /* ********* PREMIUM ********* */
-        (name === "Premium shop" && <PremiumShop1 />) ||
-        (name === "Premium detail" && <PremiumDetail1 />)
+        (name === "SimpleStart" && <BasicHome1 />) ||
+          (name === "FundamentalFlow" && <BasicHome02 />) ||
+          (name === "MinimalMart" && <BasicShop1 />) ||
+          (name === "CompanyProfile" && <Temp01Home />) ||
+          (name === "EasyCart" && <BasicCart1 />) ||
+          /* *********MEDIUM********* */
+          (name === "BalancedFlow" && <MediumHome1 />) ||
+          (name === "InsightDetail" && <MediumDetail1 />) ||
+          (name === "Medium shop" && <MediumShop />) ||
+          /* ********* PREMIUM ********* */
+          (name === "PrestigeMarket" && <PremiumShop1 />) ||
+          (name === "EliteDetail" && <PremiumDetail1 />)
       }
     </div>
   );

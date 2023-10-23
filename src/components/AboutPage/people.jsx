@@ -11,7 +11,7 @@ const people = [
     name: "Jimena Mateo",
     role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_198,h_198,ar_1:1,g_auto/v1697385470/Team/Jime_mxnoxv.png",
+      "https://res.cloudinary.com/codecrafttemplates/image/upload/c_crop,w_900,h_900,ar_1:1,g_auto/v1698068314/WhatsApp_Image_2023-10-21_at_12.58.31_rksrfy.jpg",
     linkedin: "https://www.linkedin.com/in/jimena-mateo",
     github: "https://github.com/Jimemateo",
   },
@@ -28,7 +28,7 @@ const people = [
     name: "Nahuel Santini",
     role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_186,h_186,ar_1:1,g_auto/v1697385470/Team/Nahue_ykk9tk.png",
+      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697681635/pumcph1yiw2ww1czixak.png",
     linkedin: "http://www.linkedin.com/in/nahuesantini",
     github: "https://github.com/Nahuelnob",
   },
