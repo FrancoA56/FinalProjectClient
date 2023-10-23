@@ -7,7 +7,6 @@ import { logOutUser, addAllModelsToCart } from "../../Redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 import DarkMode from "../DarkMode/darkmode";
 
-
 function Nav() {
   // Traemos el estado Global "user"
   const user = useSelector((state) => state.user);
@@ -69,12 +68,8 @@ function Nav() {
   };
 
   return (
-    <nav  
-      className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
-     >
-     
-       <div className="flex w-full flex-wrap items-center justify-between px-3">
-
+    <nav className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
+      <div className="flex w-full flex-wrap items-center justify-between px-3">
         <button
           className="lg:hidden"
           type="button"
@@ -101,37 +96,35 @@ function Nav() {
           </span>
         </button>
 
-      {isOpen && (
-             
-      <div className={`absolute z-[1000] top-10 float-left m-0 ${
-        isOpen ? "block" : "hidden"     
-      } min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block`}
-      >
+        {isOpen && (
+          <div
+            className={`absolute z-[1000] top-10 float-left m-0 ${
+              isOpen ? "block" : "hidden"
+            } min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block`}
+          >
+            <a
+              href="/"
+              className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+            >
+              Home
+            </a>
+            <a
+              href="/shop"
+              className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+            >
+              Shop
+            </a>
+            <a
+              href="/about"
+              className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+            >
+              Team
+            </a>
+          </div>
+        )}
 
-          <a
-            href="/"
-            className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-          >
-            Home
-          </a>
-          <a
-            href="/shop"
-            className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-          >
-            Shop
-          </a>
-          <a
-            href="/about"
-            className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-            
-          >
-            Team
-          </a>
-        </div>
-      )}
-    
-{/* ------------------------------------------------------------------------------------------------------------           */}
-     
+        {/* ------------------------------------------------------------------------------------------------------------           */}
+
         <div
           className="hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
           id="navbarSupportedContent1"
@@ -188,24 +181,38 @@ function Nav() {
 
             {/* Projects link */}
             {location.pathname !== "/about" && (
-            <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-              <NavLink // Usa NavLink en lugar de <a>
-                to="/about" // Especifica la ruta en el atributo "to"
-                className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
+              <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                <NavLink // Usa NavLink en lugar de <a>
+                  to="/about" // Especifica la ruta en el atributo "to"
+                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
                  dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
                  dark:[&.active]:text-neutral-400"
-                data-te-nav-link-ref
-              >
-                Team
+                  data-te-nav-link-ref
+                >
+                  Team
                   {/* <i class="fa-solid fa-users"></i> */}
-                  </NavLink>
-            </li>
+                </NavLink>
+              </li>
             )}
+            <li>
+              {user.email === "codecraftedtemplates@gmail.com" && (
+                <a
+                  href="https://final-proyect-admin.vercel.app/"
+                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
+              focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
+               dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
+               dark:[&.active]:text-neutral-400"
+                  target="_blank"
+                >
+                  Admin Panel
+                </a>
+              )}
+            </li>
           </ul>
         </div>
 
-          <DarkMode/>
+        <DarkMode />
         {/* Right elements */}
         <div className="relative flex items-center justify-around ">
           {/* Cart Icon */}
@@ -229,7 +236,9 @@ function Nav() {
               </svg>
             </span>
             {cartItemCount > 0 && (
-             <span className="absolute bottom-3 left-3.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">{cartItemCount}</span>
+              <span className="absolute bottom-3 left-3.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">
+                {cartItemCount}
+              </span>
             )}
           </NavLink>
 
@@ -309,7 +318,7 @@ function Nav() {
               <>
                 {" "}
                 <div
-                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none dark:text-white"
                   href="#"
                   id="dropdownMenuButton2"
                   role="button"

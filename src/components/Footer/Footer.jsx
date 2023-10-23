@@ -76,7 +76,7 @@ function Footer() {
   };
 
   return (
-    <footer className="bg-gray-300 text-center text-neutral-600 dark:bg-[#303030] dark:text-[#707070] text-sm lg:text-left">
+    <footer className="bg-gray-300 text-center text-neutral-600 dark:bg-[#303030] dark:text-[#cfcece] text-sm lg:text-left">
       {/* Main content container */}
       <div className="mx-6 py-3 text-center md:text-left">
         <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-3">
@@ -106,7 +106,7 @@ function Footer() {
             </h6>
 
             {/* Instagram section */}
-            <p className="mr-2 mt-4 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
+            <p className="mr-2 mt-4 text-neutral-600 dark:text-[#cfcece] flex items-center flex-col">
               <a
                 href="https://www.instagram.com/code_crafted_templates/"
                 target="_blank"
@@ -127,7 +127,7 @@ function Footer() {
             </p>
 
             {/* Twitter section */}
-            <p className="mr-8 mt-2 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
+            <p className="mr-8 mt-2 text-neutral-600 dark:text-[#cfcece] flex items-center flex-col">
               <a
                 href="https://twitter.com/CodeCraftedTemp"
                 target="_blank"
@@ -148,7 +148,7 @@ function Footer() {
             </p>
 
             {/* LinkedIn section */}
-            <p className="mr-6 mt-1.5 text-neutral-600 dark:text-[#707070] flex items-center flex-col">
+            <p className="mr-6 mt-1.5 text-neutral-600 dark:text-[#cfcece] flex items-center flex-col">
               <a
                 href="http://www.linkedin.com/in/code-crafted-templates"
                 target="_blank"
@@ -373,12 +373,12 @@ function Footer() {
       </div>
 
       {/* Copyright section */}
-      <div className="bg-[#303030] opacity-50 p-3 mb- text-center dark:bg-[#202020] ">
-        <span className="text-[#909090] dark:text-white">
+      <div className="bg-[#303030] opacity-50 p-3 text-center dark:bg-[#202020] ">
+        <span className="text-[#ffffff] dark:text-white">
           © 2023 Copyright:{" "}
         </span>
         <a
-          className="font text-[#909090] dark:text-white"
+          className="font text-[#ffffff] dark:text-white"
           href="https://tailwind-elements.com/"
         >
           CodeCrafted Templates
