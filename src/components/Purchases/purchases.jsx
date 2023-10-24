@@ -12,7 +12,7 @@ const Purchases = () => {
 
         (async () => {
             try {
-                const { data } = await axios.get(`${URL}/api/shop/invoice/?email=${user.email}`);
+                const { data } = await axios.get(`${URL}/api/shop/invoice/${user.email}`);
 
                 if (data.length) {
 
