@@ -120,6 +120,15 @@ function Nav() {
             >
               Team
             </a>
+            {user.email === "codecraftedtemplates@gmail.com" && (
+              <a
+                href="https://final-proyect-admin.vercel.app/"
+                className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                target="_blank"
+              >
+                Admin Panel
+              </a>
+            )}
           </div>
         )}
 

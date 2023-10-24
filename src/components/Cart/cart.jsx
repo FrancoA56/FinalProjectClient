@@ -186,18 +186,18 @@ const CartComponent = () => {
                     className="w-3/4 border rounded-md border-[#909090] py-3 mt-3 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   >
                     <div className="grid grid-cols-7">
-                      <div className="flex items-center justify-center font-semibold col-span-2 uppercase ">
+                      <div className="flex items-center justify-center font-semibold col-span-2 uppercase dark:text-[#ffffff]">
                         <h1> {model.name} </h1>
                       </div>
-                      <div className="flex items-center mb-1 justify-center text-sm font-semibold text-[#303030] dark:text-[#707070] col-span-2 pt-1">
+                      <div className="flex items-center mb-1 justify-center text-sm font-semibold text-[#303030] dark:text-[#bdbdbd] col-span-2 pt-1">
                         <h1> {model.type} </h1>
                       </div>
-                      <div className="flex items-center justify-center font-semibold col-span-2">
+                      <div className="flex items-center justify-center font-semibold col-span-2 dark:text-[#ffffff]">
                         <h1> $ {model.price} </h1>
                       </div>
                       <button
                         onClick={() => dispatch(removeModelFromCart(model.id))}
-                        className="text-[#505050] font-semibold col-span-1"
+                        className="text-[#505050] font-semibold col-span-1 dark:text-[#ffffff]"
                       >
                         <i className="fa-solid fa-xmark" />
                       </button>
@@ -208,19 +208,19 @@ const CartComponent = () => {
               {/* Detalles del carrito */}
               <div className="row-span-1 flex flex-col items-center justify-end pb-3">
                 <div className="grid grid-cols-2 w-3/4">
-                  <label className="flex ml-2 text-sm font-semibold uppercase leading-normal col-span-1 dark:text-[#bebebe]">
+                  <label className="flex ml-2 text-xs font-semibold leading-normal col-span-1 dark:text-[#bebebe]">
                     Subtotal
                   </label>
-                  <p className="flex justify-end mr-2 text-sm font-semibold uppercase leading-normal dark:text-[#bebebe]">
+                  <p className="flex justify-end mr-2 text-sm font-semibold leading-normal dark:text-[#bebebe]">
                     ${totalPrice(models)}
                   </p>
                 </div>
                 {deployService && (
                   <div className="grid grid-cols-2 w-3/4">
-                    <label className="text-sm font-semibold uppercase leading-normal col-span-1 flex ml-2 dark:text-[#bebebe]">
+                    <label className="text-xs font-semibold leading-normal col-span-1 flex ml-2 dark:text-[#bebebe]">
                       Deployment Cost
                     </label>
-                    <p className="flex justify-end mr-2 text-sm font-semibold uppercase leading-normal dark:text-[#bebebe]">
+                    <p className="flex justify-end mr-2 text-sm font-semibold leading-normal dark:text-[#bebebe]">
                       ${deployCost}
                     </p>
                   </div>
