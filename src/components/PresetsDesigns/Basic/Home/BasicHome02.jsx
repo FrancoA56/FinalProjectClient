@@ -182,6 +182,12 @@ const BasicHome02 = () => {
               </div>
             </div>
           </div>
+                    <div
+            id="elaboration"
+            className={`${color.primary ? color.primary : 'bg-[#101010]'} h-16 flex items-end justify-center`}
+          >
+
+          </div>
         </div>
         <div className={`col-span-2 ${color.primary ? color.primary : 'bg-[#101010]'} w-16`}></div>
       </div>
