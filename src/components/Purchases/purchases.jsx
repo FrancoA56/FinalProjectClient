@@ -57,7 +57,6 @@ const Purchases = () => {
         );
         if (response.data.length) {
           const container = response.data.map((invoice) => {
-            console.log("invoice", invoice);
             const templates = invoice.invoiceItems.map((t) => ({
               id: t.presetId,
               presetName: t.preset.presetName,
