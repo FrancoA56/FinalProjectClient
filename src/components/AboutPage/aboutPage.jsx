@@ -1,6 +1,7 @@
 import people from "./people";
 import Banner from "../../components/Banner/Banner";
 import Nav from "../../components/Nav/Nav";
+import "./about.module.css";
 
 const AboutPageComponent = () => {
   return (
@@ -32,16 +33,16 @@ const AboutPageComponent = () => {
                 in the digital world.
               </div>
             </div>
-            <div className="flex col-span-12 md:col-span-8 h-screen rounded-md overflow-hidden"
+            <div className="scroll-container flex col-span-12 md:col-span-8 h-screen rounded-md overflow-hidden"
               style={{
                 background:
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
-              }}>
+                }}>
 
            
             <ul
               role="list"
-              className="grid gap-4 sm:gap-6 sm:grid-cols-4 xl:col-span-2 mt-11 ml-12 items-center overflow-y-scroll"
+              className="grid gap-4 sm:gap-6 sm:grid-cols-4 xl:col-span-2 mt-11 ml-12 items-center "
             >
               {people.map((person) => (
                 <li key={person.name}>
