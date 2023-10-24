@@ -26,7 +26,7 @@ function App() {
   const URL = process.env.REACT_APP_API;
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login);
-
+  const { logout } = useAuth0();
 
   const presets = useSelector((state) => state.presets);
 
@@ -41,22 +41,20 @@ function App() {
             },
           };
 
-          const { data } = await axios.get(`${URL}/api/user/validate`,headerToken); // Verigica que el token no haya expirado
+          await axios.get(`${URL}/api/user/validate`, headerToken); // Verifica que el token no haya expirado
 
-          if (data) {
-            const user = decodeToken(storedToken); // Decodifica el token y se obtienen los datos del usuario ya logueado
-            dispatch(logInUser(user)); // Actualiza el estado global con el usuario logueado
-            dispatch(logInSet(true));
-          }else{
-          localStorage.removeItem("token");}
+          const user = decodeToken(storedToken); // Decodifica el token y se obtienen los datos del usuario ya logueado
+          dispatch(logInUser(user)); // Actualiza el estado global con el usuario logueado
+          dispatch(logInSet(true));
         } catch (error) {
-          console.log(error)
+          localStorage.removeItem("token");
+          await logout();
         }
       };
       login();
     }
 
-/*     if (presets === 1) {
+    /*     if (presets === 1) {
       const postData = async () => {
         try {
           await Promise.all(
@@ -87,7 +85,7 @@ function App() {
         <Route path="/profile" element={<ProfileView />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/purchases" element={<Purchases />} />
-        <Route path="/preview/:name" element={<PreviewPresets/>} />
+        <Route path="/preview/:name" element={<PreviewPresets />} />
       </Routes>
     </div>
   );
