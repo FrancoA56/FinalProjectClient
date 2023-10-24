@@ -22,6 +22,7 @@ import {
   LOGIN_TRUE,
   DEPLOYMENT_COST,
   ADD_COLOR,
+  SET_PAGE
 } from "./types";
 
 const initialState = {
@@ -34,6 +35,7 @@ const initialState = {
   deploymentCost: 0,
   login: false,
   colores: [],
+  currentPage: 1,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -45,10 +47,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case ADD_COLOR:
-      console.log('payloda--->', payload);
+      console.log("payloda--->", payload);
       return {
         ...state,
-        colores: payload
+        colores: payload,
       };
 
     case ADD_MODELS:
@@ -207,6 +209,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         deploymentCost: payload,
+      };
+    
+    case SET_PAGE:
+      return {
+        ...state,
+        currentPage: payload,
       };
 
     default:
