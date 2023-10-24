@@ -45,7 +45,7 @@ const people = [
     role: "Full-stack developer",
     imageUrl:
       "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_444,h_444,ar_1:1/v1697508329/Team/WhatsApp_Image_2023-10-16_at_22.53.20_g6vgas.jpg",
-    linkedin: "https:/",
+    linkedin: "https://",
     github: "https://github.com/RaPriG",
   },
   {
@@ -53,7 +53,7 @@ const people = [
     role: "Full-stack developer",
     imageUrl:
       "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_pad,b_gen_fill,w_645,h_645/v1697508329/Team/WhatsApp_Image_2023-10-16_at_22.53.35_z4xlan.jpg",
-    linkedin: "https://https://www.linkedin.com/in/franco-adamoli/",
+    linkedin: "https://www.linkedin.com/in/franco-adamoli/",
     github: "https://github.com/FrancoA56",
   },
   {
