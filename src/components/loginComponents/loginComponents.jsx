@@ -277,7 +277,7 @@ const LoginComponents = () => {
                   clip-rule="evenodd"
                 /> */}
               </svg>
-              Sing in with...
+              Sign in with...
             </a>
           </form>
         </div>
