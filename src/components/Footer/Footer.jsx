@@ -260,8 +260,8 @@ function Footer() {
                             <input
                               name="user_name"
                               id="name"
-                              // autocomplete="given-name"
-                              autocomplete="off"
+                              autocomplete="given-name"
+                              // autocomplete="off"
                               type="text"
                               onChange={handleChange}
                               value={formData.user_name}
@@ -283,8 +283,8 @@ function Footer() {
                               type="text"
                               name="lastname"
                               id="lastname"
-                              // autocomplete="family-name"
-                              autocomplete="off"
+                              autocomplete="family-name"
+                              // autocomplete="off"
                               onChange={handleChange}
                               required
                               // value={formData.lastname}
@@ -305,8 +305,8 @@ function Footer() {
                             type="text"
                             name="name"
                             id="name"
-                            // autocomplete="organization"
-                            autocomplete="off"
+                            autocomplete="organization"
+                            // autocomplete="off"
                             onChange={handleChange}
                             required
                             className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
@@ -325,8 +325,8 @@ function Footer() {
                             type="email"
                             name="user_email"
                             id="email"
-                            // autocomplete="email"
-                            autocomplete="off"
+                            autocomplete="email"
+                            // autocomplete="off"
                             onChange={handleChange}
                             required
                             value={formData.user_email}
