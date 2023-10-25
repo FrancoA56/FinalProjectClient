@@ -18,6 +18,7 @@ import MediumShop from "../PresetsDesigns/Medium/Shop/MediumShop"; // ? MEDIUM S
 import PremiumDetail1 from "../PresetsDesigns/Premium/Detail/PremiumDetail1"; // ? PREMIUM DETAIL 01
 import PremiumShop1 from "../PresetsDesigns/Premium/Shop/PremiumShop1"; // ? PREMIUM SHOP
 import PremiumHome01 from "../PresetsDesigns/Premium/Home/PremiumHome01"; // ? PREMIUM HOME
+import PremiumCart01 from "../PresetsDesigns/Premium/Cart/PremiumCart01"; // ? PREMIUM CART
 
 const PreviewPresetsComponent = () => {
   const { name } = useParams();
@@ -34,12 +35,12 @@ const PreviewPresetsComponent = () => {
           /* *********MEDIUM********* */
           (name === "BalancedFlow" && <MediumHome1 />) ||
           (name === "InsightDetail" && <MediumDetail1 />) ||
-          (name === "TrendyShop" && <MediumShop />) ||        // * FALTAN IMAGENES
+          (name === "TrendyShop" && <MediumShop />) || // * FALTAN IMAGENES
           /* ********* PREMIUM ********* */
           (name === "PrestigeMarket" && <PremiumShop1 />) ||
           (name === "EliteDetail" && <PremiumDetail1 />) ||
-          (name === "LuxuryLanding" && <PremiumHome01 />)        // * FALTAN IMAGENES
-          
+          (name === "LuxuryLanding" && <PremiumHome01 />) || // * FALTAN IMAGENES
+          (name === "ExclusiveCart" && <PremiumCart01 />) // * FALTAN IMAGENES y color
       }
     </div>
   );

@@ -24,27 +24,11 @@ const PremiumHome01 = () => {
       } dark:bg-zinc-900
       }`}
     >
-      {/* <ColorPanel/> */}
-      {dropDown ? (
-        <div
-          className={`relative w-full ease-in-out duration-300 ${
-            color.primary ? color.primary : "bg-red-200"
-          } dark:bg-zinc-900"
-          }`}
-        >
-          {" "}
-          <ColorPanel />{" "}
-        </div>
-      ) : (
-        <div
-          className={`absolute opacity-0 -top-24 w-full ease-in-out duration-300`}
-        >
-          <ColorPanel />
-        </div>
-      )}
-      <div className={`mx-auto mb-2 pl-12`}>
-      <DarkMode />
+      {/* **********COLOR PANEL********** */}
+      <div className="fixed bottom-2 left-1/4 right-1/4 z-10">
+        <ColorPanel />
       </div>
+      {/* ******************** */}
       {/* section */}
       <div className={`flex flex-col ease-in-out duration-300`}>
         <section
@@ -56,13 +40,8 @@ const PremiumHome01 = () => {
           <a href="" className="cursor-not-allowed">
             <span class="material-symbols-outlined px-16">home</span>
           </a>
-          <a href="" className="hover:text-slate-500">
-            <span
-              onClick={handlerDropDown}
-              class="material-symbols-outlined px-16"
-            >
-              format_color_fill
-            </span>
+          <a href="" className="cursor-not-allowed">
+            <span class="material-symbols-outlined px-16">headphones</span>
           </a>
           <a href="" className="cursor-not-allowed">
             <span class="material-symbols-outlined px-16">shopping_bag</span>
@@ -76,6 +55,9 @@ const PremiumHome01 = () => {
           <a href="" className="cursor-not-allowed">
             <span class="material-symbols-outlined px-16">login</span>
           </a>
+          <div className={`fixed inset-y-0 top-2 right-0`}>
+            <DarkMode />
+          </div>
         </section>
       </div>
       {/* MAIN */}
@@ -111,7 +93,7 @@ const PremiumHome01 = () => {
               <img src={image} alt="" className={`h-96 object-cover`} />
             </section>
             {/* Imagenes botones */}
-          
+
             <section className="flex flex-col p-1">
               <button
                 onClick={() =>
@@ -147,7 +129,8 @@ const PremiumHome01 = () => {
               </button>
               <button
                 onClick={() =>
-                  setImage("https://media.istockphoto.com/id/1373017594/es/foto/auriculares-sobre-fondo-de-color-naranja.jpg?s=612x612&w=0&k=20&c=0X3aIl4Nv7SJZS5VdWpwzyFP4Gd07ov7t72E_Kur9Hc="
+                  setImage(
+                    "https://media.istockphoto.com/id/1373017594/es/foto/auriculares-sobre-fondo-de-color-naranja.jpg?s=612x612&w=0&k=20&c=0X3aIl4Nv7SJZS5VdWpwzyFP4Gd07ov7t72E_Kur9Hc="
                   )
                 }
                 className="active:blur-md grayscale focus:grayscale-0 pb-0.5"
@@ -162,42 +145,50 @@ const PremiumHome01 = () => {
           </div>{" "}
           {/* Fin de centro */}
           {/* Epigrafe */}
-          <section className="flex justify-end items-end pl-72 pr-72 ml-2 mr-2 text-left pt-4">
-            <div className={`flex flex-col justify-start items-start`}>
-              <h1
-                className={`text-xl font-semibold uppercase ${
-                  color.text01 ? color.text01 : "text-[#101010]"
-                } dark:text-[#909090]
+          <div className={``}>
+            <div
+              className={`flex flex-row items-center justify-between overflow-hidden rounded`}
+            >
+              <div className="flex flex-col w-96 ml-24">
+                <h1
+                  className={`text-xl font-semibold uppercase -ml-80 ${
+                    color.text01 ? color.text01 : "text-[#101010]"
+                  } dark:text-[#909090]
                 }`}
-              >
-                {" "}
-                Introduce your idea{" "}
-              </h1>
-              <p
-                className={`text-sm ${
-                  color.text02 ? color.text02 : "text-[#303030]"
-                } dark:text-[#505050]
-                `}
-              >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quisquam quasi reprehenderit molestiae quibusdam velit ea nulla
-                necessitatibus autem, iure cum quis natus ducimus nesciunt sit
-                cupiditate, labore consequatur eveniet similique?
-              </p>
-            </div>
-          </section>
-          <button
-            className={`pl-16 pr-16 my-5 py-1 rounded ${
-              color.text01 ? color.text01 : "text-[#101010]"
-            } dark:text-[#101010]
+                >
+                  {" "}
+                  Introduce your idea{" "}
+                </h1>
+                <p
+                  className={`${
+                    color.text01 ? color.text01 : "text-[#101010]"
+                  } dark:text-[#909090] text-sm -ml-20 text-left`}
+                >
+                  {" "}
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim
+                  illo ea cum distinctio necessitatibus optio earum eum, ad
+                  sapiente quae pariatur quibusdam. Eaque harum, tempora
+                  sapiente accusantium cumque id at.{" "}
+                </p>
+              </div>
+              <div className={`h-48 w-48 rounded ml-24`}>
+                <button
+                  className={`pl-16 pr-16 mt-20 py-1 ml-2 rounded ${
+                    color.text01 ? color.text01 : "text-[#101010]"
+                  } dark:text-[#101010]
             } ${
               color.secondary ? color.secondary : "bg-rose-300"
             } dark:bg-[#505050] hover:${
-              color.primary ? color.primary : "bg-red-200"
-            } hover:${color.text02 ? color.text02 : "text-[#101010]"} shadow`}
-          >
-            Action
-          </button>
+                    color.primary ? color.primary : "bg-red-200"
+                  } hover:${
+                    color.text02 ? color.text02 : "text-[#101010]"
+                  } shadow-md`}
+                >
+                  Action
+                </button>
+              </div>
+            </div>
+          </div>
           {/* Abajo de todo */}
           <div className={`mt-5`}>
             <div

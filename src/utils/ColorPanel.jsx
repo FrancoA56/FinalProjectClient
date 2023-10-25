@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addColors } from "../Redux/actions";
+import DarkMode from "../components/DarkMode/darkmode";
 
 const ColorPanel = () => {
   const colores = useSelector((state) => state.colores);
@@ -12,6 +13,39 @@ const ColorPanel = () => {
     text01: "",
     text02: "",
   });
+
+  /* Armo para un dropdown  */
+  const [dropDown, setDropDown] = useState({
+    primayColor: false,
+    secondaryColor: false,
+    textColor01: false,
+    textColor02: false,
+  });
+
+  /* click para el dropdown  */
+  const handlerDropDownPc = (e) => {
+    e.preventDefault();
+    dropDown.primayColor && setDropDown({ primayColor: false });
+    !dropDown.primayColor && setDropDown({ primayColor: true });
+  };
+  /* click para el dropdown  */
+  const handlerDropDownSc = (e) => {
+    e.preventDefault();
+    dropDown.secondaryColor && setDropDown({ secondaryColor: false });
+    !dropDown.secondaryColor && setDropDown({ secondaryColor: true });
+  };
+  /* click para el dropdown  */
+  const handlerDropDownT1 = (e) => {
+    e.preventDefault();
+    dropDown.textColor01 && setDropDown({ textColor01: false });
+    !dropDown.textColor01 && setDropDown({ textColor01: true });
+  };
+  /* click para el dropdown  */
+  const handlerDropDownT2 = (e) => {
+    e.preventDefault();
+    dropDown.textColor02 && setDropDown({ textColor02: false });
+    !dropDown.textColor02 && setDropDown({ textColor02: true });
+  };
 
   const handlerPrimaryClick = (value) => {
     const updateColor = { ...color, primary: value };
@@ -33,9 +67,23 @@ const ColorPanel = () => {
     setColor(updateColor);
     dispatch(addColors(updateColor));
   };
+  const handlerResetClick = (value) => {
+    const updateColor = {
+      ...color,
+      primary: value,
+      secondary: value,
+      text01: value,
+      text02: value,
+    };
+    setColor(updateColor);
+    dispatch(addColors(updateColor));
+  };
 
-  console.log("estado local", color);
-  console.log("estado global", colores);
+  const handleBackClick = (e) => {
+    e.preventDefault;
+    window.history.back();
+  };
+
   const bgColors = [
     "bg-white",
     "bg-yellow-300",
@@ -100,120 +148,184 @@ const ColorPanel = () => {
     "text-stone-900",
     "text-black",
   ];
+
   return (
-    <div className={`w-full flex flex-col items-center justify-center`}>
-      {/* ******************** SET COLOR PRIMARY ****************** */}
-      <div className="grid grid-cols-8">
-        <div className="flex justify-end mr-2">
-          <h2
-            className={`font-semibold text-sm capitalize ${
-              color.primary === "bg-black" || color.primary === "bg-stone-900"
-                ? "text-[#909090]"
-                : "text-[#101010]"
-            }`}
-          >
-            BackGround 01
-          </h2>
-        </div>
-        <div className="col-span-7 flex flex-row">
-          {bgColors.map((color) => {
-            return (
-              <div>
-                <button
-                  onClick={() => handlerPrimaryClick(`${color}`)}
-                  className={`w-8 h-4 ${color} border-t border-b border-[#505050] focus:border-double focus:border-logo`}
-                />
-              </div>
-            );
-          })}
-        </div>
+    <div className="container mx-auto">
+      {/* LA parte de adelante */}
+      <div className="absolute bottom-2 w-full bg-[#303030] text-white dark:text-[#909090] rounded h-16 z-20 flex items-center justify-around">
+        {/*****************  BACK ***************/}
+        <a
+          class="material-symbols-outlined cursor-pointer select-none hover:text-[#101010] "
+          onClick={handleBackClick}
+        >
+          arrow_back
+        </a>
+        {/*****************  PRIMARY COLOR ***************/}
+        <a
+          class="material-symbols-outlined cursor-pointer select-none hover:text-[#101010] "
+          onClick={handlerDropDownPc}
+        >
+          colors
+        </a>
+        {/*****************  SECONDARY COLOR ***************/}
+        <a
+          class="material-symbols-outlined cursor-pointer select-none hover:text-[#101010] "
+          onClick={handlerDropDownSc}
+        >
+          colors{" "}
+          <span className="text-xs absolute top-8 ml-1 font-sans inset-y-0">
+            2
+          </span>
+        </a>
+        {/*****************  TEXT01 COLOR ***************/}
+        <a
+          class="material-symbols-outlined cursor-pointer select-none hover:text-[#101010] "
+          onClick={handlerDropDownT1}
+        >
+          format_color_text
+        </a>
+        {/*****************  TEXT02 COLOR ***************/}
+        <a
+          class="material-symbols-outlined cursor-pointer select-none hover:text-[#101010] "
+          onClick={handlerDropDownT2}
+        >
+          format_color_text{" "}
+          <span className="text-xs absolute rigth-96 top-8 ml-1 font-sans inset-y-0">
+            2
+          </span>
+        </a>
+        {/* ************* RESET *********************** */}
+
+        <a
+          onClick={() => handlerResetClick("")}
+          class="material-symbols-outlined cursor-pointer select-none hover:text-[#101010]"
+        >
+          restart_alt
+        </a>
       </div>
-      {/* ******************** SET COLOR SECONDARY ****************** */}
-      <div className="grid grid-cols-8">
-        <div className="flex justify-end mr-2">
-          <h2
-            className={`font-semibold text-sm capitalize ${
-              color.primary === "bg-black" || color.primary === "bg-stone-900"
-                ? "text-[#909090]"
-                : "text-[#101010]"
-            }`}
-          >
-            BackGround 02
-          </h2>
-        </div>
-        <div className="col-span-7 flex flex-row">
-          {/* <h2>BackG Color 02</h2> */}
-          {bgColors.map((color) => {
-            return (
-              <div>
-                <button
-                  onClick={() => handlerSecondaryClick(`${color}`)}
-                  className={`w-8 h-4 ${color} border-t border-b border-[#505050] focus:border-double focus:border-logo`}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      {/* ******************** SET COLOR TEXT01 ****************** */}
-      <div className="grid grid-cols-8">
-        <div className="flex justify-end mr-2">
-          <h2
-            className={`font-semibold text-sm capitalize ${
-              color.primary === "bg-black" || color.primary === "bg-stone-900"
-                ? "text-[#909090]"
-                : "text-[#101010]"
-            }`}
-          >
-            Text 01
-          </h2>
-        </div>
-        <div className="col-span-7 flex flex-row">
-          {colors.map((color) => {
-            return (
-              <div>
-                <button
-                  onClick={() => handlerText01Click(`${color}`)}
-                  className={`w-8 h-4 bg-${color
-                    .split("text-")
-                    .at(
-                      -1
-                    )}  border-t border-b border-[#505050] focus:border-double focus:border-logo`}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      {/* ******************** SET COLOR TEXT02 ****************** */}
-      <div className="grid grid-cols-8">
-        <div className="flex justify-end mr-2">
-          <h2
-            className={`font-semibold text-sm capitalize ${
-              color.primary === "bg-black" || color.primary === "bg-stone-900"
-                ? "text-[#909090]"
-                : "text-[#101010]"
-            }`}
-          >
-            Text 02
-          </h2>
-        </div>
-        <div className="col-span-7 flex flex-row">
-          {colors.map((color) => {
-            return (
-              <div>
-                <button
-                  onClick={() => handlerText02Click(`${color}`)}
-                  className={`w-8 h-4 bg-${color
-                    .split("text-")
-                    .at(
-                      -1
-                    )}  border-t border-b border-[#505050] focus:border-double focus:border-logo`}
-                />
-              </div>
-            );
-          })}
-        </div>
+      {/* La parte de atras */}
+
+      {/*****************  PRIMARY COLOR ***************/}
+      <div className="absolute bottom-2 w-full h-16  rounded-t-md z-10">
+        {dropDown.primayColor ? (
+          <div className="absolute inset-0 flex justify-center items-center bg-[#505050c2] rounded-t-md transform xl:-translate-y-10 -translate-y-16 ease-in-out duration-300 flex-wrap pb-4 pt-2">
+            {bgColors.map((color) => {
+              return (
+                <div>
+                  <button
+                    onClick={() => handlerPrimaryClick(`${color}`)}
+                    className={`w-5 h-5 focus:border focus:h-5 focus:pt-2 focus:mb-1 ${color}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="absolute flex bg-[#505050c2] pt-2 overflow-hidden items-center justify-center rounded-t transform inset-0 z-0 translate-y-1 ease-in-out duration-300 opacity-0">
+            {bgColors.map((color) => {
+              return (
+                <div>
+                  <button
+                    onClick={() => handlerPrimaryClick(`${color}`)}
+                    className={`w-5 h-5 hidden ${color}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {/*****************  SECONDARY COLOR ***************/}
+        {dropDown.secondaryColor ? (
+          <div className="absolute inset-0 flex justify-center items-center bg-[#505050c2] rounded-t-md transform xl:-translate-y-10 -translate-y-16 ease-in-out duration-300 flex-wrap pb-4 pt-2">
+            {bgColors.map((color) => {
+              return (
+                <div>
+                  <button
+                    onClick={() => handlerSecondaryClick(`${color}`)}
+                    className={`w-5 h-5 focus:border focus:h-5 focus:pt-2 focus:mb-1 ${color}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="absolute flex bg-[#505050c2] pt-2 overflow-hidden items-center justify-center rounded-t transform inset-0 z-0 translate-y-1 ease-in-out duration-300 opacity-0">
+            {bgColors.map((color) => {
+              return (
+                <div>
+                  <button
+                    onClick={() => handlerSecondaryClick(`${color}`)}
+                    className={`w-5 h-5 hidden ${color}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {/*****************  TEXT COLOR 01 ***************/}
+        {dropDown.textColor01 ? (
+          <div className="absolute inset-0 flex justify-center items-center bg-[#505050c2] rounded-t-md transform xl:-translate-y-10 -translate-y-16 ease-in-out duration-300 flex-wrap pb-4 pt-2">
+            {colors.map((color) => {
+              return (
+                <div>
+                  <button
+                    onClick={() => handlerText01Click(`${color}`)}
+                    className={`w-5 h-5 focus:border focus:h-5 focus:pt-2 focus:mb-1 bg-${color
+                      .split("text-")
+                      .at(-1)}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="absolute flex bg-[#505050c2] pt-2 overflow-hidden items-center justify-center rounded-t transform inset-0 z-0 translate-y-1 ease-in-out duration-300 opacity-0">
+            {colors.map((color) => {
+              return (
+                <div>
+                  <button
+                    onClick={() => handlerText01Click(`${color}`)}
+                    className={`w-5 h-5 hidden bg-${color
+                      .split("text-")
+                      .at(-1)}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {/*****************  TEXT COLOR 02 ***************/}
+        {dropDown.textColor02 ? (
+          <div className="absolute inset-0 flex justify-center items-center bg-[#505050c2] rounded-t-md transform xl:-translate-y-10 -translate-y-16 ease-in-out duration-300 flex-wrap pb-4 pt-2">
+            {colors.map((color) => {
+              return (
+                <div>
+                  <button
+                    onClick={() => handlerText02Click(`${color}`)}
+                    className={`w-5 h-5 focus:border focus:h-5 focus:pt-2 focus:mb-1 bg-${color
+                      .split("text-")
+                      .at(-1)}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="absolute flex bg-[#505050c2] pt-2 overflow-hidden items-center justify-center rounded-t transform inset-0 z-0 translate-y-1 ease-in-out duration-300 opacity-0">
+            {colors.map((color) => {
+              return (
+                <div>
+                  <button
+                    onClick={() => handlerText02Click(`${color}`)}
+                    className={`w-5 h-5 hidden bg-${color
+                      .split("text-")
+                      .at(-1)}`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
