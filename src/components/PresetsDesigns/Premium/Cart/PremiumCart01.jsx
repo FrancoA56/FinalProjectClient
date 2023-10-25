@@ -1,9 +1,16 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import DarkMode from "../../../DarkMode/darkmode";
+import ColorPanel from "../../../../utils/ColorPanel";
 
 const PremiumCart01 = () => {
   const [hoveredCoords, setHoveredCoords] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+
+  /* Traigo el user del global  */
+  const user = useSelector((state) => state.user);
+  /* Traigo los colores del global  */
+  const color = useSelector((state) => state.colores);
 
   const handleMouseMove = (e) => {
     if (isHovered) {
@@ -16,13 +23,24 @@ const PremiumCart01 = () => {
 
   return (
     <div className="grid h-screen">
+      {/* **********COLOR PANEL********** */}
+      <div className="fixed bottom-2 left-1/4 right-1/4 z-10">
+        <ColorPanel />
+      </div>
+      {/* ******************** */}
       <div className="bg-gray-100 dark:bg-[#404040]">
-        <div className="border bg-black h-12 flex items-center justify-between">
+        <div
+          className={`${color.secondary ? color.secondary : "bg-black"} h-12 flex items-center justify-between`}
+        >
           <div class="flex items-center">
             <img
-              src="data:image/png;base64,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"
-              alt="Nike Logo"
-              class="h-10 w-10 bg-transparent ml-4"
+              src={
+                user.logo
+                  ? user.logo
+                  : "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698237995/logo_nike-removebg-preview_grieze.png"
+              }
+              alt="logo"
+              className={`max-h-6 object-scale-down ml-4`}
             />
           </div>
           <div className="flex items-center mr-6 relative">
@@ -38,60 +56,102 @@ const PremiumCart01 = () => {
                 >
                   <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
                 </svg>
-                <span className="absolute -mt-4 ml-0.5 bg-transparent rounded-full text-[#ed5b18] px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none">
+                <span
+                  className={`absolute -mt-4 ml-0.5 bg-transparent rounded-full ${
+                    color.text01 ? color.text01 : "text-[#fe0000]"
+                  } px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none`}
+                >
                   2
                 </span>
               </span>
             </div>
             <div>
-              <p className="text-[#ed5b18] inline-block items-center ml-10">
+              <p
+                className={`${
+                  color.text01 ? color.text01 : "text-[#fe0000]"
+                } inline-block items-center ml-10`}
+              >
                 JOIN US
               </p>
             </div>
             <div>
-              <p className="text-[#ed5b18] inline-block items-center ml-6">
+              <p
+                className={`${
+                  color.text01 ? color.text01 : "text-[#fe0000]"
+                } inline-block items-center ml-6`}
+              >
                 LOGIN
               </p>
             </div>
           </div>
         </div>
-        <div className="border h-12 flex items-center justify-between bg-transparent h-12 ">
+        <div className="border h-12 flex items-center justify-between bg-transparent">
           <div>
-            <button className="text-gray-500 ml-4 shadow-md items-center h-8 w-auto p-2 dark:text-white">
-              <i class="fa-solid fa-arrow-down fa-rotate-90 mr-2 text-[#ed5b18]"></i>
+            <button
+              className={`${
+                color.text02 ? color.text02 : "text-gray-500"
+              } ml-4 shadow-md items-center h-8 w-auto p-2 dark:text-white`}
+            >
+              <i
+                class={`fa-solid fa-arrow-down fa-rotate-90 mr-2 ${
+                  color.text01 ? color.text01 : "text-[#fe0000]"
+                }`}
+              ></i>
               Continue Shopping
             </button>
           </div>
           <div className="flex">
             <div>
-              <button className="text-gray-500 ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white">
+              <button
+                className={`${
+                  color.text02 ? color.text02 : "text-gray-500"
+                } ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white`}
+              >
                 Men
               </button>
             </div>
             <div>
-              <button className="text-gray-500 ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white">
+              <button
+                className={`${
+                  color.text02 ? color.text02 : "text-gray-500"
+                } ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white`}
+              >
                 Woman
               </button>
             </div>
             <div>
-              <button className="text-gray-500 ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white">
+              <button
+                className={`${color.text02 ? color.text02 : "text-gray-500"} ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white`}
+              >
                 Kids
               </button>
             </div>
             <div>
-              <button className="text-gray-500 ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white">
+              <button
+                className={`${
+                  color.text02 ? color.text02 : "text-gray-500"
+                } ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white`}
+              >
                 Accessories
               </button>
             </div>
             <div>
-              <button className="text-gray-500 ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white">
+              <button
+                className={`${
+                  color.text02 ? color.text02 : "text-gray-500"
+                } ml-4 mr-8 items-center text-right h-8 w-auto p-2 dark:text-white`}
+              >
                 Sale
               </button>
             </div>
           </div>
 
           <div>
-            <button className="text-gray-500 ml-4 mr-8 underline items-center h-8 w-auto p-2 dark:text-white">
+            <button
+              className={`${
+                color.text02 ? color.text02 : "text-gray-500"
+              } ml-4 mr-8 underline items-center h-8 w-auto p-2 dark:text-white`}
+            >
               Do you need help?
             </button>
           </div>
@@ -99,15 +159,27 @@ const PremiumCart01 = () => {
         <div className="container mx-auto p-4 px-36 grid grid-cols-12 gap-4">
           {/* Columna izquierda con el h1 y detalle de productos */}
           <div className="col-span-12 md:col-span-8 bg-gray-100 dark:bg-[#404040]">
-            <h1 className="bg-gray-200 text-[#ed5b18] inline-block mb-4 w-full rounded px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] dark:bg-[#292929] ">
+            <h1
+              className={`${color.primary ? color.primary : "bg-gray-200"} ${
+                color.text01 ? color.text01 : "text-[#fe0000]"
+              } inline-block mb-4 w-full rounded px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] dark:bg-[#292929]`}
+            >
               GET FREE SHIPPING WITH NIKE+ ON EVERY ORDER, EVERY TIME.
             </h1>
-            <div className="bg-gray-200 text-black inline-block mb-4 w-full  rounded px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] dark:bg-[#292929] dark:text-white">
+            <div
+              className={`${
+                color.primary ? color.primary : "bg-gray-200"
+              } text-black inline-block mb-4 w-full  rounded px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] dark:bg-[#292929] dark:text-white`}
+            >
               <h1 className="text-left justify-start">YOUR CART (2)</h1>
             </div>
 
             {/* Nuevo div con el contenido del detalle de productos */}
-            <div className="bg-gray-200 p-4 rounded shadow-md h-screen dark:bg-[#292929] dark:text-white ">
+            <div
+              className={`${
+                color.primary ? color.primary : "bg-gray-200"
+              } p-4 rounded shadow-md h-screen dark:bg-[#292929] dark:text-white`}
+            >
               <div class="mt-8">
                 <div class="flow-root">
                   <ul role="list" class="-my-6 divide-y divide-gray-200">
@@ -145,20 +217,22 @@ const PremiumCart01 = () => {
                             </h3>
                             <p class="ml-4">$90.00</p>
                           </div>
-                          <p class="mt-1 text-sm text-left text-gray-500">
+                          <p class={`mt-1 text-sm text-left ${color.text02 ? color.text02 : "text-gray-500"}`}>
                             White/Red/Black
                           </p>
-                          <p class="mt-1 text-sm text-left text-gray-500">
+                          <p class={`mt-1 text-sm text-left ${color.text02 ? color.text02 : "text-gray-500"}`}>
                             Size: USA 8
                           </p>
                         </div>
                         <div class="flex flex-1 items-end justify-between text-sm">
-                          <p class="text-gray-500">Qty 1</p>
+                          <p class={`${color.text02 ? color.text02 : "text-gray-500"}`}>Qty 1</p>
 
                           <div class="flex">
                             <button
                               type="button"
-                              class="font-medium text-[#ed5b18]  hover:text-gray-500 dark:text-[#ed5b18]"
+                              class={`font-medium ${
+                                color.text01 ? color.text01 : "text-[#fe0000]"
+                              } hover:text-gray-500 dark:text-[#fe0000]`}
                             >
                               Remove
                             </button>
@@ -200,20 +274,22 @@ const PremiumCart01 = () => {
                             </h3>
                             <p class="ml-4">$115.00</p>
                           </div>
-                          <p class="mt-1 text-sm text-gray-500 text-left">
+                          <p class={`mt-1 text-sm ${color.text02 ? color.text02 : "text-gray-500"} text-left`}>
                             Cobblestone/Smooth Pewter/White/Light Crimson
                           </p>
-                          <p class="mt-1 text-sm text-left text-gray-500">
+                          <p class={`mt-1 text-sm text-left ${color.text02 ? color.text02 : "text-gray-500"}`}>
                             Size: USA 9
                           </p>
                         </div>
                         <div class="flex flex-1 items-end justify-between text-sm">
-                          <p class="text-gray-500">Qty 1</p>
+                          <p class={`${color.text02 ? color.text02 : "text-gray-500"}`}>Qty 1</p>
 
                           <div class="flex">
                             <button
                               type="button"
-                              class="font-medium text-[#ed5b18]  hover:text-gray-500 dark:text-[#ed5b18]"
+                              class={`font-medium ${
+                                color.text01 ? color.text01 : "text-[#fe0000]"
+                              } hover:text-gray-500 dark:text-[#fe0000]`}
                             >
                               Remove
                             </button>
@@ -232,13 +308,13 @@ const PremiumCart01 = () => {
           </div>
 
           {/* Columna derecha con fondo negro */}
-          <div className="col-span-12 md:col-span-4 bg-black h-auto rounded">
+          <div className={`col-span-12 md:col-span-4 ${color.secondary ? color.secondary : "bg-black"} h-auto rounded`}>
             <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
               <div class="flex justify-between text-base font-medium uppercase text-white">
                 <p>Shopping cart</p>
               </div>
               <span className="mt-4 block border-t border-gray-700"></span>
-              <div>
+              <div className="py-5">
                 <label
                   id="listbox-label"
                   class="flex items-center mt-4 text-sm text-left font-medium uppercase leading-6 text-white"
@@ -246,12 +322,12 @@ const PremiumCart01 = () => {
                   <p>Do you have a promo code? </p>
 
                   <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAAErCAMAAAB9xjhEAAABAlBMVEUAAAAAAAP/gRMAAgAAAAYAAAkEAAAAAgQDAQAIAAADBAQABQwABQgAAA38gRf8ghMPAAAbAAAXAAD6YQT7aBD9dhH8ehb/awsSAAD/ew7+cw0JAwhNNDUzIygwEQtULSlpQ0hIHhiVWkxOIRaEQyqnWjimWz50PTAuExM8EQXHaU9tLBxKFwt/NBipUifMZjTdaDe1TywmAAC+WzPQYDMvAAAjCQtoMCKgSijpYSf5YyXjXS2fQSRTGQpbKR2ORinLUy57MR+5TCNlJw/pXh5zNyD4XBv/VAbdVx1WEAj9XwDdZiPyZhr5ZBfyXSuHMBapWCmNQh20SyeFMhXPVSO5SyciScvjAAAEOElEQVR4nO3Ye1fiRhgG8BkyuUxIAMlNkq2txW5LAe+yxnW9RnRjsttS+v2/St8Ebfdoj0qV0D+e31HP4QBnHuedeWeAMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA3ozBDq2YkQ3vVQIZhvFWSp4fhTMr5hzJM+mOW/6HUygeLZUYRe/ednGsgoQoudE3jgh6sff/DO8kXHpSLOlv/sS3mGkiTRNg2a3c3fnr/8y8ymu/9/wVXee/XfkufayDdEpy1BsPNre2d/grniqYtOKhCv7t7+wemxV/08uL1FImz0YfD/fjo4/GnFlfVKFr0GlUMRWg7ySEznxlHKZiqiIoHayen+0nuHJ2dH0jBOdM0bdG73ogsthFn58++UMrItqncXFvf2JkmeTqOLy5HkummsuCIM2bE+rGTfGLPdWxF4UJtrV9tTr+Mx9fX45vjz221XqdZriQn09XRfu7EA9rH/1Y8zg1afLperN9iUSZ57lynTnI2XFNtS5OarCYmBW0dZk4a91Tx6Cml6JIiiiLqmaOT063brMiYXufJxeUqrcxKzqK/8e62GwRU+sd7Xhd2XQjVjrqne9tx7qSO66Tp+OPxQLK6eOWZO7/NPPDCbEjb/+EMUddRV9evJrdZ7jhO4Oa0gb6cfT0QXJqG1CoMyiOddW8Dr+a7eyuWyanP6DptbNo2VnkyXlGnzHKXpjwIgzSlmvdXmWoJ+uGLb0j/EFGd/ZaFvu+H2SGzTKqmFkXc0um53f7xxW0ZMvQ6HS8MnJxqXlm0h0FF79bxG82GFyaHo6LW1CoZX+lubG4neTGPYRGSUjr5dNhjvG5V0zQfBWXDzKWgzYbvZdPfT3q7a90Pw8l2fDR2wzD0fN/reAGtznhyOWKWRR2gsnb0LR6xTTfwa81mreEHQZYkcZJQucuppJTE8zw3o5q3aEEoGtNfdB94c7rOttzQb9RIhxZqUKKMntepNRq1Tpi5VPM/DhjXlaXU/I7JVved0K/d68xQRuIXGyhNJp/b3K6b5lKDKkp7mt4FbdwpZrJW88uY2c1kwFVamppZZTN6jO7oNKOz2WzSjmqUIYucXpg6R2XN6aAsIlZ8Cj2gK2ziBLM1Ogs6m1o/dPKY7u22qi93Ju/V6YqXuN59UCp4h/aUR7395nigsSgyjP9HUDtSV7aygLYPTWSz2ZmtTKr5cJfZQqPuX1zylp2SKPTxo3c2dgLPLza55xUnUPxnv8WEThf3im7EL8QHZ0dliw+K+xFdjgZS0Iej5TT2p+ii3b+4SehQuplOztekVOv2kg7Kp0lhC7nbGwx6B6tctVWr+LDJl3RUPumbOpcZF//NzOtU9HXcKylLPckBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABbtL/B0bGs9xLk3AAAAAElFTkSuQmCC"
+                 src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698237995/logo_nike-removebg-preview_grieze.png"
                     alt="Nike Logo"
-                    class="h-20 w-7 bg-transparent ml-2"
+                    className={`max-h-6 object-scale-down ml-4`}
                   />
                 </label>
-                <div class="relative">
+                <div class="relative mt-5">
                   <button
                     type="button"
                     class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6"
@@ -270,12 +346,12 @@ const PremiumCart01 = () => {
               <span className="mt-6 block border-t border-gray-700"></span>
 
               <div class="flex text-base font-medium text-white items-center justify-between">
-                <div class="flex items-center">
+                <div class="flex items-center py-5">
                   <p>SUBTOTAL</p>
                   <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAAErCAMAAAB9xjhEAAABAlBMVEUAAAAAAAP/gRMAAgAAAAYAAAkEAAAAAgQDAQAIAAADBAQABQwABQgAAA38gRf8ghMPAAAbAAAXAAD6YQT7aBD9dhH8ehb/awsSAAD/ew7+cw0JAwhNNDUzIygwEQtULSlpQ0hIHhiVWkxOIRaEQyqnWjimWz50PTAuExM8EQXHaU9tLBxKFwt/NBipUifMZjTdaDe1TywmAAC+WzPQYDMvAAAjCQtoMCKgSijpYSf5YyXjXS2fQSRTGQpbKR2ORinLUy57MR+5TCNlJw/pXh5zNyD4XBv/VAbdVx1WEAj9XwDdZiPyZhr5ZBfyXSuHMBapWCmNQh20SyeFMhXPVSO5SyciScvjAAAEOElEQVR4nO3Ye1fiRhgG8BkyuUxIAMlNkq2txW5LAe+yxnW9RnRjsttS+v2/St8Ebfdoj0qV0D+e31HP4QBnHuedeWeAMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA3ozBDq2YkQ3vVQIZhvFWSp4fhTMr5hzJM+mOW/6HUygeLZUYRe/ednGsgoQoudE3jgh6sff/DO8kXHpSLOlv/sS3mGkiTRNg2a3c3fnr/8y8ymu/9/wVXee/XfkufayDdEpy1BsPNre2d/grniqYtOKhCv7t7+wemxV/08uL1FImz0YfD/fjo4/GnFlfVKFr0GlUMRWg7ySEznxlHKZiqiIoHayen+0nuHJ2dH0jBOdM0bdG73ogsthFn58++UMrItqncXFvf2JkmeTqOLy5HkummsuCIM2bE+rGTfGLPdWxF4UJtrV9tTr+Mx9fX45vjz221XqdZriQn09XRfu7EA9rH/1Y8zg1afLperN9iUSZ57lynTnI2XFNtS5OarCYmBW0dZk4a91Tx6Cml6JIiiiLqmaOT063brMiYXufJxeUqrcxKzqK/8e62GwRU+sd7Xhd2XQjVjrqne9tx7qSO66Tp+OPxQLK6eOWZO7/NPPDCbEjb/+EMUddRV9evJrdZ7jhO4Oa0gb6cfT0QXJqG1CoMyiOddW8Dr+a7eyuWyanP6DptbNo2VnkyXlGnzHKXpjwIgzSlmvdXmWoJ+uGLb0j/EFGd/ZaFvu+H2SGzTKqmFkXc0um53f7xxW0ZMvQ6HS8MnJxqXlm0h0FF79bxG82GFyaHo6LW1CoZX+lubG4neTGPYRGSUjr5dNhjvG5V0zQfBWXDzKWgzYbvZdPfT3q7a90Pw8l2fDR2wzD0fN/reAGtznhyOWKWRR2gsnb0LR6xTTfwa81mreEHQZYkcZJQucuppJTE8zw3o5q3aEEoGtNfdB94c7rOttzQb9RIhxZqUKKMntepNRq1Tpi5VPM/DhjXlaXU/I7JVved0K/d68xQRuIXGyhNJp/b3K6b5lKDKkp7mt4FbdwpZrJW88uY2c1kwFVamppZZTN6jO7oNKOz2WzSjmqUIYucXpg6R2XN6aAsIlZ8Cj2gK2ziBLM1Ogs6m1o/dPKY7u22qi93Ju/V6YqXuN59UCp4h/aUR7395nigsSgyjP9HUDtSV7aygLYPTWSz2ZmtTKr5cJfZQqPuX1zylp2SKPTxo3c2dgLPLza55xUnUPxnv8WEThf3im7EL8QHZ0dliw+K+xFdjgZS0Iej5TT2p+ii3b+4SehQuplOztekVOv2kg7Kp0lhC7nbGwx6B6tctVWr+LDJl3RUPumbOpcZF//NzOtU9HXcKylLPckBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABbtL/B0bGs9xLk3AAAAAElFTkSuQmCC"
+                    src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698237995/logo_nike-removebg-preview_grieze.png"
                     alt="Nike Logo"
-                    class="h-20 w-7 bg-transparent ml-2"
+                    className={`max-h-4 object-scale-down ml-4`}
                   />
                 </div>
                 <p className="flex items-center text-right">$205.00</p>
@@ -301,12 +377,13 @@ const PremiumCart01 = () => {
               <div class="mt-6">
                 <a
                   href="#"
-                  class="flex items-center justify-center rounded-md border border-transparent bg-[#ed5b18] px-6 py-3 text-sm font-medium text-white uppercase shadow-sm"
+                  class="flex items-center justify-center rounded-md border border-transparent bg-[#fe0000] px-6 py-3 text-sm font-medium text-white uppercase shadow-sm"
                 >
-                  <i class="fa-brands fa-google mr-2"
-                  style={{
-                    "font-size": "20px",
-                  }}
+                  <i
+                    class="fa-brands fa-google mr-2"
+                    style={{
+                      "font-size": "20px",
+                    }}
                   ></i>
                   PAY
                 </a>
@@ -314,22 +391,20 @@ const PremiumCart01 = () => {
               <div class="mt-2 flex justify-center text-center text-sm text-gray-500">
                 <p>or</p>
               </div>
-                <div class="mt-2">
-                  <a
-                    href="#"
-                    class="flex items-center justify-center rounded-md border border-transparent bg-[#162966] px-6 py-3 text-sm text-white uppercase shadow-sm"
-                  >
-                         <i
-                        class="fa-brands fa-paypal text-[#019cda] mr-2 "
-                        style={{
-                          "font-size": "24px",
-                        }}
-                      ></i>
-                      Paypal
-                 
-                  </a>
-                </div>
-              
+              <div class="mt-2">
+                <a
+                  href="#"
+                  class="flex items-center justify-center rounded-md border border-transparent bg-[#162966] px-6 py-3 text-sm text-white uppercase shadow-sm"
+                >
+                  <i
+                    class="fa-brands fa-paypal text-[#019cda] mr-2 "
+                    style={{
+                      "font-size": "24px",
+                    }}
+                  ></i>
+                  Paypal
+                </a>
+              </div>
             </div>
           </div>
         </div>

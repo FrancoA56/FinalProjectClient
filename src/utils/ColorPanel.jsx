@@ -173,7 +173,7 @@ const ColorPanel = () => {
           onClick={handlerDropDownSc}
         >
           colors{" "}
-          <span className="text-xs absolute -bottom-0.5 -right-2 font-sans">
+          <span className="text-xs absolute top-8 ml-1 font-sans inset-y-0">
             2
           </span>
         </a>
@@ -190,7 +190,7 @@ const ColorPanel = () => {
           onClick={handlerDropDownT2}
         >
           format_color_text{" "}
-          <span className="text-xs absolute -bottom-0.5 -right-2 font-sans">
+          <span className="text-xs absolute rigth-96 top-8 ml-1 font-sans inset-y-0">
             2
           </span>
         </a>
