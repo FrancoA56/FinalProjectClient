@@ -1,7 +1,8 @@
 export function validation(input) {
   let errors = {};
   // const emailRegex = /^\w+([-]?\w+)@\w+([-]?\w+)(\.\w{2,3})+$/;
-  const emailRegex = /^(\w+(\.\w+)?)+@\w+([-]?\w+)(\.\w{2,3})+$/;
+  // const emailRegex = /^(\w+(\.\w+)?)+@\w+([-]?\w+)(\.\w{2,3})+$/;
+  const emailRegex = /^[\w\.-]+@[\w\.-]+\.[a-z]{2,}$/;
   const passwordRegex = /^(?=.*\d).{8,30}$/;
   const nameRegex = /^[a-zA-Z ]+$/;
 

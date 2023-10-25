@@ -3,7 +3,7 @@ const people = [
     name: "Matias Maidana",
     role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_198,h_198,ar_1:1,g_auto/v1697385470/Team/Matias_sbmur4.png",
+      "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1698258784/Mati_i5yjnf.jpg",
     linkedin: "https://www.linkedin.com/in/matias-maidana2129",
     github: "https://github.com/AMMatia",
   },
@@ -12,7 +12,7 @@ const people = [
     role: "Full-stack developer",
     imageUrl:
       "https://res.cloudinary.com/codecrafttemplates/image/upload/c_crop,w_900,h_900,ar_1:1,g_auto/v1698068314/WhatsApp_Image_2023-10-21_at_12.58.31_rksrfy.jpg",
-    linkedin: "https://www.linkedin.com/in/jimena-mateo",
+    linkedin: "https://www.linkedin.com/in/jimenamateo",
     github: "https://github.com/Jimemateo",
   },
   {
@@ -20,15 +20,14 @@ const people = [
     role: "Full-stack developer",
     imageUrl:
       "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_600,h_600,ar_1:1,g_auto/v1697508330/Team/WhatsApp_Image_2023-10-16_at_22.53.29_enw6hq.jpg",
-    linkedin:
-      "https://www.linkedin.com/in/claudio-carruz-24961256?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    linkedin: "https://www.linkedin.com/in/claudio-carruz-24961256/",
     github: "https://github.com/Corto07",
   },
   {
     name: "Nahuel Santini",
     role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697681635/pumcph1yiw2ww1czixak.png",
+      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698202704/tncojyej2otetn52kb9a.jpg",
     linkedin: "http://www.linkedin.com/in/nahuesantini",
     github: "https://github.com/Nahuelnob",
   },
@@ -36,7 +35,7 @@ const people = [
     name: "Tomas Iglesias",
     role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_198,h_198,ar_1:1,g_auto/v1697385470/Team/Tomas_f2w6at.png",
+      "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1698260298/Tomas_agiacz.jpg",
     linkedin: "https://www.linkedin.com/in/tomiglesias/",
     github: "https://github.com/zTom1909/",
   },
@@ -44,8 +43,8 @@ const people = [
     name: "Rafael Prieto",
     role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/dp6ojzhsc/image/upload/c_crop,w_444,h_444,ar_1:1/v1697508329/Team/WhatsApp_Image_2023-10-16_at_22.53.20_g6vgas.jpg",
-    linkedin: "https://",
+      "https://res.cloudinary.com/codecrafttemplates/image/upload/c_thumb,w_200,g_face/v1698201854/Rafa_r1xe8n.jpg",
+    linkedin: "https://www.linkedin.com/in/raprig",
     github: "https://github.com/RaPriG",
   },
   {
