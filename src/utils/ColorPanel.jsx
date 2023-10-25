@@ -152,7 +152,7 @@ const ColorPanel = () => {
   return (
     <div className="container mx-auto">
       {/* LA parte de adelante */}
-      <div className="absolute bottom-2 w-full bg-[#303030] rounded h-16 z-20 flex items-center justify-around">
+      <div className="absolute bottom-2 w-full bg-[#303030] text-white dark:text-[#909090] rounded h-16 z-20 flex items-center justify-around">
         {/*****************  BACK ***************/}
         <a
           class="material-symbols-outlined cursor-pointer select-none hover:text-[#101010] "
