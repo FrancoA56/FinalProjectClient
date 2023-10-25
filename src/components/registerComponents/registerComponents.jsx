@@ -296,31 +296,62 @@ function RegisterComponents() {
 
 {/* ------------------Validacion del password---------------------------------------------------------------- */}
           {popUpValidation && (
-            <div className={`static mt-3 mb-2 rounded-md bg-white ${isVisible ? 'visible' : 'invisible'}`}>
+            <div className={
+              localStorage.theme === "dark"
+                ? `static mt-3 mb-2 border rounded-md bg-[#909090] ${isVisible ? 'visible' : 'invisible'}`
+                : `static mt-3 mb-2 border rounded-md bg-white ${isVisible ? 'visible' : 'invisible'}`
+              }>
               {/* <p className="static mt-2 text-sm text-[#606060]">
                 <strong> Password must have:</strong>
               </p> */}
               <ul className="grid grid-cols-2 text-sm text-[#606060]">
                 <div className="span-col-1 flex flex-col items-start pt-2 pl-10">
-                  <li style={{ color: validations.hasUppercase ? 'green' : 'red' }}>
+                  <li style={{
+                    color: localStorage.theme === "dark"
+                      ? (validations.hasUppercase ? 'black' : 'white')
+                      : (validations.hasUppercase ? 'green' : 'red')
+                    }}>
                     {validations.hasUppercase ? (
-                      <i className="fa-solid fa-check text-green-600" />
+                      <i className={
+                        localStorage.theme === "dark"
+                      ? "fa-solid fa-check text-black" 
+                      : "fa-solid fa-check text-green-600" 
+                    }/>
                     ) : (
-                      <i className="fa-solid text-red-600" />
+                      <i className="fa-solid text-red-600"/>
+                     
                     )}{" "}
                     An uppercase character
                   </li>
-                  <li style={{ color: validations.hasLowercase ? 'green' : 'red' }}>
+                  <li style={{
+                    color: localStorage.theme === "dark"
+                      ? (validations.hasLowercase ? 'black' : 'white')
+                      : (validations.hasLowercase ? 'green' : 'red')
+                    }}>
                     {validations.hasLowercase ? (
-                      <i className="fa-solid fa-check text-green-600" />
+                      <i className={
+                        localStorage.theme === "dark"
+                      ? "fa-solid fa-check text-black" 
+                      : "fa-solid fa-check text-green-600" 
+                    }/>
                     ) : (
                       <i className="fa-solid text-red-600" />
                     )}{" "}
                     An lowercase character
                   </li>
-                  <li style={{ color: validations.isBetween8And30 ? 'green' : 'red', textAlign: 'left' }} className="mb-2 line-clamp-1">
+                  <li className="mb-2 line-clamp-1 text-left " 
+                    style={{ 
+                    color: localStorage.theme === "dark"
+                    ? (validations.isBetween8And30 ? 'black' : 'white')
+                    : (validations.isBetween8And30 ? 'green' : 'red')
+                    }}>
                     {validations.isBetween8And30 ? (
-                      <i className="fa-solid fa-check text-green-600" />
+                      <i className={
+                        localStorage.theme === "dark"
+                      ? "fa-solid fa-check text-black" 
+                      : "fa-solid fa-check text-green-600 " 
+                    }/>
+                             
                     ) : (
                       <i className="fa-solid fa text-red-600" />
                     )}{" "}
@@ -329,17 +360,33 @@ function RegisterComponents() {
                 </div>
 
                 <div className="span-col-1 flex flex-col items-start pt-2 pl-8">
-                  <li style={{ color: validations.hasNumber ? 'green' : 'red' }}>
+                  <li style={{
+                    color: localStorage.theme === "dark"
+                      ? (validations.hasNumber ? 'black' : 'white')
+                      : (validations.hasNumber ? 'green' : 'red')
+                    }}>
                     {validations.hasNumber ? (
-                      <i className="fa-solid fa-check text-green-600" />
+                       <i className={
+                        localStorage.theme === "dark"
+                      ? "fa-solid fa-check text-black" 
+                      : "fa-solid fa-check text-green-600 " 
+                    }/>
                     ) : (
                       <i className="fa-solid text-red-600" />
                     )}{" "}
                     At least one number
                   </li>
-                  <li style={{ color: validations.hasSpecialChar ? 'green' : 'red' }} >
-                    {validations.hasSpecialChar ? (
-                      <i className="fa-solid fa-check text-green-600" />
+                  <li style={{
+                    color: localStorage.theme === "dark"
+                      ? (validations.hasSpecialChar ? 'black' : 'white')
+                      : (validations.hasSpecialChar ? 'green' : 'red')
+                  }}>
+                  {validations.hasSpecialChar ? (
+                      <i className={
+                        localStorage.theme === "dark"
+                      ? "fa-solid fa-check text-black" 
+                      : "fa-solid fa-check text-green-600 " 
+                    }/>
                     ) : (
                       <i className="fa-solid text-red-600" />
                     )}{" "}
@@ -365,8 +412,8 @@ function RegisterComponents() {
                     onFocus={() => setPopUpValidation(false)}
                     className={
                       localStorage.theme === "dark"
-                        ? "shadow appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#707070] text-[#909090]"
-                        : "shadow appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        ? "shadow appearance-none border rounded-md w-full mb-1 py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-[#303030] text-[#909090]"
+                        : "shadow appearance-none border rounded-md w-full mb-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     }
                     required
                     disabled={
@@ -437,7 +484,12 @@ function RegisterComponents() {
 
             {/* <!-- Divider --> */}
             <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-[#707070] after:mt-0.5 after:flex-1 after:border-t after:border-[#707070]">
-              <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+            <p className={
+              localStorage.theme === "dark"
+                ? `mx-4 mb-0 text-center font-semibold text-[#707070]`
+                : `mx-4 mb-0 text-center font-semibold text-black `
+              }>
+            
                 OR
               </p>
             </div>
@@ -464,7 +516,7 @@ function RegisterComponents() {
                   clip-rule="evenodd"
                 /> */}
               </svg>
-              Sing in with...
+              Sign in with...
             </a>
             {/* <!-- Twitter --> */}
 
