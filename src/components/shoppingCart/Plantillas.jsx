@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { addModelToCart, removeModelFromCart } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination"
 
 const Plantillas = ({
   selectedOrder,
@@ -14,13 +15,24 @@ const Plantillas = ({
   const URL = process.env.REACT_APP_API;
   const [templates, setTemplates] = useState([]);
   const dispatch = useDispatch();
+
+  // ? Solo plantillas habilitadas
   const hideDisabled = true;
 
   // ? CAMBIO DE BOTON SI SE AGREGA AL CARRITO
   const cart = useSelector((state) => state.cart);
 
+  // ? PAGINATION
+  const presetsperPage = 6;
+  const currentPage = useSelector((state) => state.currentPage)
+  const cantTemplate = templates.length;
+
   // ? PETICIONES DE FILTROS Y ORDENES
-  const fetchTemplates = async (filters, orderType, orderPriority) => {
+  const fetchTemplates = async (
+    filters,
+    orderType,
+    orderPriority,
+  ) => {
     try {
       const response = await axios.get(`${URL}/api/preset`, {
         params: {
@@ -28,6 +40,8 @@ const Plantillas = ({
           orderType,
           orderPriority,
           hideDisabled,
+          quantity: presetsperPage,
+          page: currentPage,
         },
       });
 
@@ -63,8 +77,8 @@ const Plantillas = ({
       filters.types = type;
     }
 
-    fetchTemplates(filters, orderType, orderPriority);
-  }, [selectedFilterColor, selectedCategory, selectedOrder, selectedTypes]);
+    fetchTemplates(filters, orderType, orderPriority, );
+  }, [selectedFilterColor, selectedCategory, selectedOrder, selectedTypes, currentPage]);
 
   const buyPreset = (id) => {
     return () => {
@@ -233,6 +247,9 @@ const Plantillas = ({
           ))
         /* *********************************************  */
       )}
+      <Pagination
+        currentPage={currentPage}
+      />
     </div>
   );
 };

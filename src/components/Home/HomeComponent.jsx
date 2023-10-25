@@ -59,8 +59,10 @@ const HomeComponent = () => {
                 <div className="w-3/4 border-b border-[#909090] mt-2"></div>
               </div>
               <div className="row-span-3 flex items-center">
+                {/* "row-span-3 flex items-center" */}
                 {/* CARROUSEL */}
                 {/* Imagen de la izq */}
+                
                 <div
                   onClick={handleImageLeftClick}
                   className={
@@ -131,7 +133,7 @@ const HomeComponent = () => {
                     className="inline-block bg-logo dark:bg-[#3a8a87] w-auto rounded-md 5ec3bf my-16 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
                   text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   >
-                    Shop plantilla
+                    Templates Shop
                   </button>
                 </NavLink>
               </div>{" "}

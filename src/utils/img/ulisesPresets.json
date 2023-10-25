@@ -56,11 +56,27 @@
     "category": "medium"
   },
   {
+    "name": "TrendyShop",
+    "price": 46,
+    "defaultColor": "green",
+    "images": [],
+    "type": "shop",
+    "category": "medium"
+  },
+  {
     "name": "PrestigeMarket",
     "price": 74,
     "defaultColor": "blue",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833589/Presets/Premium/PremiumShop01_parte_1_pmp3k3.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978694/Presets/Basic/Vista%20completa%20de%20Presets/PremiumShop01_djvtji.png"],
     "type": "shop",
+    "category": "premium"
+  },
+  {
+    "name": "LuxuryLanding",
+    "price": 85,
+    "defaultColor": "black",
+    "images": [],
+    "type": "home",
     "category": "premium"
   },
   {

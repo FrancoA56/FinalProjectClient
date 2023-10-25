@@ -27,5 +27,7 @@ export const WITHOUT_DEPLOYMENT = "WITHOUT_DEPLOYMENT";
 export const CREATE_PRESETS = "CREATE_PRESETS";
 export const LOGIN_TRUE = "LOGIN_TRUE";
 export const DEPLOYMENT_COST = "DEPLOYMENT_COST";
+// PAGINATION
+export const SET_PAGE = "SET_PAGE"
 
 // export const POST_USER = "POST_USER";

@@ -1,0 +1,9 @@
+.scroll-container {
+    overflow-y: scroll;
+}
+
+@media (max-width: 500px) {
+    .scroll-container {
+      overflow-y: scroll;
+    }
+}

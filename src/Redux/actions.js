@@ -22,6 +22,7 @@ import {
   WITH_DEPLOYMENT,
   LOGIN_TRUE,
   DEPLOYMENT_COST,
+  SET_PAGE,
 } from "./types";
 import axios from "axios";
 // import { localStorageStore } from "react-admin";
@@ -422,4 +423,8 @@ export const deploymentCost = (value) => {
       window.alert(error.message);
     }
   };
+};
+
+export const setPage = (pageNumber) => {
+  return { type: SET_PAGE, payload: pageNumber };
 };
