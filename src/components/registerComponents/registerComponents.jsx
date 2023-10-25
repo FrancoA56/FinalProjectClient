@@ -296,12 +296,12 @@ function RegisterComponents() {
 
 {/* ------------------Validacion del password---------------------------------------------------------------- */}
           {popUpValidation && (
-            <div className={`static mt-3 mb-2 rounded-md bg-white ${isVisible ? 'visible' : 'invisible'}`}>
+            <div className={`static mt-3 mb-2 rounded-md bg-white dark:bg-[#303030] ${isVisible ? 'visible' : 'invisible'}`}>
               {/* <p className="static mt-2 text-sm text-[#606060]">
                 <strong> Password must have:</strong>
               </p> */}
-              <ul className="grid grid-cols-2 text-sm text-[#606060]">
-                <div className="span-col-1 flex flex-col items-start pt-2 pl-10">
+              <ul className="grid grid-cols-2 text-xs">
+                <div className="span-col-1 flex flex-col items-start pt-2 pl-10 ">
                   <li style={{ color: validations.hasUppercase ? 'green' : 'red' }}>
                     {validations.hasUppercase ? (
                       <i className="fa-solid fa-check text-green-600" />

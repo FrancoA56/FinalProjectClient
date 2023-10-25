@@ -125,7 +125,9 @@ const PayComponent = () => {
   // Hndle a paypal
   const handlePaypalSubmit = async (e) => {
     e.preventDefault();
+    console.log("formData", formData)
     const userEdit = await editUser(formData);
+
     userEdit && payOrderPost(payPaypal);
     showWaitAlert("Please, wait a few moments while we redirect you..!");
   };
@@ -342,13 +344,13 @@ const PayComponent = () => {
                             Zip Code
                           </label>
                           <input
-                            type="number"
+                            type="text"
                             name="zipcode"
                             id="zipcode"
                             autocomplete="postal-code"
                             onChange={handleChange}
                             required
-                            value={formData.zipcode}
+                            value={Number(formData.zipcode)}
                             className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
                           />
                         </div>
@@ -378,12 +380,12 @@ const PayComponent = () => {
                         <button
                           className="mt-2 h-10 w-11/12 md:mr-2 inline-block bg-logo dark:bg-[#3a8a87] 
                           hover:bg-[#3a8a87] dark:hover:bg-logo hover md:w-2/3 rounded-md md:px-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                          onClick={handlePaypalSubmit}
+                          onSubmit={handlePaypalSubmit}
                         >
                           Pay by PayPal
                         </button>
                         <button
-                          onClick={handleTransferSubmit}
+                          onSubmit={handleTransferSubmit}
                           className="h-10 w-11/12 
                           mt-2 bg-[#505050] rounded-md md:px-2 md:w-2/3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         >

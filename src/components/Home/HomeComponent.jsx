@@ -40,7 +40,7 @@ const HomeComponent = () => {
         {/*  ENCABEZADO */}
         <div className="container mx-auto p-4">
           {/*  TITULO */}
-          <h1 className="bg-[#303030] inline-block mb-4 w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]">
+          <h1 className="dark:bg-[#303030] bg-gray-300 dark:text-white inline-block mb-4 w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000]">
             Welcome
           </h1>
           {/*  EMPIEZA EL ENCOLUMNADO */}
