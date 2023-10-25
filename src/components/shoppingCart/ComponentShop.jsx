@@ -31,14 +31,27 @@ const ComponentShop = () => {
   }, [selectedFilterColor]);
 
   // ! PARA LAS CATEGORIAS
-  const [selectedCategory, setSelectedCategory] = useState([]);
-  const [check, setCheck] = useState([]);
 
-  // Para manejar los cambios en los filtros seleccionados
-  const handleCategoryChange = (event) => {
-    setSelectedCategory([event.target.value]);
-    setCheck(event.target.value);
-  };
+    const [selectedCategory, setSelectedCategory] = useState([]);
+
+    const handleCategoryChange = (event) => {
+      const categoryName = event.target.value;
+      const isCheckedCategory = event.target.checked;
+
+      //actualizacion del estado para obtener el filtro mas reciente
+      setSelectedCategory((perSelectedCategory) => {
+        if (isCheckedCategory) {
+          return [...perSelectedCategory, categoryName];
+        } else {
+          return perSelectedCategory.filter((filter) => filter !== categoryName);
+        }
+      });
+    };
+
+    // useEffect para que se actualice el estado de selectedFilterColor cada vez que se marca o desmarca un filtro.
+    useEffect(() => {
+      setSelectedCategory(selectedCategory);
+    }, [selectedCategory]);
 
   //! Para manejar los cambios en los Order seleccionados
   const handleOrderChange = (event) => {
@@ -78,7 +91,6 @@ const ComponentShop = () => {
   const handleClearFilter = () => {
     setSelectedCategory([]);
     setSelectedFilterColor([]);
-    setCheck([]);
     setSelectedOrder("name a");
     setSelectedTypes([]);
   };
@@ -121,10 +133,9 @@ const ComponentShop = () => {
                     <input
                       type="checkbox"
                       value={[]}
-                      checked={check.length === 0}
+                      checked={selectedCategory.length === 0}
                       onChange={(event) => {
                         setSelectedCategory([]);
-                        setCheck([]);
                       }}
                       className="mr-2"
                     />
@@ -134,8 +145,8 @@ const ComponentShop = () => {
                   </label>
                   {/* basic | medium | premium */}
                   {types.map((type, index) => {
-                    const typeName = Object.keys(type)[0];
-                    const typeValue = Object.values(type)[0];
+                    const categoryName = Object.keys(type)[0];
+                    const categoryValue = Object.values(type)[0];
                     return (
                       <label
                         key={index}
@@ -143,15 +154,15 @@ const ComponentShop = () => {
                       >
                         <input
                           type="checkbox"
-                          value={typeValue}
-                          checked={check === typeValue}
+                          value={categoryValue}
+                          checked={selectedCategory.includes(categoryValue)}
                           onChange={(event) => {
                             handleCategoryChange(event);
                           }}
                           className="mr-2 "
                         />
                         <span className="text-sm font-medium uppercase leading-normal  text-neutral-600 dark:text-[#909090] ">
-                          {typeName}
+                          {categoryName}
                         </span>
                       </label>
                     );
@@ -220,7 +231,7 @@ const ComponentShop = () => {
                   className="mt-5 px-6 inline-block bg-logo dark:bg-[#3a8a87] rounded py-2 text-sm font-medium uppercase text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   onClick={() => handleClearFilter()}
                 >
-                  Clear filter
+                  Clear filters
                 </button>
               </div>
             </div>
