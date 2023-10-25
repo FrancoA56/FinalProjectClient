@@ -3,11 +3,196 @@ import Banner from "../Banner/Banner";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const Purchases = () => {
   const URL = process.env.REACT_APP_API;
   const user = useSelector((state) => state.user);
   const [purchase, setPurchase] = useState([]);
+
+  const stars = () => {
+    const ratingNumber = Number(formData.rating);
+    switch (ratingNumber) {
+      case 5:
+        return (
+          <>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(1)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(2)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(3)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(4)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(5)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(1)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(2)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(3)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(4)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(5)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(1)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(2)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(3)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(4)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(5)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(1)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(2)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(3)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(4)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(5)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(1)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(2)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(3)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(4)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(5)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+          </>
+        );
+
+      default:
+        break;
+    }
+  };
 
   const showSuccessAlert = (message) => {
     Swal.fire({
@@ -26,15 +211,28 @@ const Purchases = () => {
     });
   };
 
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+  const handleChangeRating = (rate) => {
+    setFormData({
+      ...formData,
+      rating: rate,
+    });
+  };
+
   const [formData, setFormData] = useState({
-    rating: "",
+    rating: 5,
     review: "",
   });
 
   const [isPopupOpen, setPopupOpen] = useState(false);
 
   const handleSubmitReview = async (id) => {
-    if (formData.review.length && formData.rating.length) {
+    if (formData.review.length) {
       const fullBody = {
         email: user.email,
         presetId: id,
@@ -42,11 +240,12 @@ const Purchases = () => {
         rating: formData.rating,
       };
       console.log("fullBody", fullBody);
-      const { data } = await axios.post(`${URL}/api/review`, fullBody);
-      if (data.status === "success") {
-        return showSuccessAlert("Thanks for your feedback");
-      } 
-    } else return showErrorAlert("We need you to enter the review and rating")
+      // const { data } = await axios.post(`${URL}/api/review`, fullBody);
+      console.log("data", data);
+      // if (data.status === "success") {
+      //   return showSuccessAlert("Thanks for your feedback");
+      // }
+    } else return showErrorAlert("We need you to enter the review and rating");
   };
 
   useEffect(() => {
@@ -150,10 +349,11 @@ const Purchases = () => {
                   <td className={styleRow}>{template.category}</td>
                   <td className={styleRow}>
                     <button
-                      onClick={() => handleSubmitReview(template.id)}
+                      onClick={() => setPopupOpen(true)}
                       title="Add a review"
+                      className="mt-1"
                     >
-                      Add
+                      <span class="material-symbols-outlined">add_circle</span>
                     </button>
                   </td>
                 </tr>
@@ -161,6 +361,90 @@ const Purchases = () => {
             })}
           </tbody>
         </table>
+        {/*************************  FORM POPUP **********************************/}
+        {isPopupOpen && (
+          /* Este div me muestra lo que queda en el fondo */
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
+            {/* <div className="p-1 rounded-md "> */}
+            <div className="mt-1">
+              {/* ... Tu formulario aquí */}
+              <div className="isolate w-full h-2/3 bg-gray-300 dark:bg-[#303030] rounded-md px-6 sm:py-3 lg:px-3">
+                <div className="mx-auto min-w-xl max-w-xl border-b border-[#303030] dark:border-[#909090]">
+                  <div className="flex justify-end">
+                    <i
+                      onClick={() => setPopupOpen(false)}
+                      className="fa-solid fa-x text-[#909090] hover:text-[#303030] hover:dark:text-white mt-3"
+                    />
+                  </div>
+                  <h2 className="text-3xl font-bold tracking-tight text-[#303030] dark:text-[#c2c2c2] sm:text-4xl  uppercase leading-normal">
+                    Leave your review
+                  </h2>
+                  <p className="mt-2 text-sm font-medium text-[#505050] dark:text-[#c2c2c2] pb-3">
+                    Please complete the following information about the
+                    template.
+                  </p>
+                </div>
+                {/* Formulario */}
+                <form
+                  action="#"
+                  method="POST"
+                  className="mx-auto max-w-xl mt-2"
+                >
+                  {/* Formulario container */}
+                  <div className="">
+                    {/* rating */}
+                    <div className=" flex flex-col items-start px-6">
+                      <label
+                        for="rating"
+                        className="text-sm font-semibold text-[#303030] dark:text-[#c2c2c2] pb-2 pt-5 "
+                      >
+                        {" "}
+                        How many stars would you give the template
+                      </label>
+
+                      <div className="grid grid-cols-5 gap-3 self-center ">
+                        {stars()}
+                      </div>
+                    </div>
+                    {/* country */}
+                    <div className=" flex flex-col items-start px-5 pt-3">
+                      <label
+                        for="review"
+                        className="text-sm font-semibold text-[#303030] dark:text-[#c2c2c2] py-2 px-1"
+                      >
+                        {" "}
+                        Leave a brief review of the template
+                      </label>
+                      <input
+                        type="text"
+                        name="review"
+                        autoComplete="review"
+                        onChange={handleChange}
+                        required
+                        maxLength={300}
+                        value={formData.review}
+                        className="shadow appearance-none border h-32 rounded-md w-full break-all text-justify py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                      />
+                      <span className="text-xs self-end text-gray-500 dark:text-gray-300">
+                        {formData.review.length} / 300
+                      </span>
+                    </div>
+                  </div>
+                  {/* Botones */}
+                  <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
+                    <button
+                      onClick={() => handleSubmitReview(template.id)}
+                      className="h-10 w-11/12 
+                          mt-2 bg-[#505050] rounded-md md:px-2 md:w-2/3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:text-black hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                    >
+                      Submit Review
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
