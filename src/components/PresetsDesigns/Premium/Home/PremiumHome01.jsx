@@ -24,26 +24,13 @@ const PremiumHome01 = () => {
       } dark:bg-zinc-900
       }`}
     >
-      {/* <ColorPanel/> */}
-      {dropDown ? (
-        <div
-          className={`relative w-full ease-in-out duration-300 ${
-            color.primary ? color.primary : "bg-red-200"
-          } dark:bg-zinc-900"
-          }`}
-        >
-          {" "}
-          <ColorPanel />{" "}
-        </div>
-      ) : (
-        <div
-          className={`absolute opacity-0 -top-24 w-full ease-in-out duration-300`}
-        >
-          <ColorPanel />
-        </div>
-      )}
+      {/* **********COLOR PANEL********** */}
+      <div className="fixed bottom-2 left-1/4 right-1/4 z-10">
+        <ColorPanel />
+      </div>
+      {/* ******************** */}
       <div className={`mx-auto mb-2 pl-12`}>
-      <DarkMode />
+        <DarkMode />
       </div>
       {/* section */}
       <div className={`flex flex-col ease-in-out duration-300`}>
@@ -56,13 +43,8 @@ const PremiumHome01 = () => {
           <a href="" className="cursor-not-allowed">
             <span class="material-symbols-outlined px-16">home</span>
           </a>
-          <a href="" className="hover:text-slate-500">
-            <span
-              onClick={handlerDropDown}
-              class="material-symbols-outlined px-16"
-            >
-              format_color_fill
-            </span>
+          <a href="" className="cursor-not-allowed">
+            <span class="material-symbols-outlined px-16">headphones</span>
           </a>
           <a href="" className="cursor-not-allowed">
             <span class="material-symbols-outlined px-16">shopping_bag</span>
@@ -111,7 +93,7 @@ const PremiumHome01 = () => {
               <img src={image} alt="" className={`h-96 object-cover`} />
             </section>
             {/* Imagenes botones */}
-          
+
             <section className="flex flex-col p-1">
               <button
                 onClick={() =>
@@ -147,7 +129,8 @@ const PremiumHome01 = () => {
               </button>
               <button
                 onClick={() =>
-                  setImage("https://media.istockphoto.com/id/1373017594/es/foto/auriculares-sobre-fondo-de-color-naranja.jpg?s=612x612&w=0&k=20&c=0X3aIl4Nv7SJZS5VdWpwzyFP4Gd07ov7t72E_Kur9Hc="
+                  setImage(
+                    "https://media.istockphoto.com/id/1373017594/es/foto/auriculares-sobre-fondo-de-color-naranja.jpg?s=612x612&w=0&k=20&c=0X3aIl4Nv7SJZS5VdWpwzyFP4Gd07ov7t72E_Kur9Hc="
                   )
                 }
                 className="active:blur-md grayscale focus:grayscale-0 pb-0.5"
