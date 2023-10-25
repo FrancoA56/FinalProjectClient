@@ -43,7 +43,7 @@ const Profile = () => {
       );
       // data.secure_url me devuelve el url de la imagen el cloudinary
       // seteo el logo del estado local
-      showSuccessAlert("The image was uploaded to your profile");
+      showWaitAlert()
       setuserLocal({ ...userLocal, logo: data.secure_url });
     } catch (error) {
       showErrorAlert("Error loading your image");
@@ -57,6 +57,8 @@ const Profile = () => {
       if (!userEdit.logo) {
         delete userEdit.logo;
       }
+      showSuccessAlert("Your profile data has been updated");
+      
       // Edita los datos del usuario y rcibe el token actualizado
       const { data } = await axios.put(
         `${URL}/api/user/${user.email}`,
@@ -67,7 +69,6 @@ const Profile = () => {
       const userDecode = decodeToken(data); // Decodifica el token
 
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
-      showSuccessAlert("Your profile data has been updated");
     } catch (error) {
       console.log(error.message);
       showErrorAlert("Error");
@@ -98,6 +99,17 @@ const Profile = () => {
       text: `${message}`,
     });
   };
+
+  const showWaitAlert = (message) => {
+    Swal.fire({
+      icon: "info", // Icono de información
+      title: "Updating logo",
+      text: `${"Please wait while your logo is being updated"}`, // Puedes personalizar este texto
+      showConfirmButton: false, // No mostrar el botón de confirmación
+      timer: 3000, // tiempo de 5 segundos
+      timerProgressBar: true, //es una barra progress abajo
+    });
+  };
   // --------------------------------------------------------------------------------⛔------------
 
   return (
@@ -126,7 +138,7 @@ const Profile = () => {
               <div className="w-3/4 h-3/4 flex items-center justify-center">
                 <img
                   // className="max-w-full max-h-full rounded-md shadow"
-                  className="h-72 object-cover rounded-md shadow"
+                  className="h-72 object-cover rounded-md "
                   src={
                     user.logo
                       ? userLocal.logo || user.logo
@@ -210,7 +222,7 @@ const Profile = () => {
                         class="mt-10 inline-block bg-logo w-3/4 dark:bg-[#3a8a87] rounded-md px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out dark:hover:bg-logo hover:bg-[#3a8a87] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                         onClick={handleSubmit}
                       >
-                        Update
+                        Save Changes
                       </button>
                       {/* //////////////////////////// */}
                     </div>

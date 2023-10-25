@@ -1,5 +1,5 @@
 import style from "./home.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 // import { useSelector } from 'react-redux';
 
@@ -7,12 +7,11 @@ import plantillas from "../../utils/img/exampleModel.json";
 import { useSelector } from "react-redux";
 
 const HomeComponent = () => {
-  //! Traigo las plantillas de las mejores rankeadas del estado Global (aun no se como se llaman)
-  //! const bestRanked = useSelector((state) => state.bestRanked)
 
   // Estados locales para hacer la "animacion"
   const [activeLeftCard, setActiveLeftCard] = useState(false);
   const [activeRigthCard, setActiveRigthCard] = useState(false);
+
   // const user = useSelector((state) => state.user);
 
   // Click q hace que la card de la izq pase a la derecha
@@ -34,13 +33,17 @@ const HomeComponent = () => {
     setActiveRigthCard(false);
   };
 
+  //   Home
+  // - *Los comentarios en el home no se leen bien
+  // - *El color del cuadro del welcome en home y el fondo del carrousel no cambian de color al estar en tema claro lo q los muestra con mucho contraste a diferencia de la buena relacion de colores del modo oscuro
+
   return (
     <>
       <div className="bg-gray-100 min-h-screen dark:bg-[#505050]">
         {/*  ENCABEZADO */}
         <div className="container mx-auto p-4">
           {/*  TITULO */}
-          <h1 className="dark:bg-[#303030] bg-gray-300 dark:text-white inline-block mb-4 w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000]">
+          <h1 className="dark:bg-[#303030] bg-gray-300 inline-block mb-4 w-full rounded px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal dark:text-white shadow-[0_4px_9px_-4px_#000000]">
             Welcome
           </h1>
           {/*  EMPIEZA EL ENCOLUMNADO */}
@@ -59,14 +62,18 @@ const HomeComponent = () => {
                 <div className="w-3/4 border-b border-[#909090] mt-2"></div>
               </div>
               <div className="row-span-3 flex items-center">
-                {/* "row-span-3 flex items-center" */}
+
+
+
                 {/* CARROUSEL */}
-                {/* Imagen de la izq */}
                 
+                {/* Imagen de la izq */}
+
                 <div
                   onClick={handleImageLeftClick}
                   className={
-                    !activeLeftCard ? style.cardLeft : style.cardActiveL
+                    !activeLeftCard ? "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 md:translate-x-44 ease-in-out duration-300 blur-sm shadow-[0_9px_9px_-4px_#000000] sm:translate-x-20 sm:h-20" : 
+                    "w-3/4 max-h-80 flex rounded-lg items-start justify-center overflow-hidden z-10 transform md:translate-x-96 ease-in-out duration-300 shadow-[0_9px_9px_-4px_#000000] sm:translate-x-44"
                   }
                 >
                   {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
@@ -84,15 +91,15 @@ const HomeComponent = () => {
                 <div
                   onClick={handleImageCenterClick}
                   className={
-                    (activeLeftCard && style.cardD) ||
-                    (activeRigthCard && style.cardDR) ||
-                    style.cardCenter
+                    (activeLeftCard && "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 transform sm:-translate-x-40 md:-translate-x-80 ease-in-out duration-300 blur-sm sm:h-20") ||
+                    (activeRigthCard && "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 transform sm:translate-x-40 md:translate-x-80 ease-in-out duration-300 blur-sm sm:h-20") ||
+                    "w-3/4 max-h-80 flex rounded-lg items-start justify-center overflow-hidden z-10 transform ease-in-out duration-300 shadow-[0_9px_9px_-4px_#000000]"
                   }
                 >
                   {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
                   {/* <NavLink to={`/detail/${bestRanked[0].id}`}> */}
                   <img
-                    className={style.img}
+                    className={`${style.img}`}
                     src={
                       "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833592/Presets/Premium/PremiumDetail01_parte_1_oyzhpq.png"
                     } /* src={bestRanked[0].url} */
@@ -104,7 +111,7 @@ const HomeComponent = () => {
                 <div
                   onClick={handleImageRigthClick}
                   className={
-                    !activeRigthCard ? style.cardRigth : style.cardActiveR
+                    !activeRigthCard ? "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 md:-translate-x-40 ease-in-out duration-300 blur-sm shadow-[0_9px_9px_-4px_#000000] sm:h-20 sm:-translate-x-20" : "w-3/4 max-h-80 flex rounded-lg items-start justify-center overflow-hidden z-10 transform md:-translate-x-96 ease-in-out duration-300 shadow-[0_9px_9px_-4px_#000000] sm:-translate-x-44"
                   }
                 >
                   {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
@@ -121,7 +128,7 @@ const HomeComponent = () => {
               </div>
               {/* ************************************************* */}
               <div className="flex justify-center items-center">
-                <p className="animate-bounce font-semibold text-[#909090]">
+                <p className="animate-bounce font-semibold text-white">
                   "All templates are excellent !!!..."
                 </p>
               </div>{" "}
@@ -130,7 +137,7 @@ const HomeComponent = () => {
                 {" "}
                 <NavLink to={"/shop"}>
                   <button
-                    className="inline-block bg-logo dark:bg-[#3a8a87] w-auto rounded-md 5ec3bf my-16 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                    className="inline-block bg-logo dark:bg-[#3a8a87] w-auto rounded-md px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
                   text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   >
                     Templates Shop
