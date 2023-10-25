@@ -40,7 +40,7 @@ const CartComponent = () => {
       title: "Login",
       confirmButtonColor: "rgb(94, 195, 191)",
       text: "You must login to continue",
-    })
+    });
   };
 
   return (
@@ -49,7 +49,7 @@ const CartComponent = () => {
       <Nav />
       <div className="bg-gray-100 min-h-screen dark:bg-[#505050]">
         <div className="container mx-auto p-4">
-          <h1 className="bg-[#303030] inline-block mb-4 w-full rounded  px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000]">
+          <h1 className="bg-gray-300 dark:bg-[#303030] dark:text-white inline-block mb-4 w-full rounded  px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal shadow-[0_4px_9px_-4px_#000000]">
             Shopping Cart
           </h1>
           <div className="grid grid-cols-12 gap-4">
@@ -72,7 +72,7 @@ const CartComponent = () => {
                     key={model.id}
                   >
                     {/* imagen */}
-                    <div className="col-span-3 flex items-center p-2 justify-center overflow-hidden">
+                    <div className="col-span-3 flex items-center m-2 p-2 justify-center overflow-hidden">
                       <NavLink to={`/detail/${model.id}`}>
                         <img
                           src={model.images[0]}
@@ -148,7 +148,7 @@ const CartComponent = () => {
                   </div>
                 ))
               ) : (
-                <p>Your cart is empty</p>
+                <p className="text-gray-300 items-center justify-center mt-4">Your cart is empty</p>
               )}
             </div>
 
@@ -160,7 +160,7 @@ const CartComponent = () => {
                   Deployment Service
                 </label>
                 <select
-                  className="w-3/4 p-2 border-2 dark:bg-[#505050] dark:text-[#ffffff] dark:border-[#303030] rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  className="w-3/4 p-2 border-2 dark:bg-[#505050] dark:text-[#ffffff] dark:border-[#303030] rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.8)]"
                   onChange={(e) => deploymentThing(e)}
                 >
                   <option
@@ -242,14 +242,14 @@ const CartComponent = () => {
                     to="/login"
                     state={{ to: "/pay" }}
                     onClick={redirectToPayment}
-                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.8)]"
                   >
                     Continue to Payment
                   </Link>
                 ) : (
                   <NavLink
                     to="/pay"
-                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.8)]"
                   >
                     Continue to Payment
                   </NavLink>
