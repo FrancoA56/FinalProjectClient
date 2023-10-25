@@ -17,173 +17,198 @@ const Purchases = () => {
         return (
           <>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(1)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(2)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(3)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(4)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(5)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
           </>
         );
-      case 4:
-        return (
-          <>
+        case 4:
+          return (
+            <>
             <button
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(1)}
+            type="button"
+            class="material-symbols-outlined text-amber-500"
+            onClick={() => handleChangeRating(1)}
             >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(2)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(3)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(4)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(5)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
           </>
         );
-      case 3:
-        return (
-          <>
+        case 3:
+          return (
+            <>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(1)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(2)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(3)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(4)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(5)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
           </>
         );
-      case 2:
-        return (
-          <>
+        case 2:
+          return (
+            <>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(1)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(2)}
-            >
+              >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(3)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(4)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(5)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
           </>
         );
-      case 1:
-        return (
-          <>
+        case 1:
+          return (
+            <>
             <button
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(1)}
+            type="button"
+            class="material-symbols-outlined text-amber-500"
+            onClick={() => handleChangeRating(1)}
             >
               <i class="fas fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(2)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(3)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(4)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
             <button
+              type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(5)}
-            >
+              >
               <i class="far fa-star"></i>
             </button>
           </>
@@ -224,12 +249,11 @@ const Purchases = () => {
     });
   };
   const handleOpenPopUp = (id) => {
-    console.log("id", id);
     setPopUpOpen({
       ...popUpOpen,
       value: true,
       id: id,
-    }); 
+    });
   };
   const handleClosePopUp = () => {
     setPopUpOpen({
@@ -239,7 +263,7 @@ const Purchases = () => {
     setFormData({
       rating: 5,
       review: "",
-    })
+    });
   };
 
   const [formData, setFormData] = useState({
@@ -249,25 +273,39 @@ const Purchases = () => {
 
   const [popUpOpen, setPopUpOpen] = useState({
     value: false,
-    id,
+    id: "",
   });
 
-  const handleSubmitReview = async () => {
+  const [reviewedId, setReviewedId] = useState([]);
+
+  const handleReviewedTemplates = (templateID) => {
+    const reviewed = reviewedId.filter((id) => id === templateID);
+    if (reviewed.length) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
     if (formData.review.length) {
-      console.log("popipid", popUpOpen);
       const fullBody = {
         email: user.email,
         presetId: popUpOpen.id,
         ratingMessage: formData.review,
         rating: formData.rating,
       };
-      console.log("fullBody", fullBody);
-      // const { data } = await axios.post(`${URL}/api/review`, fullBody);
-      console.log("data", data);
-      // if (data.status === "success") {
-      //   return showSuccessAlert("Thanks for your feedback");
-      // }
-    } else return showErrorAlert("We need you to enter the review and rating");
+      const response = await axios.post(`${URL}/api/review`, fullBody);
+      console.log("response", response);
+      if (response.status === 200) {
+        reviewedId.push(response.data.presetId);
+        handleClosePopUp();
+        return showSuccessAlert("Thanks for your feedback");
+      } else {
+        handleClosePopUp();
+        return showErrorAlert("Something went wrong");
+      }
+    }
   };
 
   useEffect(() => {
@@ -304,28 +342,28 @@ const Purchases = () => {
   }, [user]);
 
   return (
-    <div className=" bg-gray-100">
+    <div className=" bg-gray-100 dark:bg-[#505050]">
       <Banner />
       <Nav />
-      <div className="container mx-auto p-4 min-h-screen">
+      <div className="container mx-auto p-4 min-h-screen ">
         <h1
-          className="bg-[#303030] inline-block mb-4
+          className="dark:bg-[#303030] text-black dark:text-white bg-gray-300 inline-block mb-4
                                 w-full rounded 5ec3bf px-7 pb-2.5 pt-3
                                 text-sm font-medium uppercase
-                                leading-normal text-white 
+                                leading-normal
                                 shadow-[0_4px_9px_-4px_#000000]"
         >
           Purchases
         </h1>
-        <table className="w-full">
-          <thead>
-            <tr className="bg-[#303030] text-white">
-              <th className="border border-slate-300 ">Purchase</th>
+        <table className="w-full rounded ">
+          <thead className="">
+            <tr className="bg-gray-500 text-white dark:bg-[#303030] ">
+              <th className="border border-slate-300 ">Purchase N°</th>
               <th className="border border-slate-300 ">Date</th>
               <th className="border border-slate-300 ">Status</th>
               <th className="border border-slate-300 ...">Name</th>
               <th className="border border-slate-300 ...">Price</th>
-              <th className="border border-slate-300 ...">Default color</th>
+              <th className="border border-slate-300 ...">Color</th>
               <th className="border border-slate-300 ...">Type</th>
               <th className="border border-slate-300 ...">Category</th>
               <th className="border border-slate-300 ...">Review</th>
@@ -349,7 +387,7 @@ const Purchases = () => {
               return row.templates.map((template, templateIndex) => (
                 <tr
                   key={index}
-                  className={index % 2 === 0 ? "bg-gray-300" : "bg-gray-100"}
+                  className="bg-gray-300 dark:bg-gray-400 "
                 >
                   {templateIndex === 0 && (
                     <>
@@ -370,13 +408,23 @@ const Purchases = () => {
                   <td className={styleRow}>{template.type}</td>
                   <td className={styleRow}>{template.category}</td>
                   <td className={styleRow}>
-                    <button
-                      onClick={() => handleOpenPopUp(template.id)}
-                      title="Add a review"
-                      className="mt-1"
-                    >
-                      <span class="material-symbols-outlined">add_circle</span>
-                    </button>
+                    {handleReviewedTemplates(template.id) ? (
+                      <div>
+                        <span class="material-symbols-outlined">
+                          check_circle
+                        </span>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleOpenPopUp(template.id)}
+                        title="Add a review"
+                        className="mt-1"
+                      >
+                        <span class="material-symbols-outlined">
+                          add_circle
+                        </span>
+                      </button>
+                    )}
                   </td>
                 </tr>
               ));
@@ -384,7 +432,7 @@ const Purchases = () => {
           </tbody>
         </table>
         {/*************************  FORM POPUP **********************************/}
-        {popUpOpen && (
+        {popUpOpen.value && (
           /* Este div me muestra lo que queda en el fondo */
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
             {/* <div className="p-1 rounded-md "> */}
@@ -407,7 +455,10 @@ const Purchases = () => {
                   </p>
                 </div>
                 {/* Formulario */}
-                <form className="mx-auto max-w-xl mt-2" onSubmit={handleSubmitReview}>
+                <form
+                  className="mx-auto max-w-xl mt-2"
+                  onSubmit={handleSubmitReview}
+                >
                   {/* Formulario container */}
                   <div className="">
                     {/* rating */}
@@ -417,7 +468,7 @@ const Purchases = () => {
                         className="text-sm font-semibold text-[#303030] dark:text-[#c2c2c2] pb-2 pt-5 "
                       >
                         {" "}
-                        How many stars would you give the template
+                        How many stars would you give it
                       </label>
 
                       <div className="grid grid-cols-5 gap-3 self-center ">
@@ -431,21 +482,20 @@ const Purchases = () => {
                         className="text-sm font-semibold text-[#303030] dark:text-[#c2c2c2] py-2 px-1"
                       >
                         {" "}
-                        Leave a brief review of the template
+                        Leave a brief review
                       </label>
                       <textarea
                         name="review"
-                        id=""
                         cols="30"
                         rows="10"
                         value={formData.review}
                         onChange={handleChange}
-                        maxLength={300}
+                        maxLength={200}
                         required
                         className="scroll- shadow appearance-none border h-32 rounded-md w-full break-all text-justify py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
                       />
                       <span className="text-xs self-end text-gray-500 dark:text-gray-300">
-                        {formData.review.length} / 300
+                        {formData.review.length} / 200
                       </span>
                     </div>
                   </div>
