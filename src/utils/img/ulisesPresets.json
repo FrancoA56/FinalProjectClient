@@ -59,7 +59,7 @@
     "name": "TrendyShop",
     "price": 46,
     "defaultColor": "green",
-    "images": [],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698239882/Presets/Medium/Medium-shop.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698239859/Presets/Medium/Vista%20completa%20de%20Presets%20Medium/Medium-Shop-Full.png"],
     "type": "shop",
     "category": "medium"
   },
@@ -74,8 +74,8 @@
   {
     "name": "LuxuryLanding",
     "price": 85,
-    "defaultColor": "black",
-    "images": [],
+    "defaultColor": "red",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240123/Presets/Premium/home-Premium.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240061/Presets/Premium/Vista%20completa%20de%20Presets%20Premium/home-Premium-full.png"],
     "type": "home",
     "category": "premium"
   },

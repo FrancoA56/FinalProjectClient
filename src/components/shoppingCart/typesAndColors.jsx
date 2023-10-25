@@ -5,12 +5,12 @@ export const types = [
 ];
 
 export const colors = [
-  { Black: "black" },
   { White: "white" },
   { Green: "green" },
   { Blue: "blue" },
   { Yellow: "yellow" },
   { Brown: "brown" },
+  { Red: "red" },
 ];
 
 export const models = [
