@@ -223,19 +223,41 @@ const Purchases = () => {
       rating: rate,
     });
   };
+  const handleOpenPopUp = (id) => {
+    console.log("id", id);
+    setPopUpOpen({
+      ...popUpOpen,
+      value: true,
+      id: id,
+    }); 
+  };
+  const handleClosePopUp = () => {
+    setPopUpOpen({
+      ...popUpOpen,
+      value: false,
+    });
+    setFormData({
+      rating: 5,
+      review: "",
+    })
+  };
 
   const [formData, setFormData] = useState({
     rating: 5,
     review: "",
   });
 
-  const [isPopupOpen, setPopupOpen] = useState(false);
+  const [popUpOpen, setPopUpOpen] = useState({
+    value: false,
+    id,
+  });
 
-  const handleSubmitReview = async (id) => {
+  const handleSubmitReview = async () => {
     if (formData.review.length) {
+      console.log("popipid", popUpOpen);
       const fullBody = {
         email: user.email,
-        presetId: id,
+        presetId: popUpOpen.id,
         ratingMessage: formData.review,
         rating: formData.rating,
       };
@@ -349,7 +371,7 @@ const Purchases = () => {
                   <td className={styleRow}>{template.category}</td>
                   <td className={styleRow}>
                     <button
-                      onClick={() => setPopupOpen(true)}
+                      onClick={() => handleOpenPopUp(template.id)}
                       title="Add a review"
                       className="mt-1"
                     >
@@ -362,7 +384,7 @@ const Purchases = () => {
           </tbody>
         </table>
         {/*************************  FORM POPUP **********************************/}
-        {isPopupOpen && (
+        {popUpOpen && (
           /* Este div me muestra lo que queda en el fondo */
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
             {/* <div className="p-1 rounded-md "> */}
@@ -372,7 +394,7 @@ const Purchases = () => {
                 <div className="mx-auto min-w-xl max-w-xl border-b border-[#303030] dark:border-[#909090]">
                   <div className="flex justify-end">
                     <i
-                      onClick={() => setPopupOpen(false)}
+                      onClick={handleClosePopUp}
                       className="fa-solid fa-x text-[#909090] hover:text-[#303030] hover:dark:text-white mt-3"
                     />
                   </div>
@@ -385,11 +407,7 @@ const Purchases = () => {
                   </p>
                 </div>
                 {/* Formulario */}
-                <form
-                  action="#"
-                  method="POST"
-                  className="mx-auto max-w-xl mt-2"
-                >
+                <form className="mx-auto max-w-xl mt-2" onSubmit={handleSubmitReview}>
                   {/* Formulario container */}
                   <div className="">
                     {/* rating */}
@@ -415,15 +433,16 @@ const Purchases = () => {
                         {" "}
                         Leave a brief review of the template
                       </label>
-                      <input
-                        type="text"
+                      <textarea
                         name="review"
-                        autoComplete="review"
-                        onChange={handleChange}
-                        required
-                        maxLength={300}
+                        id=""
+                        cols="30"
+                        rows="10"
                         value={formData.review}
-                        className="shadow appearance-none border h-32 rounded-md w-full break-all text-justify py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                        onChange={handleChange}
+                        maxLength={300}
+                        required
+                        className="scroll- shadow appearance-none border h-32 rounded-md w-full break-all text-justify py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
                       />
                       <span className="text-xs self-end text-gray-500 dark:text-gray-300">
                         {formData.review.length} / 300
@@ -433,7 +452,7 @@ const Purchases = () => {
                   {/* Botones */}
                   <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
                     <button
-                      onClick={() => handleSubmitReview(template.id)}
+                      type="submit"
                       className="h-10 w-11/12 
                           mt-2 bg-[#505050] rounded-md md:px-2 md:w-2/3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:text-black hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                     >
