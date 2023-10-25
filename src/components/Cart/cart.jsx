@@ -72,12 +72,12 @@ const CartComponent = () => {
                     key={model.id}
                   >
                     {/* imagen */}
-                    <div className="col-span-3 flex items-center m-2 p-2 justify-center overflow-hidden">
+                    <div className="col-span-3 flex items-center m-2 p-2 justify-center overflow-hidden max-w-full">
                       <NavLink to={`/detail/${model.id}`}>
                         <img
                           src={model.images[0]}
                           alt={model.name}
-                          className="object-cover rounded-md hover:scale-105 ease-in duration-200"
+                          className="object-cover rounded-md hover:scale-105 ease-in duration-200 w-full h-auto"
                         />
                       </NavLink>
                     </div>
@@ -106,38 +106,38 @@ const CartComponent = () => {
                       {/* Tercera FILA */}
                       <div className="row-span-2 grid grid-cols-4">
                         <div>
-                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
                             {model.rating}{" "}
                             <i className="fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />{" "}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
                             rating
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
                             {model.category}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
                             category
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
                             {model.type}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
                             Type
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
                             {model.color}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
                             color
                           </span>
                         </div>
