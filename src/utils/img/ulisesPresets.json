@@ -80,6 +80,14 @@
     "category": "premium"
   },
   {
+    "name": "ExclusiveCart",
+    "price": 89,
+    "defaultColor": "white",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698192710/Presets/Basic/PremiumCart01_xvf8rg.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698192725/Presets/Basic/Vista%20completa%20de%20Presets/PremiumCart01_wuando.png"],
+    "type": "cart",
+    "category": "premium"
+  },
+  {
     "name": "EliteDetail",
     "price": 52,
     "defaultColor": "white",

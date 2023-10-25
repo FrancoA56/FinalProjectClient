@@ -1,10 +1,14 @@
 // LIBRERIAS
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { addModelToCart, removeModelFromCart } from "../../Redux/actions";
+import {
+  addModelToCart,
+  removeModelFromCart,
+  setPage,
+} from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Pagination from "./Pagination"
+import Pagination from "./Pagination";
 
 const Plantillas = ({
   selectedOrder,
@@ -23,16 +27,31 @@ const Plantillas = ({
   const cart = useSelector((state) => state.cart);
 
   // ? PAGINATION
+  const [templatesNum, setTemplatesNum] = useState([]);
   const presetsperPage = 6;
-  const currentPage = useSelector((state) => state.currentPage)
-  const cantTemplate = templates.length;
+  const currentPage = useSelector((state) => state.currentPage);
+  const fetchTemplatesNum = async (filters, orderType, orderPriority) => {
+    try {
+      const response = await axios.get(`${URL}/api/preset`, {
+        params: {
+          filters: JSON.stringify(filters),
+          orderType,
+          orderPriority,
+          hideDisabled,
+          quantity: presetsperPage,
+          page: currentPage + 1,
+        },
+      });
+
+      const { data } = response;
+      setTemplatesNum(data);
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+    }
+  };
 
   // ? PETICIONES DE FILTROS Y ORDENES
-  const fetchTemplates = async (
-    filters,
-    orderType,
-    orderPriority,
-  ) => {
+  const fetchTemplates = async (filters, orderType, orderPriority) => {
     try {
       const response = await axios.get(`${URL}/api/preset`, {
         params: {
@@ -44,7 +63,7 @@ const Plantillas = ({
           page: currentPage,
         },
       });
-
+      
       const { data } = response;
       setTemplates(data);
     } catch (error) {
@@ -54,7 +73,7 @@ const Plantillas = ({
 
   // ? ASIGNACIONES DE FILTROS Y ORDENES
   useEffect(() => {
-    const category = selectedCategory.join(" ");
+    const category = selectedCategory;
     const defaultColor = selectedFilterColor;
     const type = selectedTypes;
     const order = selectedOrder.split(" ");
@@ -76,9 +95,15 @@ const Plantillas = ({
     if (selectedTypes.length > 0) {
       filters.types = type;
     }
-
-    fetchTemplates(filters, orderType, orderPriority, );
-  }, [selectedFilterColor, selectedCategory, selectedOrder, selectedTypes, currentPage]);
+    fetchTemplatesNum(filters, orderType, orderPriority);
+    fetchTemplates(filters, orderType, orderPriority);
+  }, [
+    selectedFilterColor,
+    selectedCategory,
+    selectedOrder,
+    selectedTypes,
+    currentPage,
+  ]);
 
   const buyPreset = (id) => {
     return () => {
@@ -249,6 +274,8 @@ const Plantillas = ({
       )}
       <Pagination
         currentPage={currentPage}
+        numTemplates={templatesNum.length}
+        templates={templates.length}
       />
     </div>
   );
