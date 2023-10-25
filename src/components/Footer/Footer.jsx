@@ -75,10 +75,13 @@ function Footer() {
     });
   };
 
+
   return (
     <footer className="bg-gray-300 text-center text-neutral-600 dark:bg-[#303030] dark:text-[#cfcece] text-sm lg:text-left">
       {/* Main content container */}
-      <div className="mx-6 py-3 text-center md:text-left">
+      <div
+        className="mx-6 py-3 text-center md:text-left"
+      >
         <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-3">
           <div className="flex flex-col items-center">
             <h6 className="mb-4 flex items-center justify-center font-semibold uppercase ">
@@ -199,14 +202,14 @@ function Footer() {
 
             {/* pop up form --> talk to us */}
 
-            <div className="rounded cursor-pointer">
+            <div className="rounded">
               <div className="flex items-center justify-center">
-                <h2
+                <button
                   className="mt-6 text-white text-center text-sm font-medium uppercase leading-normal bg-logo hover:bg-[#3a8a87] dark:bg-[#3a8a87] dark:hover:bg-logo py-2 px-4 rounded-md inline-block"
                   onClick={() => setPopupOpen(true)}
                 >
                   Talk to us
-                </h2>
+                </button>
               </div>
               {isPopupOpen && (
                 <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
@@ -257,12 +260,14 @@ function Footer() {
                             <input
                               name="user_name"
                               id="name"
-                              autocomplete="given-name"
+                              // autocomplete="given-name"
+                              autocomplete="off"
                               type="text"
                               onChange={handleChange}
                               value={formData.user_name}
                               required
                               className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                              
                             />
                           </div>
                           {/* Apellido */}
@@ -278,7 +283,8 @@ function Footer() {
                               type="text"
                               name="lastname"
                               id="lastname"
-                              autocomplete="family-name"
+                              // autocomplete="family-name"
+                              autocomplete="off"
                               onChange={handleChange}
                               required
                               // value={formData.lastname}
@@ -299,7 +305,8 @@ function Footer() {
                             type="text"
                             name="name"
                             id="name"
-                            autocomplete="organization"
+                            // autocomplete="organization"
+                            autocomplete="off"
                             onChange={handleChange}
                             required
                             className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
@@ -318,7 +325,8 @@ function Footer() {
                             type="email"
                             name="user_email"
                             id="email"
-                            autocomplete="email"
+                            // autocomplete="email"
+                            autocomplete="off"
                             onChange={handleChange}
                             required
                             value={formData.user_email}
@@ -346,7 +354,6 @@ function Footer() {
                         </div>
                         {/* Botones */}
                         <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
-
                           <button
                             type="submit"
                             name="submit"
@@ -377,12 +384,11 @@ function Footer() {
         <span className="text-[#ffffff] dark:text-white">
           © 2023 Copyright:{" "}
         </span>
-        <a
+        <span
           className="font text-[#ffffff] dark:text-white"
-          href="https://tailwind-elements.com/"
         >
           CodeCrafted Templates
-        </a>
+        </span>
       </div>
     </footer>
   );
