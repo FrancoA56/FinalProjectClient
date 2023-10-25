@@ -40,7 +40,7 @@ const CartComponent = () => {
       title: "Login",
       confirmButtonColor: "rgb(94, 195, 191)",
       text: "You must login to continue",
-    })
+    });
   };
 
   return (
@@ -49,7 +49,7 @@ const CartComponent = () => {
       <Nav />
       <div className="bg-gray-100 min-h-screen dark:bg-[#505050]">
         <div className="container mx-auto p-4">
-          <h1 className="bg-[#303030] inline-block mb-4 w-full rounded  px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000]">
+          <h1 className="bg-gray-300 dark:bg-[#303030] dark:text-white inline-block mb-4 w-full rounded  px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal shadow-[0_4px_9px_-4px_#000000]">
             Shopping Cart
           </h1>
           <div className="grid grid-cols-12 gap-4">
@@ -72,12 +72,12 @@ const CartComponent = () => {
                     key={model.id}
                   >
                     {/* imagen */}
-                    <div className="col-span-3 flex items-center p-2 justify-center overflow-hidden">
+                    <div className="col-span-3 flex items-center m-2 p-2 justify-center overflow-hidden max-w-full">
                       <NavLink to={`/detail/${model.id}`}>
                         <img
                           src={model.images[0]}
                           alt={model.name}
-                          className="object-cover rounded-md hover:scale-105 ease-in duration-200"
+                          className="object-cover rounded-md hover:scale-105 ease-in duration-200 w-full h-auto"
                         />
                       </NavLink>
                     </div>
@@ -106,38 +106,38 @@ const CartComponent = () => {
                       {/* Tercera FILA */}
                       <div className="row-span-2 grid grid-cols-4">
                         <div>
-                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
                             {model.rating}{" "}
                             <i className="fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />{" "}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
                             rating
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
                             {model.category}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
                             category
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
                             {model.type}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
                             Type
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xl text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
                             {model.color}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-sm text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
                             color
                           </span>
                         </div>
@@ -148,7 +148,7 @@ const CartComponent = () => {
                   </div>
                 ))
               ) : (
-                <p>Your cart is empty</p>
+                <p className="text-gray-300 items-center justify-center mt-4">Your cart is empty</p>
               )}
             </div>
 
@@ -160,7 +160,7 @@ const CartComponent = () => {
                   Deployment Service
                 </label>
                 <select
-                  className="w-3/4 p-2 border-2 dark:bg-[#505050] dark:text-[#ffffff] dark:border-[#303030] rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  className="w-3/4 p-2 border-2 dark:bg-[#505050] dark:text-[#ffffff] dark:border-[#303030] rounded-md text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.8)]"
                   onChange={(e) => deploymentThing(e)}
                 >
                   <option
@@ -186,18 +186,18 @@ const CartComponent = () => {
                     className="w-3/4 border rounded-md border-[#909090] py-3 mt-3 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                   >
                     <div className="grid grid-cols-7">
-                      <div className="flex items-center justify-center font-semibold col-span-2 uppercase ">
+                      <div className="flex items-center justify-center font-semibold col-span-2 uppercase dark:text-[#ffffff]">
                         <h1> {model.name} </h1>
                       </div>
-                      <div className="flex items-center mb-1 justify-center text-sm font-semibold text-[#303030] dark:text-[#707070] col-span-2 pt-1">
+                      <div className="flex items-center mb-1 justify-center text-sm font-semibold text-[#303030] dark:text-[#bdbdbd] col-span-2 pt-1">
                         <h1> {model.type} </h1>
                       </div>
-                      <div className="flex items-center justify-center font-semibold col-span-2">
+                      <div className="flex items-center justify-center font-semibold col-span-2 dark:text-[#ffffff]">
                         <h1> $ {model.price} </h1>
                       </div>
                       <button
                         onClick={() => dispatch(removeModelFromCart(model.id))}
-                        className="text-[#505050] font-semibold col-span-1"
+                        className="text-[#505050] font-semibold col-span-1 dark:text-[#ffffff]"
                       >
                         <i className="fa-solid fa-xmark" />
                       </button>
@@ -208,19 +208,19 @@ const CartComponent = () => {
               {/* Detalles del carrito */}
               <div className="row-span-1 flex flex-col items-center justify-end pb-3">
                 <div className="grid grid-cols-2 w-3/4">
-                  <label className="flex ml-2 text-sm font-semibold uppercase leading-normal col-span-1 dark:text-[#bebebe]">
+                  <label className="flex ml-2 text-xs font-semibold leading-normal col-span-1 dark:text-[#bebebe]">
                     Subtotal
                   </label>
-                  <p className="flex justify-end mr-2 text-sm font-semibold uppercase leading-normal dark:text-[#bebebe]">
+                  <p className="flex justify-end mr-2 text-sm font-semibold leading-normal dark:text-[#bebebe]">
                     ${totalPrice(models)}
                   </p>
                 </div>
                 {deployService && (
                   <div className="grid grid-cols-2 w-3/4">
-                    <label className="text-sm font-semibold uppercase leading-normal col-span-1 flex ml-2 dark:text-[#bebebe]">
+                    <label className="text-xs font-semibold leading-normal col-span-1 flex ml-2 dark:text-[#bebebe]">
                       Deployment Cost
                     </label>
-                    <p className="flex justify-end mr-2 text-sm font-semibold uppercase leading-normal dark:text-[#bebebe]">
+                    <p className="flex justify-end mr-2 text-sm font-semibold leading-normal dark:text-[#bebebe]">
                       ${deployCost}
                     </p>
                   </div>
@@ -242,14 +242,14 @@ const CartComponent = () => {
                     to="/login"
                     state={{ to: "/pay" }}
                     onClick={redirectToPayment}
-                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.8)]"
                   >
                     Continue to Payment
                   </Link>
                 ) : (
                   <NavLink
                     to="/pay"
-                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                    className="mt-7 inline-block w-3/4 bg-logo dark:bg-[#3a8a87] rounded-md 5ec3bf px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.8)]"
                   >
                     Continue to Payment
                   </NavLink>

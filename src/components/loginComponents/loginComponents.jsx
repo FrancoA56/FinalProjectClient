@@ -250,7 +250,11 @@ const LoginComponents = () => {
 
             {/* <!-- Divider --> */}
             <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-[#707070] after:mt-0.5 after:flex-1 after:border-t after:border-[#707070]">
-              <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+            <p className={
+              localStorage.theme === "dark"
+                ? `mx-4 mb-0 text-center font-semibold text-[#707070]`
+                : `mx-4 mb-0 text-center font-semibold text-black `
+              }>
                 OR
               </p>
             </div>

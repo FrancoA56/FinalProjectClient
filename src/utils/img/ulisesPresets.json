@@ -1,6 +1,6 @@
 [
   {
-    "name": "FundamentalFlow",
+    "name": "Founded Flow",
     "price": 10,
     "defaultColor": "red",
     "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697852425/Presets/Basic/BasicHome02_parte1_u5kc4e.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697979169/Presets/Basic/Vista%20completa%20de%20Presets/BasicHome02_maujae.png"],
@@ -8,7 +8,7 @@
     "category": "basic"
   },
   {
-    "name": "MinimalMart",
+    "name": "Minimal Mart",
     "price": 2,
     "defaultColor": "white",
     "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833514/Presets/Basic/BasicShop01_parte_1_icdesy.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697972653/Presets/Basic/BasicShop01_gihutm.png"],
@@ -16,7 +16,7 @@
     "category": "basic"
   },
   {
-    "name": "CompanyProfile",
+    "name": "Company Profile",
     "price": 28,
     "defaultColor": "yellow",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833511/Presets/Basic/BasicAbout01_parte_1_rcmo7a.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978697/Presets/Basic/Vista%20completa%20de%20Presets/BasicAbout01_s2d9oq.png"],
@@ -24,7 +24,7 @@
     "category": "basic"
   },
   {
-    "name": "SimpleStart",
+    "name": "Simple Start",
     "price": 5,
     "defaultColor": "blue",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833511/Presets/Basic/BasicHome01_ile7su.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978695/Presets/Basic/Vista%20completa%20de%20Presets/BasicHome01_de6caf.png"],
@@ -32,7 +32,7 @@
     "category": "basic"
   },
   {
-    "name": "EasyCart",
+    "name": "Easy Cart",
     "price": 22,
     "defaultColor": "white",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833510/Presets/Basic/BasicCart01_b4nua6.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978693/Presets/Basic/Vista%20completa%20de%20Presets/BasicCart01_s2vzea.png"],
@@ -40,7 +40,7 @@
     "category": "basic"
   },
   {
-    "name": "BalancedFlow",
+    "name": "Balanced Flow",
     "price": 33,
     "defaultColor": "green",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833553/Presets/Medium/MediumHome01_mci9gh.png"],
@@ -48,7 +48,7 @@
     "category": "medium"
   },
   {
-    "name": "InsightDetail",
+    "name": "Insight Detail",
     "price": 38,
     "defaultColor": "brown",
     "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833552/Presets/Medium/MediumDetail01_parte_1_pw3sho.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978696/Presets/Basic/Vista%20completa%20de%20Presets/MediumDetail01_eyqll8.png"],
@@ -56,7 +56,7 @@
     "category": "medium"
   },
   {
-    "name": "TrendyShop",
+    "name": "Trendy Shop",
     "price": 46,
     "defaultColor": "green",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698239882/Presets/Medium/Medium-shop.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698239859/Presets/Medium/Vista%20completa%20de%20Presets%20Medium/Medium-Shop-Full.png"],
@@ -64,7 +64,7 @@
     "category": "medium"
   },
   {
-    "name": "PrestigeMarket",
+    "name": "Prestige Market",
     "price": 74,
     "defaultColor": "blue",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833589/Presets/Premium/PremiumShop01_parte_1_pmp3k3.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978694/Presets/Basic/Vista%20completa%20de%20Presets/PremiumShop01_djvtji.png"],
@@ -72,7 +72,7 @@
     "category": "premium"
   },
   {
-    "name": "LuxuryLanding",
+    "name": "Luxury Landing",
     "price": 85,
     "defaultColor": "red",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240123/Presets/Premium/home-Premium.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240061/Presets/Premium/Vista%20completa%20de%20Presets%20Premium/home-Premium-full.png"],
@@ -80,7 +80,7 @@
     "category": "premium"
   },
   {
-    "name": "ExclusiveCart",
+    "name": "Exclusive Cart",
     "price": 89,
     "defaultColor": "white",
     "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698192710/Presets/Basic/PremiumCart01_xvf8rg.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698192725/Presets/Basic/Vista%20completa%20de%20Presets/PremiumCart01_wuando.png"],
@@ -88,7 +88,7 @@
     "category": "premium"
   },
   {
-    "name": "EliteDetail",
+    "name": "Elite Detail",
     "price": 52,
     "defaultColor": "white",
     "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833592/Presets/Premium/PremiumDetail01_parte_1_oyzhpq.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978698/Presets/Basic/Vista%20completa%20de%20Presets/PremiumDetail01_n2ix7d.png"],
