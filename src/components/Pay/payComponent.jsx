@@ -148,7 +148,7 @@ const PayComponent = () => {
       <Nav />
       <div>
         <div className="container mx-auto p-1 mt-2 mb-2">
-          <h2 className="inline-block mb-2 mt-2 w-full p-1 bg-gray-300 dark:text-white dark:bg-[#303030] rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-black  shadow-[0_4px_9px_-4px_#000000] ">
+          <h2 className="inline-block mb-2 mt-2 w-full p-1 bg-gray-300 dark:text-white dark:bg-[#303030] text-black rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] ">
             Checkout
           </h2>
         </div>
