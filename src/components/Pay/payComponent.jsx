@@ -42,7 +42,6 @@ const PayComponent = () => {
       const userDecode = decodeToken(data); // Decodifica el token
 
       dispatch(editUserRedux(userDecode)); // Guarda los datos del usuario actualizado en el estado global
-
     } catch (error) {
       showErrorAlert(error.message);
       return;
@@ -53,7 +52,9 @@ const PayComponent = () => {
   const payOrderPost = async (order) => {
     try {
       const { data } = await axios.post(`${URL}/api/shop/pay_order`, order);
-      data.href ? (window.location.href = data.href) : showErrorAlert("Paypal error");
+      data.href
+        ? (window.location.href = data.href)
+        : showErrorAlert("Paypal error");
     } catch (error) {
       showErrorAlert(error.message);
     }
@@ -74,7 +75,7 @@ const PayComponent = () => {
       text: `${message}`,
     });
   };
-  
+
   const showErrorAlert = (message) => {
     Swal.fire({
       icon: "error",
@@ -125,7 +126,7 @@ const PayComponent = () => {
   // Hndle a paypal
   const handlePaypalSubmit = async (e) => {
     e.preventDefault();
-    console.log("formData", formData)
+    console.log("formData", formData);
     const userEdit = await editUser(formData);
 
     userEdit && payOrderPost(payPaypal);
@@ -147,20 +148,18 @@ const PayComponent = () => {
       <Nav />
       <div>
         <div className="container mx-auto p-1 mt-2 mb-2">
-          <h2 className="inline-block mb-2 mt-2 w-full p-1 bg-[#303030]  rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white dark:text-white shadow-[0_4px_9px_-4px_#000000] ">
+          <h2 className="inline-block mb-2 mt-2 w-full p-1 bg-gray-300 dark:text-white dark:bg-[#303030] text-black rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000] ">
             Checkout
           </h2>
         </div>
-        <div className="bg-gray-300 dark:bg-[#909090] text-[#303030] mb-2 container mx-auto p-4 rounded shadow-2xl shadow-black">
-          <div className="grid grid-cols-5 text-sm font-medium uppercase leading-normal">
-            <div>Presets</div>
+        <div className="bg-gray-300  dark:bg-[#818181] text-[#303030] mb-2 container mx-auto p-4 rounded shadow-2xl shadow-black">
+          <div className="grid grid-cols-4 text-sm font-medium dark:text-white uppercase leading-normal">
+            <div>Templates</div>
             <div>SubTotal</div>
-            <div>With deployment</div>
             <div>Deployment Cost</div>
             <div>Total</div>
             <div>{cart.length}</div>
             <div>${subTotal}</div>
-            {deployment ? <div>Yes</div> : <div>No</div>}
             <div>${deploymentCost}</div>
             <div>${total()}</div>
           </div>
@@ -197,8 +196,7 @@ const PayComponent = () => {
         <div className="flex justify-between gap-12 my-10">
           <button
             onClick={() => setPopupOpen(true)}
-            className="h-10 w-64 mt-2 bg-logo dark:bg-[#3a8a87] rounded-md md:px-2 md:w-64 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-            // className="bg-logo text-white text-sm font-medium uppercase leading-normal p-2 rounded-md w-64"
+            className="h-10 w-64 mt-2 bg-logo dark:bg-[#3a8a87] rounded-md md:px-2 md:w-64 text-sm font-semibold uppercase leading-normal text-black dark:text-white dark:hover:text-black hover:text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
           >
             Pay
           </button>
@@ -229,15 +227,16 @@ const PayComponent = () => {
                     <div className="flex justify-end">
                       <i
                         onClick={() => setPopupOpen(false)}
-                        className="fa-solid fa-x text-[#909090] hover:text-[#303030] mt-3"
+                        className="fa-solid fa-x text-[#909090] hover:text-[#303030] dark:hover:text-white mt-3 "
                       />
                     </div>
-                    <h2 className="text-3xl font-bold tracking-tight text-[#303030] dark:text-[#909090] sm:text-4xl  uppercase leading-normal">
+                    <h2 className="text-3xl font-bold tracking-tight text-[#303030] dark:text-[#d1d1d1] sm:text-4xl  uppercase leading-normal">
                       Insert your data
                     </h2>
-                    <p className="mt-2 text-sm font-medium text-[#505050] dark:text-[#707070] pb-3">
+                    <p className="mt-2 text-sm font-medium text-[#505050] dark:text-[#d1d1d1] pb-3">
                       Please complete the following information. Once the
-                      purchase is finished, you will receive the invoice via email.
+                      purchase is finished, you will receive the invoice via
+                      email.
                     </p>
                   </div>
                   {/* Formulario */}
@@ -254,7 +253,7 @@ const PayComponent = () => {
                         <div className=" flex flex-col items-start pl-5 pr-1">
                           <label
                             for="firstname"
-                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#d1d1d1] px-2"
                           >
                             {" "}
                             First Name
@@ -274,7 +273,7 @@ const PayComponent = () => {
                         <div className="flex flex-col items-start pl-1 pr-5">
                           <label
                             for="last-name"
-                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#d1d1d1] px-2"
                           >
                             {" "}
                             Last Name
@@ -295,7 +294,7 @@ const PayComponent = () => {
                       <div className=" flex flex-col items-start px-5">
                         <label
                           for="name"
-                          className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                          className="text-sm font-semibold text-[#303030] dark:text-[#d1d1d1] px-2"
                         >
                           {" "}
                           Company
@@ -318,7 +317,7 @@ const PayComponent = () => {
                         <div className=" flex flex-col items-start pl-5 pr-1">
                           <label
                             for="city"
-                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#d1d1d1] px-2"
                           >
                             {" "}
                             City
@@ -338,7 +337,7 @@ const PayComponent = () => {
                         <div className=" flex flex-col items-start pl-1 pr-5">
                           <label
                             for="zipcode"
-                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#d1d1d1] px-2"
                           >
                             {" "}
                             Zip Code
@@ -359,7 +358,7 @@ const PayComponent = () => {
                       <div className=" flex flex-col items-start px-5">
                         <label
                           for="country"
-                          className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                          className="text-sm font-semibold text-[#303030] dark:text-[#d1d1d1] px-2"
                         >
                           {" "}
                           Country
@@ -378,19 +377,29 @@ const PayComponent = () => {
                       {/* Botones */}
                       <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
                         <button
-                          className="mt-2 h-10 w-11/12 md:mr-2 inline-block bg-logo dark:bg-[#3a8a87] 
-                          hover:bg-[#3a8a87] dark:hover:bg-logo hover md:w-2/3 rounded-md md:px-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                           onSubmit={handlePaypalSubmit}
+                          className="grid grid-cols-3 h-10 w-56 justify-center items-center bg-[#162966] rounded-md shadow-[0_4px_9px_-4px_#000000]  hover:bg-[#41538b] text-white hover:text-black mx-1 "
                         >
-                          Pay by PayPal
+                          <i class="fa-brands fa-paypal text-3xl text-blue-700 grid-span-1 ml-2"></i>
+                          <p className="text-sm uppercase grid-span-2 ml-3">
+                            Paypal
+                          </p>
                         </button>
-                        <button
-                          onSubmit={handleTransferSubmit}
-                          className="h-10 w-11/12 
-                          mt-2 bg-[#505050] rounded-md md:px-2 md:w-2/3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                        >
-                          pay by bank transfer
-                        </button>
+                        
+                        <div class="mt-2">
+                          <button
+                            href="#"
+                            class="flex items-center justify-center rounded-md border border-transparent bg-logo dark:bg-[#3a8a87] hover:bg-[#3a8a87] dark:hover:bg-logo dark:hover:text-black px-6 py-3 text-sm text-black uppercase shadow-sm h-10 mb-2 w-56 mx-1 dark:text-white hover:text-white"
+                          >
+                            <i
+                              class="material-symbols-outlined mr-2 relative right-3"
+                              style={{
+                                "font-size": "30px",
+                              }}
+                            >account_balance</i>
+                            Bank transfer
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </form>

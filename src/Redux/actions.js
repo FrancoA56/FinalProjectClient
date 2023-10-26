@@ -312,13 +312,6 @@ export const logInUser = (payload) => {
               confirmButtonColor: "rgb(94 195 191)",
             });
             // si no hay nada que actualizar la bdd esta actualizada y le informamos al usuario q se logeo correctamente
-          } else {
-            return Swal.fire({
-              text: "You have successfully logged in",
-              title: "Login",
-              icon: "success",
-              confirmButtonColor: "rgb(94 195 191)",
-            });
           }
         }
       }
@@ -326,7 +319,6 @@ export const logInUser = (payload) => {
       const responseGetAllDataBase = await axios.get(
         `${URL}/api/shop/order?email=${payload.email}`
       );
-      console.log("responseGetAllDataBase", responseGetAllDataBase.data);
 
       if (responseGetAllDataBase.data.length) {
         const responseGetAllInfoPresets = await axios.get(
@@ -337,23 +329,12 @@ export const logInUser = (payload) => {
           responseGetAllInfoPresets.data
         );
 
-        dispatch({
+        return dispatch({
           type: ADD_ALL_MODEL_CART,
           payload: responseGetAllInfoPresets.data,
         });
-        return Swal.fire({
-          text: "Your cart has been updated with your account's items.",
-          title: "Login",
-          icon: "info",
-          confirmButtonColor: "rgb(94 195 191)",
-        });
+
       }
-      return Swal.fire({
-        text: "You have successfully logged in",
-        title: "Login",
-        icon: "success",
-        confirmButtonColor: "rgb(94 195 191)",
-      });
     } catch (error) {
       showErrorAlert(error.message);
     }

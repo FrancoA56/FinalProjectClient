@@ -100,7 +100,7 @@ const ComponentShop = () => {
       <div className="bg-gray-100 min-h-screen dark:bg-[#505050]">
         <div className="container mx-auto p-4">
           {/* Encabezado */}
-          <h1 className="bg-[#303030] inline-block mb-4 w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000]">
+          <h1 className="bg-gray-300 dark:text-white dark:bg-[#303030] text-black inline-block mb-4 w-full rounded 5ec3bf px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#000000]">
             Shop
           </h1>
           {/* Encolumnado */}
