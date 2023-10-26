@@ -113,6 +113,7 @@ const LoginComponents = () => {
 
         // Determine a dónde redirigir según la ubicación anterior
         // state.to esta configurado en el componente cart
+        
         if (location.state && location.state.to) {
           navigate(location.state.to);
         } else {

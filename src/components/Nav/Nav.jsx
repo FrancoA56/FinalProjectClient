@@ -27,6 +27,7 @@ function Nav() {
   const navigate = useNavigate();
 
   const { logout, isAuthenticated } = useAuth0();
+ 
 
   // useEffect para cargar el cart del localStorage
   useEffect(() => {
@@ -38,7 +39,9 @@ function Nav() {
   // Funcion para cerrar sesion
 
   const handleLogOut = (e) => {
+    const actualLocation = window.location.href
     e.preventDefault();
+    
     Swal.fire({
       title: "Are you sure?",
       text: "You are about to log out",
@@ -48,11 +51,11 @@ function Nav() {
       cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {
-      if (isAuthenticated) logout();
-      if (result.isConfirmed) {
-        dispatch(logOutUser(user.name));
-      }
-    });
+      if (isAuthenticated) logout({logoutParams:{returnTo: actualLocation}})
+        if (result.isConfirmed) {
+          dispatch(logOutUser(user.name));
+        }
+      });
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -362,7 +365,7 @@ function Nav() {
               aria-labelledby="dropdownMenuButton1"
             >
               {/* Second dropdown menu items */}
-              {user.name || isAuthenticated ? (
+              {user.name ? (
                 <>
                   <li>
                     <NavLink
