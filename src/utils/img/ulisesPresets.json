@@ -43,7 +43,7 @@
     "name": "Cosmo",
     "price": 33,
     "defaultColor": "green",
-    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833553/Presets/Medium/MediumHome01_mci9gh.png"],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833553/Presets/Medium/MediumHome01_mci9gh.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978698/Presets/Basic/Vista%20completa%20de%20Presets/MediumHome01_grziz9.png"],
     "type": "home",
     "category": "medium"
   },
