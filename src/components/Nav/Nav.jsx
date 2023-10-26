@@ -27,7 +27,6 @@ function Nav() {
   const navigate = useNavigate();
 
   const { logout, isAuthenticated } = useAuth0();
- 
 
   // useEffect para cargar el cart del localStorage
   useEffect(() => {
@@ -39,9 +38,9 @@ function Nav() {
   // Funcion para cerrar sesion
 
   const handleLogOut = (e) => {
-    const actualLocation = window.location.href
+    const actualLocation = window.location.href;
     e.preventDefault();
-    
+
     Swal.fire({
       title: "Are you sure?",
       text: "You are about to log out",
@@ -51,11 +50,12 @@ function Nav() {
       cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {
-      if (isAuthenticated) logout({logoutParams:{returnTo: actualLocation}})
-        if (result.isConfirmed) {
-          dispatch(logOutUser(user.name));
-        }
-      });
+      if (isAuthenticated)
+        logout({ logoutParams: { returnTo: actualLocation } });
+      if (result.isConfirmed) {
+        dispatch(logOutUser(user.name));
+      }
+    });
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -70,7 +70,7 @@ function Nav() {
   };
 
   return (
-    <nav className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4">
+    <nav className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/10 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4 max-h-16 pl-10">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <button
           className="lg:hidden"
@@ -159,7 +159,7 @@ function Nav() {
             data-te-navbar-nav-ref
           >
             {location.pathname !== "/" && (
-              <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <li className="mb-4  lg:mb-0 -mr-1.5" data-te-nav-item-ref>
                 <NavLink // Usa NavLink en lugar de <a>
                   to="/" // Especifica la ruta en el atributo "to"
                   className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
@@ -175,7 +175,7 @@ function Nav() {
             )}
 
             {location.pathname !== "/shop" && (
-              <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <li className="block mb-4  lg:mb-0" data-te-nav-item-ref>
                 <NavLink // Usa NavLink en lugar de <a>
                   to="/shop" // Especifica la ruta en el atributo "to"
                   className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
@@ -192,7 +192,7 @@ function Nav() {
 
             {/* Projects link */}
             {location.pathname !== "/about" && (
-              <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <li className="mb-4 lg:mb-0" data-te-nav-item-ref>
                 <NavLink // Usa NavLink en lugar de <a>
                   to="/about" // Especifica la ruta en el atributo "to"
                   className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
@@ -359,7 +359,7 @@ function Nav() {
 
             {/* Second dropdown menu */}
             <ul
-              className={`absolute z-[1000] float-left m-0 ${
+              className={`absolute z-[1000] float-right right-11  m-0 ${
                 isDropdownOpen ? "block" : "hidden"
               } min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block`}
               aria-labelledby="dropdownMenuButton1"
@@ -395,11 +395,12 @@ function Nav() {
               ) : (
                 <>
                   {" "}
+
                   <li>
                     <a
                       className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                       href="/login"
-                    >
+                      >
                       Login
                     </a>
                   </li>
@@ -408,7 +409,7 @@ function Nav() {
                       className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                       href="/register"
                       data-te-dropdown-item-ref
-                    >
+                      >
                       Register
                     </a>
                   </li>
