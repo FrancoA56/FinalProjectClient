@@ -183,10 +183,10 @@ const CartComponent = () => {
                 {models.map((model) => (
                   <div
                     key={model.id}
-                    className="w-3/4 border rounded-md border-[#909090] py-3 mt-3 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                    className="w-3/4 border rounded-md border-[#909090] py-3 mt-3 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] overflow"
                   >
                     <div className="grid grid-cols-7">
-                      <div className="flex items-center justify-center font-semibold col-span-2 uppercase dark:text-[#ffffff]">
+                      <div className="flex items-center justify-between text-xs text-overflow font-semibold col-span-2 uppercase dark:text-[#ffffff]">
                         <h1> {model.name} </h1>
                       </div>
                       <div className="flex items-center mb-1 justify-center text-sm font-semibold text-[#303030] dark:text-[#bdbdbd] col-span-2 pt-1">
