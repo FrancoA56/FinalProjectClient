@@ -10,11 +10,11 @@ const AboutPageComponent = () => {
       <Nav />
       <div className="bg-gray-100 dark:bg-[#505050]">
         <div className="container mx-auto p-4">
-          <h1 className="bg-[#303030] inline-block mb-4 w-full rounded px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000]">
+          <h1 className="bg-gray-300 dark:bg-[#303030] text-black dark:text-white inline-block mb-4 w-full rounded px-7 pb-2.5 pt-3 text-sm font-semibold uppercase leading-normal shadow-[0_4px_9px_-4px_#000000]">
             The team
           </h1>
           <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-4 rounded-md h-screen grid grid-rows-4 bg-gray-300 dark:bg-[#303030] flex justify-center items-center">
+            <div className="col-span-12 md:col-span-4 rounded-md h-screen grid grid-rows-4 bg-gray-300 dark:bg-[#303030] justify-center items-center">
               <div
                 className="h-3/4 mx-6 text-neutral-500 px-4 py-8 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
