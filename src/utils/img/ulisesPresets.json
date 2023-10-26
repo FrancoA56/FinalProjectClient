@@ -11,7 +11,7 @@
     "name": "Atlantic",
     "price": 2,
     "defaultColor": "white",
-    "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833514/Presets/Basic/BasicShop01_parte_1_icdesy.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697972653/Presets/Basic/BasicShop01_gihutm.png"],
+    "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833514/Presets/Basic/BasicShop01_parte_1_icdesy.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697972653/Presets/Basic/Vista%20completa%20de%20Presets/BasicShop01_gihutm.png"],
     "type": "shop",
     "category": "basic"
   },
@@ -43,7 +43,7 @@
     "name": "Cosmo",
     "price": 33,
     "defaultColor": "green",
-    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833553/Presets/Medium/MediumHome01_mci9gh.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978698/Presets/Basic/Vista%20completa%20de%20Presets/MediumHome01_grziz9.png"],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698338513/Presets/Medium/MediumHome01_s6nhth.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698338600/Presets/Medium/Vista%20completa%20de%20Presets%20Medium/MediumHome01_g55y7o.png"],
     "type": "home",
     "category": "medium"
   },

@@ -10,13 +10,13 @@ const PremiumDetail1 = () => {
     /* Traigo los colores del global  */
     const color = useSelector((state) => state.colores);
   return (
-    <div class={`${color.primary ? color.primary : "bg-white"}`}>
+    <div class={`${color.primary ? color.primary : "bg-white"} dark:bg-gray-700`}>
        {/* **********COLOR PANEL********** */}
        <div className="fixed bottom-2 left-1/4 right-1/4 z-10">
       <ColorPanel />
       </div>
       {/* ********* DARK MODE *********** */}
-      <div className="absolute right-6 top-5">
+      <div className="absolute right-6 top-5 ">
       <DarkMode/>
 
       </div>
@@ -29,7 +29,7 @@ const PremiumDetail1 = () => {
           >
             <li>
               <div class="flex items-center">
-                <a href="#" class={`mr-2 text-sm font-medium ${color.text01 ? color.text01 : "text-gray-900"}`}>
+                <a href="#" class={`mr-2 text-sm font-medium ${color.text01 ? color.text01 : "text-gray-900"} dark:text-white`}>
                   Furniture
                 </a>
                 <svg
@@ -38,7 +38,7 @@ const PremiumDetail1 = () => {
                   viewBox="0 0 16 20"
                   fill="currentColor"
                   aria-hidden="true"
-                  class={`h-5 w-4 ${color.text02 ? color.text02 : "text-gray-500"}`}
+                  class={`h-5 w-4 ${color.text02 ? color.text02 : "text-gray-500"} dark:text-white`}
                 >
                   <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                 </svg>
@@ -46,7 +46,7 @@ const PremiumDetail1 = () => {
             </li>
             <li>
               <div class="flex items-center">
-                <a href="#" class={`mr-2 text-sm font-medium ${color.text01 ? color.text01 : "text-gray-900"}`}>
+                <a href="#" class={`mr-2 text-sm font-medium ${color.text01 ? color.text01 : "text-gray-900"} dark:text-white`}>
                   Living Room
                 </a>
                 <svg
@@ -55,7 +55,7 @@ const PremiumDetail1 = () => {
                   viewBox="0 0 16 20"
                   fill="currentColor"
                   aria-hidden="true"
-                  class={`h-5 w-4 ${color.text02 ? color.text02 : "text-gray-500"}`}
+                  class={`h-5 w-4 ${color.text02 ? color.text02 : "text-gray-500"} dark:text-white`}
                 >
                   <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                 </svg>
@@ -66,7 +66,7 @@ const PremiumDetail1 = () => {
               <a
                 href="#"
                 aria-current="page"
-                class={`font-medium ${color.text02 ? color.text02 : "text-gray-500"} hover:text-gray-600`}
+                class={`font-medium ${color.text02 ? color.text02 : "text-gray-500"} dark:text-white`}
               >
                 Sofa Seccion
               </a>
@@ -111,7 +111,7 @@ const PremiumDetail1 = () => {
         {/*  <!-- Product info --> */}
         <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 class={`text-2xl font-bold tracking-tight ${color.text01 ? color.text01 : "text-gray-900"} sm:text-3xl`}>
+            <h1 class={`text-2xl font-bold tracking-tight ${color.text01 ? color.text01 : "text-gray-900"} sm:text-3xl dark:text-gray-300`}>
               White and wooden living rooms to fill your house with light
             </h1>
           </div>
@@ -119,7 +119,7 @@ const PremiumDetail1 = () => {
           {/* <!-- Options --> */}
           <div class="mt-4 lg:row-span-3 lg:mt-0">
             <h2 class="sr-only">Product information</h2>
-            <p class={`text-3xl tracking-tight ${color.text01 ? color.text01 : "text-gray-900"}`}>$250</p>
+            <p class={`text-3xl tracking-tight ${color.text01 ? color.text01 : "text-gray-900"} dark:text-gray-300`}>$250</p>
 
             {/*<!-- Reviews --> */}
             <div class="mt-6">
@@ -191,7 +191,7 @@ const PremiumDetail1 = () => {
                 <p class="sr-only">4 out of 5 stars</p>
                 <a
                   href="#"
-                  class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                  class="ml-3 text-sm font-medium text-[#d57a3b] hover:text-indigo-500"
                 >
                   116 reviews
                 </a>
@@ -201,7 +201,7 @@ const PremiumDetail1 = () => {
             <form class="mt-10">
               {/*  <!-- Colors -->  */}
               <div>
-                <h3 class={`text-sm font-medium ${color.text01 ? color.text01 : "text-gray-900"}`}>Color</h3>
+                <h3 class={`text-sm font-medium ${color.text01 ? color.text01 : "text-gray-900"} dark:text-gray-300`}>Color</h3>
 
                 <fieldset class="mt-4">
                   <legend class="sr-only">Choose a color</legend>
@@ -302,7 +302,7 @@ const PremiumDetail1 = () => {
                   <h3 class={`text-sm font-medium ${color.text01 ? color.text01 : "text-gray-900"}`}></h3>
                   <a
                     href="#"
-                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-gray-300"
                   >
                     Measure of the space to design
                   </a>
@@ -445,7 +445,7 @@ const PremiumDetail1 = () => {
 
               <button
                 type="submit"
-                class={`mt-10 flex w-full items-center justify-center rounded-md border border-transparent ${color.secondary ? color.secondary : "bg-indigo-600"} px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 hover:opacity-90`}
+                class={`mt-10 flex w-full items-center justify-center rounded-md border border-transparent ${color.secondary ? color.secondary : "bg-[#d57a3b]"} px-8 py-3 text-base font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 hover:opacity-90`}
               >
                 Hire Service
               </button>
@@ -458,7 +458,7 @@ const PremiumDetail1 = () => {
               <h3 class="sr-only">Description</h3>
 
               <div class="space-y-6">
-                <p class={`text-base ${color.text01 ? color.text01 : "text-gray-900"}`}>
+                <p class={`text-base ${color.text01 ? color.text01 : "text-gray-900"} dark:text-gray-200`}>
                   We design spaces to your liking. A living room in white and
                   wood is a timeless classic that never fails, as it creates a
                   clean and pleasant space full of brightness and freshness. The
@@ -473,19 +473,19 @@ const PremiumDetail1 = () => {
 
               <div class="mt-4">
                 <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                  <p class={`${color.text02 ? color.text02 : "text-gray-500"}`}>
+                  <p class={`${color.text02 ? color.text02 : "text-gray-500"} dark:text-gray-300`}>
                     Minimalist white and wood living room.
                   </p>
 
-                  <p class={`${color.text02 ? color.text02 : "text-gray-500"}`}>
+                  <p class={`${color.text02 ? color.text02 : "text-gray-500"} dark:text-gray-300`}>
                     White and wood Mediterranean-style living room.
                   </p>
 
-                  <p class={`${color.text02 ? color.text02 : "text-gray-500"}`}>
+                  <p class={`${color.text02 ? color.text02 : "text-gray-500"} dark:text-gray-300`}>
                     Wooden furniture and brown cushions in a white living room.
                   </p>
 
-                  <p class={`${color.text02 ? color.text02 : "text-gray-500"}`}>
+                  <p class={`${color.text02 ? color.text02 : "text-gray-500"} dark:text-gray-300`}>
                     Dark brown is perfect for a white and wooden living room.
                   </p>
                 </ul>
@@ -496,7 +496,7 @@ const PremiumDetail1 = () => {
               <h2 class={`text-sm font-medium ${color.text01 ? color.text01 : "text-gray-900"}`}></h2>
 
               <div class="mt-4 space-y-6">
-                <p class={`text-sm ${color.text02 ? color.text02 : "text-gray-500"}`}>
+                <p class={`text-sm ${color.text02 ? color.text02 : "text-gray-500"} dark:text-gray-300`}>
                   You've seen that the combination of white and wood is a
                   fail-proof basic that helps flood your living room with light.
                   Therefore, it can be the main solution for decorating a small
