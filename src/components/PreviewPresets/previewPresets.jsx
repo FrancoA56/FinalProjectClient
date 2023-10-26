@@ -27,20 +27,20 @@ const PreviewPresetsComponent = () => {
     <div>
       {
         /* *********BASIC********* */
-        (name === "SimpleStart" && <BasicHome1 />) ||
-          (name === "FundamentalFlow" && <BasicHome02 />) ||
-          (name === "MinimalMart" && <BasicShop1 />) ||
-          (name === "CompanyProfile" && <Temp01Home />) ||
-          (name === "EasyCart" && <BasicCart1 />) ||
+          (name === "Silent" && <BasicHome1 />) ||
+          (name === "Gourmet Grove" && <BasicHome02 />) ||
+          (name === "Atlantic" && <BasicShop1 />) ||
+          (name === "Corporate" && <Temp01Home />) ||
+          (name === "Simple" && <BasicCart1 />) ||
           /* *********MEDIUM********* */
-          (name === "BalancedFlow" && <MediumHome1 />) ||
-          (name === "InsightDetail" && <MediumDetail1 />) ||
-          (name === "TrendyShop" && <MediumShop />) || // * FALTAN IMAGENES
+          (name === "Cosmo" && <MediumHome1 />) ||
+          (name === "Prestige" && <MediumDetail1 />) ||
+          (name === "Motion" && <MediumShop />) || // * FALTAN IMAGENES
           /* ********* PREMIUM ********* */
-          (name === "PrestigeMarket" && <PremiumShop1 />) ||
-          (name === "EliteDetail" && <PremiumDetail1 />) ||
-          (name === "LuxuryLanding" && <PremiumHome01 />) || // * FALTAN IMAGENES
-          (name === "ExclusiveCart" && <PremiumCart01 />) // * FALTAN IMAGENES y color
+          (name === "Cali" && <PremiumShop1 />) ||
+          (name === "Trend" && <PremiumDetail1 />) ||
+          (name === "Sonic" && <PremiumHome01 />) || // * FALTAN IMAGENES
+          (name === "Thunder" && <PremiumCart01 />) // * FALTAN IMAGENES y color
       }
     </div>
   );
