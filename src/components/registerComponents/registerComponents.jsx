@@ -7,7 +7,7 @@ import { validation } from "../validation";
 // import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "tailwindcss/tailwind.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logInSet, logInUser } from "../../Redux/actions";
 import decodeToken from "../loginComponents/decodeToken";
 
@@ -18,6 +18,13 @@ function RegisterComponents() {
   const [password, setPassword] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [popUpValidation, setPopUpValidation] = useState(false);
+  const {login} = useSelector(state=>state)
+
+  useEffect(() => {
+    if(login === true){
+      navigate("/")
+    }
+  }, [login, navigate])
 
   const [validations, setValidations] = useState({
     hasUppercase: false,

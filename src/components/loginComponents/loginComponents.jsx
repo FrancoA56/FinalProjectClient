@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logInUser, logInSet } from "../../Redux/actions";
 import { useState } from "react";
 import { useNavigate, Link, NavLink, useLocation } from "react-router-dom";
@@ -16,6 +16,8 @@ const LoginComponents = () => {
   const URL = process.env.REACT_APP_API;
   const { loginWithPopup, user, isAuthenticated } = useAuth0();
   const [PopupForgot, setPopupForgot] = useState(false);
+  const login = useSelector((state) => state.login);
+
 
   const [input, setInput] = useState({
     email: "",
@@ -39,6 +41,12 @@ const LoginComponents = () => {
       [e.target.name]: e.target.value,
     });
   }
+
+  useEffect(() => {
+    if(login === true){
+      navigate("/")
+    }
+  }, [login, navigate])
 
   async function forgotPassword() {
     try {
@@ -113,6 +121,7 @@ const LoginComponents = () => {
 
         // Determine a dónde redirigir según la ubicación anterior
         // state.to esta configurado en el componente cart
+        
         if (location.state && location.state.to) {
           navigate(location.state.to);
         } else {
