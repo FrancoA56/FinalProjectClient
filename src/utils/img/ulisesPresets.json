@@ -51,7 +51,7 @@
     "name": "Prestige",
     "price": 38,
     "defaultColor": "brown",
-    "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833552/Presets/Medium/MediumDetail01_parte_1_pw3sho.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978696/Presets/Basic/Vista%20completa%20de%20Presets/MediumDetail01_eyqll8.png"],
+    "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362137/Presets/Medium/MediumDetail01_wiflxm.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362226/Presets/Basic/Vista%20completa%20de%20Presets/MediumDetail01_mz8hqd.png"],
     "type": "detail",
     "category": "medium"
   },
@@ -75,7 +75,7 @@
     "name": "Sonic",
     "price": 85,
     "defaultColor": "red",
-    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240123/Presets/Premium/home-Premium.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240061/Presets/Premium/Vista%20completa%20de%20Presets%20Premium/home-Premium-full.png"],
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362360/Presets/Premium/PremiumHome01_yjohrl.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362287/Presets/Basic/Vista%20completa%20de%20Presets/PremiumHome01_wkw539.png"],
     "type": "home",
     "category": "premium"
   },
