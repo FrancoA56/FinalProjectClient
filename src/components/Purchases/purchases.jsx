@@ -4,11 +4,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Purchases = () => {
   const URL = process.env.REACT_APP_API;
   const user = useSelector((state) => state.user);
+  const login = useSelector((state) => state.login);
   const [purchase, setPurchase] = useState([]);
+  const navigate = useNavigate();
 
   const stars = () => {
     const ratingNumber = Number(formData.rating);
@@ -20,46 +23,6 @@ const Purchases = () => {
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(1)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(2)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(3)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(4)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(5)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-          </>
-        );
-        case 4:
-          return (
-            <>
-            <button
-            type="button"
-            class="material-symbols-outlined text-amber-500"
-            onClick={() => handleChangeRating(1)}
             >
               <i class="fas fa-star"></i>
             </button>
@@ -67,119 +30,39 @@ const Purchases = () => {
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(2)}
-              >
+            >
               <i class="fas fa-star"></i>
             </button>
             <button
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(3)}
-              >
+            >
               <i class="fas fa-star"></i>
             </button>
             <button
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(4)}
-              >
+            >
               <i class="fas fa-star"></i>
             </button>
             <button
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(5)}
-              >
-              <i class="far fa-star"></i>
+            >
+              <i class="fas fa-star"></i>
             </button>
           </>
         );
-        case 3:
-          return (
-            <>
+      case 4:
+        return (
+          <>
             <button
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(1)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(2)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(3)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(4)}
-              >
-              <i class="far fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(5)}
-              >
-              <i class="far fa-star"></i>
-            </button>
-          </>
-        );
-        case 2:
-          return (
-            <>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(1)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(2)}
-              >
-              <i class="fas fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(3)}
-              >
-              <i class="far fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(4)}
-              >
-              <i class="far fa-star"></i>
-            </button>
-            <button
-              type="button"
-              class="material-symbols-outlined text-amber-500"
-              onClick={() => handleChangeRating(5)}
-              >
-              <i class="far fa-star"></i>
-            </button>
-          </>
-        );
-        case 1:
-          return (
-            <>
-            <button
-            type="button"
-            class="material-symbols-outlined text-amber-500"
-            onClick={() => handleChangeRating(1)}
             >
               <i class="fas fa-star"></i>
             </button>
@@ -187,28 +70,148 @@ const Purchases = () => {
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(2)}
-              >
-              <i class="far fa-star"></i>
+            >
+              <i class="fas fa-star"></i>
             </button>
             <button
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(3)}
-              >
-              <i class="far fa-star"></i>
+            >
+              <i class="fas fa-star"></i>
             </button>
             <button
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(4)}
-              >
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(5)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(1)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(2)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(3)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(4)}
+            >
               <i class="far fa-star"></i>
             </button>
             <button
               type="button"
               class="material-symbols-outlined text-amber-500"
               onClick={() => handleChangeRating(5)}
-              >
+            >
+              <i class="far fa-star"></i>
+            </button>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(1)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(2)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(3)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(4)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(5)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(1)}
+            >
+              <i class="fas fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(2)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(3)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(4)}
+            >
+              <i class="far fa-star"></i>
+            </button>
+            <button
+              type="button"
+              class="material-symbols-outlined text-amber-500"
+              onClick={() => handleChangeRating(5)}
+            >
               <i class="far fa-star"></i>
             </button>
           </>
@@ -339,7 +342,11 @@ const Purchases = () => {
         console.log("ERROR: ", error);
       }
     })();
-  }, [user]);
+
+    if (login === false) {
+      navigate("/");
+    }
+  }, [user, login, navigate]);
 
   return (
     <div className=" bg-gray-100 dark:bg-[#505050]">
@@ -385,10 +392,7 @@ const Purchases = () => {
                 day: "numeric",
               });
               return row.templates.map((template, templateIndex) => (
-                <tr
-                  key={index}
-                  className="bg-gray-300 dark:bg-gray-400 "
-                >
+                <tr key={index} className="bg-gray-300 dark:bg-gray-400 ">
                   {templateIndex === 0 && (
                     <>
                       <td rowSpan={rowspan} className={styleRow}>
@@ -434,7 +438,10 @@ const Purchases = () => {
         {/*************************  FORM POPUP **********************************/}
         {popUpOpen.value && (
           /* Este div me muestra lo que queda en el fondo */
-          <div key={popUpOpen.id} className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
+          <div
+            key={popUpOpen.id}
+            className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center"
+          >
             {/* <div className="p-1 rounded-md "> */}
             <div className="mt-1">
               {/* ... Tu formulario aquí */}

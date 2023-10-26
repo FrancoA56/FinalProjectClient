@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Nav from "../Nav/Nav";
@@ -14,7 +14,7 @@ const PayComponent = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
-  const deployment = useSelector((state) => state.deployment);
+  const login = useSelector((state) => state.login);
   const deploymentCost = useSelector((state) => state.deploymentCost);
 
   //pop up for transfer details
@@ -141,6 +141,12 @@ const PayComponent = () => {
       "You will receive an email with the bank account details"
     ) && navigate("/purchases");
   };
+
+  useEffect(() => {
+    if(login === false){
+      navigate("/")
+    }
+  }, [login, navigate])
 
   return (
     <div className="bg-gray-100 dark:bg-[#505050] h-screen overflow-auto">

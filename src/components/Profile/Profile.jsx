@@ -5,14 +5,23 @@ import { editUserRedux, logInUser } from "../../Redux/actions";
 import decodeToken from "../loginComponents/decodeToken";
 import Swal from "sweetalert2";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   // traigo el usuario del estado global
   const user = useSelector((state) => state.user);
+  const login = useSelector((state) => state.login);
   // console.log(user);
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API;
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if(login === false){
+      navigate("/")
+    }
+  }, [login, navigate])
+  
   // construyo un estado local para pasarselo a la action de redux "editUserRedux()"
   const [userLocal, setuserLocal] = useState({
     email: user.email,
