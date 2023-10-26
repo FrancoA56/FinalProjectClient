@@ -1,36 +1,31 @@
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import style from "./home.module.css";
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-// import { useSelector } from 'react-redux';
-
-import plantillas from "../../utils/img/exampleModel.json";
-import { useSelector } from "react-redux";
 
 const HomeComponent = () => {
-
   // Estados locales para hacer la "animacion"
   const [activeLeftCard, setActiveLeftCard] = useState(false);
-  const [activeRigthCard, setActiveRigthCard] = useState(false);
+  const [activeRightCard, setActiveRightCard] = useState(false);
 
   // const user = useSelector((state) => state.user);
 
   // Click q hace que la card de la izq pase a la derecha
   const handleImageLeftClick = (e) => {
     e.preventDefault();
-    activeRigthCard && setActiveRigthCard(false);
+    activeRightCard && setActiveRightCard(false);
     setActiveLeftCard(true);
   };
   // Click q hace que la card de la derecha pase a la izquierda
   const handleImageRigthClick = (e) => {
     e.preventDefault();
     activeLeftCard && setActiveLeftCard(false);
-    setActiveRigthCard(true);
+    setActiveRightCard(true);
   };
   // Click q hace que la card que era del centro vuelva al centro
   const handleImageCenterClick = (e) => {
     e.preventDefault();
     setActiveLeftCard(false);
-    setActiveRigthCard(false);
+    setActiveRightCard(false);
   };
 
   //   Home
@@ -62,75 +57,106 @@ const HomeComponent = () => {
                 <div className="w-3/4 border-b border-[#909090] mt-2"></div>
               </div>
               <div className="row-span-3 flex items-center">
-
-
-
                 {/* CARROUSEL */}
-                
+
                 {/* Imagen de la izq */}
 
                 <div
                   onClick={handleImageLeftClick}
                   className={
-                    !activeLeftCard ? "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 md:translate-x-44 ease-in-out duration-300 blur-sm shadow-[0_9px_9px_-4px_#000000] sm:translate-x-20 sm:h-20" : 
-                    "w-3/4 max-h-80 flex rounded-lg items-start justify-center overflow-hidden z-10 transform md:translate-x-96 ease-in-out duration-300 shadow-[0_9px_9px_-4px_#000000] sm:translate-x-44"
+                    !activeLeftCard
+                      ? "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 md:translate-x-44 ease-in-out duration-300 blur-sm shadow-[0_9px_9px_-4px_#000000] sm:translate-x-20 sm:h-20"
+                      : "w-3/4 max-h-80 flex rounded-lg items-start justify-center overflow-hidden z-10 transform md:translate-x-96 ease-in-out duration-300 shadow-[0_9px_9px_-4px_#000000] sm:translate-x-44"
                   }
                 >
-                  {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
-                  {/* <NavLink to={`/detail/${bestRanked[1].id}`}> */}
-                  <img
-                    className={style.img}
-                    src={
-                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697852425/Presets/Basic/BasicHome02_parte1_u5kc4e.png"
-                    } /* src={bestRanked[1].url} */
-                    alt={`plantilla.name`} /* alt={bestRanked[1].name} */
-                  />
-                  {/* </NavLink> */}
+                  {activeLeftCard ? (
+                    <Link to={`/detail/1`}>
+                      <img
+                        className={style.img}
+                        src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833592/Presets/Premium/PremiumDetail01_parte_1_oyzhpq.png"
+                        alt="Trend"
+                      />
+                    </Link>
+                  ) : (
+                    <img
+                      className={style.img}
+                      src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833592/Presets/Premium/PremiumDetail01_parte_1_oyzhpq.png"
+                      alt="Trend"
+                    />
+                  )}
                 </div>
                 {/* Imagen del centro */}
                 <div
                   onClick={handleImageCenterClick}
                   className={
-                    (activeLeftCard && "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 transform sm:-translate-x-40 md:-translate-x-80 ease-in-out duration-300 blur-sm sm:h-20") ||
-                    (activeRigthCard && "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 transform sm:translate-x-40 md:translate-x-80 ease-in-out duration-300 blur-sm sm:h-20") ||
+                    (activeLeftCard &&
+                      "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 transform sm:-translate-x-40 md:-translate-x-80 ease-in-out duration-300 blur-sm sm:h-20") ||
+                    (activeRightCard &&
+                      "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 transform sm:translate-x-40 md:translate-x-80 ease-in-out duration-300 blur-sm sm:h-20") ||
                     "w-3/4 max-h-80 flex rounded-lg items-start justify-center overflow-hidden z-10 transform ease-in-out duration-300 shadow-[0_9px_9px_-4px_#000000]"
                   }
                 >
-                  {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
-                  {/* <NavLink to={`/detail/${bestRanked[0].id}`}> */}
-                  <img
-                    className={`${style.img}`}
-                    src={
-                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833592/Presets/Premium/PremiumDetail01_parte_1_oyzhpq.png"
-                    } /* src={bestRanked[0].url} */
-                    alt={"plantillas[1].name"} /* alt={bestRanked[0].name} */
-                  />
-                  {/* </NavLink> */}
+                  {!activeLeftCard && !activeRightCard ? (
+                    <Link to={"/detail/3"}>
+                      <img
+                        className={`${style.img}`}
+                        src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240123/Presets/Premium/home-Premium.png"
+                        alt="sonic"
+                      />
+                    </Link>
+                  ) : (
+                    <img
+                      className={`${style.img}`}
+                      src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240123/Presets/Premium/home-Premium.png"
+                      alt="sonic"
+                    />
+                  )}
                 </div>
-                {/* Imagen de la derecha  */}
+
                 <div
                   onClick={handleImageRigthClick}
                   className={
-                    !activeRigthCard ? "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 md:-translate-x-40 ease-in-out duration-300 blur-sm shadow-[0_9px_9px_-4px_#000000] sm:h-20 sm:-translate-x-20" : "w-3/4 max-h-80 flex rounded-lg items-start justify-center overflow-hidden z-10 transform md:-translate-x-96 ease-in-out duration-300 shadow-[0_9px_9px_-4px_#000000] sm:-translate-x-44"
+                    !activeRightCard
+                      ? "flex items-start justify-center w-7/12 md:h-40 overflow-hidden rounded-lg z-0 md:-translate-x-40 ease-in-out duration-300 blur-sm shadow-[0_9px_9px_-4px_#000000] sm:h-20 sm:-translate-x-20"
+                      : "w-3/4 max-h-80 flex rounded-lg items-start justify-center overflow-hidden z-10 transform md:-translate-x-96 ease-in-out duration-300 shadow-[0_9px_9px_-4px_#000000] sm:-translate-x-44"
                   }
                 >
-                  {/* QUEDA ARMADO PARA QUE LA IMAGEN TE LLEVE AL DETAIL DE LA PLANTILLA (si es que hay) */}
-                  {/* <NavLink to={`/detail/${bestRanked[2].id}`}> */}
-                  <img
-                    className={style.img}
-                    src={
-                      "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833514/Presets/Basic/BasicShop01_parte_1_icdesy.png"
-                    } /* src={bestRanked[2].url} */
-                    alt={`plantillas.name`} /* alt={bestRanked[2].name} */
-                  />
-                  {/* </NavLink> */}
+                  {activeRightCard ? (
+                    <Link to="detail/2">
+                      <img
+                        className={style.img}
+                        src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698192710/Presets/Basic/PremiumCart01_xvf8rg.png"
+                        alt="Thunder"
+                      />
+                    </Link>
+                  ) : (
+                    <img
+                      className={style.img}
+                      src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698192710/Presets/Basic/PremiumCart01_xvf8rg.png"
+                      alt="Thunder"
+                    />
+                  )}
                 </div>
               </div>
               {/* ************************************************* */}
               <div className="flex justify-center items-center">
-                <p className="animate-bounce font-semibold text-white">
-                  "All templates are excellent !!!..."
-                </p>
+                {activeLeftCard && (
+                  <p className="animate-pulse italic text-white w-1/2">
+                    "... My sales have increased incredibly! People see my page and want me to design all their spaces! These templates are the best! ..."
+                  </p>
+                )}
+                {activeRightCard && (
+                  <p className="animate-pulse italic text-white w-1/2">
+                    "... I was able to create my first website for my Sports online
+                    Store using this template! Our customers love how intuitive
+                    it is! ..."
+                  </p>
+                )}
+                {(!activeRightCard && !activeLeftCard) && (
+                  <p className="animate-pulse italic text-white  w-1/2">
+                   "... I've been in the technology retail business for years, but everything changed when I invested in building my website with you. This template is just what I was looking for! ..."
+                  </p>
+                )}
               </div>{" "}
               {/* ************************************************* */}
               <div className="flex items-center justify-center overflow-hidden">
