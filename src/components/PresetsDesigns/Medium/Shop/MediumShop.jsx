@@ -1,4 +1,5 @@
 import React from "react";
+import DarkMode from "../../../DarkMode/darkmode";
 
 const MediumShop = () => {
   // Ejemplo de datos de Products
@@ -70,28 +71,31 @@ const MediumShop = () => {
   ];
 
   return (
-    <div className="bg-green-200 p-4">
-      <div className="bg-green-400 pt-4 px-4 pb-1 rounded shadow-md my-4 mx-8">
+    <div className="bg-green-200 dark:bg-[#112213] p-4">
+      <div className="bg-green-400 dark:bg-green-800 pt-4 px-4 pb-1 rounded shadow-md my-4 mx-8">
         {/* Barra de búsqueda */}
-        <div className="flex items-center flex-wrap justify-between mb-4 ml-6">
+        <div className="flex items-center flex-wrap justify-between mb-4 ml-6 ">
           <input
             type="text"
             placeholder="Search by name..."
-            className="w-full sm:w-1/2 px-3 py-2 rounded border bg-green-100 mb-2 sm:mb-0"
+            className="w-full sm:w-1/2 px-3 py-2 rounded border bg-green-100 dark:text-gray-200 dark:bg-green-950 dark:border-green-950 mb-2 sm:mb-0"
           />
-          <div className="mr-6 mt-2 sm:mt-0">
+          <div className="pl-16">
+            <DarkMode />
+          </div>
+          <div className="mr-6 mt-2 sm:mt-0 dark:text-gray-200">
             {/* Dropdowns de filtros */}
-            <select className="px-3 py-2 rounded border w-60 mx-4 sm:w-1/4 bg-green-100 mb-2 sm:mb-0">
+            <select className="px-3 py-2 rounded border w-60 mx-4 sm:w-1/4 bg-green-100 dark:bg-green-950 dark:border-green-950 mb-2 sm:mb-0">
               <option value="filtro1">Filter 1</option>
               <option value="filtro2">Filter 2</option>
               <option value="filtro3">Filter 3</option>
             </select>
-            <select className="px-3 py-2 rounded border w-60 mx-4 sm:w-1/4 bg-green-100 mb-2 sm:mb-0">
+            <select className="px-3 py-2 rounded border w-60 mx-4 sm:w-1/4 bg-green-100 dark:bg-green-950 dark:border-green-950 mb-2 sm:mb-0">
               <option value="filtro4">Filter 4</option>
               <option value="filtro5">Filter 5</option>
               <option value="filtro6">Filter 6</option>
             </select>
-            <select className="px-3 py-2 rounded border w-60 mx-4 sm:w-1/4 bg-green-100">
+            <select className="px-3 py-2 rounded border w-60 mx-4 sm:w-1/4 bg-green-100 dark:bg-green-950 dark:border-green-950">
               <option value="filtro4">Filter 4</option>
               <option value="filtro5">Filter 5</option>
               <option value="filtro6">Filter 6</option>
@@ -99,13 +103,13 @@ const MediumShop = () => {
           </div>
         </div>
       </div>
-      <div className="bg-green-400 p-4 rounded shadow-md mx-8">
+      <div className="bg-green-400  dark:bg-green-800 p-4 rounded shadow-md mx-8">
         {/* Listado de Products */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 p-4">
           {products.map((Product) => (
             <div
               key={Product.id}
-              className="bg-green-100 border rounded p-4 shadow-md flex flex-col mb-4"
+              className="bg-green-100 dark:bg-green-950 dark:border-green-950 border rounded p-4 shadow-md flex flex-col mb-4"
             >
               <div className="flex-shrink-0">
                 <img
@@ -115,15 +119,15 @@ const MediumShop = () => {
                 />
               </div>
               <div className="mt-4 flex-grow">
-                <h2 className="text-lg font-semibold">{Product.nombre}</h2>
-                <p className="text-gray-600">{Product.caracteristica}</p>
-                <p className="text-lg font-semibold mt-2">{Product.precio}</p>
+                <h2 className="text-lg font-semibold dark:text-gray-200">{Product.nombre}</h2>
+                <p className="text-gray-600 dark:text-[#909090]">{Product.caracteristica}</p>
+                <p className="text-lg font-semibold mt-2 dark:text-gray-200">{Product.precio}</p>
               </div>
               <div className="mt-4">
-                <button className="bg-green-500 text-white px-4 py-2 rounded mr-2">
+                <button className="bg-green-500 dark:bg-green-700 text-white px-4 py-2 rounded mr-2">
                   Add to cart
                 </button>
-                <button className="bg-gray-400 text-white px-4 py-2 rounded">
+                <button className="bg-gray-400 dark:bg-[#303030] text-white px-4 py-2 rounded">
                   View Detail
                 </button>
               </div>
