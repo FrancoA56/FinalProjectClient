@@ -3,7 +3,7 @@ const people = [
     name: "Matias Maidana",
     role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1698258784/Mati_i5yjnf.jpg",
+      "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,b_rgb:262c35/v1698258784/Mati_i5yjnf.jpg",
     linkedin: "https://www.linkedin.com/in/matias-maidana2129",
     github: "https://github.com/AMMatia",
   },
@@ -35,7 +35,7 @@ const people = [
     name: "Tomas Iglesias",
     role: "Full-stack developer",
     imageUrl:
-      "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1698260298/Tomas_agiacz.jpg",
+      "https://res.cloudinary.com/codecrafttemplates/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,b_rgb:262c35/v1698260298/Tomas_agiacz.jpg",
     linkedin: "https://www.linkedin.com/in/tomiglesias/",
     github: "https://github.com/zTom1909/",
   },

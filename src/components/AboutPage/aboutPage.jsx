@@ -53,7 +53,7 @@ const AboutPageComponent = () => {
                   style={{ flexBasis: "50%", maxWidth: "250px" }}>
                     <div className="flex items-center">
                     <img
-                      className="h-28 w-28 rounded-full"
+                      className="h-28 w-28 rounded-full ring ring-teal-300 ring-offset-base-100 ring-offset-2 border border-gray-500"
                       src={person.imageUrl}
                       alt=""
                     />
