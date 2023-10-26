@@ -434,7 +434,7 @@ const Purchases = () => {
         {/*************************  FORM POPUP **********************************/}
         {popUpOpen.value && (
           /* Este div me muestra lo que queda en el fondo */
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
+          <div key={popUpOpen.id} className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
             {/* <div className="p-1 rounded-md "> */}
             <div className="mt-1">
               {/* ... Tu formulario aquí */}
