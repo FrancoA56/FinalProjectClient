@@ -100,14 +100,14 @@ const HomeComponent = () => {
                     <Link to={"/detail/3"}>
                       <img
                         className={`${style.img}`}
-                        src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240123/Presets/Premium/home-Premium.png"
+                        src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362360/Presets/Premium/PremiumHome01_yjohrl.png"
                         alt="sonic"
                       />
                     </Link>
                   ) : (
                     <img
                       className={`${style.img}`}
-                      src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698240123/Presets/Premium/home-Premium.png"
+                      src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362360/Presets/Premium/PremiumHome01_yjohrl.png"
                       alt="sonic"
                     />
                   )}
