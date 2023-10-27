@@ -28,7 +28,7 @@ const Plantillas = ({
 
   // ? PAGINATION
   const [templatesNum, setTemplatesNum] = useState([]);
-  const presetsperPage = 6;
+  const presetsperPage = 4;
   const currentPage = useSelector((state) => state.currentPage);
   const fetchTemplatesNum = async (filters, orderType, orderPriority) => {
     try {
@@ -118,7 +118,8 @@ const Plantillas = ({
 
   return (
     /* contenedor */
-    <div className="flex flex-wrap w-full items-start my-6 justify-center font-custom">
+    <div className="flex flex-wrap w-full items-start my-4 justify-center font-custom">
+      
       {templates.map(
         (img, index) =>
           /* Contenedor cards */
