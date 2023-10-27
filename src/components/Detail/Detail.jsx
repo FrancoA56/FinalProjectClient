@@ -136,6 +136,16 @@ const PresetsDetail = () => {
               <div>
                 {" "}
                 <p className="font-semibold mt-2 mb-2 text-xl text-[#909090] capitalize">
+                  {presets.rating || 0}
+                  <i className="ml-2 fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />
+                </p>
+                <span className="block border-t border-[#909090] uppercase text-sm text-[#909090]">
+                  Rating
+                </span>
+              </div>
+              <div>
+                {" "}
+                <p className="font-semibold mt-2 mb-2 text-xl text-[#909090] capitalize">
                   {new Date(presets.release).toLocaleDateString("es-ES", {
                     day: "2-digit",
                     month: "2-digit",
@@ -147,8 +157,35 @@ const PresetsDetail = () => {
                 </span>
               </div>
             </dl>
+            <div className="mt-12 items-center justify-betweer mb-56">
+              {cart.some((item) => item.id === presets.id) ? (
+                <button
+                  className="bg-logo dark:bg-[#3a8a87] w-52 rounded-md px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  onClick={removePreset(presets.id)}
+                >
+                  Remove from Cart
+                </button>
+              ) : (
+                <button
+                  className="inline-block bg-logo dark:bg-[#3a8a87] w-52 rounded-md px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                  onClick={buyPreset(presets.id)}
+                >
+                  Add to Cart
+                </button>
+              )}
+              <NavLink to={`/preview/${presets.name}`} target="_blank">
+                <button
+                  className="bg-[#303030] ml-24 w-52 rounded-md px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
+                      text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#505050] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                >
+                  PREVIEW
+                </button>
+              </NavLink>
+            </div>
           </div>
-          <div className="mt-28 grid grid-cols-1 grid-rows-2 gap-4 sm:gap-6 lg:gap-8 items-center justify-between">
+          <div className="mt-44 grid grid-cols-1 grid-rows-2 gap-0 sm:gap-0 lg:gap-0 items-center justify-between">
             {presets.images &&
               presets.images.slice(1, 5).map((image, index) => (
                 <div
@@ -161,52 +198,23 @@ const PresetsDetail = () => {
                   }}
                   onMouseMove={handleMouseMove}
                   style={{
-                    cursor: isHovered ?  'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'currentColor\' viewBox=\'0 0 20 20\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z\' clip-rule=\'evenodd\' /%3E%3C/svg%3E") 0 0, auto'
-                   : "auto",
+                    cursor: isHovered
+                      ? "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 20 20'%3E%3Cpath fill-rule='evenodd' d='M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z' clip-rule='evenodd' /%3E%3C/svg%3E\") 0 0, auto"
+                      : "auto",
                   }}
                 >
                   <img
                     src={image}
                     alt={presets.name}
                     className={`w-full h-auto ${
-                      isHovered ? "transform scale-150" 
-                      : ""
+                      isHovered ? "transform scale-150" : ""
                     }`}
                     style={{
                       transformOrigin: `${hoveredCoords.x}% ${hoveredCoords.y}%`,
                     }}
                   />
-
                 </div>
               ))}
-            <div className="items-center justify-betweer mb-56">
-              <NavLink to={`/preview/${presets.name}`} target="_blank">
-                <button
-                  className="bg-logo dark:bg-[#3a8a87] mr-4 w-52 rounded-md 5ec3bf my-16 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                >
-                  PREVIEW
-                </button>
-              </NavLink>
-
-              {cart.some((item) => item.id === presets.id) ? (
-                <button
-                  className="bg-logo dark:bg-[#3a8a87] w-52 rounded-md 5ec3bf my-16 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                  onClick={removePreset(presets.id)}
-                >
-                  Remove from Cart
-                </button>
-              ) : (
-                <button
-                  className="inline-block bg-logo dark:bg-[#3a8a87] w-52 rounded-md 5ec3bf my-16 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal
-                  text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                  onClick={buyPreset(presets.id)}
-                >
-                  Add to Cart
-                </button>
-              )}
-            </div>
           </div>
 
           {/*             <img
