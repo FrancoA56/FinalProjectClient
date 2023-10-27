@@ -357,16 +357,16 @@ const Purchases = () => {
         </h1>
         <table className="w-full rounded ">
           <thead className="">
-            <tr className="bg-gray-500 text-white dark:bg-[#303030] ">
-              <th className="border border-slate-300 ">Purchase N°</th>
-              <th className="border border-slate-300 ">Date</th>
-              <th className="border border-slate-300 ">Status</th>
-              <th className="border border-slate-300 ...">Name</th>
-              <th className="border border-slate-300 ...">Price</th>
-              <th className="border border-slate-300 ...">Color</th>
-              <th className="border border-slate-300 ...">Type</th>
-              <th className="border border-slate-300 ...">Category</th>
-              <th className="border border-slate-300 ...">Review</th>
+            <tr className="text-black dark:text-white rounded-md overflow-hidden">
+              <th className=" bg-gray-200 dark:bg-[#303030]  rounded-s  ">Purchase N°</th>
+              <th className=" bg-gray-200 dark:bg-[#303030]  ">Date</th>
+              <th className=" bg-gray-200 dark:bg-[#303030]  ">Status</th>
+              <th className=" bg-gray-200 dark:bg-[#303030]  ">Name</th>
+              <th className=" bg-gray-200 dark:bg-[#303030]  ">Price</th>
+              <th className=" bg-gray-200 dark:bg-[#303030]  ">Color</th>
+              <th className=" bg-gray-200 dark:bg-[#303030]  ">Type</th>
+              <th className=" bg-gray-200 dark:bg-[#303030]  ">Category</th>
+              <th className=" bg-gray-200 dark:bg-[#303030]  rounded-e">Review</th>
             </tr>
           </thead>
 
@@ -377,11 +377,10 @@ const Purchases = () => {
               const styleRow =
                 index % 2 === 0
                   ? "border border-slate-100 p-2"
-                  : "border border-slate-300 p-2";
+                  : "border border-slate-300 dark:border-[#505050] p-2";
               const date = new Date(row.date).toLocaleDateString("en-us", {
                 weekday: "long",
-                year: "numeric",
-                month: "short",
+                year: "numeric",                month: "short",
                 day: "numeric",
               });
               return row.templates.map((template, templateIndex) => {
