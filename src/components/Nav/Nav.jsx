@@ -227,7 +227,7 @@ function Nav() {
           <DarkMode />
         </div>
         {/* Right elements */}
-        <div className="relative flex items-center justify-around">
+        <div className="relative flex items-center justify-around mb-2">
           {/* Cart Icon */}
           <NavLink
             to="/cart"
