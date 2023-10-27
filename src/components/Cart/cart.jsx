@@ -55,7 +55,7 @@ const CartComponent = () => {
           <div className="grid grid-cols-12 gap-4">
             {/* Columna izquierda para la imagen del producto */}
             <div
-              className="col-span-12 md:col-span-8 h-screen rounded-md overflow-auto"
+              className="col-span-12 md:col-span-8 h-screen rounded-md overflow-auto menu-item"
               style={{
                 background:
                   "radial-gradient( 40rem circle at bottom, rgb(105, 105, 105), black)",
@@ -176,7 +176,7 @@ const CartComponent = () => {
               </div>
 
               {/* medio */}
-              <div className="row-span-3 flex flex-col mt-5 items-center overflow-auto">
+              <div className="row-span-3 flex flex-col mt-5 items-center overflow-auto menu-item">
                 {models.map((model) => (
                   <div
                     key={model.id}

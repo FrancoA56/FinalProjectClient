@@ -30,6 +30,8 @@ function App() {
 
   const presets = useSelector((state) => state.presets);
 
+  const theme = localStorage.getItem("theme")
+
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken && !isLoggedIn) {
@@ -72,7 +74,7 @@ function App() {
   }, [dispatch, isLoggedIn, URL]);
 
   return (
-    <div className="App">
+    <div className={`App ${theme}`}>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
