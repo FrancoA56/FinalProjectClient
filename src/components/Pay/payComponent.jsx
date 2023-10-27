@@ -51,7 +51,9 @@ const PayComponent = () => {
   // funcion edita la base de datos USER
   const payOrderPost = async (order) => {
     try {
+      console.log("oder", order);
       const { data } = await axios.post(`${URL}/api/shop/pay_order`, order);
+      console.log("data", data);
       data.href
         ? (window.location.href = data.href)
         : showErrorAlert("Paypal error");
@@ -105,7 +107,7 @@ const PayComponent = () => {
 
   // Nuevo array para pasarle solo id|price|name al back
   const productsCart = cart.map((product) => {
-    return { id: product.id, price: product.price, name: product.nmae };
+    return { id: product.id, price: product.price, name: product.name };
   });
 
   // Objeto para mandarle a shop_pay_order
@@ -139,7 +141,8 @@ const PayComponent = () => {
     userEdit && payOrderPost(payBank);
     showSuccessAlert(
       "You will receive an email with the bank account details"
-    ) && navigate("/purchases");
+    );
+    navigate("/purchases");
   };
 
   useEffect(() => {
@@ -383,7 +386,8 @@ const PayComponent = () => {
                       {/* Botones */}
                       <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
                         <button
-                          onSubmit={handlePaypalSubmit}
+                        type="button"
+                          onClick={handlePaypalSubmit}
                           className="grid grid-cols-3 h-10 w-56 justify-center items-center bg-[#162966] rounded-md shadow-[0_4px_9px_-4px_#000000]  hover:bg-[#41538b] text-white hover:text-black mx-1 "
                         >
                           <i class="fa-brands fa-paypal text-3xl text-blue-700 grid-span-1 ml-2"></i>
@@ -395,6 +399,8 @@ const PayComponent = () => {
                         <div class="mt-2">
                           <button
                             href="#"
+                            type="button"
+                            onClick={handleTransferSubmit}
                             class="flex items-center justify-center rounded-md border border-transparent bg-logo dark:bg-[#3a8a87] hover:bg-[#3a8a87] dark:hover:bg-logo dark:hover:text-black px-6 py-3 text-sm text-black uppercase shadow-sm h-10 mb-2 w-56 mx-1 dark:text-white hover:text-white"
                           >
                             <i
