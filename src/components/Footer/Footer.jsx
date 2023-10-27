@@ -51,10 +51,10 @@ function Footer() {
     e.preventDefault();
     if (formData.user_email && formData.message) {
       console.log("Form Data:", formData);
-      showSuccessAlert("Your form was submitted successfully!");
+      showSuccessAlert("Message sent to our staff. We'll be contacting you soon!");
     } else {
       showErrorAlert(
-        "You must fill in at least the email and a message to submit the form"
+        "You must fill in at least the email and a message"
       );
     }
     setPopupOpen(false);
