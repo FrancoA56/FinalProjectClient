@@ -182,10 +182,10 @@ const Profile = () => {
                         type="text"
                         name="name"
                         id="name"
-                        placeholder={user.name ? user.name : "DEFAULT"}
+                        placeholder={user.name ? user.name : "Write your username"}
                         value={userLocal.name}
                         onChange={handleChange}
-                        className="shadow appearance-none border rounded-md w-3/4 py-2 px-3 text-gray-700 dark:bg-[#505050] dark:text-[#909090] leading-normal focus:outline-none focus:shadow-outline first-letter:shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        className="shadow appearance-none border rounded-md w-3/4 py-2 px-3 text-gray-700 dark:bg-[#505050] dark:text-white leading-normal border-none focus:outline-none focus:shadow-outline first-letter:shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       />
                       {/* //////////////////////////// */}
 
@@ -216,8 +216,8 @@ const Profile = () => {
                         onChange={handleChange}
                         cols="40"
                         rows="5"
-                        placeholder="..."
-                        className="indent-2 w-3/4 mt-5 rounded-md dark:bg-[#505050] dark:text-[#909090] leading-normal shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                        placeholder="Write a brief description about your company"
+                        className="p-2 w-3/4 mt-5 rounded-md dark:bg-[#505050] dark:text-[#909090] leading-normal shadow-[0_4px_9px_-4px_#000000] focus:outline-none focus:shadow-outline transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
                       ></textarea>
                       <p class="mt-1 text-sm leading-6 dark:text-[#909090] text-[#505050] mb-10">
                         Write a few sentences about your company.
