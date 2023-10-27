@@ -30,8 +30,6 @@ function App() {
 
   const presets = useSelector((state) => state.presets);
 
-  const theme = localStorage.getItem("theme")
-
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken && !isLoggedIn) {
@@ -74,20 +72,20 @@ function App() {
   }, [dispatch, isLoggedIn, URL]);
 
   return (
-    <div className={`App ${theme}`}>
+    <div className="App">
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path="/shop" element={<ShoppingCart />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/pay" element={<Pay />} />
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/profile" element={<ProfileView />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/purchases" element={<Purchases />} />
-        <Route path="/preview/:name" element={<PreviewPresets />} />
+        <Route className="dark" path="/login" element={<Login />} />
+        <Route className="dark" path="/register" element={<Register />} />
+        <Route className="dark" path="/reset-password/:token" element={<ResetPassword />} />
+        <Route className="dark" path="/shop" element={<ShoppingCart />} />
+        <Route className="dark" path="/" element={<Home />} />
+        <Route className="dark" path="/cart" element={<Cart />} />
+        <Route className="dark" path="/pay" element={<Pay />} />
+        <Route className="dark" path="/detail/:id" element={<Detail />} />
+        <Route className="dark" path="/profile" element={<ProfileView />} />
+        <Route className="dark" path="/about" element={<AboutPage />} />
+        <Route className="dark" path="/purchases" element={<Purchases />} />
+        <Route className="dark" path="/preview/:name" element={<PreviewPresets />} />
       </Routes>
     </div>
   );
