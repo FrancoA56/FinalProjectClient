@@ -73,7 +73,7 @@ function Nav() {
     <nav className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/10 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4 max-h-16 pl-10">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <button
-          className="lg:hidden mb-2"
+          className="lg:hidden mb-2 text-neutral-600 dark:text-neutral-200"
           type="button"
           data-te-collapse-init
           data-te-target="#navbarSupportedContent1"
