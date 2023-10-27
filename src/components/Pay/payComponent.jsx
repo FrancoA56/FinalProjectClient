@@ -51,12 +51,7 @@ const PayComponent = () => {
   // funcion edita la base de datos USER
   const payOrderPost = async (order) => {
     try {
-      console.log("oder", order);
-      const { data } = await axios.post(`${URL}/api/shop/pay_order`, order);
-      console.log("data", data);
-      data.href
-        ? (window.location.href = data.href)
-        : showErrorAlert("Paypal error");
+      await axios.post(`${URL}/api/shop/pay_order`, order);
     } catch (error) {
       showErrorAlert(error.message);
     }
@@ -133,23 +128,22 @@ const PayComponent = () => {
 
     userEdit && payOrderPost(payPaypal);
     showWaitAlert("Please, wait a few moments while we redirect you..!");
+    navigate("/");
   };
   // Hndle a bank_transfer
   const handleTransferSubmit = async (e) => {
     e.preventDefault();
     const userEdit = await editUser(formData);
     userEdit && payOrderPost(payBank);
-    showSuccessAlert(
-      "You will receive an email with the bank account details"
-    );
-    navigate("/purchases");
+    showSuccessAlert("You will receive an email with the bank account details");
+    navigate("/");
   };
 
   useEffect(() => {
-    if(login === false){
-      navigate("/")
+    if (login === false) {
+      navigate("/");
     }
-  }, [login, navigate])
+  }, [login, navigate]);
 
   return (
     <div className="bg-gray-100 dark:bg-[#505050] h-screen overflow-auto">
@@ -386,7 +380,7 @@ const PayComponent = () => {
                       {/* Botones */}
                       <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
                         <button
-                        type="button"
+                          type="button"
                           onClick={handlePaypalSubmit}
                           className="grid grid-cols-3 h-10 w-56 justify-center items-center bg-[#162966] rounded-md shadow-[0_4px_9px_-4px_#000000]  hover:bg-[#41538b] text-white hover:text-black mx-1 "
                         >
@@ -395,7 +389,7 @@ const PayComponent = () => {
                             Paypal
                           </p>
                         </button>
-                        
+
                         <div class="mt-2">
                           <button
                             href="#"
@@ -408,7 +402,9 @@ const PayComponent = () => {
                               style={{
                                 "font-size": "30px",
                               }}
-                            >account_balance</i>
+                            >
+                              account_balance
+                            </i>
                             Bank transfer
                           </button>
                         </div>

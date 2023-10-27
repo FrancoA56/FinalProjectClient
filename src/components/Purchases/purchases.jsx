@@ -279,16 +279,6 @@ const Purchases = () => {
     id: "",
   });
 
-  const [reviewedId, setReviewedId] = useState([]);
-
-  const handleReviewedTemplates = (templateID) => {
-    const reviewed = reviewedId.filter((id) => id === templateID);
-    if (reviewed.length) {
-      return true;
-    }
-    return false;
-  };
-
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     if (formData.review.length) {
@@ -301,7 +291,6 @@ const Purchases = () => {
       const response = await axios.post(`${URL}/api/review`, fullBody);
       console.log("response", response);
       if (response.status === 200) {
-        reviewedId.push(response.data.presetId);
         handleClosePopUp();
         return showSuccessAlert("Thanks for your feedback");
       } else {
@@ -315,19 +304,22 @@ const Purchases = () => {
     (async () => {
       try {
         const response = await axios.get(
-          `${URL}/api/shop/invoice/?email=${user.email}`
+          `${URL}/api/shop/invoice/${user.email}`
         );
         console.log("response", response);
         if (response.data.length) {
           const container = response.data.map((invoice) => {
-            const templates = invoice.invoiceItems.map((t) => ({
-              id: t.presetId,
-              presetName: t.preset.presetName,
-              price: t.preset.price,
-              defaultColor: t.preset.defaultColor,
-              type: t.preset.type,
-              category: t.preset.category,
-            }));
+            const templates = invoice.invoiceItems.map((t) => {
+              return {
+                id: t.presetId,
+                presetName: t.preset.presetName,
+                price: t.preset.price,
+                defaultColor: t.preset.defaultColor,
+                type: t.preset.type,
+                category: t.preset.category,
+                reviews: t.preset.reviews,
+              };
+            });
 
             return {
               invoice: invoice.id,
@@ -392,47 +384,52 @@ const Purchases = () => {
                 month: "short",
                 day: "numeric",
               });
-              return row.templates.map((template, templateIndex) => (
-                <tr key={index} className="bg-gray-300 dark:bg-gray-400 ">
-                  {templateIndex === 0 && (
-                    <>
-                      <td rowSpan={rowspan} className={styleRow}>
-                        {row.invoice}
-                      </td>
-                      <td rowSpan={rowspan} className={styleRow}>
-                        {date}
-                      </td>
-                      <td rowSpan={rowspan} className={styleRow}>
-                        {row.status}
-                      </td>
-                    </>
-                  )}
-                  <td className={styleRow}>{template.presetName}</td>
-                  <td className={styleRow}>${template.price}</td>
-                  <td className={styleRow}>{template.defaultColor}</td>
-                  <td className={styleRow}>{template.type}</td>
-                  <td className={styleRow}>{template.category}</td>
-                  <td className={styleRow}>
-                    {handleReviewedTemplates(template.id) ? (
-                      <div>
-                        <span class="material-symbols-outlined">
-                          check_circle
-                        </span>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() => handleOpenPopUp(template.id)}
-                        title="Add a review"
-                        className="mt-1"
-                      >
-                        <span class="material-symbols-outlined">
-                          add_circle
-                        </span>
-                      </button>
+              return row.templates.map((template, templateIndex) => {
+                {
+                  console.log("template", template);
+                }
+                return (
+                  <tr key={index} className="bg-gray-300 dark:bg-gray-400 ">
+                    {templateIndex === 0 && (
+                      <>
+                        <td rowSpan={rowspan} className={styleRow}>
+                          {row.invoice}
+                        </td>
+                        <td rowSpan={rowspan} className={styleRow}>
+                          {date}
+                        </td>
+                        <td rowSpan={rowspan} className={styleRow}>
+                          {row.status}
+                        </td>
+                      </>
                     )}
-                  </td>
-                </tr>
-              ));
+                    <td className={styleRow}>{template.presetName}</td>
+                    <td className={styleRow}>${template.price}</td>
+                    <td className={styleRow}>{template.defaultColor}</td>
+                    <td className={styleRow}>{template.type}</td>
+                    <td className={styleRow}>{template.category}</td>
+                    <td className={styleRow}>
+                      {template.reviews?.length ? (
+                        <div>
+                          <span class="material-symbols-outlined">
+                            check_circle
+                          </span>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleOpenPopUp(template.id)}
+                          title="Add a review"
+                          className="mt-1"
+                        >
+                          <span class="material-symbols-outlined">
+                            add_circle
+                          </span>
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              });
             })}
           </tbody>
         </table>
