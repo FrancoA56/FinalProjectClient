@@ -227,7 +227,7 @@ function Nav() {
           <DarkMode />
         </div>
         {/* Right elements */}
-        <div className="relative flex items-center justify-around mb-2">
+        <div className="relative flex items-center justify-around">
           {/* Cart Icon */}
           <NavLink
             to="/cart"
@@ -285,7 +285,7 @@ function Nav() {
                   onClick={toggleDropdown}
                 >
                   {/* User avatar */}
-                  <i class="fa-solid fa-user h-5 w-5 text-neutral-600 hover:text-neutral-700 dark:text-white"></i>
+                  <i class="fa-solid fa-user h-5 w-5 text-neutral-600 hover:text-neutral-700 dark:text-white p-0.5"></i>
                 </div>
               </>
             )}
