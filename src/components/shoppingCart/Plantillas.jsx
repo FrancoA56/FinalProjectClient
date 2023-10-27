@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {
   addModelToCart,
   removeModelFromCart,
-  setPage,
 } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,6 +14,7 @@ const Plantillas = ({
   selectedFilterColor,
   selectedCategory,
   selectedTypes,
+  savedFilters,
 }) => {
   const URL = process.env.REACT_APP_API;
   const [templates, setTemplates] = useState([]);
@@ -26,50 +26,9 @@ const Plantillas = ({
   // ? CAMBIO DE BOTON SI SE AGREGA AL CARRITO
   const cart = useSelector((state) => state.cart);
 
-  // ? PAGINATION
   const [templatesNum, setTemplatesNum] = useState([]);
   const presetsperPage = 6;
   const currentPage = useSelector((state) => state.currentPage);
-  const fetchTemplatesNum = async (filters, orderType, orderPriority) => {
-    try {
-      const response = await axios.get(`${URL}/api/preset`, {
-        params: {
-          filters: JSON.stringify(filters),
-          orderType,
-          orderPriority,
-          hideDisabled,
-          quantity: presetsperPage,
-          page: currentPage + 1,
-        },
-      });
-
-      const { data } = response;
-      setTemplatesNum(data);
-    } catch (error) {
-      console.error("Error al obtener datos:", error);
-    }
-  };
-
-  // ? PETICIONES DE FILTROS Y ORDENES
-  const fetchTemplates = async (filters, orderType, orderPriority) => {
-    try {
-      const response = await axios.get(`${URL}/api/preset`, {
-        params: {
-          filters: JSON.stringify(filters),
-          orderType,
-          orderPriority,
-          hideDisabled,
-          quantity: presetsperPage,
-          page: currentPage,
-        },
-      });
-      
-      const { data } = response;
-      setTemplates(data);
-    } catch (error) {
-      console.error("Error al obtener datos:", error);
-    }
-  };
 
   // ? ASIGNACIONES DE FILTROS Y ORDENES
   useEffect(() => {
@@ -95,15 +54,72 @@ const Plantillas = ({
     if (selectedTypes.length > 0) {
       filters.types = type;
     }
-    fetchTemplatesNum(filters, orderType, orderPriority);
-    fetchTemplates(filters, orderType, orderPriority);
-  }, [
-    selectedFilterColor,
-    selectedCategory,
-    selectedOrder,
-    selectedTypes,
-    currentPage,
-  ]);
+
+    // Hacer ambas peticiones de forma asíncrona usando async/await
+    const fetchData = async () => {
+      try {
+        await fetchTemplatesNum(filters, orderType, orderPriority, currentPage);
+        await fetchTemplates(filters, orderType, orderPriority, currentPage);
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+      }
+    };
+
+    fetchData();
+  }, [savedFilters, currentPage]);
+
+  // ? PETICIONES DE FILTROS Y ORDENES
+  const fetchTemplates = async (
+    filters,
+    orderType,
+    orderPriority,
+    currentPage
+  ) => {
+    try {
+      const response = await axios.get(`${URL}/api/preset`, {
+        params: {
+          filters: JSON.stringify(filters),
+          orderType,
+          orderPriority,
+          hideDisabled,
+          quantity: presetsperPage,
+          page: currentPage,
+        },
+      });
+
+      const { data } = response;
+      setTemplates(data);
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+    }
+  };
+
+  // ? PAGINATION
+
+  const fetchTemplatesNum = async (
+    filters,
+    orderType,
+    orderPriority,
+    currentPage
+  ) => {
+    try {
+      const response = await axios.get(`${URL}/api/preset`, {
+        params: {
+          filters: JSON.stringify(filters),
+          orderType,
+          orderPriority,
+          hideDisabled,
+          quantity: presetsperPage,
+          page: currentPage + 1,
+        },
+      });
+
+      const { data } = response;
+      setTemplatesNum(data);
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+    }
+  };
 
   const buyPreset = (id) => {
     return () => {

@@ -12,46 +12,39 @@ const ComponentShop = () => {
 
   // Para manejar los cambios en los filtros seleccionados
   const handleFilterColorChange = (event) => {
-    const typeName = event.target.value;
+    const colorValue = event.target.value;
     const isChecked = event.target.checked;
-
-    //actualizacion del estado para obtener el filtro mas reciente
     setSelectedFilterColor((prevSelectedFilter) => {
+      if (!Array.isArray(prevSelectedFilter)) {
+        prevSelectedFilter = [];
+      }
+
       if (isChecked) {
-        return [...prevSelectedFilter, typeName];
+        return [...prevSelectedFilter, colorValue];
       } else {
-        return prevSelectedFilter.filter((filter) => filter !== typeName);
+        return prevSelectedFilter.filter((filter) => filter !== colorValue);
       }
     });
   };
 
-  // useEffect para que se actualice el estado de selectedFilterColor cada vez que se marca o desmarca un filtro.
-  useEffect(() => {
-    setSelectedFilterColor(selectedFilterColor);
-  }, [selectedFilterColor]);
-
   // ! PARA LAS CATEGORIAS
+  const [selectedCategory, setSelectedCategory] = useState([]);
 
-    const [selectedCategory, setSelectedCategory] = useState([]);
+  const handleCategoryChange = (event) => {
+    const categoryName = event.target.value;
+    const isCheckedCategory = event.target.checked;
+    setSelectedCategory((perSelectedCategory) => {
+      if (!Array.isArray(perSelectedCategory)) {
+        perSelectedCategory = [];
+      }
 
-    const handleCategoryChange = (event) => {
-      const categoryName = event.target.value;
-      const isCheckedCategory = event.target.checked;
-
-      //actualizacion del estado para obtener el filtro mas reciente
-      setSelectedCategory((perSelectedCategory) => {
-        if (isCheckedCategory) {
-          return [...perSelectedCategory, categoryName];
-        } else {
-          return perSelectedCategory.filter((filter) => filter !== categoryName);
-        }
-      });
-    };
-
-    // useEffect para que se actualice el estado de selectedFilterColor cada vez que se marca o desmarca un filtro.
-    useEffect(() => {
-      setSelectedCategory(selectedCategory);
-    }, [selectedCategory]);
+      if (isCheckedCategory) {
+        return [...perSelectedCategory, categoryName];
+      } else {
+        return perSelectedCategory.filter((filter) => filter !== categoryName);
+      }
+    });
+  };
 
   //! Para manejar los cambios en los Order seleccionados
   const handleOrderChange = (event) => {
@@ -60,11 +53,6 @@ const ComponentShop = () => {
     setSelectedOrder(typeName);
   };
 
-  // useEffect para que se actualice el estado de selectedType cada vez que se marca o desmarca un filtro.
-  useEffect(() => {
-    setSelectedCategory(selectedCategory);
-  }, [selectedCategory]);
-
   // ! PARA MANEJAR LOS TYPES
   const [selectedTypes, setSelectedTypes] = useState([]);
 
@@ -72,8 +60,11 @@ const ComponentShop = () => {
     const modelsName = event.target.value;
     const isCheckedType = event.target.checked;
 
-    //actualizacion del estado para obtener el filtro mas reciente
     setSelectedTypes((prevSelectedType) => {
+      if (!Array.isArray(prevSelectedType)) {
+        prevSelectedType = [];
+      }
+
       if (isCheckedType) {
         return [...prevSelectedType, modelsName];
       } else {
@@ -82,11 +73,6 @@ const ComponentShop = () => {
     });
   };
 
-  // useEffect para que se actualice el estado de selectedFilterColor cada vez que se marca o desmarca un filtro.
-  useEffect(() => {
-    setSelectedTypes(selectedTypes);
-  }, [selectedTypes]);
-
   // ! LIMPIEZA DE FILTROS
   const handleClearFilter = () => {
     setSelectedCategory([]);
@@ -94,6 +80,30 @@ const ComponentShop = () => {
     setSelectedOrder("name a");
     setSelectedTypes([]);
   };
+
+  // Cuando se monta el componente, intenta cargar los filtros desde el localStorage
+  const savedFilters = localStorage.getItem("filters");
+  useEffect(() => {
+    const savedFilters = localStorage.getItem("filters");
+    if (savedFilters) {
+      const parsedFilters = JSON.parse(savedFilters);
+      setSelectedFilterColor(parsedFilters.selectedFilterColor);
+      setSelectedCategory(parsedFilters.selectedCategory);
+      setSelectedTypes(parsedFilters.selectedTypes);
+      setSelectedOrder(parsedFilters.selectedOrder);
+    }
+  }, []);
+
+  // Cuando cambian los filtros, guárdalos en el localStorage
+  useEffect(() => {
+    const filters = {
+      selectedFilterColor,
+      selectedCategory,
+      selectedTypes,
+      selectedOrder,
+    };
+    localStorage.setItem("filters", JSON.stringify(filters));
+  }, [selectedFilterColor, selectedCategory, selectedTypes, selectedOrder]);
 
   return (
     <>
@@ -248,6 +258,7 @@ const ComponentShop = () => {
                 selectedOrder={selectedOrder}
                 selectedCategory={selectedCategory}
                 selectedTypes={selectedTypes}
+                savedFilters={savedFilters}
               />
             </div>
           </div>
