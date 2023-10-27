@@ -64,11 +64,8 @@ const CartComponent = () => {
               {models && models.length > 0 ? (
                 models.map((model) => (
                   <div
-                    className="m-2 grid grid-cols-7 h-48 rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
-                    style={{
-                      background:
-                        "linear-gradient(to left, rgb(50, 50, 50), rgb(40,40,40))",
-                    }}
+                    className="m-2 grid grid-cols-7 h-48 bg-gray-300 dark:bg-[#303030] dark:text-white rounded-md shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+
                     key={model.id}
                   >
                     {/* imagen */}
@@ -98,7 +95,7 @@ const CartComponent = () => {
                       <div className="px-12">
                         {" "}
                         <NavLink to={`/detail/${model.id}`}>
-                          <h1 className="text-2xl font-bold uppercase text-[#cecece] border-b border-[#cecece] hover:scale-105 ease-in duration-200">
+                          <h1 className="text-2xl font-bold uppercase dark:text-[#909090] border-b border-[#909090] hover:scale-105 ease-in duration-200">
                             {model.name}
                           </h1>
                         </NavLink>
@@ -106,38 +103,38 @@ const CartComponent = () => {
                       {/* Tercera FILA */}
                       <div className="row-span-2 grid grid-cols-4">
                         <div>
-                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm dark:text-[#909090] capitalize">
                             {model.rating}{" "}
                             <i className="fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />{" "}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs dark:text-[#909090]">
                             rating
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm dark:text-[#909090] capitalize">
                             {model.category}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs dark:text-[#909090]">
                             category
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm dark:text-[#909090] capitalize">
                             {model.type}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs dark:text-[#909090]">
                             Type
                           </span>
                         </div>
                         <div>
                           {" "}
-                          <p className="font-semibold mt-4 text-xm text-[#909090] capitalize">
+                          <p className="font-semibold mt-4 text-xm dark:text-[#909090] capitalize">
                             {model.color}
                           </p>
-                          <span className="border-t border-[#909090] uppercase text-xs text-[#909090]">
+                          <span className="border-t border-[#909090] uppercase text-xs dark:text-[#909090]">
                             color
                           </span>
                         </div>
@@ -183,10 +180,10 @@ const CartComponent = () => {
                 {models.map((model) => (
                   <div
                     key={model.id}
-                    className="w-3/4 border rounded-md border-[#909090] py-3 mt-3 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] overflow"
+                    className="w-5/6 border rounded-md border-[#909090] py-3 mt-3 shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)] overflow"
                   >
                     <div className="grid grid-cols-7">
-                      <div className="flex items-center justify-between text-xs text-overflow font-semibold col-span-2 uppercase dark:text-[#ffffff]">
+                      <div className="flex items-center ml-3 justify-between text-xs text-overflow font-semibold col-span-2 uppercase dark:text-[#ffffff]">
                         <h1> {model.name} </h1>
                       </div>
                       <div className="flex items-center mb-1 justify-center text-sm font-semibold text-[#303030] dark:text-[#bdbdbd] col-span-2 pt-1">
