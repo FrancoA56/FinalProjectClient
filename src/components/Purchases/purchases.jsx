@@ -317,6 +317,7 @@ const Purchases = () => {
         const response = await axios.get(
           `${URL}/api/shop/invoice/?email=${user.email}`
         );
+        console.log("response", response);
         if (response.data.length) {
           const container = response.data.map((invoice) => {
             const templates = invoice.invoiceItems.map((t) => ({
