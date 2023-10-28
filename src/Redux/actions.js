@@ -130,13 +130,12 @@ export const addModelToCart = (id) => {
           email: state.user.email,
           products: [id],
         };
-        const response = await axios.post(`${URL}/api/shop/order`, userAndIds);
-        if (response.statusText === "Created") {
-          dispatch({
+        dispatch({
             type: ADD_MODEL_CART,
             payload: preset,
           });
-        }
+        await axios.post(`${URL}/api/shop/order`, userAndIds);
+        
       } else {
         // si no esta logeado se guarda el carrito actualizado en el localStorage y en redux
         const updatedCart = [...state.cart, preset];
