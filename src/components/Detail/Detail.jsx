@@ -35,6 +35,7 @@ const PresetsDetail = () => {
       try {
         const { data } = await axios.get(`${URL}/api/preset/${id}`);
         if (data.name) {
+          console.log("PRESET:",data);
           setPresets(data);
         } else {
           showErrorAlert("Unable to display detail at this time");
@@ -45,7 +46,7 @@ const PresetsDetail = () => {
     }
     fetchPreset();
   }, [id, URL]);
-
+  console.log("PRESET2:",presets);
   // ? CAMBIO DE BOTON SI SE AGREGA AL CARRITO
 
   const dispatch = useDispatch();
@@ -136,7 +137,7 @@ const PresetsDetail = () => {
               <div>
                 {" "}
                 <p className="font-semibold mt-2 mb-2 text-xl text-[#909090] capitalize">
-                  {presets.rating || 0}
+                  {presets.ratingAverage || 0}
                   <i className="ml-2 fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />
                 </p>
                 <span className="block border-t border-[#909090] uppercase text-sm text-[#909090]">
