@@ -5,7 +5,7 @@ import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { editUserRedux } from "../../Redux/actions";
+import { editUserRedux, addAllModelsToCart } from "../../Redux/actions";
 import decodeToken from "../loginComponents/decodeToken";
 
 const PayComponent = () => {
@@ -51,11 +51,13 @@ const PayComponent = () => {
   // funcion edita la base de datos USER
   const payOrderPost = async (order) => {
     try {
+
       const { data } = await axios.post(`${URL}/api/shop/pay_order`, order);
       if (data.isSuccess) {
 
         window.location.href = data.href;
       }
+
     } catch (error) {
       showErrorAlert(error.message);
     }
@@ -139,6 +141,7 @@ const PayComponent = () => {
     e.preventDefault();
     const userEdit = await editUser(formData);
     userEdit && payOrderPost(payBank);
+    dispatch(addAllModelsToCart([]));
     showSuccessAlert("You will receive an email with the bank account details");
     navigate("/");
   };
