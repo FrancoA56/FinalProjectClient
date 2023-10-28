@@ -292,7 +292,9 @@ const Purchases = () => {
       console.log("response", response);
       if (response.status === 200) {
         handleClosePopUp();
+        navigate("/");
         return showSuccessAlert("Thanks for your feedback");
+        
       } else {
         handleClosePopUp();
         return showErrorAlert("Something went wrong");
