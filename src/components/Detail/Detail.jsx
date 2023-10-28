@@ -185,7 +185,7 @@ const PresetsDetail = () => {
               </NavLink>
             </div>
           </div>
-          <div className="mt-44 grid grid-cols-1 grid-rows-2 gap-0 sm:gap-0 lg:gap-0 items-center justify-between">
+          <div className="mt-24 grid grid-cols-1 grid-rows-2 gap-0 sm:gap-0 lg:gap-0 items-center justify-between">
             {presets.images &&
               presets.images.slice(1, 5).map((image, index) => (
                 <div
