@@ -35,6 +35,7 @@ const PresetsDetail = () => {
       try {
         const { data } = await axios.get(`${URL}/api/preset/${id}`);
         if (data.name) {
+          console.log("PRESET:",data);
           setPresets(data);
         } else {
           showErrorAlert("Unable to display detail at this time");
@@ -45,7 +46,7 @@ const PresetsDetail = () => {
     }
     fetchPreset();
   }, [id, URL]);
-
+  console.log("PRESET2:",presets);
   // ? CAMBIO DE BOTON SI SE AGREGA AL CARRITO
 
   const dispatch = useDispatch();
@@ -136,7 +137,7 @@ const PresetsDetail = () => {
               <div>
                 {" "}
                 <p className="font-semibold mt-2 mb-2 text-xl text-[#909090] capitalize">
-                  {presets.rating || 0}
+                  {presets.ratingAverage || 0}
                   <i className="ml-2 fa-solid fa-star relative bottom-0.5 text-yellow-600 text-sm" />
                 </p>
                 <span className="block border-t border-[#909090] uppercase text-sm text-[#909090]">
@@ -185,7 +186,7 @@ const PresetsDetail = () => {
               </NavLink>
             </div>
           </div>
-          <div className="mt-44 grid grid-cols-1 grid-rows-2 gap-0 sm:gap-0 lg:gap-0 items-center justify-between">
+          <div className="mt-24 grid grid-cols-1 grid-rows-2 gap-0 sm:gap-0 lg:gap-0 items-center justify-between">
             {presets.images &&
               presets.images.slice(1, 5).map((image, index) => (
                 <div

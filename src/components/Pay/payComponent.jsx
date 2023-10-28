@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redir } from "react-router-dom";
 import Nav from "../Nav/Nav";
 import Banner from "../Banner/Banner";
 import Swal from "sweetalert2";
@@ -51,8 +51,13 @@ const PayComponent = () => {
   // funcion edita la base de datos USER
   const payOrderPost = async (order) => {
     try {
-      const {data} = await axios.post(`${URL}/api/shop/pay_order`, order);
-      console.log(data)
+
+      const { data } = await axios.post(`${URL}/api/shop/pay_order`, order);
+      if (data.isSuccess) {
+
+        window.location.href = data.href;
+      }
+
     } catch (error) {
       showErrorAlert(error.message);
     }
