@@ -18,9 +18,11 @@ module.exports = {
         titulo: "2rem",
       },
       fontFamily: {
-        custom: ["CustomFont", "sans"],
+        // custom: ['Heebo'],
+        custom: ['Mulish'],
       },
     },
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class"
 };

@@ -1,22 +1,90 @@
 import "tailwindcss/tailwind.css";
-import React from "react";
+import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 // Footer container
 function Footer() {
+  // ? FUNCIONES PARA USAR EMAIL JS
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    if (formData.user_email && formData.message) {
+      emailjs
+        .sendForm(
+          "service_rjik02h",
+          "template_w2je5xe",
+          form.current,
+          "ncTuTVkphxHhuJbUE"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
+  };
+
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
+
+  //Función para manejar el cambio en los inputs del form
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  //Función para manejar el envío del form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.user_email && formData.message) {
+      console.log("Form Data:", formData);
+      showSuccessAlert("Message sent to our staff. We'll be contacting you soon!");
+    } else {
+      showErrorAlert(
+        "You must fill in at least the email and a message"
+      );
+    }
+    setPopupOpen(false);
+  };
+  const showSuccessAlert = (message) => {
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      confirmButtonColor: "rgb(94 195 191)",
+      text: `${message}`,
+    });
+  };
+  const showErrorAlert = (message) => {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: `${message}`,
+    });
+  };
+
+
   return (
-    <footer
-      style={{
-        background:
-          "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-      }}
-      className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left"
-    >
+    <footer className="bg-gray-300 text-center text-neutral-600 dark:bg-[#303030] dark:text-[#cfcece] text-sm lg:text-left">
       {/* Main content container */}
-      <div className="mx-6 py-5 text-center md:text-left">
-        <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-4">
-          {/* Tailwind Elements section */}
-          <div className="">
-            <h6 className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
+      <div
+        className="mx-6 py-3 text-center md:text-left"
+      >
+        <div className="grid-1 grid gap-8 md:grid-cols-1 lg:grid-cols-3">
+          <div className="flex flex-col items-center">
+            <h6 className="mb-4 flex items-center justify-center font-semibold uppercase ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -27,7 +95,7 @@ function Footer() {
               </svg>
               ABOUT US
             </h6>
-            <p>
+            <p className="text-left pl-3">
               This is a company dedicated to the development of templates for
               websites. You can choose from the options we offer or contact us
               to make modifications that suit your needs!
@@ -36,19 +104,21 @@ function Footer() {
 
           {/* Social section */}
           <div className="flex justify-center flex-col">
-            <h6 className="mb-0.3 flex justify-center font-semibold uppercase md:justify-center">
+            <h6 className="mb-0.3 flex jitems-center justify-center font-semibold uppercase">
               Social Media
             </h6>
 
             {/* Instagram section */}
-            <p className="mr-2 mt-4 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-2 mt-4 text-neutral-600 dark:text-[#cfcece] flex items-center flex-col">
               <a
                 href="https://www.instagram.com/code_crafted_templates/"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 mr-2"
+                  className="h-4 w-4 mr-2"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -60,14 +130,16 @@ function Footer() {
             </p>
 
             {/* Twitter section */}
-            <p className="mr-8 mt-2 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-8 mt-2 text-neutral-600 dark:text-[#cfcece] flex items-center flex-col">
               <a
                 href="https://twitter.com/CodeCraftedTemp"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-4 flex items-center justify-center md:justify-center"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 mr-2"
+                  className="h-4 w-4 mr-2"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -79,14 +151,16 @@ function Footer() {
             </p>
 
             {/* LinkedIn section */}
-            <p className="mr-6 mt-1.5 text-neutral-600 dark:text-neutral-200 flex items-center flex-col">
+            <p className="mr-6 mt-1.5 text-neutral-600 dark:text-[#cfcece] flex items-center flex-col">
               <a
-                href="www.linkedin.com/in/code-crafted-templates"
+                href="http://www.linkedin.com/in/code-crafted-templates"
+                target="_blank"
+                rel="noreferrer"
                 className="mb-3 flex items-center justify-center md:justify-center"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 mr-2 mb-1"
+                  className="h-4 w-4 mr-2 mb-1"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -96,40 +170,14 @@ function Footer() {
                 LinkedIn
               </a>
             </p>
-            {/* Add other product links similarly */}
-          </div>
-
-          {/* Email us */}
-          <div className="flex flex-col">
-            <input
-              className="indent-2 border rounded ml-2 mr-40"
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-            ></input>
-            <input
-              className="indent-2 border rounded ml-2 mt-2 mr-20"
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Email"
-            ></input>
-            <input
-              className="indent-2 border rounded m-2 h-28"
-              type="text"
-              name="text"
-              id="text"
-              placeholder="Talk to us!"
-            ></input>
           </div>
 
           {/* Contact section */}
           <div>
-            <h6 className="mb-2 flex justify-center font-semibold uppercase md:justify-center">
+            <h6 className=" flex items-center justify-center font-semibold uppercase">
               Contact
             </h6>
-            <p className="mb-4 flex items-center justify-center md:justify-start">
+            <p className=" text-center font text-s leading-tight">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -140,7 +188,7 @@ function Footer() {
               </svg>
               Email: codeCraftedTemplates@gmail.com
             </p>
-            <p className="mb-4 flex items-center justify-center md:justify-start">
+            <p className="text-center font text-s leading-tight">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -151,20 +199,196 @@ function Footer() {
               </svg>
               Phone: +54 xxxx xxxxxxx
             </p>
-            {/* Add other contact information similarly */}
+
+            {/* pop up form --> talk to us */}
+
+            <div className="rounded">
+              <div className="flex items-center justify-center">
+                <button
+                  className="mt-6 text-white text-center text-sm font-medium uppercase leading-normal bg-logo hover:bg-[#3a8a87] dark:bg-[#3a8a87] dark:hover:bg-logo py-2 px-4 rounded-md inline-block"
+                  onClick={() => setPopupOpen(true)}
+                >
+                  Talk to us
+                </button>
+              </div>
+              {isPopupOpen && (
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 z-50 flex items-center justify-center">
+                  <form
+                    className="mt-1"
+                    ref={form}
+                    onSubmit={(e) => {
+                      handleSubmit(e);
+                      sendEmail(e);
+                    }}
+                  >
+                    {/* ... Tu formulario aquí */}
+                    <div className="isolate w-full h-2/3 bg-gray-300 dark:bg-[#303030] rounded-md px-6 sm:py-3 lg:px-3">
+                      {/* Creo q le da animacion y el tamaño */}
+                      <div
+                        className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+                        aria-hidden="true"
+                      ></div>
+                      {/* Encabezado */}
+                      <div className="mx-auto flex flex-col items-center justify-center min-w-xl max-w-xl border-b border-[#303030] dark:border-[#909090]">
+                        <h2 className="text-3xl font-bold tracking-tight text-[#303030] dark:text-[#909090] sm:text-4xl  uppercase leading-normal">
+                          Contact us
+                        </h2>
+                        <p className="mt-2 text-sm font-medium text-[#505050] dark:text-[#707070] pb-3">
+                          Send us your opinion or suggestion, it helps us
+                          improve
+                        </p>
+                      </div>
+                      {/* Formulario */}
+                      <div
+                        action="#"
+                        method="POST"
+                        className="mx-auto max-w-xl mt-5"
+                      >
+                        {/* Formulario container */}
+                        <div className="grid md:grid-rows-5"></div>
+                        {/* Nombre y apellido */}
+                        <div className="grid md:grid-cols-2 grid-cols-1">
+                          {/* Nombre */}
+                          <div className=" flex flex-col items-start pl-5 pr-1 py-0.5">
+                            <label
+                              for="first-name"
+                              className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                            >
+                              {" "}
+                              First Name
+                            </label>
+                            <input
+                              name="user_name"
+                              id="name"
+                              autocomplete="given-name"
+                              // autocomplete="off"
+                              type="text"
+                              onChange={handleChange}
+                              value={formData.user_name}
+                              required
+                              className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                              
+                            />
+                          </div>
+                          {/* Apellido */}
+                          <div className="flex flex-col items-start pr-5 pl-1 py-0.5">
+                            <label
+                              for="last-name"
+                              className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                            >
+                              {" "}
+                              Last Name
+                            </label>
+                            <input
+                              type="text"
+                              name="lastname"
+                              id="lastname"
+                              autocomplete="family-name"
+                              // autocomplete="off"
+                              onChange={handleChange}
+                              required
+                              // value={formData.lastname}
+                              className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                            />
+                          </div>
+                        </div>
+                        {/* name (company name)*/}
+                        <div className=" flex flex-col items-start px-5 py-0.5">
+                          <label
+                            for="name"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                          >
+                            {" "}
+                            Company
+                          </label>
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            autocomplete="organization"
+                            // autocomplete="off"
+                            onChange={handleChange}
+                            required
+                            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                          />
+                        </div>
+                        {/* email */}
+                        <div className=" flex flex-col items-start px-5 py-0.5">
+                          <label
+                            for="email"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                          >
+                            {" "}
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            name="user_email"
+                            id="email"
+                            autocomplete="email"
+                            // autocomplete="off"
+                            onChange={handleChange}
+                            required
+                            value={formData.user_email}
+                            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                          />
+                        </div>
+                        {/* message */}
+                        <div className=" flex flex-col items-start px-5 py-0.5">
+                          <label
+                            for="message"
+                            className="text-sm font-semibold text-[#303030] dark:text-[#909090] px-2"
+                          >
+                            {" "}
+                            Message
+                          </label>
+                          <textarea
+                            name="message"
+                            id="message"
+                            rows="4"
+                            onChange={handleChange}
+                            required
+                            value={formData.message}
+                            className="shadow appearance-none border rounded-md w-full py-2 px-3 text-[#303030] leading-tight focus:outline-[#909090] focus:shadow-outline dark:text-white dark:bg-[#505050]"
+                          />
+                        </div>
+                        {/* Botones */}
+                        <div className="flex flex-col justify-center items-center mt-5 md:px-4 md:flex-row md:justify-center">
+                          <button
+                            type="submit"
+                            name="submit"
+                            value="Send"
+                            className="h-10 w-11/12 mt-2 mb-2 bg-logo dark:bg-[#3a8a87] rounded-md md:px-2 md:w-2/3 md:m-1 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#3a8a87] dark:hover:bg-logo hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                          >
+                            Send
+                          </button>
+                          <button
+                            onClick={() => setPopupOpen(false)}
+                            className="mt-2 mb-2 h-10 w-11/12 inline-block bg-[#505050] md:w-2/3 rounded-md md:px-2 md:m-1 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#000000] transition duration-150 ease-in-out hover:bg-[#303030] hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.3),0_4px_18px_0_rgba(0,0,0,0.2)]"
+                          >
+                            close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Copyright section */}
-      <div className="bg-logo opacity-50 p-3 mb- text-center dark:bg-neutral-700">
-        <span className="text-black">© 2023 Copyright: </span>
-        <a
-          className="font-semibold text-black dark:text-neutral-400"
-          href="https://tailwind-elements.com/"
+      <div className="bg-[#303030] opacity-50 p-3 text-center dark:bg-[#202020] ">
+        <span className="text-[#ffffff] dark:text-white">
+          © 2023 Copyright:{" "}
+        </span>
+        <span
+          className="font text-[#ffffff] dark:text-white"
         >
           CodeCrafted Templates
-        </a>
+        </span>
       </div>
     </footer>
   );

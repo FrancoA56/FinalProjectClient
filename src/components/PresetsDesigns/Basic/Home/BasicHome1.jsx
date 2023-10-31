@@ -15,7 +15,7 @@ const BasicHome1 = () => {
             {/* Logo */}
             <svg
               viewBox="0 0 2 2"
-              class="mx-2 inline h-0.5 w-0.5 fill-current"
+              className="mx-2 inline h-0.5 w-0.5 fill-current"
               aria-hidden="true"
             >
             </svg>
@@ -31,7 +31,7 @@ const BasicHome1 = () => {
             <div className="flex w-22  col-span-1 flex items-center justify-start bg-gradient-to-r from-blue-900 to-blue-500 border-none">
               <nav
                 id="sidenav-4"
-                class=""
+                className=""
                 data-te-sidenav-init
                 data-te-sidenav-hidden="false"
                 data-te-sidenav-mode="side"
@@ -41,18 +41,18 @@ const BasicHome1 = () => {
               >
                 {/*Toggler*/}
                 <button
-                  class="mr-1 mt-10 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                  className="mr-1 mt-10 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                   data-te-sidenav-toggle-ref
                   data-te-target="#sidenav-4"
                   aria-controls="#sidenav-4"
                   aria-haspopup="true"
                 >
-                  <span class="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
+                  <span className="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -64,7 +64,7 @@ const BasicHome1 = () => {
                 </button>
 
                 <button
-                  class="mt-10 mb-10 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                  className="mt-10 mb-10 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                   aria-haspopup="true"
                   id="slim-toggler"
                 >
@@ -72,34 +72,34 @@ const BasicHome1 = () => {
                 </button>
 
                 <ul
-                  class="relative m-0 list-none px-[0.2rem]"
+                  className="relative m-0 list-none px-[0.2rem]"
                   data-te-sidenav-menu-ref
                 >
-                  <li class="relative">
+                  <li className="relative">
                     <a
-                      class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-white-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-white-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                      className="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-white-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-white-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                       data-te-sidenav-link-ref
                     >
-                      <span class="mr-4 [&>svg]:h-4 [&>svg]:w-12 [&>svg]:text-white dark:[&>svg]:text-gray-300">
+                      <span className="mr-4 [&>svg]:h-4 [&>svg]:w-12 [&>svg]:text-white dark:[&>svg]:text-gray-300">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          class="h-4 w-4"
+                          className="h-4 w-4"
                         >
                           <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
                         </svg>
                       </span>
 
                       <span
-                        class="absolute right-0 ml-auto mr-10 transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-white dark:[&>svg]:text-gray-300"
+                        className="absolute right-0 ml-auto mr-10 transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-white dark:[&>svg]:text-gray-300"
                         data-te-sidenav-rotate-icon-ref
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          class="h-5 w-5"
+                          className="h-5 w-5"
                         >
                           <path
                             fill-rule="evenodd"
@@ -110,17 +110,17 @@ const BasicHome1 = () => {
                       </span>
                     </a>
                   </li>
-                  <li class="relative">
+                  <li className="relative">
                     <a
-                      class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-white outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                      className="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-white outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                       data-te-sidenav-link-ref
                     >
-                      <span class="mr-4 [&>svg]:h-4 [&>svg]:w-12 [&>svg]:text-white dark:[&>svg]:text-white">
+                      <span className="mr-4 [&>svg]:h-4 [&>svg]:w-12 [&>svg]:text-white dark:[&>svg]:text-white">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          class="h-4 w-4"
+                          className="h-4 w-4"
                         >
                           <path
                             fill-rule="evenodd"
@@ -131,14 +131,14 @@ const BasicHome1 = () => {
                       </span>
 
                       <span
-                        class="absolute right-0 ml-auto mr-10 transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-dark dark:[&>svg]:text-gray-300"
+                        className="absolute right-0 ml-auto mr-10 transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-dark dark:[&>svg]:text-gray-300"
                         data-te-sidenav-rotate-icon-ref
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          class="h-5 w-5"
+                          className="h-5 w-5"
                         >
                           <path
                             fill-rule="evenodd"
@@ -200,7 +200,7 @@ const BasicHome1 = () => {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4 mr-2"
+                      className="h-4 w-4 mr-2"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -219,7 +219,7 @@ const BasicHome1 = () => {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-4 w-4 mr-2"
+                      className="h-4 w-4 mr-2"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

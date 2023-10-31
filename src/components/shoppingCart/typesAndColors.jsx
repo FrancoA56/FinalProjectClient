@@ -5,16 +5,18 @@ export const types = [
 ];
 
 export const colors = [
-  { Black: "black" },
   { White: "white" },
-  { Red: "red" },
   { Green: "green" },
   { Blue: "blue" },
+  { Yellow: "yellow" },
+  { Brown: "brown" },
+  { Red: "red" },
 ];
 
 export const models = [
-  { About: "about" },
+  { Shop: "shop" },
   { Home: "home" },
-  { Form: "form" },
-  { Card: "card" },
+  { Detail: "detail" },
+  { Cart: "cart" },
+  { About: "about" },
 ];

@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  margin: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #999999;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8d8d8d;
+  color: #000000ff;
+}
+
+
+
+/* Background */
+.dark ::-webkit-scrollbar-track {
+  background-color: rgb(80 80 80);
+}
+
+.dark .menu-item::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, NavLink, useNavigate } from "react-router-dom";
+import { useLocation, NavLink, useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
 import { logOutUser, addAllModelsToCart } from "../../Redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
+import DarkMode from "../DarkMode/darkmode";
 
 function Nav() {
   // Traemos el estado Global "user"
@@ -24,6 +26,8 @@ function Nav() {
   // Hook para ir al home
   const navigate = useNavigate();
 
+  const { logout, isAuthenticated } = useAuth0();
+
   // useEffect para cargar el cart del localStorage
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -34,48 +38,51 @@ function Nav() {
   // Funcion para cerrar sesion
 
   const handleLogOut = (e) => {
+    const actualLocation = window.location.href;
     e.preventDefault();
+
     Swal.fire({
       title: "Are you sure?",
       text: "You are about to log out",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#5ec3bf",
+      confirmButtonColor: "rgb(94 195 191)",
       cancelButtonColor: "#303030",
       confirmButtonText: "Yes, log out",
     }).then((result) => {
+      if (isAuthenticated)
+        logout({ logoutParams: { returnTo: actualLocation } });
       if (result.isConfirmed) {
         dispatch(logOutUser(user.name));
-        navigate("/");
       }
     });
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <nav
-      style={{
-        background:
-          "radial-gradient( 40rem circle at bottom, rgb(200, 200, 200), rgb(230, 230, 230)",
-      }}
-      className="flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
-    >
+    <nav className="bg-gray-300 flex-no-wrap relative flex w-full items-center justify-between py-2 shadow-md shadow-black/10 dark:bg-[#303030] dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4 max-h-16 pl-10">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
         <button
-          className="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+          className="lg:hidden mb-2 text-neutral-600 dark:text-neutral-200"
           type="button"
           data-te-collapse-init
           data-te-target="#navbarSupportedContent1"
           aria-controls="navbarSupportedContent1"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={toggleMenu}
         >
-          <span className="[&>svg]:w-7">
+          <span className="[&>svg]:w-7 dark:text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -91,8 +98,46 @@ function Nav() {
           </span>
         </button>
 
+        {isOpen && (
+          <div
+            className={`absolute z-[1000] top-10 float-left m-0 ${
+              isOpen ? "block" : "hidden"
+            } min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block`}
+          >
+            <a
+              href="/"
+              className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+            >
+              Home
+            </a>
+            <a
+              href="/shop"
+              className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+            >
+              Shop
+            </a>
+            <a
+              href="/about"
+              className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+            >
+              Team
+            </a>
+            {user.email === "codecraftedtemplates@gmail.com" && (
+              <a
+                href="https://final-proyect-admin.vercel.app/"
+                className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                target="_blank"
+              >
+                Admin Panel
+              </a>
+            )}
+          </div>
+        )}
+
+        {/* ------------------------------------------------------------------------------------------------------------           */}
+
         <div
-          className="hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
+          className="hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto mb-2"
           id="navbarSupportedContent1"
           data-te-collapse-item
         >
@@ -100,10 +145,10 @@ function Nav() {
             className="mb-4 ml-2 mr-5  flex items-center text-neutral-900 hover:text-neutral-900
             focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 
             lg:mb-0 lg:"
-            href=""
+            href="#!"
           >
             <img
-              src="https://res.cloudinary.com/dxrjxvxc1/image/upload/v1695951292/logos/iso_wfaz4p.png"
+              src="https://res.cloudinary.com/codecrafttemplates/image/upload/v1697045466/codeCraft/grid_landscape_csxysv.png"
               style={{ height: "25px", width: "25px" }}
               alt="Logo"
               loading="lazy"
@@ -114,19 +159,23 @@ function Nav() {
             data-te-navbar-nav-ref
           >
             {location.pathname !== "/" && (
-              <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <li className="mb-4  lg:mb-0 w-16" data-te-nav-item-ref>
                 <NavLink // Usa NavLink en lugar de <a>
                   to="/" // Especifica la ruta en el atributo "to"
-                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
+                  focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
+                   dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
+                   dark:[&.active]:text-neutral-400"
                   data-te-nav-link-ref
                 >
                   Home
+                  {/* <i class="fa-solid fa-house"></i> */}
                 </NavLink>
               </li>
             )}
 
             {location.pathname !== "/shop" && (
-              <li className="mb-4  lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+              <li className="block mb-4  lg:mb-0 w-16" data-te-nav-item-ref>
                 <NavLink // Usa NavLink en lugar de <a>
                   to="/shop" // Especifica la ruta en el atributo "to"
                   className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out 
@@ -136,36 +185,59 @@ function Nav() {
                   data-te-nav-link-ref
                 >
                   Shop
+                  {/* <i class="fa-solid fa-shop"></i> */}
                 </NavLink>
               </li>
             )}
 
             {/* Projects link */}
-            {/*             <li className="mb-3  lg:mb-1 lg:pr-2" data-te-nav-item-ref>
-              <a
-                className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
+            {location.pathname !== "/about" && (
+              <li className="mb-4 lg:mb-0 w-16" data-te-nav-item-ref>
+                <NavLink // Usa NavLink en lugar de <a>
+                  to="/about" // Especifica la ruta en el atributo "to"
+                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
                 focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
                  dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
                  dark:[&.active]:text-neutral-400"
-                href="#"
-                data-te-nav-link-ref
-              >
-                Otra Ruta
-              </a>
-            </li> */}
+                  data-te-nav-link-ref
+                >
+                  Team
+                  {/* <i class="fa-solid fa-users"></i> */}
+                </NavLink>
+              </li>
+            )}
+            <li>
+              {user.email === "codecraftedtemplates@gmail.com" && (
+                <a
+                  href="https://final-proyect-admin.vercel.app/"
+                  className="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out
+              focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200
+               dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 
+               dark:[&.active]:text-neutral-400"
+                  target="_blank"
+                >
+                  Admin Panel
+                </a>
+              )}
+            </li>
           </ul>
         </div>
 
+        <div className="relative md:bottom-1 md:right-0 sm:right-20 sm:bottom-0.5">
+          <DarkMode />
+        </div>
         {/* Right elements */}
-        <div className="relative flex items-center justify-around ">
+        <div className="relative flex items-center justify-around mb-2">
           {/* Cart Icon */}
-          <a
+          <NavLink
+            to="/cart"
             className="mr-12 text-neutral-600 transition duration-2.0 hover:text-neutral-700 hover:ease-in-out 
             focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 
             dark:hover:text-neutral-30 dark:focus:text-neutral-300 [&.active]:text-black/90 
             dark:[&.active]:text-neutral-400"
-            href="/cart"
+            //href="/cart"
           >
+            {/* <i class="fa-solid fa-cart-shopping"></i> */}
             <span className="[&>svg]:w-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -177,78 +249,11 @@ function Nav() {
               </svg>
             </span>
             {cartItemCount > 0 && (
-              <div className="absolute bottom-3 left-3">{cartItemCount}</div>
+              <span className="absolute bottom-3 left-3.5 rounded-full bg-logo px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-black">
+                {cartItemCount}
+              </span>
             )}
-          </a>
-
-          {/* Container with two dropdown menus */}
-          <div
-            className="relative"
-            data-te-dropdown-ref
-            data-te-dropdown-alignment="end"
-          >
-            {/* First dropdown trigger --> notifications */}
-            <a
-              className="hidden-arrow mr-12 flex items-center text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-              href="#"
-              id="dropdownMenuButton1"
-              role="button"
-              data-te-dropdown-toggle-ref
-              aria-expanded="false"
-            >
-              {/* Dropdown trigger icon */}
-              <span className="[&>svg]:w-5">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-5 w-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-              {/* Notification counter */}
-              <span className="absolute -mt-4 ml-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white">
-                1
-              </span>
-            </a>
-
-            {/* First dropdown menu --> Notofications */}
-            <ul
-              className="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
-              aria-labelledby="dropdownMenuButton1"
-            >
-              {/* First dropdown menu items */}
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="/login"
-                >
-                  Alguna notificación sobre la compra
-                </a>
-              </li>
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="#"
-                >
-                  Notificación sobre la compra
-                </a>
-              </li>
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="#"
-                >
-                  Notificación sobre la compra
-                </a>
-              </li>
-            </ul>
-          </div>
+          </NavLink>
 
           {/* Second dropdown container */}
           <div className="relative" data-te-dropdown-alignment="end">
@@ -256,8 +261,8 @@ function Nav() {
             {user.name ? (
               <>
                 {" "}
-                <a
-                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                <div
+                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none dark:text-white"
                   href="#"
                   id="dropdownMenuButton2"
                   role="button"
@@ -266,13 +271,13 @@ function Nav() {
                 >
                   {" "}
                   {user.name}{" "}
-                </a>
+                </div>
               </>
             ) : (
               <>
                 {" "}
-                <a
-                  className="hidden-arrow mr-12 flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                <div
+                  className="hidden-arrow mr-12 flex  items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
                   href="#"
                   id="dropdownMenuButton2"
                   role="button"
@@ -280,14 +285,14 @@ function Nav() {
                   onClick={toggleDropdown}
                 >
                   {/* User avatar */}
-                  <i class="fa-solid fa-bars"></i>
-                </a>
+                  <i class="fa-solid fa-user h-5 w-5 text-neutral-600 hover:text-neutral-700 dark:text-white p-0.5"></i>
+                </div>
               </>
             )}
 
             {/* Second dropdown menu */}
             <ul
-              className={`absolute z-[1000] float-left m-0 ${
+              className={`absolute z-[1000] float-right right-11  m-0 ${
                 isDropdownOpen ? "block" : "hidden"
               } min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block`}
               aria-labelledby="dropdownMenuButton1"
@@ -304,12 +309,20 @@ function Nav() {
                     </NavLink>
                   </li>
                   <li>
-                    <a
-                      className="block cursor-pointer w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                    <NavLink
+                      className="block w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                      to="/purchases"
+                    >
+                      Purchases
+                    </NavLink>
+                  </li>
+                  <li>
+                    <button
+                      className="block cursor-pointer text-left w-full whitespace-nowrap bg-transparent px-3 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                       onClick={handleLogOut}
                     >
                       Log Out
-                    </a>
+                    </button>
                   </li>
                 </>
               ) : (
@@ -329,7 +342,7 @@ function Nav() {
                       href="/register"
                       data-te-dropdown-item-ref
                     >
-                      Sing In
+                      Register
                     </a>
                   </li>
                 </>

@@ -1,50 +1,98 @@
 [
   {
-    "id": "1",
-    "name": "Preset 1",
-    "price": 10,
-    "defaultColor": "green",
+    "name": "Gourmet Grove",
+    "price": 20,
+    "defaultColor": "red",
+    "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697852425/Presets/Basic/BasicHome02_parte1_u5kc4e.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697979169/Presets/Basic/Vista%20completa%20de%20Presets/BasicHome02_maujae.png"],
+    "type": "home",
+    "category": "basic"
+  },
+  {
+    "name": "Atlantic",
+    "price": 20,
+    "defaultColor": "white",
+    "images" : ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833514/Presets/Basic/BasicShop01_parte_1_icdesy.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697972653/Presets/Basic/Vista%20completa%20de%20Presets/BasicShop01_gihutm.png"],
+    "type": "shop",
+    "category": "basic"
+  },
+  {
+    "name": "Corporate",
+    "price": 28,
+    "defaultColor": "yellow",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833511/Presets/Basic/BasicAbout01_parte_1_rcmo7a.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978697/Presets/Basic/Vista%20completa%20de%20Presets/BasicAbout01_s2d9oq.png"],
     "type": "about",
     "category": "basic"
   },
   {
-    "id": "2",
-    "name": "Preset 2",
-    "price": 2,
+    "name": "Silent",
+    "price": 15,
     "defaultColor": "blue",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833511/Presets/Basic/BasicHome01_ile7su.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978695/Presets/Basic/Vista%20completa%20de%20Presets/BasicHome01_de6caf.png"],
+    "type": "home",
+    "category": "basic"
+  },
+  {
+    "name": "Simple",
+    "price": 25,
+    "defaultColor": "white",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833510/Presets/Basic/BasicCart01_b4nua6.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978693/Presets/Basic/Vista%20completa%20de%20Presets/BasicCart01_s2vzea.png"],
+    "type": "cart",
+    "category": "basic"
+  },
+  {
+    "name": "Cosmo",
+    "price": 45,
+    "defaultColor": "green",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698338513/Presets/Medium/MediumHome01_s6nhth.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698338600/Presets/Medium/Vista%20completa%20de%20Presets%20Medium/MediumHome01_g55y7o.png"],
     "type": "home",
     "category": "medium"
   },
   {
-    "id": "3",
-    "name": "Preset 3",
-    "price": 28,
-    "defaultColor": "white",
+    "name": "Prestige",
+    "price": 45,
+    "defaultColor": "brown",
+    "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362137/Presets/Medium/MediumDetail01_wiflxm.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362226/Presets/Basic/Vista%20completa%20de%20Presets/MediumDetail01_mz8hqd.png"],
+    "type": "detail",
+    "category": "medium"
+  },
+  {
+    "name": "Motion",
+    "price": 35,
+    "defaultColor": "green",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698239882/Presets/Medium/Medium-shop.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698239859/Presets/Medium/Vista%20completa%20de%20Presets%20Medium/Medium-Shop-Full.png"],
+    "type": "shop",
+    "category": "medium"
+  },
+  {
+    "name": "Cali",
+    "price": 70,
+    "defaultColor": "blue",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833589/Presets/Premium/PremiumShop01_parte_1_pmp3k3.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978694/Presets/Basic/Vista%20completa%20de%20Presets/PremiumShop01_djvtji.png"],
+    "type": "shop",
+    "category": "premium"
+  },
+  {
+    "name": "Sonic",
+    "price": 90,
+    "defaultColor": "red",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362360/Presets/Premium/PremiumHome01_yjohrl.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698362287/Presets/Basic/Vista%20completa%20de%20Presets/PremiumHome01_wkw539.png"],
     "type": "home",
     "category": "premium"
   },
   {
-    "id": "4",
-    "name": "Preset 4",
-    "price": 5,
-    "defaultColor": "red",
-    "type": "about",
-    "category": "medium"
-  },
-  {
-    "id": "5",
-    "name": "Preset 5",
-    "price": 22,
-    "defaultColor": "black",
-    "type": "form",
-    "category": "basic"
-  },
-  {
-    "id": "6",
-    "name": "Preset 6",
-    "price": 33,
+    "name": "Thunder",
+    "price": 80,
     "defaultColor": "white",
-    "type": "form",
+    "images": ["https://res.cloudinary.com/codecrafttemplates/image/upload/v1698192710/Presets/Basic/PremiumCart01_xvf8rg.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1698192725/Presets/Basic/Vista%20completa%20de%20Presets/PremiumCart01_wuando.png"],
+    "type": "cart",
+    "category": "premium"
+  },
+  {
+    "name": "Trend",
+    "price": 70,
+    "defaultColor": "white",
+    "images":["https://res.cloudinary.com/codecrafttemplates/image/upload/v1697833592/Presets/Premium/PremiumDetail01_parte_1_oyzhpq.png", "https://res.cloudinary.com/codecrafttemplates/image/upload/v1697978698/Presets/Basic/Vista%20completa%20de%20Presets/PremiumDetail01_n2ix7d.png"],
+    "type": "detail",
     "category": "premium"
   }
 ]
